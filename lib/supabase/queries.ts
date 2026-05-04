@@ -35,18 +35,6 @@ export async function getLead(id: string): Promise<Lead | null> {
   return data as Lead
 }
 
-export async function updateLeadStatus(id: string, status: LeadStatus): Promise<void> {
-  const supabase = await createClient()
-  const { error } = await supabase.from('leads').update({ status }).eq('id', id)
-  if (error) throw new Error(error.message)
-}
-
-export async function updateLeadNotes(id: string, notes: string): Promise<void> {
-  const supabase = await createClient()
-  const { error } = await supabase.from('leads').update({ notes }).eq('id', id)
-  if (error) throw new Error(error.message)
-}
-
 export async function getDashboardStats(): Promise<DashboardStats> {
   const supabase = await createClient()
 

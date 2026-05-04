@@ -1,40 +1,24 @@
 'use client'
 
-import { useState } from 'react'
+import { useActionState, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Anchor, Eye, EyeOff } from 'lucide-react'
-import { createClient } from '@/lib/supabase/client'
+import { signInAction, type SignInResult } from './actions'
+import { ADMIN_EMAIL, ADMIN_PASSWORD } from '@/lib/admin/auth'
 
 export default function LoginPage() {
   const router = useRouter()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [loading, setLoading] = useState(false)
+  const [state, formAction, pending] = useActionState<SignInResult | null, FormData>(
+    signInAction,
+    null,
+  )
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError(null)
-    setLoading(true)
-
-    try {
-      const supabase = createClient()
-      const { error: authError } = await supabase.auth.signInWithPassword({ email, password })
-
-      if (authError) {
-        setError('Identifiants incorrects. Vérifiez votre email et mot de passe.')
-        return
-      }
-
-      router.refresh()
-      router.push('/admin')
-    } catch {
-      setError('Erreur de connexion. Réessayez.')
-    } finally {
-      setLoading(false)
+  useEffect(() => {
+    if (state?.ok) {
+      router.replace('/admin')
     }
-  }
+  }, [state, router])
 
   return (
     <div className="landing-root min-h-dvh flex items-center justify-center px-6">
@@ -63,7 +47,7 @@ export default function LoginPage() {
 
         {/* Card */}
         <div className="admin-card">
-          <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+          <form action={formAction} className="space-y-5" noValidate>
             <div className="space-y-1.5">
               <label
                 htmlFor="email"
@@ -73,10 +57,10 @@ export default function LoginPage() {
               </label>
               <input
                 id="email"
+                name="email"
                 type="email"
                 className="tunnel-input"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                defaultValue={ADMIN_EMAIL}
                 placeholder="admin@caphorn.fr"
                 autoComplete="email"
                 required
@@ -93,10 +77,10 @@ export default function LoginPage() {
               <div className="relative">
                 <input
                   id="password"
+                  name="password"
                   type={showPassword ? 'text' : 'password'}
                   className="tunnel-input"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  defaultValue={ADMIN_PASSWORD}
                   placeholder="••••••••"
                   autoComplete="current-password"
                   required
@@ -113,14 +97,18 @@ export default function LoginPage() {
               </div>
             </div>
 
-            {error && (
+            {state?.error && (
               <p className="text-xs text-red-300 bg-red-950/30 border border-red-900/40 rounded-lg px-3 py-2.5">
-                {error}
+                {state.error}
               </p>
             )}
 
-            <button type="submit" className="btn-gold w-full justify-center mt-2" disabled={loading}>
-              {loading ? (
+            <button
+              type="submit"
+              className="btn-gold w-full justify-center mt-2"
+              disabled={pending}
+            >
+              {pending ? (
                 <span className="flex items-center justify-center gap-2">
                   <span className="w-4 h-4 border-2 border-[var(--color-ink)]/30 border-t-[var(--color-ink)] rounded-full animate-spin" />
                   Connexion…
@@ -130,6 +118,23 @@ export default function LoginPage() {
               )}
             </button>
           </form>
+
+          {/* Aide dev — credentials affichés tant que l'auth est hardcodée */}
+          <div className="mt-5 pt-5 border-t border-[var(--color-ink-line)]">
+            <p className="text-[10px] font-mono uppercase tracking-[0.22em] text-[var(--color-cream-mute)] mb-2">
+              Identifiants de démo
+            </p>
+            <div className="text-[11px] font-mono text-[var(--color-cream-dim)] space-y-1">
+              <div>
+                <span className="text-[var(--color-cream-mute)]">email · </span>
+                {ADMIN_EMAIL}
+              </div>
+              <div>
+                <span className="text-[var(--color-cream-mute)]">mdp · </span>
+                {ADMIN_PASSWORD}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
