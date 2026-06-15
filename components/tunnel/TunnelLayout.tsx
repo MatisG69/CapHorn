@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowLeft, Anchor } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 
 interface TunnelLayoutProps {
@@ -50,9 +50,9 @@ export default function TunnelLayout({
           )}
 
           <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-6 h-6 rounded-md flex items-center justify-center"
-                 style={{ background: 'linear-gradient(180deg, var(--color-gold-soft), var(--color-gold))' }}>
-              <Anchor className="w-3 h-3 text-[var(--color-ink)]" />
+            <div className="w-7 h-7 rounded-lg flex items-center justify-center text-[var(--color-gold-soft)]"
+                 style={{ background: 'linear-gradient(150deg, var(--color-ink-raised), var(--color-ink-soft))', border: '1px solid rgba(201,164,92,0.42)', fontFamily: 'var(--font-cormorant)', fontWeight: 800, fontSize: '0.72rem' }}>
+              CH
             </div>
             <span className="text-sm font-semibold tracking-wide text-[var(--color-cream)]">
               Cap Horn Conseils
@@ -75,7 +75,7 @@ export default function TunnelLayout({
             style={{
               width: `${progress}%`,
               background: 'linear-gradient(90deg, var(--color-gold-deep), var(--color-gold-soft))',
-              boxShadow: '0 0 8px rgba(226, 201, 126, 0.45)',
+              boxShadow: '0 0 10px rgba(201, 164, 92, 0.5)',
             }}
           />
         </div>

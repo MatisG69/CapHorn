@@ -155,7 +155,7 @@ export default function LeadCapture({ isSubmitting, onSubmit, isBusiness }: Lead
           >
             {isSubmitting ? (
               <>
-                <span className="w-4 h-4 border-2 border-[var(--color-ink)]/30 border-t-[var(--color-ink)] rounded-full animate-spin" />
+                <span className="w-4 h-4 border-2 border-[var(--on-gold)]/30 border-t-[var(--on-gold)] rounded-full animate-spin" />
                 Envoi en cours…
               </>
             ) : (

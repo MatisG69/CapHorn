@@ -37,12 +37,12 @@ const modalStyle: CSSProperties = {
   maxHeight: 'calc(100dvh - 3rem)',
   overflowY: 'auto',
   background:
-    'linear-gradient(180deg, rgba(201, 168, 76, 0.04), transparent 30%), var(--color-ink-soft)',
+    'linear-gradient(180deg, rgba(201, 164, 92, 0.04), transparent 30%), var(--color-ink-soft)',
   border: '1px solid var(--color-ink-line)',
   borderRadius: 18,
   padding: '2.5rem 2rem 2.25rem',
   boxShadow:
-    '0 0 0 1px rgba(201, 168, 76, 0.15), 0 40px 100px -24px rgba(0, 0, 0, 0.7)',
+    '0 0 0 1px rgba(201, 164, 92, 0.15), 0 40px 100px -24px rgba(0, 0, 0, 0.7)',
   animation: 'service-modal-in 320ms cubic-bezier(0.16, 1, 0.3, 1)',
 }
 
@@ -151,9 +151,9 @@ export function ServiceModal({ service, onClose }: ServiceModalProps) {
         }
         .service-modal__close:hover,
         .service-modal__close:focus-visible {
-          background: rgba(201, 168, 76, 0.12) !important;
+          background: rgba(201, 164, 92, 0.12) !important;
           color: var(--color-cream) !important;
-          border-color: rgba(201, 168, 76, 0.45) !important;
+          border-color: rgba(201, 164, 92, 0.45) !important;
           outline: none !important;
         }
         @media (min-width: 768px) {

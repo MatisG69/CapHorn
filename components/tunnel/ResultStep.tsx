@@ -27,15 +27,15 @@ export default function ResultStep({ messageVariant, firstName }: ResultStepProp
           <div
             className="w-20 h-20 rounded-full flex items-center justify-center"
             style={{
-              background: 'linear-gradient(180deg, var(--color-gold-soft), var(--color-gold) 60%, var(--color-gold-deep))',
-              boxShadow: '0 18px 40px -8px rgba(201, 168, 76, 0.45), inset 0 1px 0 rgba(255,255,255,0.35)',
+              background: 'linear-gradient(180deg, var(--gold-fill-1), var(--gold-fill-2) 58%, var(--gold-fill-3))',
+              boxShadow: '0 18px 40px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.6)',
             }}
           >
-            <CheckCircle className="w-9 h-9 text-[var(--color-ink)]" />
+            <CheckCircle className="w-9 h-9 text-[var(--on-gold)]" />
           </div>
           <div
             className="absolute inset-0 rounded-full animate-ping"
-            style={{ background: 'rgba(201, 168, 76, 0.25)', animationDuration: '2.4s' }}
+            style={{ background: 'rgba(201, 164, 92, 0.25)', animationDuration: '2.4s' }}
           />
         </div>
       </div>
@@ -54,7 +54,7 @@ export default function ResultStep({ messageVariant, firstName }: ResultStepProp
       </div>
 
       {/* Status badge */}
-      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--color-gold-deep)] bg-[rgba(201,168,76,0.08)] text-xs font-mono uppercase tracking-[0.22em] text-[var(--color-gold-soft)]">
+      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--color-gold-deep)] bg-[rgba(201,164,92,0.08)] text-xs font-mono uppercase tracking-[0.22em] text-[var(--color-gold-soft)]">
         <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-gold)]" />
         {badgeLabel}
       </div>
@@ -69,7 +69,7 @@ export default function ResultStep({ messageVariant, firstName }: ResultStepProp
             'Cap Horn négocie les meilleures conditions pour votre financement.',
           ].map((step, i) => (
             <li key={i} className="flex items-start gap-3">
-              <div className="w-6 h-6 rounded-full flex items-center justify-center mt-0.5 shrink-0 border border-[var(--color-gold-deep)] bg-[rgba(201,168,76,0.06)]">
+              <div className="w-6 h-6 rounded-full flex items-center justify-center mt-0.5 shrink-0 border border-[var(--color-gold-deep)] bg-[rgba(201,164,92,0.06)]">
                 <span className="text-[var(--color-gold-soft)] text-xs font-mono font-semibold">{i + 1}</span>
               </div>
               <p className="text-sm text-[var(--color-cream-dim)] pt-0.5 leading-relaxed">{step}</p>

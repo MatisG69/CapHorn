@@ -160,7 +160,7 @@ export function AssuranceCalculator() {
             right: '-15%',
             width: '500px',
             height: '500px',
-            background: 'radial-gradient(circle, rgba(201, 168, 76, 0.18) 0%, transparent 60%)',
+            background: 'radial-gradient(circle, rgba(201, 164, 92, 0.12) 0%, transparent 60%)',
           }}
         />
 
@@ -186,7 +186,7 @@ export function AssuranceCalculator() {
                     {fmtEur(result.monthlySaving)}
                   </span>
                   {result.savingsPercent >= 1 && (
-                    <span className="inline-flex items-center gap-1 text-xs font-mono text-emerald-300 bg-emerald-500/10 border border-emerald-500/30 px-2 py-1 rounded-md">
+                    <span className="inline-flex items-center gap-1 text-xs font-mono text-amber-200 bg-amber-400/10 border border-amber-400/30 px-2 py-1 rounded-md">
                       <TrendingDown className="w-3 h-3" />
                       −{result.savingsPercent.toFixed(0)} %
                     </span>
@@ -277,8 +277,8 @@ function Stat({
   return (
     <div className={`p-4 rounded-xl border ${
       highlight
-        ? 'border-[rgba(201,168,76,0.4)] bg-[rgba(201,168,76,0.06)]'
-        : 'border-[var(--color-ink-line)] bg-[rgba(15,18,22,0.4)]'
+        ? 'border-[rgba(201,164,92,0.4)] bg-[rgba(201,164,92,0.08)]'
+        : 'border-[var(--color-ink-line)] bg-[rgba(255,255,255,0.04)]'
     }`}>
       <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-[var(--color-cream-mute)] mb-1.5">
         {label}
