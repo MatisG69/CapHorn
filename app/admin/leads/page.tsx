@@ -135,8 +135,8 @@ export default async function LeadsPage({ searchParams }: PageProps) {
             Aucun dossier {view === 'complets' ? 'finalisé' : view === 'en-cours' ? 'en cours' : ''} pour le moment.
           </div>
         ) : (
-          <>
-            <div className="grid grid-cols-[2fr_1.3fr_1.5fr_1.2fr_0.9fr] gap-4 px-6 py-3 border-b border-[var(--color-ink-line)] bg-[var(--color-ink-raised)]">
+          <div className="overflow-x-auto">
+            <div className="grid grid-cols-[2fr_1.3fr_1.5fr_1.2fr_0.9fr] gap-4 px-6 py-3 border-b border-[var(--color-ink-line)] bg-[var(--color-ink-raised)] min-w-[820px]">
               {['Contact', 'Profil', 'État', 'Score / étape', 'Activité'].map((h) => (
                 <span key={h} className="text-[10px] font-mono font-semibold text-[var(--color-cream-mute)] uppercase tracking-[0.22em]">
                   {h}
@@ -144,7 +144,7 @@ export default async function LeadsPage({ searchParams }: PageProps) {
               ))}
             </div>
 
-            <div className="divide-y divide-[var(--color-ink-line)]">
+            <div className="divide-y divide-[var(--color-ink-line)] min-w-[820px]">
               {leads.map((lead) => (
                 <Link
                   key={lead.id}
@@ -214,7 +214,7 @@ export default async function LeadsPage({ searchParams }: PageProps) {
                 </Link>
               ))}
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>

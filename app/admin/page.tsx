@@ -151,11 +151,11 @@ export default async function AdminDashboard() {
         {recentLeads.length === 0 ? (
           <div className="py-14 text-center text-[var(--color-cream-mute)] text-sm">Aucun lead pour le moment.</div>
         ) : (
-          <div>
-            <div className="grid grid-cols-[2fr_1.4fr_0.7fr_1.1fr_1.1fr_0.7fr] gap-4 px-6 py-3 border-y border-[var(--color-ink-line)] text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--color-cream-mute)]">
+          <div className="overflow-x-auto">
+            <div className="grid grid-cols-[2fr_1.4fr_0.7fr_1.1fr_1.1fr_0.7fr] gap-4 px-6 py-3 border-y border-[var(--color-ink-line)] text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--color-cream-mute)] min-w-[860px]">
               <span>Lead</span><span>Entreprise</span><span>Score</span><span>Statut</span><span>Dernière activité</span><span className="text-right">Action</span>
             </div>
-            <div className="divide-y divide-[var(--color-ink-line)]">
+            <div className="divide-y divide-[var(--color-ink-line)] min-w-[860px]">
               {recentLeads.map((lead) => {
                 const name = lead.first_name || lead.last_name ? `${lead.first_name ?? ''} ${lead.last_name ?? ''}`.trim() : 'Anonyme'
                 const initials = (name === 'Anonyme' ? 'A' : name.split(/\s+/).slice(0, 2).map((w) => w[0]).join('')).toUpperCase()
