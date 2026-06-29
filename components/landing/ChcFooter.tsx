@@ -17,15 +17,18 @@ export function ChcFooter() {
           </p>
         </div>
         <div>
-          <h4>Expertises</h4>
-          <Link href="/expertises">Immobilier</Link>
-          <Link href="/expertises">Financement pro</Link>
-          <Link href="/expertises">Assurance emprunteur</Link>
-          <Link href="/simulateur">Simulateur</Link>
+          <h4>Financements</h4>
+          <Link href="/financement-professions-liberales">Professions libérales</Link>
+          <Link href="/financement-franchise">Franchise</Link>
+          <Link href="/reprise-transmission">Reprise &amp; transmission</Link>
+          <Link href="/expertises">Toutes les expertises</Link>
+          <Link href="/simulateur-credit-immobilier">Simulateur crédit immo</Link>
+          <Link href="/simulateur">Simulateur assurance</Link>
         </div>
         <div>
           <h4>Cabinet</h4>
           <Link href="/methode">Méthode</Link>
+          <Link href="/blog">Blog &amp; conseils</Link>
           <Link href="/le-cabinet">À propos</Link>
           <Link href="/tunnel">Démarrer une étude</Link>
         </div>

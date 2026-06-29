@@ -1,11 +1,13 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import ContactModal from './ContactModal'
 
 const LINKS = [
   { href: '/expertises', label: 'Expertises' },
   { href: '/methode', label: 'Méthode' },
+  { href: '/blog', label: 'Blog' },
   { href: '/simulateur', label: 'Simulateur' },
   { href: '/le-cabinet', label: 'Le cabinet' },
 ]
@@ -13,6 +15,7 @@ const LINKS = [
 /** Nav editorial Cap Horn (transparent → crème au scroll) + révélation au scroll. */
 export function ChcNav({ active }: { active?: string }) {
   const navRef = useRef<HTMLElement>(null)
+  const [contactOpen, setContactOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => {
@@ -41,7 +44,8 @@ export function ChcNav({ active }: { active?: string }) {
           <Link key={l.href} href={l.href} aria-current={active === l.href ? 'page' : undefined}>{l.label}</Link>
         ))}
       </div>
-      <Link href="/tunnel" className="chc-nav__cta">Prendre contact</Link>
+      <button type="button" className="chc-nav__cta" onClick={() => setContactOpen(true)}>Prendre contact</button>
+      <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
     </nav>
   )
 }

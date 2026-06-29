@@ -1,4 +1,11 @@
 import type { ScoreLabel, Priority, InternalStatus, LeadStatus, TunnelType, MessageVariant } from '../types'
+import { TUNNEL_STEPS } from '../tunnel/config'
+
+/** Libellé lisible de la dernière étape atteinte dans le tunnel. */
+export function stepLabel(id?: string | null): string {
+  if (!id) return '—'
+  return TUNNEL_STEPS[id]?.title ?? id.replace(/_/g, ' ')
+}
 
 export const TUNNEL_LABELS: Record<TunnelType, string> = {
   pro: 'Professionnel',

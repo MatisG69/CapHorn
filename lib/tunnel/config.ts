@@ -13,6 +13,18 @@ const STEP_ENTRY: StepConfig = {
     { value: 'particulier', label: 'Particulier', description: 'Immobilier, patrimoine, assurance emprunteur' },
     { value: 'reseau', label: "Apporteur d'affaires / Partenaire", description: 'Recommandation, courtier, prescripteur' },
   ],
+  getNext: () => 'contact',
+}
+
+// ─── Coordonnées (placées tôt : chaque dossier commencé est contactable) ─────
+
+const STEP_CONTACT: StepConfig = {
+  id: 'contact',
+  type: 'contact',
+  title: 'À qui adressons-nous votre étude ?',
+  subtitle:
+    'Vos coordonnées nous permettent de préparer votre analyse et de vous recontacter. Aucun engagement.',
+  progressValue: 12,
   getNext: (answers) => {
     const v = answers['entry']
     if (v === 'pro') return 'pro_need'
@@ -473,11 +485,43 @@ const STEP_COMMON_REVENUE: StepConfig = {
 const STEP_COMMON_BANK_REFUSAL: StepConfig = {
   id: 'common_bank_refusal',
   type: 'choice',
-  title: 'Avez-vous déjà essuyé un refus bancaire pour ce projet ?',
-  progressValue: 76,
+  title: 'Avez-vous eu une demande de financement refusée au cours des 6 derniers mois ?',
+  subtitle: 'Cette information nous aide à mieux qualifier et orienter votre dossier dès le départ.',
+  progressValue: 74,
   options: [
-    { value: 'no', label: "Non, je n'ai pas encore sollicité ma banque" },
-    { value: 'yes', label: "Oui, j'ai eu un refus" },
+    { value: 'no', label: 'Non', description: "Aucun refus récent, ou je n'ai pas encore sollicité de banque" },
+    { value: 'yes', label: 'Oui', description: "J'ai eu un refus au cours des 6 derniers mois" },
+  ],
+  getNext: (answers) => (answers['common_bank_refusal'] === 'yes' ? 'bank_refusal_org' : 'capture'),
+}
+
+const STEP_BANK_REFUSAL_ORG: StepConfig = {
+  id: 'bank_refusal_org',
+  type: 'input',
+  title: 'Quelle banque ou quel organisme a refusé ?',
+  subtitle: 'Indiquez le nom de l’établissement concerné.',
+  inputType: 'text',
+  inputLabel: 'Banque / organisme',
+  inputPlaceholder: 'Ex. Crédit Agricole, BNP, BPI…',
+  progressValue: 80,
+  getNext: () => 'bank_refusal_reason',
+}
+
+const STEP_BANK_REFUSAL_REASON: StepConfig = {
+  id: 'bank_refusal_reason',
+  type: 'choice',
+  title: 'Quel motif vous a été indiqué ?',
+  subtitle: 'Même approximatif, cela nous aide à reconstruire votre dossier sous le bon angle.',
+  progressValue: 86,
+  options: [
+    { value: 'apport_insuffisant', label: 'Apport jugé insuffisant' },
+    { value: 'endettement', label: "Taux d'endettement / capacité" },
+    { value: 'activite_recente', label: 'Activité trop récente / historique court' },
+    { value: 'garanties', label: 'Garanties insuffisantes' },
+    { value: 'rentabilite', label: 'Rentabilité / prévisionnel jugé fragile' },
+    { value: 'scoring', label: 'Scoring interne / politique de la banque' },
+    { value: 'sans_motif', label: 'Aucun motif clair communiqué' },
+    { value: 'autre', label: 'Autre motif' },
   ],
   getNext: () => 'capture',
 }
@@ -599,10 +643,11 @@ const STEP_RESEAU_TYPE: StepConfig = {
 
 const STEP_CAPTURE: StepConfig = {
   id: 'capture',
-  type: 'capture',
+  type: 'finalize',
   title: 'Votre analyse personnalisée est prête',
-  subtitle: 'Laissez vos coordonnées pour recevoir votre étude et être contacté par un expert.',
-  progressValue: 88,
+  subtitle:
+    'Vérifiez les éléments transmis puis finalisez : un expert Cap Horn étudie votre dossier et vous recontacte.',
+  progressValue: 92,
   getNext: () => 'result',
 }
 
@@ -618,6 +663,7 @@ const STEP_RESULT: StepConfig = {
 
 export const TUNNEL_STEPS: Record<string, StepConfig> = {
   entry: STEP_ENTRY,
+  contact: STEP_CONTACT,
   pro_need: STEP_PRO_NEED,
 
   tresorerie_step1: STEP_TRESORERIE_1,
@@ -659,6 +705,8 @@ export const TUNNEL_STEPS: Record<string, StepConfig> = {
 
   common_revenue: STEP_COMMON_REVENUE,
   common_bank_refusal: STEP_COMMON_BANK_REFUSAL,
+  bank_refusal_org: STEP_BANK_REFUSAL_ORG,
+  bank_refusal_reason: STEP_BANK_REFUSAL_REASON,
 
   particulier_need: STEP_PARTICULIER_NEED,
   immo_situation: STEP_IMMO_SITUATION,

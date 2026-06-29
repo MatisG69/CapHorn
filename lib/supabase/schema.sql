@@ -46,6 +46,21 @@ alter table leads add column if not exists status      text not null default 'ne
 alter table leads add column if not exists notes       text;
 alter table leads add column if not exists assigned_to text;
 
+-- Dossier / suivi du tunnel (sauvegarde progressive + dossiers non finis)
+--   session_id      : identifiant client stable → permet l'UPSERT à chaque étape
+--   completed       : true seulement quand le lead a finalisé tout le tunnel
+--   progress        : avancement 0-100 (dernière étape atteinte)
+--   current_step    : id de la dernière étape vue (pour relance ciblée)
+--   last_activity_at : dernière interaction (tri des dossiers en cours)
+alter table leads add column if not exists session_id       uuid;
+alter table leads add column if not exists completed        boolean not null default false;
+alter table leads add column if not exists progress         integer not null default 0;
+alter table leads add column if not exists current_step     text;
+alter table leads add column if not exists last_activity_at timestamptz not null default now();
+
+-- Un seul dossier par session → autorise INSERT ... ON CONFLICT (upsert)
+create unique index if not exists leads_session_id_uidx on leads (session_id);
+
 /* 3. Check constraints idempotents. */
 do $$
 begin
@@ -98,30 +113,17 @@ begin
   end if;
 end $$;
 
-/* 4. NOT NULL sur les colonnes critiques (uniquement si la table est vide
-      ou si elles sont déjà remplies — sinon on laisse passer pour ne pas
-      casser une base existante avec des lignes incomplètes). */
-do $$
-begin
-  if not exists (select 1 from leads where tunnel_type is null) then
-    alter table leads alter column tunnel_type set not null;
-  end if;
-  if not exists (select 1 from leads where sub_type is null) then
-    alter table leads alter column sub_type set not null;
-  end if;
-  if not exists (select 1 from leads where first_name is null) then
-    alter table leads alter column first_name set not null;
-  end if;
-  if not exists (select 1 from leads where last_name is null) then
-    alter table leads alter column last_name set not null;
-  end if;
-  if not exists (select 1 from leads where email is null) then
-    alter table leads alter column email set not null;
-  end if;
-  if not exists (select 1 from leads where phone is null) then
-    alter table leads alter column phone set not null;
-  end if;
-end $$;
+/* 4. Colonnes NULLABLES — un dossier est créé dès la 1re étape du tunnel,
+      avant même que le besoin (sub_type) ou la totalité des coordonnées
+      soient connus. On relâche donc explicitement NOT NULL (idempotent) pour
+      ne jamais bloquer un enregistrement partiel. La complétude est garantie
+      applicativement au moment de la finalisation (completed = true). */
+alter table leads alter column tunnel_type drop not null;
+alter table leads alter column sub_type    drop not null;
+alter table leads alter column first_name  drop not null;
+alter table leads alter column last_name   drop not null;
+alter table leads alter column email       drop not null;
+alter table leads alter column phone       drop not null;
 
 /* 5. Trigger updated_at. */
 create or replace function update_leads_updated_at() returns trigger as $$
@@ -142,6 +144,8 @@ create index if not exists leads_status_idx          on leads (status);
 create index if not exists leads_tunnel_type_idx     on leads (tunnel_type);
 create index if not exists leads_score_label_idx     on leads (score_label);
 create index if not exists leads_internal_status_idx on leads (internal_status);
+create index if not exists leads_completed_idx       on leads (completed);
+create index if not exists leads_last_activity_idx   on leads (last_activity_at desc);
 
 /* 7. RLS. */
 alter table leads enable row level security;
@@ -169,10 +173,13 @@ drop policy if exists "anon_select_leads_dev" on leads;
 drop policy if exists "anon_update_leads_dev" on leads;
 drop policy if exists "anon_delete_leads_dev" on leads;
 
--- Insertion publique depuis le tunnel (consentement RGPD obligatoire)
+-- Insertion publique depuis le tunnel.
+-- NB : on n'exige plus consent_rgpd=true au niveau policy car le dossier est
+-- créé dès la 1re étape (sauvegarde progressive). Le consentement reste
+-- recueilli applicativement à l'étape « coordonnées » et stocké dans la ligne.
 create policy "anon_insert_leads" on leads
   for insert to anon
-  with check (consent_rgpd = true);
+  with check (true);
 
 -- DEV-ONLY : lecture / écriture / suppression admin via auth hardcodée
 create policy "anon_select_leads_dev" on leads

@@ -89,7 +89,7 @@ export default function NotesEditor({ leadId, initial }: Props) {
             </div>
           </div>
           {error && (
-            <p className="text-xs text-red-300 bg-red-950/30 border border-red-900/40 rounded-lg px-3 py-2">
+            <p className="text-xs text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
               {error}
             </p>
           )}

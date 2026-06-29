@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight, X } from 'lucide-react'
 import { Counter } from '@/components/landing/Counter'
+import StaggerTestimonials from '@/components/landing/StaggerTestimonials'
+import MethodCarousel from '@/components/landing/MethodCarousel'
 import { ChcNav } from '@/components/landing/ChcNav'
 import { ChcFooter } from '@/components/landing/ChcFooter'
 
@@ -48,11 +50,11 @@ const SERVICES: Svc[] = [
   },
 ]
 
-const STEPS = [
-  { n: '01', name: 'Qualifiez votre projet', desc: 'Notre outil analyse votre situation en 3 minutes. Aucun document requis à cette étape.' },
-  { n: '02', name: 'Échange personnalisé', desc: 'Guillaume vous rappelle sous 24 h pour affiner le dossier et identifier les meilleures pistes.' },
-  { n: '03', name: 'Montage & négociation', desc: 'Nous constituons le dossier et négocions chaque paramètre auprès du bon réseau bancaire.' },
-  { n: '04', name: 'Signature & suivi', desc: 'Nous orchestrons jusqu’à la signature chez le notaire, et sécurisons les conditions annexes.' },
+const METHOD_STEPS = [
+  { n: '01', name: 'Qualifiez votre projet', desc: 'Notre outil analyse votre situation en 3 minutes. Aucun document requis à cette étape.', src: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=900&q=80&auto=format&fit=crop' },
+  { n: '02', name: 'Échange personnalisé', desc: 'Guillaume vous rappelle sous 24 h pour affiner le dossier et identifier les meilleures pistes.', src: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=900&q=80&auto=format&fit=crop' },
+  { n: '03', name: 'Montage & négociation', desc: 'Nous constituons le dossier et négocions chaque paramètre auprès du bon réseau bancaire.', src: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=900&q=80&auto=format&fit=crop' },
+  { n: '04', name: 'Signature & suivi', desc: 'Nous orchestrons jusqu’à la signature chez le notaire, et sécurisons les conditions annexes.', src: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=900&q=80&auto=format&fit=crop' },
 ]
 
 export default function HomePage() {
@@ -156,39 +158,20 @@ export default function HomePage() {
             <div className="chc-eyebrow">Méthodologie</div>
             <h2 className="chc-h2">Simple pour vous,<br /><em>exigeant en coulisses.</em></h2>
           </div>
-          <div className="chc-steps">
-            {STEPS.map((s, i) => (
-              <div className="chc-step r" key={s.n} data-d={String((i % 4) + 1)}>
-                <div className="chc-step__n">{s.n}</div>
-                <div className="chc-step__name">{s.name}</div>
-                <p className="chc-step__desc">{s.desc}</p>
-              </div>
-            ))}
+          <div className="r" data-d="1">
+            <MethodCarousel steps={METHOD_STEPS} />
           </div>
         </div>
       </section>
 
-      {/* ─── PROOF BAR ───────────────────────────────────────── */}
+      {/* ─── PREUVE — témoignages clients ─────────────────────── */}
       <section className="chc-section">
-        <div className="chc-wrap r">
-          <div className="chc-proof">
-            <div className="chc-proof__item">
-              <div className="chc-proof__val"><Counter value={15} /><sup>+</sup></div>
-              <div className="chc-proof__label">Banques &amp; assureurs partenaires</div>
-            </div>
-            <div className="chc-proof__item">
-              <div className="chc-proof__val"><Counter value={0.3} prefix="−" decimals={2} /><sup>%</sup></div>
-              <div className="chc-proof__label">De taux sous les grilles</div>
-            </div>
-            <div className="chc-proof__item">
-              <div className="chc-proof__val"><Counter value={24} /><sup>h</sup></div>
-              <div className="chc-proof__label">Pour un premier retour</div>
-            </div>
-            <div className="chc-proof__item">
-              <div className="chc-proof__val"><Counter value={98} /><sup>%</sup></div>
-              <div className="chc-proof__label">De clients satisfaits</div>
-            </div>
-          </div>
+        <div className="chc-wrap r" style={{ maxWidth: 760, marginBottom: 28 }}>
+          <div className="chc-eyebrow">Ils nous font confiance</div>
+          <h2 className="chc-h2">La preuve, <em>côté clients.</em></h2>
+        </div>
+        <div className="chc-wrap r" data-d="1">
+          <StaggerTestimonials />
         </div>
       </section>
 
@@ -219,7 +202,8 @@ export default function HomePage() {
       <section id="about" className="chc-section">
         <div className="chc-wrap chc-about">
           <div className="chc-about__photo r">
-            <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--chc-serif)', fontSize: 'clamp(80px,12vw,140px)', fontWeight: 300, color: 'rgba(184,146,42,0.35)' }}>GH</div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/guillaume-horn.jpg" alt="Guillaume Horn, fondateur de Cap Horn Conseils" />
             <div className="chc-about__badge">Disponible pour un premier échange</div>
           </div>
           <div className="r" data-d="1">

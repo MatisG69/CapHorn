@@ -93,7 +93,7 @@ export default function StatusSwitcher({ leadId, current }: Props) {
       )}
 
       {error && (
-        <p className="absolute top-full mt-1 right-0 text-[11px] text-red-300 whitespace-nowrap">
+        <p className="absolute top-full mt-1 right-0 text-[11px] text-red-600 whitespace-nowrap">
           {error}
         </p>
       )}

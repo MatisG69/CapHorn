@@ -8,10 +8,12 @@ import {
   PRIORITY_DOT,
   formatDate,
   formatEuro,
+  formatRelativeDate,
+  stepLabel,
 } from '@/lib/admin/labels'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, Mail, Phone, Building2, Calendar } from 'lucide-react'
+import { ArrowLeft, Mail, Phone, Building2, Calendar, CheckCircle2, Hourglass } from 'lucide-react'
 import StatusSwitcher from '@/components/admin/StatusSwitcher'
 import NotesEditor from '@/components/admin/NotesEditor'
 import DeleteLeadButton from '@/components/admin/DeleteLeadButton'
@@ -52,8 +54,45 @@ export default async function LeadDetailPage({ params }: PageProps) {
         className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.18em] text-[var(--color-cream-mute)] hover:text-[var(--color-gold-soft)] transition-colors"
       >
         <ArrowLeft className="w-3.5 h-3.5" />
-        Retour aux leads
+        Retour aux dossiers
       </Link>
+
+      {/* Bannière de suivi du dossier */}
+      {lead.completed ? (
+        <div className="admin-card flex items-center gap-3 !py-4 border-emerald-500/30">
+          <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+          <p className="text-sm text-[var(--color-cream-dim)]">
+            <span className="text-[var(--color-cream)] font-medium">Dossier finalisé</span> — envoyé par le lead
+            {' · '}
+            {formatDate(lead.created_at)}
+          </p>
+        </div>
+      ) : (
+        <div className="admin-card !py-5">
+          <div className="flex items-center gap-3 mb-3">
+            <Hourglass className="w-5 h-5 text-[var(--color-gold-soft)] shrink-0" />
+            <p className="text-sm text-[var(--color-cream-dim)]">
+              <span className="text-[var(--color-cream)] font-medium">Dossier en cours</span> — non finalisé, à relancer.
+              {' '}Dernière étape : <span className="text-[var(--color-gold-soft)]">{stepLabel(lead.current_step)}</span>
+              {' · '}Activité {formatRelativeDate(lead.last_activity_at ?? lead.created_at)}
+            </p>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="flex-1 h-1.5 bg-[var(--color-ink-raised)] rounded-full overflow-hidden">
+              <div
+                className="h-full rounded-full"
+                style={{
+                  width: `${lead.progress}%`,
+                  background: 'linear-gradient(90deg, var(--color-gold-deep), var(--color-gold-soft))',
+                }}
+              />
+            </div>
+            <span className="text-xs font-mono tabular-nums text-[var(--color-gold-soft)] w-10 text-right">
+              {lead.progress}%
+            </span>
+          </div>
+        </div>
+      )}
 
       {/* Header card */}
       <div className="admin-card">
@@ -74,8 +113,8 @@ export default async function LeadDetailPage({ params }: PageProps) {
               </span>
             </div>
             <p className="text-sm text-[var(--color-cream-dim)] mt-2">
-              {TUNNEL_LABELS[lead.tunnel_type]} ·{' '}
-              {SUBTUNNEL_LABELS[lead.sub_type] ?? lead.sub_type}
+              {lead.tunnel_type ? TUNNEL_LABELS[lead.tunnel_type] : 'Profil non précisé'}
+              {lead.sub_type ? ` · ${SUBTUNNEL_LABELS[lead.sub_type] ?? lead.sub_type}` : ''}
             </p>
           </div>
 

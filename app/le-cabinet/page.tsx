@@ -33,7 +33,8 @@ export default function CabinetPage() {
       <section className="chc-section">
         <div className="chc-wrap chc-about">
           <div className="chc-about__photo r">
-            <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--chc-serif)', fontSize: 'clamp(80px,12vw,150px)', fontWeight: 300, color: 'rgba(184,146,42,0.35)' }}>GH</div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/guillaume-horn.jpg" alt="Guillaume Horn, fondateur de Cap Horn Conseils" />
             <div className="chc-about__badge">Disponible pour un premier échange</div>
           </div>
           <div className="r" data-d="1">

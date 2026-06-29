@@ -2,10 +2,11 @@
 
 import { useState } from 'react'
 import { ChevronRight } from 'lucide-react'
-import type { StepConfig } from '@/lib/types'
+import type { TunnelStepDef } from '@/lib/types'
+import { stepGlyph, optionGlyph } from './stepIcons'
 
 interface ChoiceStepProps {
-  step: StepConfig
+  step: TunnelStepDef
   onAnswer: (value: string) => void
 }
 
@@ -19,47 +20,28 @@ export default function ChoiceStep({ step, onAnswer }: ChoiceStepProps) {
   }
 
   return (
-    <div className="space-y-10">
-      {/* Question */}
-      <div className="space-y-4">
-        <p className="eyebrow eyebrow--single text-[var(--color-gold-soft)]">Étape</p>
-        <h1
-          className="display-serif text-[var(--color-cream)] leading-[1.04]"
-          style={{ fontSize: 'clamp(2rem, 4.5vw, 3.25rem)' }}
-        >
-          {step.title}
-        </h1>
-        {step.subtitle && (
-          <p className="text-[var(--color-cream-dim)] text-[0.95rem] leading-relaxed max-w-lg">
-            {step.subtitle}
-          </p>
-        )}
-      </div>
+    <div className="chc-step-wrap">
+      <span className="chc-tunnel__icon">{stepGlyph(step)}</span>
+      <p className="chc-tunnel__eyebrow">Étape</p>
+      <h1 className="chc-tunnel__title">{step.title}</h1>
+      {step.subtitle && <p className="chc-tunnel__lead">{step.subtitle}</p>}
 
-      {/* Options */}
-      <div className="space-y-3">
+      <div className="chc-choices">
         {step.options?.map((option) => (
           <button
             key={option.value}
             onClick={() => handleSelect(option.value)}
             disabled={selected !== null && selected !== option.value}
-            className={`tunnel-choice group ${selected === option.value ? 'is-selected' : ''}`}
+            className={`chc-choice ${selected === option.value ? 'is-selected' : ''}`}
           >
-            <div className="flex items-center justify-between gap-4">
-              <div className="flex-1 min-w-0 text-left">
-                <div className="font-medium text-[1rem] leading-snug transition-colors text-[var(--color-cream)] group-hover:text-[var(--color-gold-soft)]">
-                  {option.label}
-                </div>
-                {option.description && (
-                  <div className="text-[13px] text-[var(--color-cream-dim)] mt-1.5 leading-relaxed">
-                    {option.description}
-                  </div>
-                )}
-              </div>
-              <div className="tunnel-choice__chev">
-                <ChevronRight className="w-3.5 h-3.5" />
-              </div>
-            </div>
+            <span className="chc-choice__icon">{optionGlyph(option.value)}</span>
+            <span className="min-w-0 flex-1 text-left">
+              <span className="chc-choice__name block">{option.label}</span>
+              {option.description && <span className="chc-choice__desc block">{option.description}</span>}
+            </span>
+            <span className="chc-choice__chev">
+              <ChevronRight className="w-3.5 h-3.5" />
+            </span>
           </button>
         ))}
       </div>

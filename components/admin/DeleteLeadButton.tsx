@@ -32,7 +32,7 @@ export default function DeleteLeadButton({ leadId }: Props) {
       <button
         type="button"
         onClick={() => setConfirming(true)}
-        className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg border border-[var(--color-ink-line)] text-[var(--color-cream-dim)] hover:text-red-300 hover:border-red-900/60 transition-colors"
+        className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg border border-[var(--color-ink-line)] text-[var(--color-cream-dim)] hover:text-red-600 hover:border-red-900/60 transition-colors"
       >
         <Trash2 className="w-3.5 h-3.5" strokeWidth={1.8} />
         Supprimer
@@ -59,7 +59,7 @@ export default function DeleteLeadButton({ leadId }: Props) {
       >
         Annuler
       </button>
-      {error && <span className="text-xs text-red-300 ml-2">{error}</span>}
+      {error && <span className="text-xs text-red-600 ml-2">{error}</span>}
     </div>
   )
 }

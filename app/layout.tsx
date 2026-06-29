@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import { Inter, Cormorant_Garamond } from 'next/font/google'
 import './globals.css'
+import { LiquidGlassFilter } from '@/components/LiquidGlassFilter'
+import ChatWidget from '@/components/chat/ChatWidget'
+import Analytics from '@/components/Analytics'
 
 // ── Direction « Cap Horn — editorial premium » ─────────────────────────
 // Deux familles, conformément au design system : Inter (corps + display
@@ -31,7 +34,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr" className={`${inter.variable} ${cormorant.variable} h-full`}>
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">
+        <LiquidGlassFilter />
+        {children}
+        <ChatWidget />
+        <Analytics />
+      </body>
     </html>
   )
 }
