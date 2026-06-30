@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { ChcNav } from '@/components/landing/ChcNav'
 import { ChcFooter } from '@/components/landing/ChcFooter'
+import { LiquidButton } from '@/components/ui/LiquidButton'
 
 export const metadata = {
   title: 'Notre méthode — Étude, montage & négociation · Cap Horn Conseils',
@@ -59,7 +60,7 @@ export default function MethodePage() {
             <div className="chc-eyebrow">Ce que nous gérons</div>
             <h2 className="chc-h2">Tout,<br /><em>de bout en bout.</em></h2>
             <p className="chc-lead" style={{ marginTop: 22 }}>Vous n’avez qu’un projet à exprimer. Le reste — comparaison, montage, négociation, paperasse — c’est notre métier.</p>
-            <Link href="/tunnel" className="chc-btn chc-btn-gold" style={{ marginTop: 28 }}>Démarrer mon étude <ArrowRight className="w-4 h-4" /></Link>
+            <LiquidButton href="/tunnel" tone="light" size="lg" style={{ marginTop: 28 }}>Démarrer mon étude <ArrowRight className="w-4 h-4" /></LiquidButton>
           </div>
           <div className="r" data-d="1">
             <ul className="chc-checklist">

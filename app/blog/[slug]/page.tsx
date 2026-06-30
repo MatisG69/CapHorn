@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { notFound } from 'next/navigation'
 import { ChcNav } from '@/components/landing/ChcNav'
 import { ChcFooter } from '@/components/landing/ChcFooter'
+import { LiquidButton } from '@/components/ui/LiquidButton'
 import { BlogContent } from '@/components/blog/BlogContent'
 import { getPublishedPostBySlug, getPublishedPosts } from '@/lib/blog/queries'
 import { blogCategoryLabel } from '@/lib/types'
@@ -72,9 +73,9 @@ export default async function BlogPostPage({ params }: PageProps) {
           <p className="chc-lead" style={{ marginTop: 14, marginBottom: 26 }}>
             Cap Horn qualifie votre projet en 3 minutes et vous rappelle sous 24 h.
           </p>
-          <Link href="/tunnel" className="chc-btn chc-btn-gold">
+          <LiquidButton href="/tunnel" tone="light" size="lg">
             Démarrer mon étude gratuite <ArrowRight className="w-4 h-4" />
-          </Link>
+          </LiquidButton>
         </div>
       </article>
 

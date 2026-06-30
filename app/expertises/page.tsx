@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { ChcNav } from '@/components/landing/ChcNav'
 import { ChcFooter } from '@/components/landing/ChcFooter'
+import { LiquidButton } from '@/components/ui/LiquidButton'
 import { SERVICES } from '@/components/landing/landingData'
 
 export const metadata = {
@@ -35,7 +36,7 @@ export default function ExpertisesPage() {
             ))}
           </div>
           <div style={{ textAlign: 'center', marginTop: 52 }} className="r">
-            <Link href="/tunnel" className="chc-btn chc-btn-gold">Qualifier mon projet en 3 minutes <ArrowRight className="w-4 h-4" /></Link>
+            <LiquidButton href="/tunnel" tone="light" size="lg">Qualifier mon projet en 3 minutes <ArrowRight className="w-4 h-4" /></LiquidButton>
           </div>
         </div>
       </section>

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { ChcNav } from '@/components/landing/ChcNav'
 import { ChcFooter } from '@/components/landing/ChcFooter'
+import { LiquidButton } from '@/components/ui/LiquidButton'
 import { getPublishedPosts } from '@/lib/blog/queries'
 import { blogCategoryLabel } from '@/lib/types'
 
@@ -45,7 +46,7 @@ export default async function BlogIndexPage() {
                 Conseils de financement, méthodes et cas concrets — publiés régulièrement par Guillaume.
                 En attendant, lancez votre étude personnalisée.
               </p>
-              <Link href="/tunnel" className="chc-btn chc-btn-gold">Démarrer mon étude gratuite</Link>
+              <LiquidButton href="/tunnel" tone="light" size="lg">Démarrer mon étude gratuite</LiquidButton>
             </div>
           ) : (
             <>

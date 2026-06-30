@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { ChcNav } from './ChcNav'
 import { ChcFooter } from './ChcFooter'
+import { LiquidButton } from '@/components/ui/LiquidButton'
 
 export interface PillarData {
   slug: string
@@ -45,9 +46,9 @@ export function SeoPillar({ data }: { data: PillarData }) {
           </div>
           <div className="chc-intro__right r" data-d="1">
             {data.intro.map((p, i) => (<p key={i}>{p}</p>))}
-            <Link href="/tunnel" className="chc-btn chc-btn-gold" style={{ marginTop: 8 }}>
+            <LiquidButton href="/tunnel" tone="light" size="lg" style={{ marginTop: 8 }}>
               Étudier mon projet <ArrowRight className="w-4 h-4" />
-            </Link>
+            </LiquidButton>
           </div>
         </div>
       </section>

@@ -4,10 +4,12 @@ import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight, X } from 'lucide-react'
 import { Counter } from '@/components/landing/Counter'
-import StaggerTestimonials from '@/components/landing/StaggerTestimonials'
+import TestimonialsWall from '@/components/landing/TestimonialsWall'
 import MethodCarousel from '@/components/landing/MethodCarousel'
+import SectionWithMockup from '@/components/landing/SectionWithMockup'
 import { ChcNav } from '@/components/landing/ChcNav'
 import { ChcFooter } from '@/components/landing/ChcFooter'
+import { LiquidButton } from '@/components/ui/LiquidButton'
 
 type Svc = { n: string; name: string; tag: string; desc: string; lead: string; details: string }
 
@@ -123,7 +125,7 @@ export default function HomePage() {
           <div className="chc-intro__right r" data-d="1">
             <p>Cap Horn n’est pas un simple intermédiaire. Nous analysons chaque situation en profondeur avant de mobiliser notre réseau bancaire, pour construire le financement le plus juste — pour vous, pas pour une commission.</p>
             <p>Indépendance totale, exigence sur chaque dossier, et un interlocuteur unique du premier appel à la signature.</p>
-            <Link href="/le-cabinet" className="chc-btn-link" style={{ marginTop: 6, display: 'inline-block' }}>Découvrir le cabinet</Link>
+            <LiquidButton href="/le-cabinet" tone="light" size="sm" uppercase={false} style={{ marginTop: 6 }}>Découvrir le cabinet</LiquidButton>
           </div>
         </div>
       </section>
@@ -164,14 +166,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── PREUVE — témoignages clients ─────────────────────── */}
+      {/* ─── PREUVE — témoignages clients (colonnes défilantes) ─── */}
       <section className="chc-section">
         <div className="chc-wrap r" style={{ maxWidth: 760, marginBottom: 28 }}>
           <div className="chc-eyebrow">Ils nous font confiance</div>
           <h2 className="chc-h2">La preuve, <em>côté clients.</em></h2>
         </div>
-        <div className="chc-wrap r" data-d="1">
-          <StaggerTestimonials />
+        <div className="chc-wrap">
+          <TestimonialsWall />
         </div>
       </section>
 
@@ -182,7 +184,7 @@ export default function HomePage() {
             <div className="chc-eyebrow">Module exclusif · Loi Lemoine</div>
             <h2 className="chc-h2">Combien pourriez-vous <em>économiser ?</em></h2>
             <p className="chc-lead" style={{ marginTop: 22 }}>Estimez en 30 secondes le potentiel d’économie sur votre assurance emprunteur. Jusqu’à 50 % moins cher que la délégation initiale de votre banque.</p>
-            <Link href="/simulateur" className="chc-btn chc-btn-gold" style={{ marginTop: 28 }}>Lancer la simulation <ArrowRight className="w-4 h-4" /></Link>
+            <LiquidButton href="/simulateur" tone="light" size="lg" style={{ marginTop: 28 }}>Lancer la simulation <ArrowRight className="w-4 h-4" /></LiquidButton>
           </div>
           <div className="r" data-d="1">
             <div className="chc-sim__card">
@@ -216,24 +218,20 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── CTA final ───────────────────────────────────────── */}
-      <section id="contact" className="chc-cta">
-        <img className="chc-cta__bg" src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=88&auto=format&fit=crop" alt="" />
-        <div className="chc-cta__bg-overlay" />
-        <div className="chc-cta__inner">
-          <div className="r">
-            <div className="chc-eyebrow chc-eyebrow--light">À votre disposition</div>
-            <h2 className="chc-cta__title">Votre projet mérite<br /><em>la meilleure solution.</em></h2>
-          </div>
-          <div className="chc-cta__contact r" data-d="1">
-            <div className="row">Notre outil qualifie votre projet en 3 minutes. Un expert vous rappelle sous 24 h, sans engagement.</div>
-            <div className="row"><b>Marcq-en-Barœul</b> &nbsp;·&nbsp; cap-horn-conseils.com</div>
-            <Link href="/tunnel" className="chc-btn chc-btn-gold" style={{ marginTop: 12 }}>Démarrer mon étude gratuite <ArrowRight className="w-4 h-4" /></Link>
-          </div>
-        </div>
-      </section>
+      {/* ─── CTA final fusionné (À votre disposition + Prêt à avancer) ── */}
+      <div id="contact">
+        <SectionWithMockup
+          eyebrow="À votre disposition"
+          title="Prêt à faire avancer"
+          titleEm="votre projet ?"
+          description="Notre outil qualifie votre projet en 3 minutes, puis un expert Cap Horn vous rappelle sous 24 h — sans engagement. Indépendance totale et un interlocuteur unique, du premier appel à la signature chez le notaire."
+          contact="Marcq-en-Barœul · cap-horn-conseils.com"
+          primaryImageSrc="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=900&q=85&auto=format&fit=crop"
+          secondaryImageSrc="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&q=85&auto=format&fit=crop"
+        />
+      </div>
 
-      <ChcFooter />
+      <ChcFooter showCta={false} />
 
       {/* ─── MODALE détail service (claire, gold/blanc) ───────── */}
       {open && (
@@ -246,7 +244,7 @@ export default function HomePage() {
             <p className="chc-modal__lead">{open.lead}</p>
             <div className="chc-modal__rule" />
             <p className="chc-modal__body">{open.details}</p>
-            <Link href="/tunnel" className="chc-btn chc-btn-gold chc-modal__cta">Étudier mon projet <ArrowRight className="w-4 h-4" /></Link>
+            <LiquidButton href="/tunnel" tone="light" size="lg" className="chc-modal__cta">Étudier mon projet <ArrowRight className="w-4 h-4" /></LiquidButton>
           </div>
         </div>
       )}

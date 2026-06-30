@@ -2588,6 +2588,40 @@ body { background: var(--color-background); color: var(--color-foreground); }
 .chc-cta__contact .row { font-family: var(--chc-sans); font-size: 13px; color: rgba(255,255,255,0.7); letter-spacing: 0.04em; }
 .chc-cta__contact .row b { color: #fff; font-weight: 600; }
 
+/* ── SECTION FUSIONNÉE — CTA + mockup (fond noir, parallax) ──────────── */
+.cta-merge { position: relative; overflow: hidden; background: #0A0A0A; padding: clamp(72px, 13vh, 150px) clamp(24px, 5vw, 52px); }
+.cta-merge__wrap { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 56px; align-items: center; }
+@media (min-width: 880px) {
+  .cta-merge__wrap { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .cta-merge--rev .cta-merge__text { order: 2; }
+  .cta-merge--rev .cta-merge__visual { order: 1; }
+}
+
+/* Texte */
+.cta-merge__text { max-width: 540px; opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+.cta-merge.is-in .cta-merge__text { opacity: 1; transform: none; }
+.cta-merge__eyebrow { font-family: var(--chc-sans); font-size: 10px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--chc-gold); display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.cta-merge__eyebrow::after { content: ''; width: 40px; height: 1px; background: var(--chc-gold); opacity: 0.5; }
+.cta-merge__title { font-family: var(--chc-serif); font-weight: 300; font-size: clamp(34px, 5vw, 56px); line-height: 1.05; letter-spacing: -0.01em; color: #fff; }
+.cta-merge__title em { font-style: italic; color: var(--chc-gold); }
+.cta-merge__desc { font-family: var(--chc-sans); font-weight: 300; font-size: clamp(15px, 1.5vw, 16.5px); line-height: 1.85; color: #8A8F97; margin-top: 22px; }
+.cta-merge__contact { font-family: var(--chc-sans); font-size: 13px; letter-spacing: 0.04em; color: rgba(255,255,255,0.62); margin-top: 18px; }
+.cta-merge__cta { margin-top: 30px; }
+
+/* Visuel — deux plans superposés */
+.cta-merge__visual { position: relative; width: 100%; max-width: 472px; margin: 0 auto; aspect-ratio: 472 / 600; }
+.cta-merge__back { position: absolute; width: 88%; height: 84%; border-radius: 32px; background-size: cover; background-position: center; z-index: 0; filter: blur(2px) saturate(0.9) brightness(0.7); opacity: 0; top: 6%; left: -16%; transform: translateY(40px); transition: opacity 1s ease, transform 1.3s cubic-bezier(0.16,1,0.3,1); }
+.cta-merge--rev .cta-merge__back { left: auto; right: -16%; }
+.cta-merge.is-in .cta-merge__back { opacity: 0.9; transform: translateY(-22px); }
+.cta-merge__card { position: absolute; inset: 0; border-radius: 32px; overflow: hidden; z-index: 10; background: rgba(255,255,255,0.04); -webkit-backdrop-filter: blur(15px); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.10); box-shadow: 0 40px 90px -30px rgba(0,0,0,0.8); opacity: 0; transform: translateY(40px); transition: opacity 1s ease 0.1s, transform 1.3s cubic-bezier(0.16,1,0.3,1) 0.1s; }
+.cta-merge.is-in .cta-merge__card { opacity: 1; transform: translateY(22px); }
+.cta-merge__img { width: 100%; height: 100%; background-size: cover; background-position: center; }
+.cta-merge__shine { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(150deg, rgba(255,255,255,0.10) 0%, transparent 38%), linear-gradient(to top, rgba(10,10,10,0.55), transparent 45%); }
+.cta-merge__glow { position: absolute; left: 0; bottom: 0; width: 100%; height: 1px; z-index: 0; background: radial-gradient(50% 50% at 50% 50%, rgba(201,164,92,0.4) 0%, rgba(255,255,255,0) 100%); }
+@media (prefers-reduced-motion: reduce) {
+  .cta-merge__text, .cta-merge__back, .cta-merge__card { transition: opacity 0.4s ease; transform: none !important; }
+}
+
 /* ── FOOTER ──────────────────────────────────────────────────────────── */
 .chc-footer { background: var(--chc-dark); color: rgba(255,255,255,0.6); padding: 64px clamp(24px, 5vw, 52px) 36px; }
 .chc-footer__grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 32px; }

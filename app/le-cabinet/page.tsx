@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { ChcNav } from '@/components/landing/ChcNav'
 import { ChcFooter } from '@/components/landing/ChcFooter'
+import { LiquidButton } from '@/components/ui/LiquidButton'
 import { Counter } from '@/components/landing/Counter'
 
 export const metadata = {
@@ -88,7 +89,7 @@ export default function CabinetPage() {
             </div>
           </div>
           <div style={{ textAlign: 'center', marginTop: 48 }} className="r">
-            <Link href="/tunnel" className="chc-btn chc-btn-gold">Travailler avec Cap Horn <ArrowRight className="w-4 h-4" /></Link>
+            <LiquidButton href="/tunnel" tone="light" size="lg">Travailler avec Cap Horn <ArrowRight className="w-4 h-4" /></LiquidButton>
           </div>
         </div>
       </section>
