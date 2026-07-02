@@ -5,8 +5,9 @@ import Link from 'next/link'
 
 export const dynamic = 'force-dynamic'
 
-const SCORE_COLORS: Record<string, string> = { A: '#16a34a', B: '#2f2a22', C: '#B8922A', D: '#dc2626' }
-const SCORE_LEGEND_DOT: Record<string, string> = { A: '#16a34a', B: '#3f3a30', C: '#B8922A', D: '#dc2626' }
+// Palette de score cohérente avec les badges (SCORE_BG) : A vert, B bleu, C ambre, D rouge.
+const SCORE_COLORS: Record<string, string> = { A: '#16a34a', B: '#2563eb', C: '#d97706', D: '#dc2626' }
+const SCORE_LEGEND_DOT: Record<string, string> = SCORE_COLORS
 
 export default async function AdminDashboard() {
   const [stats, recent, counts, trends] = await Promise.all([getDashboardStats(), getLeads(), getLeadCounts(), getKpiTrends()])
@@ -243,7 +244,7 @@ function Donut({ segments, total }: { segments: { key: string; count: number; co
             strokeDasharray={`${len} ${C - len}`} strokeDashoffset={-offset} transform={`rotate(-90 ${cx} ${cy})`} />
         )
       })}
-      <text x={cx} y={cy - 4} textAnchor="middle" style={{ fontFamily: 'var(--font-cormorant), serif', fontSize: 30, fontWeight: 600, fill: 'var(--color-cream)' }}>{total}</text>
+      <text x={cx} y={cy - 4} textAnchor="middle" style={{ fontFamily: 'var(--font-cormorant), serif', fontSize: 30, fontWeight: 600, fill: 'var(--color-cream)', fontFeatureSettings: "'lnum' 1, 'tnum' 1" }}>{total}</text>
       <text x={cx} y={cy + 16} textAnchor="middle" style={{ fontSize: 11, fill: 'var(--color-cream-mute)', letterSpacing: '0.1em' }}>LEADS</text>
     </svg>
   )

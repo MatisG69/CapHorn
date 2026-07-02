@@ -10,6 +10,8 @@ import {
   formatEuro,
   formatRelativeDate,
   stepLabel,
+  answerLabel,
+  answerValue,
 } from '@/lib/admin/labels'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
@@ -201,12 +203,12 @@ export default async function LeadDetailPage({ params }: PageProps) {
           ) : (
             <div className="divide-y divide-[var(--color-ink-line)]">
               {Object.entries(lead.answers).map(([key, value]) => (
-                <div key={key} className="flex gap-4 py-3 first:pt-0 last:pb-0">
-                  <span className="text-[11px] font-mono text-[var(--color-cream-mute)] w-52 shrink-0 pt-0.5 uppercase tracking-[0.12em]">
-                    {key.replace(/_/g, ' ')}
+                <div key={key} className="flex flex-col sm:flex-row sm:gap-4 py-3 first:pt-0 last:pb-0">
+                  <span className="text-xs text-[var(--color-cream-mute)] sm:w-64 shrink-0 sm:pt-0.5 leading-snug">
+                    {answerLabel(key)}
                   </span>
-                  <span className="text-sm text-[var(--color-cream)] flex-1 break-words">
-                    {value}
+                  <span className="text-sm font-medium text-[var(--color-cream)] flex-1 break-words mt-0.5 sm:mt-0">
+                    {answerValue(key, String(value))}
                   </span>
                 </div>
               ))}

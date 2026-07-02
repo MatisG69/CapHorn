@@ -88,7 +88,7 @@ export default async function AnalyticsPage() {
                   <div key={score} className="flex items-center gap-3">
                     <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded border ${SCORE_BG[score]}`}>{score}</span>
                     <Bar pct={pct} />
-                    <span className="text-xs font-mono text-[var(--color-cream-dim)] w-16 text-right tabular-nums">{count} · {pct}%</span>
+                    <span className="text-xs font-mono text-[var(--color-cream-dim)] w-20 shrink-0 text-right tabular-nums whitespace-nowrap">{count} · {pct}%</span>
                   </div>
                 )
               })}
@@ -125,7 +125,7 @@ function Kpi({ label, value, sub, icon: Icon }: { label: string; value: number; 
           <Icon className="w-4 h-4 text-[var(--color-gold)]" strokeWidth={1.7} />
         </div>
       </div>
-      <p className="display-serif text-[2.5rem] text-[var(--color-gold-soft)] tabular-nums leading-none">{value}</p>
+      <p className="display-serif text-[2.5rem] text-[var(--color-gold-soft)] leading-none" style={{ fontFeatureSettings: "'lnum' 1, 'tnum' 1", fontVariantNumeric: 'lining-nums tabular-nums' }}>{value}</p>
       <p className="text-xs text-[var(--color-cream-dim)] mt-3">{sub}</p>
     </div>
   )
@@ -142,8 +142,11 @@ function TrendChart({ days }: { days: WebAnalytics['days'] }) {
   const ticks = [0, 7, 14, 21, 29]
 
   return (
-    <div className="w-full overflow-hidden">
-      <svg viewBox={`0 0 ${W} ${H + 22}`} className="w-full" preserveAspectRatio="none" style={{ minHeight: 180 }}>
+    <div className="w-full">
+      {/* Le tracé est étiré en pleine largeur (preserveAspectRatio=none) ; les
+          libellés d'axe sont rendus en HTML sous le SVG pour éviter la
+          distorsion et le rognage des dates aux extrémités. */}
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full block" preserveAspectRatio="none" style={{ height: 180 }}>
         <defs>
           <linearGradient id="trendFill" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="rgba(201,168,76,0.35)" />
@@ -151,16 +154,16 @@ function TrendChart({ days }: { days: WebAnalytics['days'] }) {
           </linearGradient>
         </defs>
         <path d={area} fill="url(#trendFill)" />
-        <path d={line} fill="none" stroke="var(--color-gold-soft)" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
+        <path d={line} fill="none" stroke="var(--color-gold-soft)" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
         {days.map((d, i) => d.views > 0 && i % 3 === 0 ? (
           <circle key={i} cx={x(i)} cy={y(d.views)} r="2.5" fill="var(--color-gold)" />
         ) : null)}
-        {ticks.map((i) => (
-          <text key={i} x={x(i)} y={H + 14} fontSize="10" fill="var(--color-cream-mute)" textAnchor="middle" fontFamily="monospace">
-            {days[i]?.label}
-          </text>
-        ))}
       </svg>
+      <div className="flex justify-between mt-2 text-[10px] font-mono text-[var(--color-cream-mute)] tabular-nums">
+        {ticks.map((i) => (
+          <span key={i}>{days[i]?.label}</span>
+        ))}
+      </div>
     </div>
   )
 }
@@ -181,7 +184,7 @@ function BarList({ items, total }: { items: { label: string; count: number; icon
               {it.label}
             </span>
             <Bar pct={pct} />
-            <span className="text-xs font-mono text-[var(--color-cream-mute)] w-16 text-right tabular-nums">{it.count} · {share}%</span>
+            <span className="text-xs font-mono text-[var(--color-cream-mute)] w-20 shrink-0 text-right tabular-nums whitespace-nowrap">{it.count} · {share}%</span>
           </div>
         )
       })}

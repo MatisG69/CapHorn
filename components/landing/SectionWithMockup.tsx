@@ -41,13 +41,15 @@ export default function SectionWithMockup({
 }: SectionWithMockupProps) {
   const ref = useRef<HTMLElement>(null)
   const [inView, setInView] = useState(false)
-  const [isWide, setIsWide] = useState(() => typeof window !== 'undefined' && window.matchMedia('(min-width: 880px)').matches)
-  const [reduce] = useState(() => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+  const [isWide, setIsWide] = useState(false)
+  const [reduce, setReduce] = useState(false)
   const [front, setFront] = useState(0)
   const [paused, setPaused] = useState(false)
 
   useEffect(() => {
     const mq = () => setIsWide(window.matchMedia('(min-width: 880px)').matches)
+    mq()
+    setReduce(window.matchMedia('(prefers-reduced-motion: reduce)').matches)
     window.addEventListener('resize', mq)
     const el = ref.current
     const obs = new IntersectionObserver(

@@ -7,6 +7,20 @@ export function stepLabel(id?: string | null): string {
   return TUNNEL_STEPS[id]?.title ?? id.replace(/_/g, ' ')
 }
 
+/** Intitulé métier d'une réponse du tunnel (la question posée), à partir de sa clé. */
+export function answerLabel(key: string): string {
+  const title = TUNNEL_STEPS[key]?.title
+  if (title) return title
+  const words = key.replace(/_/g, ' ').trim()
+  return words.charAt(0).toUpperCase() + words.slice(1)
+}
+
+/** Valeur lisible d'une réponse : libellé de l'option choisie si disponible, sinon la valeur brute. */
+export function answerValue(key: string, value: string): string {
+  const opt = TUNNEL_STEPS[key]?.options?.find((o) => o.value === value)
+  return opt?.label ?? value
+}
+
 export const TUNNEL_LABELS: Record<TunnelType, string> = {
   pro: 'Professionnel',
   particulier: 'Particulier',

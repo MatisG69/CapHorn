@@ -99,13 +99,14 @@ export default async function LeadsPage({ searchParams }: PageProps) {
       <div className="admin-card flex flex-wrap gap-3">
         <form className="relative flex-1 min-w-48">
           {view !== 'tous' && <input type="hidden" name="view" value={view} />}
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--color-cream-mute)]" />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--color-cream-mute)] pointer-events-none" />
           <input
             type="text"
             name="q"
             defaultValue={params.q}
             placeholder="Nom, email, société…"
-            className="tunnel-input pl-9 text-sm py-2.5"
+            className="tunnel-input text-sm"
+            style={{ paddingLeft: '2.75rem' }}
           />
         </form>
 
