@@ -85,7 +85,7 @@ export function HeroEditorial() {
         <dl className="hero-blueprint__stats">
           {[
             { label: 'Projets accompagnés', value: '300+' },
-            { label: 'Banques partenaires', value: '15+' },
+            { label: 'Banques partenaires', value: '100+' },
             { label: 'Délai de réponse', value: '24h' },
             { label: 'Indépendant', value: '100%' },
           ].map((s) => (

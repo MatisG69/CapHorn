@@ -7,7 +7,7 @@ import { LiquidButton } from '@/components/ui/LiquidButton'
 export const metadata = {
   title: 'Notre méthode — Étude, montage & négociation · Cap Horn Conseils',
   description:
-    "La méthode Cap Horn : qualification en 3 minutes, échange personnalisé sous 24 h, montage du dossier et négociation auprès de plus de 15 banques partenaires. Transparent, sans frais avant résultat.",
+    "La méthode Cap Horn : qualification en 3 minutes, échange personnalisé sous 24 h, montage du dossier et négociation auprès de près de 100 banques partenaires. Transparent, sans frais avant résultat.",
 }
 
 const STEPS = [
@@ -18,7 +18,7 @@ const STEPS = [
 ]
 
 const INCLUDED = [
-  'Comparaison de plus de 15 banques et 20 assureurs partenaires',
+  'Comparaison de près de 100 banques et 20 assureurs partenaires',
   'Négociation du taux, de la marge et de l’assurance emprunteur',
   'Optimisation des conditions annexes (modulation, transférabilité, IRA)',
   'Constitution et présentation du dossier à votre place',

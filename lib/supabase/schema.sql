@@ -31,7 +31,12 @@ alter table leads add column if not exists last_name    text;
 alter table leads add column if not exists email        text;
 alter table leads add column if not exists phone        text;
 alter table leads add column if not exists company_name text;
+alter table leads add column if not exists siret        text;
 alter table leads add column if not exists consent_rgpd boolean not null default false;
+-- Description libre du projet (max 3000 car., saisie à la dernière étape du tunnel)
+alter table leads add column if not exists project_details text;
+-- Pièces jointes transmises par le lead : [{ name, path, size }]
+alter table leads add column if not exists documents jsonb not null default '[]';
 
 -- Scoring (interne — jamais exposé côté user)
 alter table leads add column if not exists score           integer not null default 0;

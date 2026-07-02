@@ -118,6 +118,17 @@ export function formatDate(dateStr: string): string {
   })
 }
 
+/** Date + heure lisibles (ex. « lun. 6 juil. à 09:00 ») — utilisé pour la programmation. */
+export function formatDateTime(dateStr: string): string {
+  return new Date(dateStr).toLocaleDateString('fr-FR', {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+    hour: '2-digit',
+    minute: '2-digit',
+  })
+}
+
 export function formatRelativeDate(dateStr: string): string {
   const diff = Date.now() - new Date(dateStr).getTime()
   const minutes = Math.floor(diff / 60000)

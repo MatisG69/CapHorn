@@ -1,5 +1,5 @@
 import { createClient } from './server'
-import type { Lead, DashboardStats, LeadStatus, AppointmentRequest } from '../types'
+import type { Lead, DashboardStats, LeadStatus, AppointmentRequest, SimulatorEstimation } from '../types'
 
 /** Demandes de rendez-vous (formulaire « Prendre contact »). Résilient. */
 export async function getAppointments(): Promise<AppointmentRequest[]> {
@@ -11,6 +11,21 @@ export async function getAppointments(): Promise<AppointmentRequest[]> {
       .order('created_at', { ascending: false })
     if (error) return []
     return (data ?? []) as AppointmentRequest[]
+  } catch {
+    return []
+  }
+}
+
+/** Estimations envoyées « à Guillaume » depuis le simulateur. Résilient. */
+export async function getSimulatorEstimations(): Promise<SimulatorEstimation[]> {
+  try {
+    const supabase = await createClient()
+    const { data, error } = await supabase
+      .from('simulator_estimations')
+      .select('*')
+      .order('created_at', { ascending: false })
+    if (error) return []
+    return (data ?? []) as SimulatorEstimation[]
   } catch {
     return []
   }

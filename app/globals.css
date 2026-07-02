@@ -2979,6 +2979,29 @@ body { background: var(--color-background); color: var(--color-foreground); }
 .chc-recap__k { font-family: var(--chc-sans); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--chc-lite); }
 .chc-recap__v { font-family: var(--chc-sans); font-size: 14px; font-weight: 500; color: var(--chc-text); text-align: right; }
 
+/* ── Textarea (description projet) ──────────────────────────────────── */
+.chc-textarea { width: 100%; background: var(--chc-white); border: 1px solid var(--chc-bd); border-radius: 10px; padding: 14px 16px; font-family: var(--chc-sans); font-size: 16px; font-weight: 400; line-height: 1.55; color: var(--chc-text); resize: vertical; min-height: 120px; transition: border-color 0.2s, box-shadow 0.2s; }
+.chc-textarea::placeholder { color: var(--chc-lite); font-weight: 300; }
+.chc-textarea:focus { outline: none; border-color: var(--chc-gold); box-shadow: 0 0 0 3px var(--chc-gold3); }
+.chc-label-opt { font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--chc-lite); font-size: 12px; }
+.chc-counter { margin-top: 6px; text-align: right; font-family: var(--chc-sans); font-size: 11px; color: var(--chc-lite); }
+
+/* ── Upload de documents ───────────────────────────────────────────── */
+.chc-file-input { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+.chc-dropzone { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 16px; border: 1.5px dashed var(--chc-bd); border-radius: 12px; background: rgba(255,255,255,0.5); color: var(--chc-mid); font-family: var(--chc-sans); font-size: 14px; font-weight: 500; cursor: pointer; transition: border-color 0.2s, background 0.2s, color 0.2s; }
+.chc-dropzone:hover { border-color: var(--chc-gold); color: var(--chc-gold); background: var(--chc-gold3); }
+.chc-dropzone[data-disabled="true"] { opacity: 0.55; cursor: not-allowed; pointer-events: none; }
+.chc-file-hint { margin-top: 8px; font-family: var(--chc-sans); font-size: 11px; color: var(--chc-lite); }
+.chc-doclist { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+.chc-doc { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--chc-bd); border-radius: 10px; background: var(--chc-white); }
+.chc-doc__icon { color: var(--chc-gold); flex-shrink: 0; }
+.chc-doc__name { flex: 1; font-family: var(--chc-sans); font-size: 13px; font-weight: 500; color: var(--chc-text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chc-doc__size { font-family: var(--chc-sans); font-size: 11px; color: var(--chc-lite); flex-shrink: 0; }
+.chc-doc__rm { flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 6px; border: none; background: transparent; color: var(--chc-lite); cursor: pointer; transition: background 0.2s, color 0.2s; }
+.chc-doc__rm:hover { background: rgba(0,0,0,0.05); color: var(--chc-text); }
+.chc-spin { animation: chc-spin 0.8s linear infinite; }
+@keyframes chc-spin { to { transform: rotate(360deg); } }
+
 /* Steps / résultat */
 .chc-tunnel__steps { margin-top: 30px; border-top: 1px solid var(--chc-bd); }
 .chc-tunnel__steps li { display: flex; gap: 14px; padding: 18px 0; border-bottom: 1px solid var(--chc-bd); list-style: none; }

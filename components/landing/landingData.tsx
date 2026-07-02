@@ -26,7 +26,7 @@ export const SERVICES: SvcCard[] = [
   {
     number: '01', title: 'Immobilier', icon: <IconHome />,
     description: 'Résidence principale, investissement locatif, SCI. Négociation des meilleures conditions auprès de nos partenaires bancaires.',
-    details: 'Que vous achetiez votre résidence principale, financiez un investissement locatif ou structuriez une acquisition via SCI, nous étudions chaque dossier individuellement. Nous comparons les offres de plus de quinze banques partenaires, négocions les marges, optimisons l’assurance et la garantie. Sur les profils premium, nous obtenons régulièrement des taux 0,20 à 0,40 % en dessous des grilles publiques.',
+    details: 'Que vous achetiez votre résidence principale, financiez un investissement locatif ou structuriez une acquisition via SCI, nous étudions chaque dossier individuellement. Nous comparons les offres de près de cent banques partenaires, négocions les marges, optimisons l’assurance et la garantie. Sur les profils premium, nous obtenons régulièrement des taux 0,20 à 0,40 % en dessous des grilles publiques.',
   },
   {
     number: '02', title: 'Financement professionnel', icon: <IconBriefcase />,
@@ -82,7 +82,7 @@ export const PARTNERS = [
 ]
 
 export const STATS = [
-  { value: 15, prefix: '', suffix: '+', decimals: 0, label: 'banques & assureurs partenaires' },
+  { value: 100, prefix: '', suffix: '+', decimals: 0, label: 'banques & assureurs partenaires' },
   { value: 0.3, prefix: '−', suffix: ' %', decimals: 2, label: 'de taux négocié sous les grilles' },
   { value: 24, prefix: '', suffix: ' h', decimals: 0, label: 'pour un premier retour personnalisé' },
   { value: 98, prefix: '', suffix: ' %', decimals: 0, label: 'de clients qui nous recommandent' },

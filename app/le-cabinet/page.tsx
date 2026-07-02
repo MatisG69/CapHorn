@@ -18,7 +18,7 @@ const SPECS: { k: string; v: string; sup?: string }[] = [
   { k: 'Statut', v: 'Indépendant' },
   { k: 'Fondateur', v: 'Guillaume Horn' },
   { k: 'Établi à', v: 'Marcq-en-Barœul' },
-  { k: 'Réseau', v: '15', sup: '+ banques' },
+  { k: 'Réseau', v: '100', sup: '+ banques' },
   { k: 'Honoraires', v: 'Au résultat' },
 ]
 
@@ -48,7 +48,7 @@ const VALUES = [
 const CREDS = ['Ancien financeur bancaire', 'Courtier IOBSP indépendant', 'Sans exclusivité de réseau']
 
 const STATS: { value: number; sup: string; label: string; duration?: number }[] = [
-  { value: 15, sup: '+', label: 'Banques & assureurs' },
+  { value: 100, sup: '+', label: 'Banques & assureurs' },
   { value: 500, sup: '+', label: 'Dossiers financés' },
   { value: 24, sup: 'h', label: 'Premier retour' },
   { value: 98, sup: '%', label: 'Clients satisfaits' },

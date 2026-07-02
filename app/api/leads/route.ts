@@ -29,6 +29,8 @@ export async function POST(request: NextRequest) {
       current_step,
       completed,
       contact,
+      project_details,
+      documents,
     } = body
 
     if (!session_id || !UUID_RE.test(session_id)) {
@@ -91,7 +93,23 @@ export async function POST(request: NextRequest) {
       row.email = contact.email
       row.phone = contact.phone
       row.company_name = contact.company_name ?? null
+      row.siret = contact.siret ?? null
       row.consent_rgpd = !!contact.consent_rgpd
+    }
+
+    // Description libre du projet (max 3000 caractères) & pièces jointes
+    if (typeof project_details === 'string') {
+      row.project_details = project_details.slice(0, 3000)
+    }
+    if (Array.isArray(documents)) {
+      row.documents = documents
+        .filter((d) => d && typeof d.path === 'string' && typeof d.name === 'string')
+        .slice(0, 6)
+        .map((d) => ({
+          name: String(d.name).slice(0, 255),
+          path: String(d.path),
+          size: typeof d.size === 'number' ? d.size : undefined,
+        }))
     }
 
     // Scoring uniquement à la finalisation
@@ -113,6 +131,15 @@ export async function POST(request: NextRequest) {
     if (error && /internal_score_label/.test(error.message ?? '')) {
       delete row.internal_score_label
       ;({ data, error } = await doUpsert())
+    }
+
+    // Tolérance si les colonnes 'project_details' / 'documents' / 'siret'
+    // n'ont pas encore été ajoutées à la base (migration non appliquée).
+    for (const col of ['project_details', 'documents', 'siret']) {
+      if (error && new RegExp(col).test(error.message ?? '')) {
+        delete row[col]
+        ;({ data, error } = await doUpsert())
+      }
     }
 
     if (error || !data) {

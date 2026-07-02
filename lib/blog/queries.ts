@@ -11,6 +11,10 @@ export async function getPublishedPosts(category?: string): Promise<BlogPost[]> 
       .from('blog_posts')
       .select('*')
       .eq('published', true)
+      // Les articles programmés (published_at dans le futur) restent masqués
+      // jusqu'à leur date de mise en ligne. Les pages étant `force-dynamic`,
+      // `now()` est réévalué à chaque requête : l'article apparaît tout seul.
+      .lte('published_at', new Date().toISOString())
       .order('published_at', { ascending: false })
     if (category) query = query.eq('category', category)
     const { data, error } = await query
@@ -29,6 +33,8 @@ export async function getPublishedPostBySlug(slug: string): Promise<BlogPost | n
     .select('*')
     .eq('slug', slug)
     .eq('published', true)
+    // Un article programmé (published_at futur) reste introuvable → notFound().
+    .lte('published_at', new Date().toISOString())
     .single()
   if (error) return null
   return data as BlogPost

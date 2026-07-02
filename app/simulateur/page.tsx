@@ -4,6 +4,7 @@ import { ChcFooter } from '@/components/landing/ChcFooter'
 import { CompassRose } from '@/components/landing/CompassRose'
 import { LiquidButton } from '@/components/ui/LiquidButton'
 import { AssuranceCalculator } from '@/components/simulateur/AssuranceCalculator'
+import { getSimulatorSettings } from '@/lib/simulateur/settings'
 
 export const metadata = {
   title: 'Simulateur d\'économies — Assurance emprunteur · Cap Horn Conseils',
@@ -40,7 +41,8 @@ const REASONS = [
   },
 ]
 
-export default function SimulateurPage() {
+export default async function SimulateurPage() {
+  const settings = await getSimulatorSettings()
   return (
     <div className="chc">
       <ChcNav active="/simulateur" />
@@ -84,7 +86,7 @@ export default function SimulateurPage() {
             </p>
           </div>
           <div className="chc-cab-calc__body r" data-d="1">
-            <AssuranceCalculator />
+            <AssuranceCalculator settings={settings} />
           </div>
         </div>
       </section>

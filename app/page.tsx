@@ -20,9 +20,9 @@ type Svc = {
 const SERVICES: Svc[] = [
   {
     n: '01', name: 'Immobilier', tag: 'Résidentiel & locatif',
-    desc: 'Résidence principale, investissement locatif, SCI. Négociation des meilleures conditions auprès de plus de quinze banques partenaires.',
+    desc: 'Résidence principale, investissement locatif, SCI. Négociation des meilleures conditions auprès de près de cent banques partenaires.',
     lead: 'Acheter, investir, structurer via SCI — chaque dossier étudié individuellement.',
-    details: 'Nous comparons les offres de plus de quinze banques partenaires, négocions les marges, optimisons l’assurance et la garantie. Sur les profils premium, nous obtenons régulièrement des taux 0,20 à 0,40 % en dessous des grilles publiques. Notre rôle ne s’arrête pas à la signature : nous sécurisons aussi les conditions annexes — modulation, transférabilité, indemnités de remboursement anticipé.',
+    details: 'Nous comparons les offres de près de cent banques partenaires, négocions les marges, optimisons l’assurance et la garantie. Sur les profils premium, nous obtenons régulièrement des taux 0,20 à 0,40 % en dessous des grilles publiques. Notre rôle ne s’arrête pas à la signature : nous sécurisons aussi les conditions annexes — modulation, transférabilité, indemnités de remboursement anticipé.',
     photo: { url: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80&auto=format&fit=crop', by: 'Frames For Your Heart' },
   },
   {

@@ -15,7 +15,7 @@ import {
 } from '@/lib/admin/labels'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, Mail, Phone, Building2, Calendar, CheckCircle2, Hourglass } from 'lucide-react'
+import { ArrowLeft, Mail, Phone, Building2, Calendar, CheckCircle2, Hourglass, FileText, Download } from 'lucide-react'
 import StatusSwitcher from '@/components/admin/StatusSwitcher'
 import NotesEditor from '@/components/admin/NotesEditor'
 import DeleteLeadButton from '@/components/admin/DeleteLeadButton'
@@ -135,6 +135,9 @@ export default async function LeadDetailPage({ params }: PageProps) {
           ) : (
             <ContactItem icon={Building2} label="Société" value="—" muted />
           )}
+          {lead.siret && (
+            <ContactItem icon={Building2} label="SIRET" value={lead.siret} />
+          )}
           <ContactItem icon={Calendar} label="Soumis le" value={formatDate(lead.created_at)} />
         </div>
       </div>
@@ -217,10 +220,57 @@ export default async function LeadDetailPage({ params }: PageProps) {
         </div>
       </div>
 
+      {/* Projet décrit par le lead */}
+      {lead.project_details && (
+        <div className="admin-card">
+          <h2 className="eyebrow eyebrow--single mb-4">Projet décrit par le lead</h2>
+          <p className="text-sm text-[var(--color-cream)] whitespace-pre-wrap leading-relaxed">
+            {lead.project_details}
+          </p>
+        </div>
+      )}
+
+      {/* Pièces jointes */}
+      {lead.documents && lead.documents.length > 0 && (
+        <div className="admin-card">
+          <h2 className="eyebrow eyebrow--single mb-4">
+            Documents transmis ({lead.documents.length})
+          </h2>
+          <ul className="space-y-2">
+            {lead.documents.map((doc) => (
+              <li key={doc.path}>
+                <a
+                  href={`/api/admin/lead-document?path=${encodeURIComponent(doc.path)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-3 px-4 py-3 rounded-lg border border-[var(--color-ink-line)] bg-[var(--color-ink-raised)] hover:border-[var(--color-gold-soft)] transition-colors"
+                >
+                  <FileText className="w-4 h-4 text-[var(--color-cream-mute)] shrink-0" />
+                  <span className="text-sm text-[var(--color-cream)] flex-1 truncate group-hover:text-[var(--color-gold-soft)] transition-colors">
+                    {doc.name}
+                  </span>
+                  {doc.size ? (
+                    <span className="text-xs text-[var(--color-cream-mute)] font-mono shrink-0">
+                      {formatFileSize(doc.size)}
+                    </span>
+                  ) : null}
+                  <Download className="w-4 h-4 text-[var(--color-cream-mute)] shrink-0 group-hover:text-[var(--color-gold-soft)] transition-colors" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       {/* Notes (interactive) */}
       <NotesEditor leadId={lead.id} initial={lead.notes ?? null} />
     </div>
   )
+}
+
+function formatFileSize(bytes: number): string {
+  if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} Ko`
+  return `${(bytes / (1024 * 1024)).toFixed(1)} Mo`
 }
 
 function ContactItem({

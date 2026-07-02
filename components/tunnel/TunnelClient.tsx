@@ -9,7 +9,7 @@ import InputStep from '@/components/tunnel/InputStep'
 import ContactStep from '@/components/tunnel/ContactStep'
 import FinalizeStep from '@/components/tunnel/FinalizeStep'
 import ResultStep from '@/components/tunnel/ResultStep'
-import type { LeadCaptureData, MessageVariant, TunnelType, SubType, TunnelConfig } from '@/lib/types'
+import type { LeadCaptureData, LeadDocument, MessageVariant, TunnelType, SubType, TunnelConfig } from '@/lib/types'
 import { track } from '@/lib/tracking'
 
 function deriveTypes(answers: Record<string, string>): { tunnelType: TunnelType; subType?: SubType } {
@@ -88,7 +88,7 @@ export default function TunnelClient({ config }: { config: TunnelConfig }) {
     advance()
   }
 
-  const handleFinalize = async () => {
+  const handleFinalize = async (extra: { projectDetails: string; documents: LeadDocument[] }) => {
     dispatch({ type: 'SET_SUBMITTING', value: true })
     const sessionId = ensureSessionId()
     const { tunnelType, subType } = deriveTypes(state.answers)
@@ -106,6 +106,8 @@ export default function TunnelClient({ config }: { config: TunnelConfig }) {
           current_step: 'result',
           completed: true,
           contact: state.contact ?? undefined,
+          project_details: extra.projectDetails || undefined,
+          documents: extra.documents.length ? extra.documents : undefined,
         }),
       })
       if (res.ok) {

@@ -5,11 +5,34 @@ import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { createPostAction, updatePostAction, type BlogPostInput } from '@/app/admin/blog/actions'
 import { BLOG_CATEGORIES, type BlogPost } from '@/lib/types'
-import { ImagePlus, Save, Loader2, Eye, EyeOff } from 'lucide-react'
+import { ImagePlus, Save, Loader2, Eye, EyeOff, Clock } from 'lucide-react'
 import BlogPreview from './BlogPreview'
 
 interface Props {
   post: BlogPost | null
+}
+
+type PubMode = 'now' | 'schedule' | 'draft'
+
+/** ISO → valeur d'un `<input type="datetime-local">` (heure locale du navigateur). */
+function isoToLocalInput(iso: string): string {
+  const d = new Date(iso)
+  const pad = (n: number) => String(n).padStart(2, '0')
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`
+}
+
+/** Proposition par défaut : prochaine heure pleine (ex. « demain 9 h » à ajuster). */
+function defaultScheduleLocal(): string {
+  const d = new Date(Date.now() + 60 * 60 * 1000)
+  d.setMinutes(0, 0, 0)
+  return isoToLocalInput(d.toISOString())
+}
+
+function initialMode(post: BlogPost | null): PubMode {
+  if (!post) return 'now'
+  if (!post.published) return 'draft'
+  if (post.published_at && new Date(post.published_at).getTime() > Date.now()) return 'schedule'
+  return 'now'
 }
 
 export default function BlogEditor({ post }: Props) {
@@ -23,7 +46,12 @@ export default function BlogEditor({ post }: Props) {
   const [excerpt, setExcerpt] = useState(post?.excerpt ?? '')
   const [body, setBody] = useState(post?.body ?? '')
   const [coverUrl, setCoverUrl] = useState(post?.cover_image_url ?? '')
-  const [published, setPublished] = useState(post?.published ?? true)
+  const [mode, setMode] = useState<PubMode>(() => initialMode(post))
+  const [scheduleAt, setScheduleAt] = useState<string>(() =>
+    post?.published && post.published_at && new Date(post.published_at).getTime() > Date.now()
+      ? isoToLocalInput(post.published_at)
+      : defaultScheduleLocal(),
+  )
 
   const [uploadingCover, setUploadingCover] = useState(false)
   const [uploadingInline, setUploadingInline] = useState(false)
@@ -76,6 +104,34 @@ export default function BlogEditor({ post }: Props) {
 
   const save = () => {
     setError(null)
+
+    // Détermine l'état de diffusion à partir du mode choisi.
+    let publishedFlag = true
+    let publishedAtIso: string
+    if (mode === 'draft') {
+      publishedFlag = false
+      publishedAtIso = post?.published_at ?? new Date().toISOString()
+    } else if (mode === 'schedule') {
+      const when = new Date(scheduleAt)
+      if (!scheduleAt || isNaN(when.getTime())) {
+        setError('Choisissez une date et une heure de programmation valides.')
+        return
+      }
+      if (when.getTime() <= Date.now()) {
+        setError('La date de programmation doit être dans le futur.')
+        return
+      }
+      publishedFlag = true
+      publishedAtIso = when.toISOString()
+    } else {
+      // Publication immédiate. Conserve la date d'origine si déjà en ligne,
+      // sinon horodate maintenant.
+      publishedFlag = true
+      const alreadyLive =
+        !!post?.published && !!post.published_at && new Date(post.published_at).getTime() <= Date.now()
+      publishedAtIso = alreadyLive ? post!.published_at : new Date().toISOString()
+    }
+
     const input: BlogPostInput = {
       title,
       slug: slug || undefined,
@@ -83,7 +139,8 @@ export default function BlogEditor({ post }: Props) {
       body,
       cover_image_url: coverUrl || null,
       category: category || null,
-      published,
+      published: publishedFlag,
+      published_at: publishedAtIso,
     }
     startTransition(async () => {
       try {
@@ -102,16 +159,38 @@ export default function BlogEditor({ post }: Props) {
       {/* Barre d'actions */}
       <div className="admin-card flex flex-wrap items-center justify-between gap-3 !py-3.5">
         <div className="flex flex-wrap items-center gap-2.5">
-          <button
-            type="button"
-            onClick={() => setPublished((p) => !p)}
-            className={`inline-flex items-center gap-2 text-xs px-3 py-2 rounded-lg border transition-colors ${
-              published ? 'border-emerald-300 text-emerald-700 bg-emerald-50' : 'border-[var(--color-ink-line)] text-[var(--color-cream-mute)]'
-            }`}
-          >
-            {published ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
-            {published ? 'Publié' : 'Brouillon'}
-          </button>
+          {/* Diffusion : publier maintenant, programmer une date, ou brouillon. */}
+          <div className="inline-flex rounded-lg border border-[var(--color-ink-line)] overflow-hidden">
+            {([
+              { m: 'now', label: 'Publier', Icon: Eye },
+              { m: 'schedule', label: 'Programmer', Icon: Clock },
+              { m: 'draft', label: 'Brouillon', Icon: EyeOff },
+            ] as const).map(({ m, label, Icon }) => (
+              <button
+                key={m}
+                type="button"
+                onClick={() => setMode(m)}
+                aria-pressed={mode === m}
+                className={`inline-flex items-center gap-1.5 text-xs px-3 py-2 transition-colors ${
+                  mode === m
+                    ? 'bg-[var(--color-gold)] text-[#1a1a1a] font-medium'
+                    : 'text-[var(--color-cream-mute)] hover:text-[var(--color-cream)]'
+                }`}
+              >
+                <Icon className="w-3.5 h-3.5" /> {label}
+              </button>
+            ))}
+          </div>
+          {mode === 'schedule' && (
+            <input
+              type="datetime-local"
+              value={scheduleAt}
+              min={defaultScheduleLocal()}
+              onChange={(e) => setScheduleAt(e.target.value)}
+              className="tunnel-input text-sm !py-2"
+              title="Date et heure de mise en ligne automatique"
+            />
+          )}
           <select value={category} onChange={(e) => setCategory(e.target.value)} className="tunnel-input text-sm !py-2">
             <option value="">— Catégorie —</option>
             {BLOG_CATEGORIES.map((c) => (
@@ -130,7 +209,13 @@ export default function BlogEditor({ post }: Props) {
           {error && <span className="text-xs text-red-600">{error}</span>}
           <button type="button" onClick={save} disabled={pending} className="btn-gold text-xs px-4 py-2">
             {pending ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
-            {pending ? 'Enregistrement…' : 'Enregistrer'}
+            {pending
+              ? 'Enregistrement…'
+              : mode === 'schedule'
+              ? 'Programmer'
+              : mode === 'draft'
+              ? 'Enregistrer le brouillon'
+              : 'Publier'}
           </button>
         </div>
       </div>

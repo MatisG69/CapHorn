@@ -20,6 +20,7 @@ export default function ContactStep({ step, initial, isBusiness, onSubmit }: Con
       email: '',
       phone: '',
       company_name: '',
+      siret: '',
       consent_rgpd: false,
     },
   )
@@ -36,6 +37,10 @@ export default function ContactStep({ step, initial, isBusiness, onSubmit }: Con
     if (!form.last_name.trim()) e.last_name = 'Requis'
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Email invalide'
     if (!form.phone.trim()) e.phone = 'Requis'
+    if (isBusiness && form.siret && form.siret.replace(/\s/g, '').length > 0) {
+      if (!/^\d{14}$/.test(form.siret.replace(/\s/g, '')))
+        e.siret = 'Le SIRET doit comporter 14 chiffres'
+    }
     if (!form.consent_rgpd) e.consent_rgpd = 'Requis pour continuer'
     setErrors(e)
     return Object.keys(e).length === 0
@@ -110,6 +115,20 @@ export default function ContactStep({ step, initial, isBusiness, onSubmit }: Con
               onChange={(e) => update('company_name', e.target.value)}
               placeholder="Votre société"
               autoComplete="organization"
+            />
+          </Field>
+        )}
+
+        {isBusiness && (
+          <Field label="Numéro SIRET" error={errors.siret}>
+            <input
+              type="text"
+              className="chc-input"
+              value={form.siret ?? ''}
+              onChange={(e) => update('siret', e.target.value)}
+              placeholder="123 456 789 00012"
+              inputMode="numeric"
+              maxLength={17}
             />
           </Field>
         )}

@@ -2,13 +2,14 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, Users, BarChart3, Anchor, FileText, Workflow, CalendarClock } from 'lucide-react'
+import { LayoutDashboard, Users, BarChart3, Anchor, FileText, Workflow, CalendarClock, Calculator } from 'lucide-react'
 import AdminProfile from './AdminProfile'
 
 const NAV_ITEMS = [
   { href: '/admin', label: "Vue d'ensemble", icon: LayoutDashboard, exact: true },
   { href: '/admin/leads', label: 'Leads', icon: Users, exact: false },
   { href: '/admin/rendez-vous', label: 'Rendez-vous', icon: CalendarClock, exact: false },
+  { href: '/admin/simulateur', label: 'Simulateur', icon: Calculator, exact: false },
   { href: '/admin/tunnel', label: 'Tunnel', icon: Workflow, exact: false },
   { href: '/admin/blog', label: 'Blog', icon: FileText, exact: false },
   { href: '/admin/analytics', label: 'Analytique', icon: BarChart3, exact: false },

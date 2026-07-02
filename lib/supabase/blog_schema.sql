@@ -22,6 +22,8 @@ alter table blog_posts add column if not exists cover_image_url text;
 alter table blog_posts add column if not exists category        text;
 alter table blog_posts add column if not exists author          text not null default 'Guillaume Horn';
 alter table blog_posts add column if not exists published       boolean not null default true;
+-- `published_at` = date/heure de mise en ligne. Si elle est dans le futur avec
+-- published = true, l'article est « programmé » : masqué jusqu'à cette date.
 alter table blog_posts add column if not exists published_at    timestamptz not null default now();
 
 -- Slug unique (clé d'URL /blog/<slug>)
@@ -54,9 +56,12 @@ drop policy if exists "anon_insert_posts_dev"          on blog_posts;
 drop policy if exists "anon_update_posts_dev"          on blog_posts;
 drop policy if exists "anon_delete_posts_dev"          on blog_posts;
 
--- Lecture publique : uniquement les articles publiés
+-- Lecture publique : uniquement les articles publiés ET dont la date de mise
+-- en ligne est atteinte. Un article programmé (published = true, published_at
+-- dans le futur) reste donc invisible tant que l'heure n'est pas venue ; il
+-- apparaît automatiquement ensuite (les pages du blog sont `force-dynamic`).
 create policy "public_select_published_posts" on blog_posts
-  for select to anon using (published = true);
+  for select to anon using (published = true and published_at <= now());
 
 -- DEV-ONLY : l'admin (anon) peut tout lire / écrire / supprimer
 create policy "anon_select_posts_dev" on blog_posts for select to anon using (true);

@@ -13,6 +13,9 @@ export interface BlogPostInput {
   cover_image_url?: string | null
   category?: string | null
   published: boolean
+  /** Date/heure de mise en ligne (ISO). Dans le futur = article programmé,
+   *  il apparaîtra automatiquement sur le site public à cette date. */
+  published_at?: string | null
 }
 
 /** Garantit un slug unique (ajoute -2, -3… en cas de collision). */
@@ -50,7 +53,7 @@ export async function createPostAction(input: BlogPostInput): Promise<{ id: stri
       cover_image_url: input.cover_image_url || null,
       category: input.category || null,
       published: input.published,
-      published_at: new Date().toISOString(),
+      published_at: input.published_at || new Date().toISOString(),
     })
     .select('id, slug')
     .single()
@@ -68,17 +71,22 @@ export async function updatePostAction(id: string, input: BlogPostInput): Promis
   const supabase = await createClient()
   const slug = await uniqueSlug(supabase, input.slug?.trim() || input.title, id)
 
+  const patch: Record<string, unknown> = {
+    title: input.title.trim(),
+    slug,
+    excerpt: input.excerpt?.trim() || null,
+    body: input.body ?? '',
+    cover_image_url: input.cover_image_url || null,
+    category: input.category || null,
+    published: input.published,
+  }
+  // Ne met à jour la date de mise en ligne que si l'éditeur en fournit une
+  // (publication immédiate ou programmation) — jamais écrasée par null.
+  if (input.published_at) patch.published_at = input.published_at
+
   const { data, error } = await supabase
     .from('blog_posts')
-    .update({
-      title: input.title.trim(),
-      slug,
-      excerpt: input.excerpt?.trim() || null,
-      body: input.body ?? '',
-      cover_image_url: input.cover_image_url || null,
-      category: input.category || null,
-      published: input.published,
-    })
+    .update(patch)
     .eq('id', id)
     .select('slug')
     .single()
