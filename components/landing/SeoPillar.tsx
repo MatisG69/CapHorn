@@ -11,7 +11,13 @@ export interface PillarData {
   titleTop: string
   titleEm: string
   lead: string
+  /** Titre de la section « En bref » (défaut : « Un financement sur mesure, pour chaque situation. »). */
+  introTitle?: string
   intro: string[]
+  /** Intro de la section « Qui nous accompagnons » (défaut : générique). */
+  professionsIntro?: string
+  /** Bloc d'appel final propre à la page (rendu avant le pied de page). */
+  cta?: { title: string; text: string }
   projets?: { title: string; desc: string }[]
   professions?: string[]
   solutions?: { title: string; desc: string }[]
@@ -42,7 +48,11 @@ export function SeoPillar({ data }: { data: PillarData }) {
         <div className="chc-wrap chc-intro">
           <div className="r">
             <div className="chc-eyebrow">En bref</div>
-            <h2 className="chc-h2">Un financement <em>sur mesure,</em><br />pour chaque situation.</h2>
+            {data.introTitle ? (
+              <h2 className="chc-h2">{data.introTitle}</h2>
+            ) : (
+              <h2 className="chc-h2">Un financement <em>sur mesure,</em><br />pour chaque situation.</h2>
+            )}
           </div>
           <div className="chc-intro__right r" data-d="1">
             {data.intro.map((p, i) => (<p key={i}>{p}</p>))}
@@ -82,7 +92,8 @@ export function SeoPillar({ data }: { data: PillarData }) {
               <div className="chc-eyebrow">Qui nous accompagnons</div>
               <h2 className="chc-h2">Les profils <em>accompagnés.</em></h2>
               <p className="chc-lead" style={{ marginTop: 22 }}>
-                Chaque activité a ses spécificités bancaires. Nous savons les présenter sous le bon angle.
+                {data.professionsIntro ??
+                  'Chaque activité a ses spécificités bancaires. Nous savons les présenter sous le bon angle.'}
               </p>
             </div>
             <div className="r" data-d="1">
@@ -168,6 +179,20 @@ export function SeoPillar({ data }: { data: PillarData }) {
                 </Link>
               ))}
             </div>
+          </div>
+        </section>
+      )}
+
+      {/* CTA final propre à la page (facultatif) */}
+      {data.cta && (
+        <section className="chc-section chc-section--white" style={{ textAlign: 'center' }}>
+          <div className="chc-wrap r" style={{ maxWidth: 720 }}>
+            <div className="chc-eyebrow" style={{ justifyContent: 'center' }}>À votre disposition</div>
+            <h2 className="chc-h2">{data.cta.title}</h2>
+            <p className="chc-lead" style={{ marginTop: 20 }}>{data.cta.text}</p>
+            <LiquidButton href="/tunnel" tone="light" size="lg" style={{ marginTop: 28 }}>
+              Démarrer mon étude <ArrowRight className="w-4 h-4" />
+            </LiquidButton>
           </div>
         </section>
       )}

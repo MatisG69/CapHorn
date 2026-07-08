@@ -43,9 +43,9 @@ export function ChcNav({ active }: { active?: string }) {
   return (
     <>
       <nav ref={navRef} className="chc-nav">
-        <Link href="/" className="chc-nav__logo" onClick={() => setMenuOpen(false)}>
-          <span className="chc-nav__mark">CH</span>
-          <span className="chc-nav__name">Cap Horn<span>Conseils en financement</span></span>
+        <Link href="/" className="chc-nav__logo" onClick={() => setMenuOpen(false)} aria-label="Cap Horn Conseils, accueil">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo-caphorn.png" alt="Cap Horn Conseils" className="chc-nav__logo-img" />
         </Link>
         <div className="chc-nav__links">
           {LINKS.map((l) => (
@@ -54,7 +54,7 @@ export function ChcNav({ active }: { active?: string }) {
         </div>
         <button type="button" className="chc-nav__cta" onClick={() => setContactOpen(true)}>Prendre contact</button>
 
-        {/* Burger — mobile uniquement */}
+        {/* Burger, mobile uniquement */}
         <button
           type="button"
           className={`chc-burger ${menuOpen ? 'is-open' : ''}`}

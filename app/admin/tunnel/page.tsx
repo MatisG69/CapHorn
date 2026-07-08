@@ -47,7 +47,7 @@ export default async function AdminTunnelPage() {
           <p className="eyebrow eyebrow--single mb-3">Tunnel de conversion</p>
           <h1 className="display-serif text-4xl text-[var(--color-cream)] tracking-tight">Parcours &amp; décrochage</h1>
           <p className="text-sm text-[var(--color-cream-dim)] mt-2">
-            Le déroulé de chaque parcours et l’endroit exact où les leads s’arrêtent — pour affiner vos questions.
+            Le déroulé de chaque parcours et l’endroit exact où les leads s’arrêtent, pour affiner vos questions.
             <span className="ml-2 text-[var(--color-cream-mute)] font-mono text-xs">
               · Config : {source === 'db' ? 'personnalisée' : 'par défaut'}
             </span>

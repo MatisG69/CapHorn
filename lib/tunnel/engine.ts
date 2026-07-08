@@ -9,7 +9,7 @@ export function stepMap(config: TunnelConfig): Record<string, TunnelStepDef> {
 }
 
 /**
- * Étape suivante (routage déclaratif) — reproduit la logique getNext :
+ * Étape suivante (routage déclaratif), reproduit la logique getNext :
  *  - branch_on : route selon la réponse d'un champ antérieur (ex: 'entry').
  *  - choice    : route selon l'option choisie (next_step_id), sinon défaut.
  *  - autre     : default_next_step_id.

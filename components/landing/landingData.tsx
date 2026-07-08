@@ -41,7 +41,7 @@ export const SERVICES: SvcCard[] = [
   {
     number: '04', title: 'Équilibre financier', icon: <IconBalance />,
     description: 'Restructuration de dettes, regroupement de crédits, optimisation de votre capacité d’emprunt.',
-    details: 'Lorsque les mensualités pèsent trop, ou avant un nouveau projet immobilier, le regroupement de crédits permet de réduire la charge mensuelle, restaurer la capacité d’emprunt et reprendre la main sur le budget. Nous simulons plusieurs scénarios et orientons vers la solution la plus saine — pas systématiquement la plus longue.',
+    details: 'Lorsque les mensualités pèsent trop, ou avant un nouveau projet immobilier, le regroupement de crédits permet de réduire la charge mensuelle, restaurer la capacité d’emprunt et reprendre la main sur le budget. Nous simulons plusieurs scénarios et orientons vers la solution la plus saine, pas systématiquement la plus longue.',
   },
   {
     number: '05', title: 'International', icon: <IconGlobe />,

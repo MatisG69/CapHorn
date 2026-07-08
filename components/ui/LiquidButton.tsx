@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 
 /**
- * Bouton « Liquid Glass » façon Apple — 100 % inline (insensible au cache CSS),
+ * Bouton « Liquid Glass » façon Apple, 100 % inline (insensible au cache CSS),
  * sans dépendance (ni cva ni radix). Effet : anneau de verre (inset shadows) +
  * réfraction du fond via le filtre SVG #container-glass (monté dans le layout).
  *
@@ -93,7 +93,7 @@ export const LiquidButton = React.forwardRef<HTMLButtonElement, LiquidButtonProp
             transition: 'box-shadow 0.25s ease',
           }}
         />
-        {/* Réfraction du fond — flou de verre propre (sans déplacement/bruit) */}
+        {/* Réfraction du fond, flou de verre propre (sans déplacement/bruit) */}
         <span
           aria-hidden
           style={{

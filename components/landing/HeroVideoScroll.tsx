@@ -113,7 +113,7 @@ export function HeroVideoScroll() {
         >
           <p className="hero-scroll-video__eyebrow">
             <span className="hero-scroll-video__eyebrow-text">
-              Cabinet Cap Horn Conseils — Marcq-en-Barœul
+              Cabinet Cap Horn Conseils, Marcq-en-Barœul
             </span>
           </p>
 

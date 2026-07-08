@@ -241,7 +241,7 @@ const STEP_REPRISE_EXPERIENCE: StepConfig = {
   progressValue: 52,
   options: [
     { value: 'yes', label: "Oui, j'ai une expérience significative" },
-    { value: 'partial', label: 'Partielle — je me forme' },
+    { value: 'partial', label: 'Partielle, je me forme' },
     { value: 'no', label: "Non, c'est une reconversion" },
   ],
   getNext: () => 'reprise_profitability',
@@ -422,7 +422,7 @@ const STEP_LEVEE_WHY: StepConfig = {
   options: [
     { value: 'equity', label: 'Capital (equity)', description: "Cession de parts en échange d'un investissement" },
     { value: 'debt', label: 'Dette venture', description: 'Financement non-dilutif' },
-    { value: 'both', label: 'Les deux — je compare' },
+    { value: 'both', label: 'Les deux, je compare' },
   ],
   getNext: () => 'levee_amount',
 }

@@ -64,7 +64,7 @@ export default async function LeadDetailPage({ params }: PageProps) {
         <div className="admin-card flex items-center gap-3 !py-4 border-emerald-500/30">
           <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
           <p className="text-sm text-[var(--color-cream-dim)]">
-            <span className="text-[var(--color-cream)] font-medium">Dossier finalisé</span> — envoyé par le lead
+            <span className="text-[var(--color-cream)] font-medium">Dossier finalisé</span>, envoyé par le lead
             {' · '}
             {formatDate(lead.created_at)}
           </p>
@@ -74,7 +74,7 @@ export default async function LeadDetailPage({ params }: PageProps) {
           <div className="flex items-center gap-3 mb-3">
             <Hourglass className="w-5 h-5 text-[var(--color-gold-soft)] shrink-0" />
             <p className="text-sm text-[var(--color-cream-dim)]">
-              <span className="text-[var(--color-cream)] font-medium">Dossier en cours</span> — non finalisé, à relancer.
+              <span className="text-[var(--color-cream)] font-medium">Dossier en cours</span>, non finalisé, à relancer.
               {' '}Dernière étape : <span className="text-[var(--color-gold-soft)]">{stepLabel(lead.current_step)}</span>
               {' · '}Activité {formatRelativeDate(lead.last_activity_at ?? lead.created_at)}
             </p>

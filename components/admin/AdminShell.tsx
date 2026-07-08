@@ -26,12 +26,12 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
 
   return (
     <div className="flex min-h-dvh" style={{ background: '#0E0C09' }}>
-      {/* Sidebar fixe — desktop */}
+      {/* Sidebar fixe, desktop */}
       <div className="hidden lg:block">
         <Sidebar />
       </div>
 
-      {/* Sidebar en tiroir — mobile */}
+      {/* Sidebar en tiroir, mobile */}
       <div className={`lg:hidden fixed inset-0 z-50 ${open ? '' : 'pointer-events-none'}`} aria-hidden={!open}>
         <div
           onClick={() => setOpen(false)}
@@ -43,7 +43,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
       </div>
 
       <div className="admin-main flex-1 min-w-0 overflow-auto">
-        {/* Barre supérieure — mobile uniquement */}
+        {/* Barre supérieure, mobile uniquement */}
         <div className="lg:hidden sticky top-0 z-30 flex items-center justify-between px-4 h-14 bg-[var(--color-ink-soft)]/95 backdrop-blur border-b border-[var(--color-ink-line)]">
           <button
             onClick={() => setOpen(true)}

@@ -6,13 +6,13 @@ import { Counter } from '@/components/landing/Counter'
 import { CompassRose } from '@/components/landing/CompassRose'
 
 export const metadata = {
-  title: 'Le cabinet — Courtier indépendant à Marcq-en-Barœul · Cap Horn Conseils',
+  title: 'Le cabinet, Courtier indépendant à Marcq-en-Barœul · Cap Horn Conseils',
   description:
     "Cap Horn Conseils, cabinet de courtage indépendant fondé par Guillaume Horn à Marcq-en-Barœul. Indépendance, exigence et transparence au service de votre financement.",
 }
 
-/* Coordonnées de Marcq-en-Barœul — motif de repère nautique du cabinet. */
-const COORD = '50.6795° N · 3.0972° E — Marcq-en-Barœul'
+/* Coordonnées de Marcq-en-Barœul, motif de repère nautique du cabinet. */
+const COORD = 'Marcq-en-Barœul'
 
 const SPECS: { k: string; v: string; sup?: string }[] = [
   { k: 'Statut', v: 'Indépendant' },
@@ -25,7 +25,7 @@ const SPECS: { k: string; v: string; sup?: string }[] = [
 const VALUES = [
   {
     n: '01', name: 'Indépendance', feature: true, Icon: Compass,
-    desc: 'Nous ne sommes liés à aucune banque. La solution que nous recommandons est la meilleure pour vous — jamais la plus rémunératrice pour nous. C’est la condition d’un conseil qui n’a rien à cacher.',
+    desc: 'Nous ne sommes liés à aucune banque. La solution que nous recommandons est la meilleure pour vous, jamais la plus rémunératrice pour nous. C’est la condition d’un conseil qui n’a rien à cacher.',
   },
   {
     n: '02', name: 'Exigence', Icon: Gem,
@@ -69,7 +69,7 @@ export default function CabinetPage() {
             <p className="chc-cab-hero__lead">
               Cap Horn Conseils est un cabinet de courtage indépendant établi à Marcq-en-Barœul.
               Nous accompagnons particuliers, expatriés et chefs d’entreprise dans la construction
-              de financements sur mesure — en tenant la barre, du premier échange à la signature.
+              de financements sur mesure, en tenant la barre, du premier échange à la signature.
             </p>
             <div className="chc-coord" style={{ marginTop: 30 }}>{COORD}</div>
           </div>
@@ -100,24 +100,24 @@ export default function CabinetPage() {
           <div className="r" data-d="1">
             <div className="chc-eyebrow">Le fondateur</div>
             <blockquote className="chc-cab-quote">
-              «&nbsp;Un bon financement commence par une <b>lecture juste</b>&nbsp;du projet — et de la personne qui le porte.&nbsp;»
+              «&nbsp;Un bon financement commence par une <b>lecture juste</b>&nbsp;du projet, et de la personne qui le porte.&nbsp;»
             </blockquote>
             <div className="chc-cab-founder__name">Guillaume Horn</div>
             <p className="chc-lead" style={{ marginTop: 14 }}>
-              Après plusieurs années au cœur du financement bancaire, Guillaume a fondé Cap Horn pour
-              remettre le conseil au centre du courtage. De l’autre côté du guichet, il a vu trop de bons
-              projets se heurter à des grilles rigides — et trop de dossiers atypiques abandonnés faute d’être défendus.
+              Après plusieurs années dans le financement bancaire et le courtage en crédit, Guillaume Horn
+              a fondé CAP HORN CONSEILS® avec une conviction simple : un bon financement commence par une
+              compréhension approfondie du projet et de la personne qui le porte.
             </p>
             <p className="chc-lead" style={{ marginTop: 16 }}>
-              Son approche, indépendante et exigeante, permet d’obtenir régulièrement des conditions supérieures
-              aux grilles — y compris sur les dossiers jugés inclassables ailleurs.
+              Chaque recommandation repose sur une analyse indépendante, une stratégie adaptée et une
+              négociation menée dans le seul intérêt du client.
             </p>
             <div className="chc-cab-creds">
               {CREDS.map((c) => (
                 <span className="chc-cab-cred" key={c}>{c}</span>
               ))}
             </div>
-            <div className="chc-cab-sign">— Guillaume Horn, fondateur</div>
+            <div className="chc-cab-sign">Guillaume Horn, fondateur</div>
           </div>
         </div>
       </section>
@@ -133,12 +133,12 @@ export default function CabinetPage() {
           </p>
           <p className="chc-cab-manifesto__sub">
             C’est pourquoi nous refusons toute exclusivité et ne facturons rien tant que le financement
-            n’est pas obtenu. Notre seul intérêt, c’est le vôtre — négocié dossier par dossier, banque par banque.
+            n’est pas obtenu. Notre seul intérêt, c’est le vôtre, négocié dossier par dossier, banque par banque.
           </p>
         </div>
       </section>
 
-      {/* ── VALEURS — bento ──────────────────────────────────── */}
+      {/* ── VALEURS, bento ──────────────────────────────────── */}
       <section className="chc-section chc-section--white">
         <div className="chc-wrap">
           <div className="r" style={{ maxWidth: 720 }}>
@@ -188,8 +188,8 @@ export default function CabinetPage() {
               <div className="chc-eyebrow chc-eyebrow--center" style={{ color: 'var(--chc-gold)' }}>Mettez le cap</div>
               <h2 className="chc-cab-cta__title">Prêt à faire avancer<br /><em>votre projet ?</em></h2>
               <p className="chc-cab-cta__sub">
-                Qualifiez votre projet en trois minutes. Guillaume vous rappelle sous 24 h — sans engagement,
-                et sans le moindre honoraire avant résultat.
+                Qualifiez votre projet en moins de trois minutes. Un expert CAP HORN CONSEILS® vous recontacte
+                sous 24 h pour construire avec vous la stratégie de financement la plus adaptée, sans engagement.
               </p>
               <LiquidButton href="/tunnel" tone="dark" size="lg">Travailler avec Cap Horn <ArrowRight className="w-4 h-4" /></LiquidButton>
             </div>

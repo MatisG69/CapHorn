@@ -6,7 +6,7 @@ import { LiquidButton } from '@/components/ui/LiquidButton'
 import { SERVICES } from '@/components/landing/landingData'
 
 export const metadata = {
-  title: 'Nos expertises — Courtage immobilier, pro & assurance · Cap Horn Conseils',
+  title: 'Nos expertises, Courtage immobilier, pro & assurance · Cap Horn Conseils',
   description:
     "Immobilier, financement professionnel, assurance emprunteur, regroupement de crédits, non-résidents, dossiers complexes. Les expertises de Cap Horn Conseils, cabinet de courtage indépendant à Marcq-en-Barœul.",
 }

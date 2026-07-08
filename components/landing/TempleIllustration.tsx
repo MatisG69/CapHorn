@@ -1,5 +1,5 @@
 /**
- * Élévation architecturale Cap Horn — façade principale style temple
+ * Élévation architecturale Cap Horn, façade principale style temple
  * néo-classique. Trait or, dessin technique sur fond noir, cotations à
  * la marge, échelle bas-droite. Pure SVG, accessible et résolution-libre.
  *
@@ -8,7 +8,7 @@
  * conseil. Niveau de détail dosé pour rester lisible à 50 % de hauteur.
  */
 export function TempleIllustration({ className }: { className?: string }) {
-  // Stroke gold + ink fond — encre d'or sur papier vergé sombre.
+  // Stroke gold + ink fond, encre d'or sur papier vergé sombre.
   const gold = '#C9A84C'
   const goldSoft = '#E2C97E'
   const goldDeep = '#8A6F2A'
@@ -74,7 +74,7 @@ export function TempleIllustration({ className }: { className?: string }) {
       <g stroke={gold} strokeWidth="1" fill="none">
         <line x1="180" y1="208" x2="620" y2="208" />
         <line x1="180" y1="218" x2="620" y2="218" />
-        {/* Frise — lettrage central */}
+        {/* Frise, lettrage central */}
         <rect x="180" y="218" width="440" height="44" />
         <line x1="180" y1="262" x2="620" y2="262" />
       </g>

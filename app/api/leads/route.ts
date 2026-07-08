@@ -7,7 +7,7 @@ const UUID_RE =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 
 /**
- * Enregistrement du tunnel — UPSERT par `session_id`.
+ * Enregistrement du tunnel, UPSERT par `session_id`.
  *
  * Appelé à CHAQUE étape (sauvegarde progressive) :
  *   • completed = false → le dossier est créé / mis à jour « en cours ».
@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
       current_step: current_step ?? null,
       completed: !!completed,
       last_activity_at: new Date().toISOString(),
-      // Scoring / statut — valeurs par défaut (surchargées à la finalisation)
+      // Scoring / statut, valeurs par défaut (surchargées à la finalisation)
       score: 0,
       score_label: 'D',
       priority: 'low',

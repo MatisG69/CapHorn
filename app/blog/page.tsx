@@ -8,7 +8,7 @@ import { blogCategoryLabel } from '@/lib/types'
 export const dynamic = 'force-dynamic'
 
 export const metadata = {
-  title: 'Blog & conseils — Financement, immobilier, professions libérales · Cap Horn Conseils',
+  title: 'Blog & conseils, Financement, immobilier, professions libérales · Cap Horn Conseils',
   description:
     "Articles et conseils de Cap Horn Conseils : financement professionnel, immobilier, professions libérales, franchise, assurance emprunteur, reprise et transmission d'entreprise.",
 }
@@ -30,7 +30,7 @@ export default async function BlogIndexPage() {
           <div className="chc-eyebrow">Le blog</div>
           <h1 className="chc-pagehead__title">Conseils &amp; analyses,<br /><em>sur le financement.</em></h1>
           <p className="chc-pagehead__lead">
-            Décryptages, méthodes et cas concrets — immobilier, financement professionnel, professions
+            Décryptages, méthodes et cas concrets, immobilier, financement professionnel, professions
             libérales, assurance emprunteur, reprise et transmission. Par Cap Horn Conseils.
           </p>
         </div>
@@ -43,7 +43,7 @@ export default async function BlogIndexPage() {
               <div className="chc-eyebrow" style={{ justifyContent: 'center' }}>Bientôt</div>
               <h2 className="chc-h2" style={{ marginTop: 10 }}>Les premiers articles<br /><em>arrivent.</em></h2>
               <p className="chc-lead" style={{ marginTop: 18, marginBottom: 28 }}>
-                Conseils de financement, méthodes et cas concrets — publiés régulièrement par Guillaume.
+                Conseils de financement, méthodes et cas concrets, publiés régulièrement par Guillaume.
                 En attendant, lancez votre étude personnalisée.
               </p>
               <LiquidButton href="/tunnel" tone="light" size="lg">Démarrer mon étude gratuite</LiquidButton>

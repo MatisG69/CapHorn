@@ -7,12 +7,12 @@ import { AssuranceCalculator } from '@/components/simulateur/AssuranceCalculator
 import { getSimulatorSettings } from '@/lib/simulateur/settings'
 
 export const metadata = {
-  title: 'Simulateur d\'économies — Assurance emprunteur · Cap Horn Conseils',
+  title: 'Simulateur d\'économies, Assurance emprunteur · Cap Horn Conseils',
   description:
-    "Estimez en 30 secondes vos économies sur l'assurance emprunteur. Loi Lemoine — résiliation possible à tout moment, sans frais ni pénalité.",
+    "Estimez en 30 secondes vos économies sur l'assurance emprunteur. Loi Lemoine, résiliation possible à tout moment, sans frais ni pénalité.",
 }
 
-const COORD = '50.6795° N · 3.0972° E — Marcq-en-Barœul'
+const COORD = 'Marcq-en-Barœul'
 
 const SPECS: { k: string; v: string; sup?: string }[] = [
   { k: 'Cadre légal', v: 'Loi Lemoine' },
@@ -25,7 +25,7 @@ const SPECS: { k: string; v: string; sup?: string }[] = [
 const REASONS = [
   {
     n: '01', name: 'La loi Lemoine', feature: true, Icon: Scale,
-    desc: 'Depuis septembre 2022, vous pouvez résilier votre assurance emprunteur à tout moment, sans frais ni pénalité. Un droit ouvert à tous les emprunteurs — et rarement exercé, faute d’être accompagné.',
+    desc: 'Depuis septembre 2022, vous pouvez résilier votre assurance emprunteur à tout moment, sans frais ni pénalité. Un droit ouvert à tous les emprunteurs, et rarement exercé, faute d’être accompagné.',
   },
   {
     n: '02', name: 'Étude sous 24 h', Icon: Clock,
@@ -33,7 +33,7 @@ const REASONS = [
   },
   {
     n: '03', name: 'Garanties équivalentes', Icon: ShieldCheck,
-    desc: 'Nos contrats respectent à la lettre les garanties exigées par votre banque. Aucune dégradation de couverture — jamais.',
+    desc: 'Nos contrats respectent à la lettre les garanties exigées par votre banque. Aucune dégradation de couverture, jamais.',
   },
   {
     n: '04', name: 'Démarches prises en charge', Icon: FileCheck,
@@ -52,12 +52,12 @@ export default async function SimulateurPage() {
         <CompassRose className="chc-cab-hero__rose" />
         <div className="chc-cab-hero__inner">
           <div className="r">
-            <div className="chc-eyebrow">Module exclusif · Loi Lemoine</div>
+            <div className="chc-eyebrow">Module exclusif · Changement d’assurance emprunteur, Loi Lemoine</div>
             <h1 className="chc-cab-hero__title">Combien pourriez-vous<br /><em>économiser ?</em></h1>
             <p className="chc-cab-hero__lead">
-              Estimez en 30 secondes le potentiel d’économie sur votre assurance emprunteur —
-              souvent jusqu’à 50 % moins cher que la délégation initiale de votre banque,
-              à garanties au moins équivalentes.
+              Estimez en 30 secondes les économies réalisables sur votre assurance emprunteur.
+              Selon votre profil, vous pourriez réduire significativement le coût total de votre
+              assurance, sans modifier les garanties exigées par votre banque.
             </p>
             <div className="chc-coord" style={{ marginTop: 30 }}>{COORD}</div>
           </div>
@@ -73,7 +73,7 @@ export default async function SimulateurPage() {
         </div>
       </header>
 
-      {/* ── CALCULATEUR — module sombre ──────────────────────── */}
+      {/* ── CALCULATEUR, module sombre ──────────────────────── */}
       <section className="chc-dark">
         <CompassRose className="chc-cab-calc__rose" />
         <div className="chc-dark__inner">
@@ -91,7 +91,7 @@ export default async function SimulateurPage() {
         </div>
       </section>
 
-      {/* ── POURQUOI CHANGER — bento ─────────────────────────── */}
+      {/* ── POURQUOI CHANGER, bento ─────────────────────────── */}
       <section className="chc-section chc-section--white">
         <div className="chc-wrap">
           <div className="r" style={{ maxWidth: 720 }}>
@@ -124,7 +124,7 @@ export default async function SimulateurPage() {
           </p>
           <p className="chc-cab-manifesto__sub">
             Sur un prêt de 250 000 € sur 20 ans, la délégation représente en moyenne
-            15 000 à 30 000 € d’économie cumulée. Nous la sécurisons pour vous — sans frais avant résultat.
+            15 000 à 30 000 € d’économie cumulée. Nous la sécurisons pour vous, sans frais avant résultat.
           </p>
         </div>
       </section>

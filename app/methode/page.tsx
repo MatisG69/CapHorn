@@ -5,16 +5,16 @@ import { ChcFooter } from '@/components/landing/ChcFooter'
 import { LiquidButton } from '@/components/ui/LiquidButton'
 
 export const metadata = {
-  title: 'Notre méthode — Étude, montage & négociation · Cap Horn Conseils',
+  title: 'Notre méthode, Étude, montage & négociation · Cap Horn Conseils',
   description:
     "La méthode Cap Horn : qualification en 3 minutes, échange personnalisé sous 24 h, montage du dossier et négociation auprès de près de 100 banques partenaires. Transparent, sans frais avant résultat.",
 }
 
 const STEPS = [
-  { n: '01', name: 'Qualifiez votre projet', desc: 'Notre outil en ligne analyse votre situation en 3 minutes — type de projet, montant, profil. Aucun document requis, aucune incidence sur votre dossier bancaire.' },
-  { n: '02', name: 'Échange personnalisé', desc: 'Guillaume vous rappelle sous 24 h ouvrées pour affiner le dossier et comprendre vos objectifs patrimoniaux. Un vrai conseil, pas un script commercial.' },
-  { n: '03', name: 'Montage & négociation', desc: 'Nous présentons un dossier solide aux banques susceptibles de l’accepter et négocions chaque paramètre : taux, marge, assurance, garantie.' },
-  { n: '04', name: 'Signature & suivi', desc: 'Vous validez ; nous orchestrons jusqu’à la signature chez le notaire, en sécurisant les conditions annexes.' },
+  { n: '01', name: 'Qualifiez votre projet', desc: 'Notre outil préqualifie votre projet en moins de trois minutes. Aucun document n’est nécessaire à cette étape.' },
+  { n: '02', name: 'Échange personnalisé', desc: 'Un expert vous rappelle sous 24 h afin d’affiner votre projet et de définir la stratégie de financement la plus adaptée.' },
+  { n: '03', name: 'Montage & négociation', desc: 'Nous constituons votre dossier et négocions chaque paramètre auprès des établissements les plus adaptés à votre projet.' },
+  { n: '04', name: 'Signature & suivi', desc: 'Nous coordonnons chaque étape jusqu’à la signature et sécurisons les conditions qui protégeront durablement vos intérêts.' },
 ]
 
 const INCLUDED = [
@@ -59,7 +59,7 @@ export default function MethodePage() {
           <div className="r">
             <div className="chc-eyebrow">Ce que nous gérons</div>
             <h2 className="chc-h2">Tout,<br /><em>de bout en bout.</em></h2>
-            <p className="chc-lead" style={{ marginTop: 22 }}>Vous n’avez qu’un projet à exprimer. Le reste — comparaison, montage, négociation, paperasse — c’est notre métier.</p>
+            <p className="chc-lead" style={{ marginTop: 22 }}>Vous n’avez qu’un projet à exprimer. Le reste, comparaison, montage, négociation, paperasse, c’est notre métier.</p>
             <LiquidButton href="/tunnel" tone="light" size="lg" style={{ marginTop: 28 }}>Démarrer mon étude <ArrowRight className="w-4 h-4" /></LiquidButton>
           </div>
           <div className="r" data-d="1">

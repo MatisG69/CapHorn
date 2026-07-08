@@ -56,7 +56,7 @@ export default function TunnelEditor({ config, source }: { config: TunnelConfig;
           <p className="text-sm text-[var(--color-cream-dim)] mb-4 max-w-2xl">
             Le tunnel utilise actuellement le <strong>parcours par défaut</strong> (codé dans l’application).
             Pour pouvoir modifier les questions et réponses, importez-le d’abord dans la base. Le tunnel
-            continuera de fonctionner exactement à l’identique — vous pourrez ensuite l’éditer librement.
+            continuera de fonctionner exactement à l’identique, vous pourrez ensuite l’éditer librement.
           </p>
           <button onClick={seed} disabled={seeding} className="btn-gold text-sm px-4 py-2.5">
             {seeding ? <Loader2 className="w-4 h-4 animate-spin" /> : <RotateCcw className="w-4 h-4" />}
@@ -66,7 +66,7 @@ export default function TunnelEditor({ config, source }: { config: TunnelConfig;
 
         <div className="admin-card !p-0 overflow-hidden">
           <div className="px-6 py-3 border-b border-[var(--color-ink-line)] text-[10px] font-mono uppercase tracking-[0.22em] text-[var(--color-cream-mute)]">
-            Aperçu — {steps.length} étapes (lecture seule)
+            Aperçu, {steps.length} étapes (lecture seule)
           </div>
           <div className="divide-y divide-[var(--color-ink-line)]">
             {steps.map((s) => (

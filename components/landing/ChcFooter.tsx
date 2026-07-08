@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import { ArrowRight, ArrowUpRight } from 'lucide-react'
+import LegalLinks from './LegalLinks'
 
 /**
- * Pied de page Cap Horn — « carte marine ».
+ * Pied de page Cap Horn, « carte marine ».
  * Bandeau d'appel éditorial (facultatif) + colonnes de liens en texte plein +
  * relevé de position (coordonnées du cap Horn) comme signature de marque.
  * Aucun bouton « liquid glass » : liens sobres, à l'image d'un cabinet discret.
@@ -26,16 +27,15 @@ export function ChcFooter({ showCta = true }: { showCta?: boolean }) {
 
         <div className="chc-footer__grid">
           <div className="chc-footer__brand">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo-mark.png" alt="" aria-hidden className="chc-footer__logomark" />
             <Link href="/" className="chc-footer__wordmark">
               Cap Horn
-              <span>Conseils — Courtage &amp; Financement</span>
+              <span>Conseils, Courtage &amp; Financement</span>
             </Link>
             <p className="chc-footer__desc">
               Cabinet de courtage indépendant en financement et assurance.
               Architecture financière sur mesure, à Marcq-en-Barœul.
-            </p>
-            <p className="chc-footer__coords" aria-label="Cap Horn, relevé de position">
-              55°58′ S — 67°16′ O
             </p>
           </div>
 
@@ -68,11 +68,16 @@ export function ChcFooter({ showCta = true }: { showCta?: boolean }) {
         </div>
 
         <div className="chc-footer__bottom">
-          <span>© {new Date().getFullYear()} Cap Horn Conseils · Courtage &amp; Financement</span>
-          <span className="chc-footer__legal">
-            <span>Données protégées · RGPD</span>
-            <span>Mentions légales · Marcq-en-Barœul</span>
+          <span>
+            © {new Date().getFullYear()} Cap Horn Conseils · Courtage &amp; Financement
+            <span className="chc-footer__credit">
+              {' · '}Site réalisé par{' '}
+              <a href="https://mapa-developpement.fr" target="_blank" rel="noopener noreferrer">
+                Mapa Développement
+              </a>
+            </span>
           </span>
+          <LegalLinks />
         </div>
       </div>
     </footer>

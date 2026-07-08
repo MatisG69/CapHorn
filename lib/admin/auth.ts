@@ -1,5 +1,5 @@
 /**
- * ⚠️  DEV / PRE-PROD ONLY — Auth admin hardcodée.
+ * ⚠️  DEV / PRE-PROD ONLY, Auth admin hardcodée.
  *
  * Identifiants en dur le temps que Guillaume choisisse ses creds définitifs.
  * À remplacer par Supabase Auth (ou autre IdP) avant mise en production.
@@ -22,7 +22,7 @@ export const ADMIN_PASSWORD = 'Test123'
 export const ADMIN_COOKIE_NAME = 'caphorn_admin_session'
 export const COOKIE_MAX_AGE = 60 * 60 * 24 * 7 // 7 jours
 
-// Secret HMAC — fixe le temps du dev hardcodé. À sortir en env quand l'auth
+// Secret HMAC, fixe le temps du dev hardcodé. À sortir en env quand l'auth
 // passera en prod (ne sera plus nécessaire à ce moment-là).
 const SESSION_SECRET = 'caphorn-dev-session-secret-2026-replace-before-prod'
 
@@ -115,7 +115,7 @@ export async function parseSessionToken(token: string | undefined): Promise<Admi
 }
 
 export function checkCredentials(email: string, password: string): boolean {
-  // Comparaison simple — credentials hardcodés non sensibles côté secret.
+  // Comparaison simple, credentials hardcodés non sensibles côté secret.
   return (
     email.trim().toLowerCase() === ADMIN_EMAIL.toLowerCase() &&
     password === ADMIN_PASSWORD

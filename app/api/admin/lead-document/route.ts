@@ -3,7 +3,7 @@ import { createServerClient } from '@supabase/ssr'
 import { getAdminSession } from '@/lib/admin/session'
 
 /**
- * Téléchargement d'une pièce jointe de lead — réservé à l'admin.
+ * Téléchargement d'une pièce jointe de lead, réservé à l'admin.
  *
  * Le bucket `lead-documents` est PRIVÉ. On génère une URL signée à durée
  * limitée puis on redirige dessus. L'accès est protégé par la session admin.

@@ -7,7 +7,7 @@
  * verre épais/liquide. Monté une seule fois dans le layout racine ; référencé
  * en CSS via `backdrop-filter: url(#liquid-nav) …`.
  *
- * Le SVG est invisible (0×0) — il ne sert qu'à exposer la définition du filtre.
+ * Le SVG est invisible (0×0), il ne sert qu'à exposer la définition du filtre.
  */
 export function LiquidGlassFilter() {
   return (

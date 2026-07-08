@@ -12,8 +12,14 @@ interface Msg {
 const GREETING: Msg = {
   role: 'assistant',
   content:
-    "Bonjour, je suis l'assistant de Cap Horn Conseils. Posez votre question sur votre projet de financement — immobilier, professionnel, assurance emprunteur…",
+    "Bonjour, je suis l'assistant de Cap Horn Conseils. Posez votre question sur votre projet de financement, immobilier, professionnel, assurance emprunteur…",
 }
+
+const SUGGESTIONS = [
+  'Financer un achat immobilier',
+  'Changer mon assurance de prêt',
+  'Financer mon activité pro',
+]
 
 export default function ChatWidget() {
   const pathname = usePathname()
@@ -41,24 +47,37 @@ export default function ChatWidget() {
   // Le widget n'apparaît pas dans l'admin ni dans le tunnel
   if (pathname.startsWith('/admin') || pathname.startsWith('/tunnel')) return null
 
-  const send = () => {
-    const text = value.trim()
+  const send = (preset?: string) => {
+    const text = (preset ?? value).trim()
     if (!text || loading) return
-    setMessages((m) => [...m, { role: 'user', content: text }])
+    const next: Msg[] = [...messages, { role: 'user', content: text }]
+    setMessages(next)
     setValue('')
     setLoading(true)
-    // TODO IA : remplacer ce placeholder par l'appel à l'API (clé fournie plus tard)
-    setTimeout(() => {
-      setMessages((m) => [
-        ...m,
-        {
-          role: 'assistant',
-          content:
-            "Merci pour votre message. L'assistant intelligent sera bientôt connecté. En attendant, vous pouvez lancer votre étude gratuite : un expert Cap Horn vous recontacte sous 24 h.",
-        },
-      ])
-      setLoading(false)
-    }, 700)
+
+    fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: next }),
+    })
+      .then(async (r) => {
+        const data = (await r.json().catch(() => ({}))) as { reply?: string }
+        const reply =
+          data.reply ||
+          "Désolé, je ne parviens pas à répondre pour l'instant. Vous pouvez lancer votre étude gratuite : un expert Cap Horn vous recontacte sous 24 h."
+        setMessages((m) => [...m, { role: 'assistant', content: reply }])
+      })
+      .catch(() => {
+        setMessages((m) => [
+          ...m,
+          {
+            role: 'assistant',
+            content:
+              "Désolé, une erreur est survenue. Un expert Cap Horn peut vous recontacter sous 24 h, n'hésitez pas à lancer votre étude gratuite.",
+          },
+        ])
+      })
+      .finally(() => setLoading(false))
   }
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -75,7 +94,10 @@ export default function ChatWidget() {
         <div className="chc-chat__panel" role="dialog" aria-label="Assistant Cap Horn">
           <header className="chc-chat__header">
             <div className="chc-chat__id">
-              <span className="chc-chat__mark">CH</span>
+              <span className="chc-chat__mark-wrap">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/logo-mark.png" alt="Cap Horn Conseils" className="chc-chat__mark" />
+              </span>
               <div>
                 <div className="chc-chat__title">Cap Horn Conseils</div>
                 <div className="chc-chat__status">Assistant · en ligne</div>
@@ -88,47 +110,77 @@ export default function ChatWidget() {
 
           <div className="chc-chat__body" ref={scrollRef}>
             {messages.map((m, i) => (
-              <div key={i} className={`chc-chat__msg chc-chat__msg--${m.role}`}>
-                {m.content}
+              <div key={i} className={`chc-chat__row chc-chat__row--${m.role}`}>
+                {m.role === 'assistant' && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src="/logo-mark.png" alt="" aria-hidden className="chc-chat__avatar" />
+                )}
+                <div className={`chc-chat__msg chc-chat__msg--${m.role}`}>{m.content}</div>
               </div>
             ))}
+
+            {messages.length === 1 && !loading && (
+              <div className="chc-chat__suggests">
+                {SUGGESTIONS.map((s) => (
+                  <button key={s} type="button" className="chc-chat__chip" onClick={() => send(s)}>
+                    {s}
+                  </button>
+                ))}
+              </div>
+            )}
+
             {loading && (
-              <div className="chc-chat__msg chc-chat__msg--assistant chc-chat__typing">
-                <span /><span /><span />
+              <div className="chc-chat__row chc-chat__row--assistant">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/logo-mark.png" alt="" aria-hidden className="chc-chat__avatar" />
+                <div className="chc-chat__msg chc-chat__msg--assistant chc-chat__typing">
+                  <span /><span /><span />
+                </div>
               </div>
             )}
           </div>
 
-          <div className="chc-chat__inputbar">
-            <textarea
-              ref={taRef}
-              rows={1}
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
-              onKeyDown={onKeyDown}
-              placeholder="Écrivez votre message…"
-              className="chc-chat__textarea"
-            />
-            <button
-              className="chc-chat__send"
-              onClick={send}
-              disabled={!value.trim() || loading}
-              aria-label="Envoyer"
-            >
-              <ArrowUp className="w-4 h-4" />
-            </button>
+          <div className="chc-chat__footer">
+            <div className="chc-chat__inputbar">
+              <textarea
+                ref={taRef}
+                rows={1}
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                onKeyDown={onKeyDown}
+                placeholder="Écrivez votre message…"
+                className="chc-chat__textarea"
+              />
+              <button
+                className="chc-chat__send"
+                onClick={() => send()}
+                disabled={!value.trim() || loading}
+                aria-label="Envoyer"
+              >
+                <ArrowUp className="w-4 h-4" />
+              </button>
+            </div>
+            <p className="chc-chat__note">Réponse indicative · un expert vous recontacte sous 24 h.</p>
           </div>
         </div>
       )}
 
-      {/* Bouton flottant */}
-      <button
-        className={`chc-chat__launcher ${open ? 'is-open' : ''}`}
-        onClick={() => setOpen((o) => !o)}
-        aria-label={open ? "Fermer l'assistant" : "Ouvrir l'assistant Cap Horn"}
-      >
-        {open ? <X className="w-5 h-5" /> : <span className="chc-chat__launcher-mark">CH</span>}
-      </button>
+      {/* Bouton flottant + invitation */}
+      <div className="chc-chat__launch-row">
+        {!open && <span className="chc-chat__hint">Une question&nbsp;?</span>}
+        <button
+          className={`chc-chat__launcher ${open ? 'is-open' : ''}`}
+          onClick={() => setOpen((o) => !o)}
+          aria-label={open ? "Fermer l'assistant" : "Ouvrir l'assistant Cap Horn"}
+        >
+          {open ? (
+            <X className="w-5 h-5" />
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src="/logo-mark.png" alt="Cap Horn Conseils" className="chc-chat__launcher-mark" />
+          )}
+        </button>
+      </div>
     </div>
   )
 }

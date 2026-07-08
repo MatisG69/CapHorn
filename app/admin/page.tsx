@@ -14,14 +14,14 @@ export default async function AdminDashboard() {
   const recentLeads = recent.slice(0, 6)
   const totalAll = counts.completed + counts.inProgress
 
-  // Donut — répartition par score (dossiers finalisés)
+  // Donut, répartition par score (dossiers finalisés)
   const scoreTotal = (['A', 'B', 'C', 'D'] as const).reduce((s, k) => s + (stats.leads_by_score[k] ?? 0), 0)
   const scoreSegments = (['A', 'B', 'C', 'D'] as const).map((k) => ({
     key: k, count: stats.leads_by_score[k] ?? 0, color: SCORE_COLORS[k],
     pct: scoreTotal > 0 ? Math.round(((stats.leads_by_score[k] ?? 0) / scoreTotal) * 100) : 0,
   }))
 
-  // Funnel — pipeline par statut (tous les leads)
+  // Funnel, pipeline par statut (tous les leads)
   const st = stats.leads_by_status
   const funnel = [
     { label: 'Nouveaux leads', count: totalAll, color: '#C9A45C' },
@@ -205,7 +205,7 @@ function Pill({ text, color }: { text: string; color: string }) {
 }
 
 function Sparkline({ color, data }: { color: string; data: readonly number[] }) {
-  // Courbe réelle — cumul sur 30 jours
+  // Courbe réelle, cumul sur 30 jours
   const pts = data && data.length > 1 ? data : [0, 0]
   const W = 240, H = 36
   const max = Math.max(1, ...pts)

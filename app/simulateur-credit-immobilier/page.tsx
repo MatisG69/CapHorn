@@ -3,7 +3,7 @@ import { ChcFooter } from '@/components/landing/ChcFooter'
 import CreditSimulator from '@/components/simulateur/CreditSimulator'
 
 export const metadata = {
-  title: 'Simulateur de crédit immobilier 2026 — Mensualité & taux · Cap Horn Conseils',
+  title: 'Simulateur de crédit immobilier 2026, Mensualité & taux · Cap Horn Conseils',
   description:
     "Estimez votre mensualité et le coût de votre crédit immobilier selon les taux 2026 (grille indicative Pretto). Montant, apport, durée : simulation gratuite et non contractuelle.",
 }

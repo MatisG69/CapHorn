@@ -168,7 +168,7 @@ export default function FinalizeStep({ step, contact, answers, isSubmitting, onF
         {/* Upload de documents */}
         <div className="chc-field">
           <label className="chc-label">
-            Vos documents <span className="chc-label-opt">(bilans, devis, pièces justificatives — facultatif)</span>
+            Vos documents <span className="chc-label-opt">(bilans, devis, pièces justificatives, facultatif)</span>
           </label>
 
           <input

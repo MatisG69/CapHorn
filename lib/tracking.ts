@@ -16,6 +16,6 @@ export function track(event: string, properties?: Record<string, string>): void 
     events.push(entry)
     localStorage.setItem(STORAGE_KEY, JSON.stringify(events.slice(-100)))
   } catch {
-    // localStorage unavailable — silent fail
+    // localStorage unavailable, silent fail
   }
 }

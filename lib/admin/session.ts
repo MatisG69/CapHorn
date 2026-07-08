@@ -1,4 +1,4 @@
-// Helpers cookies — Node runtime (server components + server actions).
+// Helpers cookies, Node runtime (server components + server actions).
 // Le middleware utilise directement parseSessionToken depuis ./auth.ts.
 
 import { cookies } from 'next/headers'

@@ -1,5 +1,5 @@
 /**
- * Logique PARTAGÉE du simulateur d'économies (assurance emprunteur — loi Lemoine).
+ * Logique PARTAGÉE du simulateur d'économies (assurance emprunteur, loi Lemoine).
  *
  * Ce module est PUR (aucun import serveur) : il est utilisé aussi bien côté
  * client (composant `AssuranceCalculator`) que côté serveur (route
@@ -25,7 +25,7 @@ export interface SimulatorSettings {
   defaultCurrentPremium: number
 }
 
-/** Réglages par défaut — repris des constantes historiques du composant. */
+/** Réglages par défaut, repris des constantes historiques du composant. */
 export const DEFAULT_SIMULATOR_SETTINGS: SimulatorSettings = {
   rateUnder35: 0.08,
   rateUnder45: 0.11,
@@ -66,7 +66,7 @@ export function parseFrNumber(input: string | number | null | undefined): number
   if (typeof input === 'number') return Number.isFinite(input) ? input : 0
   if (!input) return 0
   let s = String(input).trim()
-  // Séparateurs de milliers en espaces — \s couvre l'espace insécable (U+00A0)
+  // Séparateurs de milliers en espaces, \s couvre l'espace insécable (U+00A0)
   // et l'espace fine insécable (U+202F) produits par Intl.NumberFormat('fr-FR').
   s = s.replace(/\s/g, '')
 
@@ -102,7 +102,7 @@ export function caphornRate(age: number, s: SimulatorSettings): number {
 
 /**
  * Calcule l'estimation. Renvoie `null` UNIQUEMENT si une donnée est absente
- * ou ≤ 0 — jamais à cause d'un montant élevé.
+ * ou ≤ 0, jamais à cause d'un montant élevé.
  */
 export function computeEstimation(
   inputs: EstimationInputs,

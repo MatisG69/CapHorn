@@ -52,7 +52,7 @@ export default function ResultStep({ messageVariant, firstName }: ResultStepProp
       <div className="mt-7 flex flex-col sm:flex-row gap-3 justify-center text-[11px] uppercase tracking-[0.14em] font-medium text-[var(--chc-mid)]">
         <span className="flex items-center justify-center gap-2">
           <Phone className="w-3.5 h-3.5 text-[var(--chc-gold)]" />
-          Rappel sous 24–48h
+          Rappel sous 24 à 48 h
         </span>
         <span className="hidden sm:block opacity-40">·</span>
         <span className="flex items-center justify-center gap-2">

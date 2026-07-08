@@ -131,7 +131,7 @@ export default function ContactModal({ open, onClose }: { open: boolean; onClose
                 Être rappelé par Guillaume
               </h2>
               <p style={{ fontSize: 14.5, lineHeight: 1.5, color: SUB, margin: 0 }}>
-                Laissez vos coordonnées — réponse sous 24 h, sans engagement.
+                Laissez vos coordonnées, réponse sous 24 h, sans engagement.
               </p>
             </div>
 

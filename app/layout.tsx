@@ -5,7 +5,7 @@ import { LiquidGlassFilter } from '@/components/LiquidGlassFilter'
 import ChatWidget from '@/components/chat/ChatWidget'
 import Analytics from '@/components/Analytics'
 
-// ── Direction « Cap Horn — editorial premium » ─────────────────────────
+// ── Direction « Cap Horn, editorial premium » ─────────────────────────
 // Deux familles, conformément au design system : Inter (corps + display
 // massif 900) et Cormorant Garamond (titres de section serif, italiques).
 // Variables CSS conservées (--font-ibm-plex = Inter, --font-cormorant =
@@ -26,7 +26,7 @@ const cormorant = Cormorant_Garamond({
 })
 
 export const metadata: Metadata = {
-  title: 'Cap Horn Conseils — Cabinet de courtage indépendant',
+  title: 'Cap Horn Conseils, Cabinet de courtage indépendant',
   description:
     "Architecture financière premium. Immobilier, professionnel, assurance emprunteur. Cabinet de courtage indépendant à Marcq-en-Barœul.",
 }

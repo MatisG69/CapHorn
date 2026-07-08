@@ -14,9 +14,9 @@ export default async function AnalyticsPage() {
   return (
     <div className="p-8 lg:p-10 space-y-8">
       <div className="page-header">
-        <span className="page-header__index">02 — Analyse</span>
+        <span className="page-header__index">02, Analyse</span>
         <h1 className="page-header__title">Analytique</h1>
-        <p className="page-header__lead">Audience du site et santé du pipeline — 30 derniers jours.</p>
+        <p className="page-header__lead">Audience du site et santé du pipeline, 30 derniers jours.</p>
       </div>
 
       {/* ── Audience web ─────────────────────────────────────── */}
@@ -37,7 +37,7 @@ export default async function AnalyticsPage() {
           {/* Courbe 30 jours */}
           <div className="admin-card">
             <div className="flex items-center justify-between mb-5">
-              <h2 className="eyebrow eyebrow--single">Vues — 30 derniers jours</h2>
+              <h2 className="eyebrow eyebrow--single">Vues, 30 derniers jours</h2>
               <span className="text-xs text-[var(--color-cream-mute)] font-mono">{web.days[0]?.label} → {web.days[web.days.length - 1]?.label}</span>
             </div>
             <TrendChart days={web.days} />
@@ -69,7 +69,7 @@ export default async function AnalyticsPage() {
 
       {/* ── Pipeline leads ───────────────────────────────────── */}
       <div className="page-header" style={{ marginTop: 8 }}>
-        <span className="page-header__index">03 — Pipeline</span>
+        <span className="page-header__index">03, Pipeline</span>
         <h2 className="page-header__title" style={{ fontSize: '1.6rem' }}>Conversion des leads</h2>
       </div>
       {stats.total_leads === 0 ? (

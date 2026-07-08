@@ -84,7 +84,7 @@ export default function SectionWithMockup({
           gap: isWide ? 40 : 52, alignItems: 'center',
         }}
       >
-        {/* Texte — à gauche par défaut */}
+        {/* Texte, à gauche par défaut */}
         <div style={{ maxWidth: 540, order: isWide && reverseLayout ? 2 : 1, ...reveal(0) }}>
           {eyebrow && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20, fontFamily: SANS, fontSize: 10, fontWeight: 600, letterSpacing: '0.22em', textTransform: 'uppercase', color: GOLD }}>
@@ -101,7 +101,7 @@ export default function SectionWithMockup({
           </LiquidButton>
         </div>
 
-        {/* Visuel — deck de 2 images qui se permutent (à droite par défaut) */}
+        {/* Visuel, deck de 2 images qui se permutent (à droite par défaut) */}
         <div
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}

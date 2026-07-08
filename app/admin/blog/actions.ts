@@ -27,7 +27,7 @@ async function uniqueSlug(
   const root = slugify(base) || 'article'
   let candidate = root
   let n = 1
-  // Boucle bornée — au pire quelques itérations.
+  // Boucle bornée, au pire quelques itérations.
   for (let i = 0; i < 50; i++) {
     const { data } = await supabase.from('blog_posts').select('id').eq('slug', candidate).maybeSingle()
     if (!data || data.id === excludeId) return candidate
@@ -81,7 +81,7 @@ export async function updatePostAction(id: string, input: BlogPostInput): Promis
     published: input.published,
   }
   // Ne met à jour la date de mise en ligne que si l'éditeur en fournit une
-  // (publication immédiate ou programmation) — jamais écrasée par null.
+  // (publication immédiate ou programmation), jamais écrasée par null.
   if (input.published_at) patch.published_at = input.published_at
 
   const { data, error } = await supabase

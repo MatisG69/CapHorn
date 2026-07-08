@@ -12,43 +12,51 @@ export const SEO_PAGES: Record<string, PillarData> = {
   'financement-professions-liberales': {
     slug: 'financement-professions-liberales',
     eyebrow: 'Professions libérales',
-    titleTop: 'Financer votre activité',
-    titleEm: 'libérale, sereinement.',
+    titleTop: 'Le financement adapté à votre',
+    titleEm: 'activité libérale.',
+    introTitle: 'Une stratégie de financement adaptée à chaque profession libérale.',
+    professionsIntro:
+      'Chaque profession libérale répond à des critères bancaires spécifiques. Nous structurons votre dossier de financement selon les attentes des établissements prêteurs afin d’optimiser vos conditions d’emprunt.',
     lead:
-      "Installation, rachat de patientèle ou de clientèle, achat des murs du cabinet, matériel, trésorerie ou rachat de parts : Cap Horn structure et négocie chaque financement de profession libérale auprès des banques et partenaires spécialisés.",
+      "Médecin, chirurgien-dentiste, infirmier, kinésithérapeute, pharmacien, avocat, notaire, expert-comptable ou toute autre profession libérale : CAP HORN CONSEILS structure et négocie votre prêt professionnel pour financer votre installation, le rachat de patientèle ou de clientèle, l’acquisition des murs de votre cabinet, vos équipements, votre trésorerie ou le rachat de parts auprès de banques et partenaires spécialisés.",
     intro: [
-      "Les professions libérales ont des codes bancaires particuliers : revenus en BNC, parts de SCM ou de SELARL, valorisation d’une patientèle, achat de murs via une SCI… Mal présenté, un excellent dossier peut être refusé ; bien structuré, il obtient des conditions premium.",
-      "Notre rôle : traduire votre projet dans le langage des banques, identifier les établissements qui financent réellement votre profession, et négocier le taux, l’assurance et les garanties à votre place.",
+      "Les professions libérales répondent à des critères bancaires spécifiques : revenus en BNC, parts de SCM ou de SELARL, valorisation d’une patientèle, acquisition des murs via une SCI… Même un excellent dossier peut être refusé s’il est mal présenté. Correctement structuré, il peut accéder à des conditions de financement plus compétitives.",
+      "Notre rôle est de traduire votre projet dans le langage des banques, d’identifier les établissements réellement adaptés à votre profession et de négocier pour vous les meilleures conditions de financement, d’assurance et de garanties.",
     ],
     projets: [
-      { title: 'Installation', desc: "Premier établissement, association, transfert de cabinet : financement du droit de présentation et des frais d’installation." },
-      { title: 'Rachat de patientèle / clientèle', desc: "Financement de la valeur incorporelle d’un cabinet médical, paramédical, juridique ou comptable." },
-      { title: 'Achat des murs / local', desc: "Acquisition des murs professionnels, en direct ou via une SCI, avec optimisation patrimoniale." },
-      { title: 'Matériel professionnel', desc: "Équipement médical, fauteuil, imagerie, informatique métier — en prêt ou crédit-bail." },
-      { title: 'Trésorerie professionnelle', desc: "Financement du besoin en fonds de roulement, des charges sociales ou d’un décalage de recettes." },
-      { title: 'Rachat de parts', desc: "Entrée ou montée au capital d’une SELARL, SCP ou société d’exercice : financement des parts sociales." },
+      { title: 'Installation', desc: "Installation, reprise ou association : financement du droit de présentation, des murs professionnels et des frais d’installation." },
+      { title: 'Rachat de patientèle / clientèle', desc: "Financement du rachat de patientèle ou de clientèle pour les médecins, chirurgiens-dentistes, infirmiers, kinésithérapeutes, avocats, notaires et experts-comptables." },
+      { title: 'Achat des murs professionnels', desc: "Financement de l’acquisition des murs du cabinet, en direct ou via une SCI, avec une stratégie patrimoniale et bancaire adaptée." },
+      { title: 'Matériel professionnel', desc: "Financement de vos équipements professionnels : matériel médical, informatique métier, fauteuil dentaire ou équipements spécialisés, en prêt ou crédit-bail." },
+      { title: 'Trésorerie professionnelle', desc: "Financement des besoins de trésorerie, des charges d’exploitation et des décalages de recettes afin de préserver la continuité et le développement de votre activité." },
+      { title: 'Rachat de parts', desc: "Financement du rachat de parts sociales pour intégrer ou développer une SELARL, une SCP ou toute société d’exercice libéral, avec une structuration bancaire adaptée." },
     ],
     professions: [
-      'Professions de santé — médecins, chirurgiens-dentistes, kinésithérapeutes, infirmiers, sages-femmes, vétérinaires, pharmaciens',
-      'Professions juridiques — avocats, notaires, commissaires de justice, administrateurs',
-      'Professions du chiffre — experts-comptables, commissaires aux comptes',
-      'Autres libéraux — architectes, géomètres, consultants, professions du conseil',
+      'Professions de santé, médecins, chirurgiens-dentistes, kinésithérapeutes, infirmiers, sages-femmes, vétérinaires et pharmaciens.',
+      'Professions juridiques, avocats, notaires, commissaires de justice et administrateurs judiciaires.',
+      'Professions du chiffre, experts-comptables et commissaires aux comptes.',
+      'Professions du conseil et techniques, architectes, géomètres-experts, consultants et autres professions libérales réglementées ou indépendantes.',
     ],
     solutions: [
-      { title: 'Prêt professionnel', desc: "Le financement classique de l’installation, de la patientèle ou du matériel, négocié au meilleur taux." },
-      { title: 'Crédit-bail / location financière', desc: "Préserver votre trésorerie en finançant le matériel sans apport, avec option d’achat." },
-      { title: 'SCI & achat des murs', desc: "Structurer l’acquisition des murs via une SCI pour optimiser fiscalité et patrimoine." },
-      { title: 'Financement in fine & patrimonial', desc: "Pour les profils à revenus élevés, des montages qui optimisent l’effet de levier." },
+      { title: 'Prêt professionnel', desc: "Financement de l’installation, du rachat de patientèle, des équipements professionnels ou des murs du cabinet, négocié auprès de nos partenaires bancaires." },
+      { title: 'Crédit-bail / location financière', desc: "Financez vos équipements professionnels sans mobiliser votre trésorerie grâce au crédit-bail ou à la location financière, avec option d’achat selon le contrat." },
+      { title: 'SCI & achat des murs', desc: "Structuration de l’acquisition des murs professionnels via une SCI afin d’optimiser votre stratégie patrimoniale et votre financement." },
+      { title: 'Financement in fine & patrimonial', desc: "Pour les dirigeants et professions libérales disposant d’un patrimoine significatif, mise en place de financements in fine intégrés à une stratégie patrimoniale globale." },
     ],
-    parcours: PARCOURS_STD,
+    parcours: [
+      { n: '01', name: 'Analyse de votre projet', desc: "Présentez votre projet en quelques minutes. Pour les professionnels déjà installés, l’ajout des derniers bilans permet de réaliser une étude plus précise dès le premier échange." },
+      { n: '02', name: 'Analyse & stratégie', desc: "Un expert du cabinet étudie votre situation, vos bilans et votre projet afin de construire une stratégie de financement personnalisée avant toute présentation aux établissements bancaires." },
+      { n: '03', name: 'Structuration & négociation', desc: "Nous structurons votre dossier, sélectionnons les établissements les plus pertinents et négocions pour vous le taux, l’assurance et les garanties." },
+      { n: '04', name: 'Signature & suivi', desc: "Nous vous accompagnons jusqu’à la signature, au déblocage des fonds et au suivi des dernières formalités jusqu’à la concrétisation de votre projet." },
+    ],
     faq: [
-      { q: 'Comment financer une patientèle ?', a: "Le rachat d’une patientèle (ou clientèle) se finance par un prêt professionnel sur 7 à 12 ans, parfois adossé à une garantie. La banque évalue la récurrence des honoraires, l’ancienneté du cabinet et votre capacité de reprise. Nous valorisons ces éléments pour obtenir un financement à 100 % lorsque le dossier le permet." },
-      { q: 'Comment financer son installation ?', a: "L’installation regroupe le droit de présentation, le matériel et parfois la trésorerie de démarrage. Nous montons un plan de financement global combinant prêt professionnel, crédit-bail matériel et, si besoin, une ligne de trésorerie, en présentant un prévisionnel crédible aux banques." },
-      { q: 'Comment financer un cabinet médical ?', a: "Le financement d’un cabinet médical combine généralement l’acquisition de la patientèle, l’équipement et, souvent, les murs via une SCI. Chaque brique a sa logique bancaire : nous les articulons pour optimiser le coût total et préserver votre capacité d’emprunt personnelle." },
-      { q: 'Comment financer les murs de son cabinet ?', a: "L’achat des murs se fait le plus souvent via une SCI qui loue à votre structure d’exercice. Ce montage déduit les intérêts et constitue un patrimoine. Nous négocions le prêt immobilier de la SCI et coordonnons l’ensemble avec votre notaire et votre expert-comptable." },
-      { q: 'Quel apport pour acheter son cabinet ?', a: "De nombreux dossiers libéraux se financent avec un apport limité (souvent 10 % ou moins), voire sans apport pour les profils de santé à revenus réguliers. L’essentiel est la solidité du prévisionnel et la récurrence des honoraires. Nous identifions les banques qui acceptent les apports faibles." },
-      { q: 'Comment financer du matériel médical ?', a: "Le matériel (imagerie, fauteuil, laser, informatique) se finance idéalement en crédit-bail : pas d’apport, loyers déductibles et option d’achat. Selon votre fiscalité, le prêt classique peut être préférable — nous comparons les deux scénarios." },
-      { q: 'Comment financer un rachat de parts ?', a: "L’entrée ou la montée au capital d’une société d’exercice (SELARL, SCP) se finance par un prêt dédié au rachat de parts, dont le remboursement est calibré sur la quote-part de bénéfices. Le montage fiscal est déterminant : nous le construisons avec votre conseil." },
+      { q: 'Comment financer une patientèle ?', a: "Le rachat d’une patientèle ou d’une clientèle peut être financé par un prêt professionnel, parfois complété par une garantie adaptée. Les établissements bancaires analysent notamment la récurrence des honoraires, l’ancienneté du cabinet et votre capacité de reprise. Nous structurons et présentons votre dossier afin d’optimiser vos chances d’obtenir un financement pouvant couvrir jusqu’à 100 % du projet, lorsque votre situation le permet." },
+      { q: 'Comment financer son installation ?', a: "L’installation d’une profession libérale peut inclure le droit de présentation, les équipements professionnels et les besoins de trésorerie de démarrage. Nous construisons un plan de financement global combinant prêt professionnel, crédit-bail et, si nécessaire, une ligne de trésorerie, présenté aux établissements bancaires avec un prévisionnel solide." },
+      { q: 'Comment financer un cabinet médical ?', a: "Le financement d’un cabinet médical peut combiner le rachat de patientèle, l’acquisition des équipements professionnels, l’achat des murs du cabinet et les besoins de trésorerie. Chaque composante répond à des critères bancaires spécifiques. Nous structurons un plan de financement global afin d’optimiser le coût du crédit, de préserver votre capacité d’emprunt et de sélectionner les établissements les plus adaptés à votre projet." },
+      { q: 'Comment financer les murs de son cabinet ?', a: "L’acquisition des murs d’un cabinet s’effectue le plus souvent en direct ou via une SCI, selon votre situation patrimoniale et fiscale. Cette structuration permet de dissocier l’immobilier de l’activité professionnelle et de construire un patrimoine à long terme. Nous négocions le financement immobilier et coordonnons le montage avec votre notaire et votre expert-comptable." },
+      { q: 'Quel apport pour acheter son cabinet ?', a: "Selon votre profession, votre expérience et la solidité de votre dossier, un financement avec un apport limité, voire sans apport dans certains cas, peut être envisagé. L’essentiel reste la qualité du projet, du prévisionnel et la stabilité des revenus. Nous identifions les établissements bancaires les plus adaptés à votre profil." },
+      { q: 'Comment financer du matériel médical ?', a: "Le matériel médical (imagerie, fauteuil dentaire, laser, informatique métier ou équipements spécialisés) peut être financé par un prêt professionnel ou un crédit-bail. Le crédit-bail permet généralement de préserver votre trésorerie, avec une option d’achat en fin de contrat. Nous comparons chaque solution afin de retenir le financement le plus adapté à votre activité, à votre fiscalité et à vos objectifs patrimoniaux." },
+      { q: 'Comment financer un rachat de parts ?', a: "Le rachat de parts sociales d’une SELARL, d’une SCP ou de toute société d’exercice libéral peut être financé par un prêt professionnel dédié. Les établissements bancaires analysent notamment la rentabilité de la structure, votre capacité de remboursement et les perspectives de développement. Nous structurons le montage juridique, fiscal et bancaire avec votre expert-comptable et votre notaire afin de sécuriser l’opération." },
     ],
     related: [
       { href: '/financement-professions-sante', label: 'Professions de santé' },
@@ -57,7 +65,7 @@ export const SEO_PAGES: Record<string, PillarData> = {
       { href: '/simulateur', label: 'Simulateur assurance emprunteur' },
       { href: '/tunnel', label: 'Démarrer mon étude' },
     ],
-    metaTitle: 'Financement des professions libérales — Installation, patientèle, murs · Cap Horn Conseils',
+    metaTitle: 'Financement des professions libérales, Installation, patientèle, murs · Cap Horn Conseils',
     metaDescription:
       "Courtier spécialisé dans le financement des professions libérales : installation, rachat de patientèle ou clientèle, achat des murs, matériel, trésorerie, rachat de parts. Étude gratuite.",
   },
@@ -71,13 +79,13 @@ export const SEO_PAGES: Record<string, PillarData> = {
     lead:
       "Médecins, chirurgiens-dentistes, kinésithérapeutes, infirmiers, vétérinaires, pharmaciens : un financement calibré sur la régularité de vos honoraires et les spécificités de votre exercice.",
     intro: [
-      "Les professionnels de santé bénéficient d’un regard bancaire favorable — revenus réguliers, faible sinistralité — à condition que le dossier soit présenté avec les bons repères : valorisation de la patientèle, nomenclature des actes, conventionnement.",
+      "Les professionnels de santé bénéficient d’un regard bancaire favorable, revenus réguliers, faible sinistralité, à condition que le dossier soit présenté avec les bons repères : valorisation de la patientèle, nomenclature des actes, conventionnement.",
       "Nous travaillons avec les banques et les partenaires les plus actifs sur le secteur médical pour obtenir des financements à apport réduit et des conditions parmi les meilleures du marché.",
     ],
     projets: [
       { title: 'Rachat de patientèle', desc: "Financement de la valeur d’un cabinet médical, dentaire ou paramédical." },
       { title: 'Installation & association', desc: "Premier exercice, entrée en SCM/SELARL, transfert ou création de cabinet." },
-      { title: 'Équipement médical', desc: "Fauteuil dentaire, imagerie, laser, matériel de cabinet — prêt ou crédit-bail." },
+      { title: 'Équipement médical', desc: "Fauteuil dentaire, imagerie, laser, matériel de cabinet, prêt ou crédit-bail." },
       { title: 'Murs du cabinet', desc: "Acquisition des locaux professionnels, en direct ou via SCI." },
     ],
     solutions: [
@@ -95,7 +103,7 @@ export const SEO_PAGES: Record<string, PillarData> = {
       { href: '/financement-professions-liberales', label: 'Toutes les professions libérales' },
       { href: '/tunnel', label: 'Démarrer mon étude' },
     ],
-    metaTitle: 'Financement professions de santé — Médecins, dentistes, kinés · Cap Horn Conseils',
+    metaTitle: 'Financement professions de santé, Médecins, dentistes, kinés · Cap Horn Conseils',
     metaDescription:
       "Financement des professionnels de santé : patientèle, installation, matériel médical, murs du cabinet. Apport réduit, conditions négociées. Courtier spécialisé.",
   },
@@ -103,12 +111,12 @@ export const SEO_PAGES: Record<string, PillarData> = {
   'financement-professions-juridiques': {
     slug: 'financement-professions-juridiques',
     eyebrow: 'Professions juridiques',
-    titleTop: 'Financer votre cabinet',
-    titleEm: 'juridique.',
+    titleTop: 'Le financement sur mesure des',
+    titleEm: 'professions juridiques.',
     lead:
-      "Avocats, notaires, commissaires de justice : financement de l’installation, du rachat de clientèle ou d’office, des parts sociales et des locaux professionnels.",
+      "Avocats, notaires, commissaires de justice, administrateurs judiciaires et mandataires judiciaires : financement de l’installation, du rachat de clientèle ou d’office, des parts sociales, des murs professionnels et de la trésorerie.",
     intro: [
-      "Les professions juridiques cumulent des enjeux de valorisation (clientèle, office, parts) et de structuration (SCP, SEL, SCI). La présentation du dossier et le montage fiscal font toute la différence sur le coût final.",
+      "Les professions juridiques cumulent des enjeux de valorisation (clientèle, office, parts) et de structuration (SCP, SEL, SCI). La présentation du dossier et la structuration juridique, fiscale et bancaire font toute la différence sur le coût final.",
       "Nous identifions les banques qui financent réellement ces opérations et négocions un montage cohérent avec votre stratégie patrimoniale.",
     ],
     projets: [
@@ -131,7 +139,7 @@ export const SEO_PAGES: Record<string, PillarData> = {
       { href: '/financement-professions-liberales', label: 'Toutes les professions libérales' },
       { href: '/tunnel', label: 'Démarrer mon étude' },
     ],
-    metaTitle: 'Financement professions juridiques — Avocats, notaires · Cap Horn Conseils',
+    metaTitle: 'Financement professions juridiques, Avocats, notaires · Cap Horn Conseils',
     metaDescription:
       "Financement des professions juridiques : rachat de clientèle ou d’office, parts sociales (SCP, SEL), installation, murs. Montage et négociation par un courtier spécialisé.",
   },
@@ -139,13 +147,13 @@ export const SEO_PAGES: Record<string, PillarData> = {
   'financement-professions-chiffre': {
     slug: 'financement-professions-chiffre',
     eyebrow: 'Professions du chiffre',
-    titleTop: 'Financer votre cabinet',
-    titleEm: "d'expertise comptable.",
+    titleTop: 'Financer un cabinet d’expertise comptable,',
+    titleEm: 'un portefeuille clients ou une croissance externe.',
     lead:
       "Experts-comptables et commissaires aux comptes : financement du rachat de cabinet, de la clientèle, des parts et de la croissance externe.",
     intro: [
       "Les cabinets d’expertise comptable se valorisent sur la récurrence des missions et le portefeuille clients. C’est un actif très finançable, à condition de présenter un dossier qui rassure sur la rétention de la clientèle après reprise.",
-      "Nous structurons l’opération — souvent via une holding de reprise — et négocions le financement le plus efficient avec les banques actives sur le secteur.",
+      "Nous structurons l’opération, souvent via une holding de reprise, et négocions le financement le plus efficient avec les banques actives sur le secteur.",
     ],
     projets: [
       { title: 'Rachat de cabinet', desc: "Acquisition d’un portefeuille clients d’expertise comptable, en direct ou par holding." },
@@ -154,21 +162,23 @@ export const SEO_PAGES: Record<string, PillarData> = {
       { title: 'Murs & équipement', desc: "Acquisition des locaux et financement des outils métier." },
     ],
     solutions: [
-      { title: 'Holding de reprise', desc: "Montage avec effet de levier et remboursement sur les dividendes du cabinet repris." },
+      { title: 'Holding de reprise (SAS, SARL ou SPFPL selon la structure)', desc: "Montage avec effet de levier et remboursement sur les dividendes du cabinet repris." },
       { title: 'Prêt d’acquisition', desc: "Financement du portefeuille clients sur 7 à 10 ans." },
       { title: 'Financement des murs', desc: "Détenir les locaux via une SCI et optimiser le patrimoine." },
     ],
     parcours: PARCOURS_STD,
     faq: [
-      { q: 'Comment financer le rachat d’un cabinet comptable ?', a: "Le plus souvent via une holding de reprise qui contracte la dette, remboursée par les dividendes du cabinet acquis. La rétention du portefeuille post-reprise est le point clé pour les banques." },
-      { q: 'Quel apport pour racheter un portefeuille clients ?', a: "Généralement 10 à 20 %, modulable selon la qualité du portefeuille et la structuration. Un montage en holding peut réduire l’apport personnel nécessaire." },
+      { q: 'Comment financer le rachat d’un cabinet comptable ?', a: "Le rachat d’un cabinet d’expertise comptable peut être financé par un prêt professionnel, souvent via une holding de reprise. Les banques analysent la rentabilité du cabinet, la récurrence du portefeuille clients et votre capacité de remboursement. Nous structurons le montage et négocions les meilleures conditions de financement." },
+      { q: 'Quel apport pour racheter un portefeuille clients ?', a: "L’apport dépend de votre profil, du cabinet repris et de la banque. Un apport limité, voire nul dans certains dossiers, peut être accepté lorsque la rentabilité et le portefeuille clients offrent des garanties suffisantes. Nous identifions les établissements les plus adaptés à votre projet." },
+      { q: 'Comment financer une holding de reprise ?', a: "Une holding de reprise permet d’acquérir un cabinet en utilisant l’effet de levier du financement bancaire. Les remboursements sont généralement assurés par les dividendes remontés par la société reprise. Nous structurons l’opération avec votre expert-comptable et vos conseils." },
+      { q: 'Comment financer une croissance externe ?', a: "La croissance externe peut être financée par un prêt professionnel, une holding de reprise ou un financement mixte. Nous analysons la rentabilité de l’opération et construisons une stratégie adaptée afin d’optimiser le coût du financement et votre capacité d’investissement." },
     ],
     related: [
       { href: '/financement-professions-liberales', label: 'Toutes les professions libérales' },
       { href: '/reprise-transmission', label: 'Reprise & transmission' },
       { href: '/tunnel', label: 'Démarrer mon étude' },
     ],
-    metaTitle: 'Financement experts-comptables — Rachat de cabinet & portefeuille · Cap Horn Conseils',
+    metaTitle: 'Financement experts-comptables, Rachat de cabinet & portefeuille · Cap Horn Conseils',
     metaDescription:
       "Financement des professions du chiffre : rachat de cabinet d’expertise comptable, portefeuille clients, parts, croissance externe. Montage en holding et négociation.",
   },
@@ -177,19 +187,20 @@ export const SEO_PAGES: Record<string, PillarData> = {
   'financement-franchise': {
     slug: 'financement-franchise',
     eyebrow: 'Franchise',
-    titleTop: 'Financer votre projet',
-    titleEm: 'de franchise.',
+    titleTop: 'Le financement sur mesure',
+    titleEm: 'de votre franchise.',
+    introTitle: 'Un financement sur mesure, pour chaque projet de franchise.',
     lead:
       "Vous ouvrez un point de vente en franchise ? Cap Horn monte votre dossier bancaire, optimise l’apport et négocie le financement du droit d’entrée, de l’aménagement et du besoin en fonds de roulement.",
     intro: [
-      "Un projet de franchise rassure les banques — concept éprouvé, accompagnement du franchiseur, prévisionnel cadré — mais le dossier doit être impeccable : business plan, apport, garanties et adéquation homme/projet.",
-      "Nous présentons votre projet sous le bon angle aux banques partenaires des réseaux de franchise et négocions un plan de financement qui préserve votre trésorerie de démarrage.",
+      "Un projet de franchise bénéficie souvent d’un concept éprouvé, d’un accompagnement du franchiseur et d’un prévisionnel structuré. Les établissements bancaires analysent toutefois la solidité du business plan, l’apport personnel, les garanties et l’adéquation entre le porteur de projet et le réseau choisi.",
+      "Nous construisons un dossier de financement complet, identifions les banques les plus adaptées à votre franchise et négocions une solution qui préserve votre trésorerie dès le lancement de votre activité.",
     ],
     projets: [
       { title: 'Droit d’entrée & redevances', desc: "Financement du droit d’entrée dans le réseau et des frais initiaux." },
       { title: 'Agencement & travaux', desc: "Aménagement du point de vente aux normes du concept." },
       { title: 'Stock & fonds de roulement', desc: "Constitution du stock initial et financement des premiers mois d’exploitation." },
-      { title: 'Matériel & équipement', desc: "Équipement du local — en prêt ou en crédit-bail." },
+      { title: 'Matériel & équipement', desc: "Équipement du local, en prêt ou en crédit-bail." },
     ],
     solutions: [
       { title: 'Prêt création / franchise', desc: "Financement global du projet, souvent adossé à une garantie (Bpifrance, caution)." },
@@ -207,7 +218,7 @@ export const SEO_PAGES: Record<string, PillarData> = {
       { href: '/expertises', label: 'Toutes nos expertises' },
       { href: '/tunnel', label: 'Démarrer mon étude' },
     ],
-    metaTitle: 'Financement de franchise — Droit d’entrée, apport, prêt bancaire · Cap Horn Conseils',
+    metaTitle: 'Financement de franchise, Droit d’entrée, apport, prêt bancaire · Cap Horn Conseils',
     metaDescription:
       "Financer l’ouverture d’une franchise : droit d’entrée, agencement, stock, fonds de roulement. Optimisation de l’apport et négociation du prêt bancaire. Étude gratuite.",
   },
@@ -218,14 +229,18 @@ export const SEO_PAGES: Record<string, PillarData> = {
     eyebrow: 'Reprise & transmission',
     titleTop: 'Vendre ou reprendre',
     titleEm: 'une entreprise.',
+    cta: {
+      title: 'Vous préparez une reprise ou une transmission d’entreprise ?',
+      text: 'Présentez votre projet en quelques minutes. Un expert CAP HORN CONSEILS analysera votre situation, définira la stratégie la plus adaptée et vous accompagnera jusqu’à la réussite de votre opération.',
+    },
     lead:
       "Que vous cédiez votre société ou que vous repreniez une entreprise, Cap Horn intervient sur la valorisation, le montage du financement et la mise en relation entre vendeurs et repreneurs.",
     intro: [
-      "Côté cédant : préparer la vente, valoriser correctement la société et sécuriser la transmission. Côté repreneur : analyser la cible, structurer l’acquisition et financer le rachat avec le bon effet de levier.",
-      "Notre double positionnement nous permet de rapprocher vendeurs et acquéreurs tout en pilotant le financement de l’opération du début à la fin.",
+      "Chaque opération de reprise ou de transmission est unique. Valorisation de l’entreprise, audit d’acquisition, structuration juridique, apport personnel, dette d’acquisition ou holding de reprise : chaque étape influence directement les conditions de financement et la réussite de l’opération.",
+      "Nous accompagnons vendeurs et repreneurs dans la structuration de la transaction, la recherche des financements et la négociation avec les établissements bancaires afin de sécuriser l’ensemble du projet.",
     ],
     projets: [
-      { title: 'Vendre son entreprise', desc: "Préparation de la cession, estimation de valeur et recherche de repreneur." },
+      { title: 'Vendre son entreprise', desc: "Préparation de la cession, valorisation d’entreprise et recherche de repreneur." },
       { title: 'Reprendre une entreprise', desc: "Recherche de cible, analyse du projet et financement de l’acquisition." },
       { title: 'Rachat de parts / LBO', desc: "Montage en holding avec effet de levier pour la reprise majoritaire." },
       { title: 'Croissance externe', desc: "Acquisition d’un concurrent ou d’un fournisseur pour accélérer." },
@@ -238,17 +253,20 @@ export const SEO_PAGES: Record<string, PillarData> = {
     ],
     parcours: PARCOURS_STD,
     faq: [
-      { q: 'Comment préparer la vente de son entreprise ?', a: "En amont : fiabiliser les comptes, sécuriser les contrats clés, documenter la récurrence du chiffre d’affaires et estimer une fourchette de valeur réaliste. Une société « prête à vendre » se cède mieux et plus vite." },
-      { q: 'Comment valoriser sa société ?', a: "Plusieurs méthodes coexistent (multiple d’EBE, rentabilité, actif net). Nous croisons les approches pour une fourchette crédible, base de discussion avec les repreneurs et les banques." },
-      { q: 'Comment financer l’acquisition d’une entreprise ?', a: "Généralement via une holding de reprise qui contracte la dette d’acquisition, remboursée par les dividendes de la cible. L’apport, les garanties et la qualité du prévisionnel déterminent le levier accessible." },
-      { q: 'Comment trouver un repreneur ?', a: "Au-delà des plateformes, la mise en relation directe avec des repreneurs qualifiés accélère la transmission. Nous activons notre réseau et accompagnons le financement côté acquéreur." },
+      { q: 'Quel apport pour reprendre une entreprise ?', a: "L’apport personnel varie selon la taille de l’opération, le secteur d’activité et le profil du repreneur. Dans certains dossiers, des garanties ou des financements complémentaires permettent de limiter l’apport initial." },
+      { q: 'Comment fonctionne une holding de reprise ?', a: "Une holding de reprise acquiert les titres de la société cible grâce à un financement bancaire. Les dividendes versés par l’entreprise reprise contribuent ensuite au remboursement de la dette d’acquisition." },
+      { q: 'Qu’est-ce qu’un LBO ?', a: "Le LBO (Leveraged Buy-Out) consiste à reprendre une entreprise via une holding financée en partie par emprunt. Ce montage permet d’optimiser l’effet de levier tout en structurant le remboursement grâce aux résultats de la société reprise." },
+      { q: 'Comment valoriser sa société ?', a: "La valorisation d’une entreprise repose notamment sur sa rentabilité, son chiffre d’affaires, ses actifs, son potentiel de développement et les références du marché. Nous vous accompagnons pour déterminer une valeur cohérente et crédible auprès des repreneurs et des banques." },
+      { q: 'Comment trouver un repreneur ?', a: "Trouver un repreneur nécessite une valorisation réaliste, un dossier de présentation de qualité et un réseau qualifié. Nous mettons en relation cédants et acquéreurs, tout en sécurisant les aspects financiers de la transmission." },
+      { q: 'Comment fonctionne un crédit vendeur ?', a: "Le crédit vendeur permet au cédant de financer une partie du prix de vente en accordant un paiement échelonné à l’acquéreur. Cette solution réduit souvent l’apport initial et facilite l’obtention du financement bancaire. Nous structurons ce montage avec les banques et vos conseils afin de sécuriser la transaction." },
+      { q: 'Comment préparer la vente de son entreprise ?', a: "La préparation d’une cession commence par l’analyse des performances de l’entreprise, de son organisation et de ses documents financiers. Un dossier complet et une société bien préparée renforcent la confiance des acquéreurs et facilitent le financement de la reprise." },
     ],
     related: [
       { href: '/financement-professions-chiffre', label: 'Rachat de cabinet comptable' },
       { href: '/expertises', label: 'Toutes nos expertises' },
       { href: '/tunnel', label: 'Démarrer mon étude' },
     ],
-    metaTitle: 'Reprise & transmission d’entreprise — Vendre ou racheter · Cap Horn Conseils',
+    metaTitle: 'Reprise & transmission d’entreprise, Vendre ou racheter · Cap Horn Conseils',
     metaDescription:
       "Vendre son entreprise ou reprendre une société : valorisation, montage bancaire de reprise, effet de levier (holding), mise en relation cédants/repreneurs. Cap Horn Conseils.",
   },

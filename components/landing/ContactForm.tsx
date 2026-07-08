@@ -58,7 +58,7 @@ export default function ContactForm() {
     <div className="chc-contact-card r" data-d="1">
       <div className="chc-contact-card__manifest">
         <span>Fiche de contact</span>
-        <span>50.68° N · 3.09° E</span>
+        <span>Marcq-en-Barœul</span>
       </div>
 
       {done ? (

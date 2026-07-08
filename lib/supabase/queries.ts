@@ -160,7 +160,7 @@ export async function getDashboardStats(): Promise<DashboardStats> {
     if (createdAt >= weekStart) new_week++
   }
 
-  // Statut / conversion : sur TOUS les leads — un lead peut être gagné ou perdu
+  // Statut / conversion : sur TOUS les leads, un lead peut être gagné ou perdu
   // même s'il n'a pas terminé le tunnel à 100 %.
   for (const lead of all) {
     leads_by_status[lead.status] = (leads_by_status[lead.status] ?? 0) + 1

@@ -11,7 +11,7 @@ export interface MethodStep {
 }
 
 /**
- * Carrousel « méthode » — adaptation du composant circulaire (sans
+ * Carrousel « méthode », adaptation du composant circulaire (sans
  * framer-motion ni react-icons) : pile d'images en 3D (gauche/centre/droite),
  * autoplay, flèches, points. Thémé pour la section sombre.
  */

@@ -1,9 +1,9 @@
 /**
- * Grille de taux de crédit immobilier — indicative, basée sur les données
+ * Grille de taux de crédit immobilier, indicative, basée sur les données
  * Pretto (historique des taux, juin 2026). Valeurs ancrées sur les chiffres
  * publiés (15, 20 et 25 ans) et interpolées pour 7 et 10 ans.
  *
- * Source : pretto.fr/taux-immobilier — mise à jour juin 2026.
+ * Source : pretto.fr/taux-immobilier, mise à jour juin 2026.
  * ⚠️ Simulation NON CONTRACTUELLE : les taux réels dépendent du profil
  * (revenus, apport, reste à vivre, banque, assurance…).
  */
@@ -25,7 +25,7 @@ export const RATE_GRID: Record<number, DurationRates> = {
 
 export const DURATIONS = [7, 10, 15, 20, 25]
 
-export const RATE_SOURCE = 'Grille indicative — Pretto, juin 2026'
+export const RATE_SOURCE = 'Grille indicative, Pretto, juin 2026'
 
 export const TIER_LABELS: Record<RateTier, string> = {
   excellent: 'Excellent profil',

@@ -118,7 +118,7 @@ export function formatDate(dateStr: string): string {
   })
 }
 
-/** Date + heure lisibles (ex. « lun. 6 juil. à 09:00 ») — utilisé pour la programmation. */
+/** Date + heure lisibles (ex. « lun. 6 juil. à 09:00 »), utilisé pour la programmation. */
 export function formatDateTime(dateStr: string): string {
   return new Date(dateStr).toLocaleDateString('fr-FR', {
     weekday: 'short',

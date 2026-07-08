@@ -219,7 +219,7 @@ export interface BlogPost {
   published_at: string
 }
 
-/** Catégories éditoriales — alignées sur les axes SEO de Cap Horn. */
+/** Catégories éditoriales, alignées sur les axes SEO de Cap Horn. */
 export const BLOG_CATEGORIES: { value: string; label: string }[] = [
   { value: 'professions-liberales', label: 'Professions libérales' },
   { value: 'immobilier', label: 'Immobilier' },
@@ -237,7 +237,7 @@ export function blogCategoryLabel(value?: string | null): string {
 
 /** État de diffusion d'un article, dérivé de `published` + `published_at`.
  *  - draft     : brouillon, jamais visible publiquement ;
- *  - scheduled : programmé — `published=true` mais `published_at` est dans le
+ *  - scheduled : programmé, `published=true` mais `published_at` est dans le
  *                futur ; l'article apparaît tout seul sur le site à cette date ;
  *  - published : en ligne (date de mise en ligne atteinte). */
 export type BlogPostStatus = 'draft' | 'scheduled' | 'published'
@@ -293,7 +293,7 @@ export const APPOINTMENT_STATUS_LABELS: Record<AppointmentStatus, string> = {
   archived: 'Archivé',
 }
 
-/* ── Simulateur — estimations envoyées par les clients ─────────────────── */
+/* ── Simulateur, estimations envoyées par les clients ─────────────────── */
 
 export type SimulatorEstimationStatus = 'new' | 'contacted' | 'converted' | 'archived'
 

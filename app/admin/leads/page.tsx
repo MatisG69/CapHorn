@@ -68,7 +68,7 @@ export default async function LeadsPage({ searchParams }: PageProps) {
         <p className="eyebrow eyebrow--single mb-3">Pipeline</p>
         <h1 className="display-serif text-4xl text-[var(--color-cream)] tracking-tight">Leads</h1>
         <p className="text-sm text-[var(--color-cream-dim)] mt-2">
-          Tous les dossiers — finalisés et en cours. {leads.length} affiché{leads.length !== 1 ? 's' : ''}.
+          Tous les dossiers, finalisés et en cours. {leads.length} affiché{leads.length !== 1 ? 's' : ''}.
         </p>
       </div>
 

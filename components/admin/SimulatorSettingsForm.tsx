@@ -13,9 +13,9 @@ type NumKey = keyof SimulatorSettings
 
 const RATE_FIELDS: { key: NumKey; label: string; hint: string }[] = [
   { key: 'rateUnder35', label: 'Moins de 35 ans', hint: '% annuel du capital' },
-  { key: 'rateUnder45', label: '35 – 44 ans', hint: '% annuel du capital' },
-  { key: 'rateUnder55', label: '45 – 54 ans', hint: '% annuel du capital' },
-  { key: 'rateUnder65', label: '55 – 64 ans', hint: '% annuel du capital' },
+  { key: 'rateUnder45', label: '35, 44 ans', hint: '% annuel du capital' },
+  { key: 'rateUnder55', label: '45, 54 ans', hint: '% annuel du capital' },
+  { key: 'rateUnder65', label: '55, 64 ans', hint: '% annuel du capital' },
   { key: 'rate65plus', label: '65 ans et plus', hint: '% annuel du capital' },
 ]
 
@@ -106,7 +106,7 @@ export default function SimulatorSettingsForm({ initial }: { initial: SimulatorS
       {/* Aperçu */}
       <div className="rounded-xl border border-[var(--color-ink-line)] bg-[var(--color-ink-raised)] px-4 py-3 mb-6 flex items-center justify-between gap-3 flex-wrap">
         <span className="text-sm text-[var(--color-cream-dim)]">
-          Aperçu — prime Cap Horn pour le profil par défaut ({Math.round(num('defaultAge'))} ans · {fmtEur(num('defaultCapital'))})
+          Aperçu, prime Cap Horn pour le profil par défaut ({Math.round(num('defaultAge'))} ans · {fmtEur(num('defaultCapital'))})
         </span>
         <span className="text-sm font-semibold text-[var(--color-gold-soft)] font-mono tabular-nums">
           {fmtEur(previewPremium)} / mois

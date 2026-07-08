@@ -3,7 +3,7 @@ import { ArrowRight } from 'lucide-react'
 import { TempleIllustration } from './TempleIllustration'
 
 /**
- * Hero éditorial Cap Horn — mise en page « dossier d'architecte ».
+ * Hero éditorial Cap Horn, mise en page « dossier d'architecte ».
  *
  * Composition fidèle au mockup blueprint :
  *   · Cadre L-corners aux 4 coins de la page (signature dossier classé)
@@ -21,7 +21,7 @@ import { TempleIllustration } from './TempleIllustration'
 export function HeroEditorial() {
   return (
     <section className="hero-blueprint">
-      {/* Cadre L-corners — signature de dossier classé */}
+      {/* Cadre L-corners, signature de dossier classé */}
       <CornerFrame />
 
       <div className="hero-blueprint__inner">
@@ -81,7 +81,7 @@ export function HeroEditorial() {
         {/* Filet horizontal avant les stats */}
         <div className="hero-blueprint__rule hero-blueprint__rule--bottom" aria-hidden />
 
-        {/* Bandeau stats — 4 chiffres clés */}
+        {/* Bandeau stats, 4 chiffres clés */}
         <dl className="hero-blueprint__stats">
           {[
             { label: 'Projets accompagnés', value: '300+' },

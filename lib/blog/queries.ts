@@ -40,7 +40,7 @@ export async function getPublishedPostBySlug(slug: string): Promise<BlogPost | n
   return data as BlogPost
 }
 
-/** Tous les articles (admin — inclut les brouillons non publiés). */
+/** Tous les articles (admin, inclut les brouillons non publiés). */
 export async function getAllPosts(): Promise<BlogPost[]> {
   try {
     const supabase = await createClient()

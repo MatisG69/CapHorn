@@ -32,7 +32,7 @@ export default function TunnelLayout({
         ))}
       </svg>
 
-      {/* Header — pilule flottante en verre liquide */}
+      {/* Header, pilule flottante en verre liquide */}
       <header className="chc-tunnel__header">
         <div className="chc-tunnel__bar">
           <div className="chc-tunnel__headrow">

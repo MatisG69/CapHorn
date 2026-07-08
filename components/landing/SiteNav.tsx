@@ -11,7 +11,7 @@ const LINKS = [
   { href: '/le-cabinet', label: 'Le cabinet' },
 ]
 
-/** Barre de navigation premium partagée — monogramme, liens pages, verre au scroll. */
+/** Barre de navigation premium partagée, monogramme, liens pages, verre au scroll. */
 export function SiteNav({ active }: { active?: string }) {
   const navRef = useRef<HTMLElement>(null)
   const progressRef = useRef<HTMLSpanElement>(null)
@@ -59,7 +59,7 @@ export function SiteNav({ active }: { active?: string }) {
       <div ref={glowRef} className="ch-cursor-glow" aria-hidden />
       <nav ref={navRef} className="ch-nav">
       <div className="ch-container ch-nav__inner">
-        <Link href="/" className="ch-brand" aria-label="Cap Horn Conseils — accueil">
+        <Link href="/" className="ch-brand" aria-label="Cap Horn Conseils, accueil">
           <span className="ch-brand__mark">CH</span>
           <span className="ch-brand__name">Cap Horn <span>Conseils</span></span>
         </Link>

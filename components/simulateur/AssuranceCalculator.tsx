@@ -12,7 +12,7 @@ import {
 } from '@/lib/simulateur/estimate'
 
 /**
- * Simulateur d'économies — assurance emprunteur (loi Lemoine).
+ * Simulateur d'économies, assurance emprunteur (loi Lemoine).
  *
  * La logique de calcul et le parsing des montants vivent dans
  * `lib/simulateur/estimate.ts` (partagés avec l'API `/api/simulateur`).
@@ -123,7 +123,7 @@ export function AssuranceCalculator({
         </div>
 
         <p className="mt-6 text-[10px] font-mono uppercase tracking-[0.18em] text-[var(--color-cream-mute)] leading-relaxed">
-          Estimation indicative — votre prime réelle est calculée après étude
+          Estimation indicative, votre prime réelle est calculée après étude
           personnalisée du dossier.
         </p>
       </div>

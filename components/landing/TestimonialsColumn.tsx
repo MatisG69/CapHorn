@@ -16,6 +16,7 @@ export const TestimonialsColumn = (props: {
   className?: string
   testimonials: Testimonial[]
   duration?: number
+  onSelect?: (t: Testimonial) => void
 }) => {
   return (
     <div className={props.className}>
@@ -32,9 +33,19 @@ export const TestimonialsColumn = (props: {
         {[
           ...new Array(2).fill(0).map((_, index) => (
             <React.Fragment key={index}>
-              {props.testimonials.map(({ text, image, name, role }, i) => (
+              {props.testimonials.map((t, i) => (
                 <div
                   key={i}
+                  className="chc-testi-card"
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => props.onSelect?.(t)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault()
+                      props.onSelect?.(t)
+                    }
+                  }}
                   style={{
                     padding: 32,
                     borderRadius: 24,
@@ -43,15 +54,17 @@ export const TestimonialsColumn = (props: {
                     background: '#fff',
                     maxWidth: 320,
                     width: '100%',
+                    cursor: 'pointer',
                   }}
                 >
-                  <div style={{ fontFamily: SANS, fontSize: 15, lineHeight: 1.7, color: 'var(--chc-text)', fontWeight: 300 }}>{text}</div>
+                  <div aria-label="Note : 5 sur 5" style={{ color: 'var(--chc-gold)', fontSize: 14, letterSpacing: 2, marginBottom: 12 }}>★★★★★</div>
+                  <div className="chc-testi-card__text" style={{ fontFamily: SANS, fontSize: 15, lineHeight: 1.7, color: 'var(--chc-text)', fontWeight: 300 }}>{t.text}</div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 20 }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img width={40} height={40} src={image} alt={name} style={{ height: 40, width: 40, borderRadius: '50%' }} />
+                    <img width={40} height={40} src={t.image} alt={t.name} style={{ height: 40, width: 40, borderRadius: '50%' }} />
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
-                      <div style={{ fontFamily: SANS, fontWeight: 500, letterSpacing: '-0.01em', lineHeight: 1.25, color: 'var(--chc-text)' }}>{name}</div>
-                      <div style={{ fontFamily: SANS, fontSize: 13, lineHeight: 1.25, letterSpacing: '-0.01em', color: 'var(--chc-mid)', opacity: 0.85 }}>{role}</div>
+                      <div style={{ fontFamily: SANS, fontWeight: 500, letterSpacing: '-0.01em', lineHeight: 1.25, color: 'var(--chc-text)' }}>{t.name}</div>
+                      <div style={{ fontFamily: SANS, fontSize: 13, lineHeight: 1.25, letterSpacing: '-0.01em', color: 'var(--chc-mid)', opacity: 0.85 }}>{t.role}</div>
                     </div>
                   </div>
                 </div>

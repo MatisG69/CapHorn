@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 
 /**
- * Hero premium « private banking » — vidéo d'entrée en plein écran (entrée.mp4)
+ * Hero premium « private banking », vidéo d'entrée en plein écran (entrée.mp4)
  * voilée par un dégradé bleu nuit. La mise en page critique (vidéo plein écran,
  * voile, conteneur, lisibilité du texte) est en styles inline pour être
  * robuste quelle que soit la compilation du CSS global. Pattern background-video
@@ -85,7 +85,7 @@ const leadStyle: CSSProperties = {
 
 export function HeroPremium() {
   return (
-    <header style={sectionStyle} aria-label="Cap Horn Conseils — cabinet de courtage">
+    <header style={sectionStyle} aria-label="Cap Horn Conseils, cabinet de courtage">
       <video style={videoStyle} src="/entree.mp4" autoPlay loop muted playsInline preload="auto" aria-hidden />
       <div style={gradeStyle} aria-hidden />
       <div style={scrimStyle} aria-hidden />
@@ -104,7 +104,7 @@ export function HeroPremium() {
 
           <p style={leadStyle} className="ch-vhero-in" data-d="2">
             Immobilier, professionnel, assurance emprunteur. Cap Horn lit votre projet,
-            structure le dossier et négocie pour vous les meilleures conditions — sans frais avant résultat.
+            structure le dossier et négocie pour vous les meilleures conditions, sans frais avant résultat.
           </p>
 
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginTop: 36 }} className="ch-vhero-in" data-d="3">

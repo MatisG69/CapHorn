@@ -119,7 +119,7 @@ export default function LoginPage() {
             </button>
           </form>
 
-          {/* Aide dev — credentials affichés tant que l'auth est hardcodée */}
+          {/* Aide dev, credentials affichés tant que l'auth est hardcodée */}
           <div className="mt-5 pt-5 border-t border-[var(--color-ink-line)]">
             <p className="text-[10px] font-mono uppercase tracking-[0.22em] text-[var(--color-cream-mute)] mb-2">
               Identifiants de démo

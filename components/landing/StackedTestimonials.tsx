@@ -24,7 +24,7 @@ const MID = '#6B7280'
 const SERIF = "var(--font-cormorant), 'Cormorant Garamond', Georgia, serif"
 const SANS = "var(--font-ibm-plex), 'Inter', system-ui, sans-serif"
 
-// ⚠️ Témoignages de démonstration — à remplacer par de vrais avis clients.
+// ⚠️ Témoignages de démonstration, à remplacer par de vrais avis clients.
 const testimonials = [
   { testimonial: "Cap Horn a décroché un taux que ma banque refusait. Dossier bouclé en trois semaines.", by: 'Julie', role: 'Primo-accédante · Lille' },
   { testimonial: "Un seul interlocuteur du premier appel à la signature. Guillaume a tout négocié à ma place.", by: 'Marc', role: "Chef d'entreprise · Roubaix" },

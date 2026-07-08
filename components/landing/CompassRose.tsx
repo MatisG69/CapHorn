@@ -1,5 +1,5 @@
 /**
- * Rose des vents gravée — signature graphique Cap Horn.
+ * Rose des vents gravée, signature graphique Cap Horn.
  * Trait fin, sans remplissage : sert de filigrane discret (opacité gérée
  * en CSS via la couleur/opacité du conteneur). Composant pur (server-safe).
  */
