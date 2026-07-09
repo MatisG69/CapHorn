@@ -43,7 +43,7 @@ export default function DeletePostButton({ postId, title }: { postId: string; ti
   return (
     <button
       onClick={() => setConfirming(true)}
-      title={`Supprimer « ${title} »`}
+      title={`Mettre « ${title} » à la corbeille`}
       className="inline-flex items-center justify-center w-8 h-8 rounded-lg border border-[var(--color-ink-line)] text-[var(--color-cream-mute)] hover:text-red-600 hover:border-red-200 transition-colors"
     >
       <Trash2 className="w-3.5 h-3.5" />

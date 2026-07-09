@@ -98,11 +98,39 @@ export async function updatePostAction(id: string, input: BlogPostInput): Promis
   return { slug: data.slug }
 }
 
+/** Met l'article à la corbeille (soft delete) — restaurable. */
 export async function deletePostAction(id: string): Promise<void> {
+  await assertAdminSession()
+  const supabase = await createClient()
+  const { error } = await supabase
+    .from('blog_posts')
+    .update({ deleted_at: new Date().toISOString() })
+    .eq('id', id)
+  if (error) throw new Error(error.message)
+  revalidatePath('/blog')
+  revalidatePath('/admin/blog')
+  revalidatePath('/admin/blog/corbeille')
+}
+
+/** Restaure un article depuis la corbeille. */
+export async function restorePostAction(id: string): Promise<void> {
+  await assertAdminSession()
+  const supabase = await createClient()
+  const { error } = await supabase
+    .from('blog_posts')
+    .update({ deleted_at: null })
+    .eq('id', id)
+  if (error) throw new Error(error.message)
+  revalidatePath('/blog')
+  revalidatePath('/admin/blog')
+  revalidatePath('/admin/blog/corbeille')
+}
+
+/** Supprime définitivement un article (depuis la corbeille) — irréversible. */
+export async function permanentlyDeletePostAction(id: string): Promise<void> {
   await assertAdminSession()
   const supabase = await createClient()
   const { error } = await supabase.from('blog_posts').delete().eq('id', id)
   if (error) throw new Error(error.message)
-  revalidatePath('/blog')
-  revalidatePath('/admin/blog')
+  revalidatePath('/admin/blog/corbeille')
 }

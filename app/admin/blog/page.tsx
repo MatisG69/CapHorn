@@ -1,8 +1,8 @@
 import Link from 'next/link'
-import { getAllPosts } from '@/lib/blog/queries'
+import { getAllPosts, getTrashedPosts } from '@/lib/blog/queries'
 import { blogCategoryLabel, blogPostStatus } from '@/lib/types'
 import { formatRelativeDate, formatDateTime } from '@/lib/admin/labels'
-import { Plus, Pencil, ExternalLink, Clock } from 'lucide-react'
+import { Plus, Pencil, ExternalLink, Clock, Trash2 } from 'lucide-react'
 import DeletePostButton from '@/components/admin/DeletePostButton'
 
 export const dynamic = 'force-dynamic'
@@ -19,7 +19,7 @@ const STATUS_LABEL: Record<string, string> = {
 }
 
 export default async function AdminBlogPage() {
-  const posts = await getAllPosts()
+  const [posts, trashed] = await Promise.all([getAllPosts(), getTrashedPosts()])
   const statuses = posts.map((p) => blogPostStatus(p))
   const liveCount = statuses.filter((s) => s === 'published').length
   const scheduledCount = statuses.filter((s) => s === 'scheduled').length
@@ -35,9 +35,17 @@ export default async function AdminBlogPage() {
             {scheduledCount > 0 ? ` · ${scheduledCount} programmé${scheduledCount !== 1 ? 's' : ''}` : ''}
           </p>
         </div>
-        <Link href="/admin/blog/new" className="btn-gold text-sm px-4 py-2.5">
-          <Plus className="w-4 h-4" /> Nouvel article
-        </Link>
+        <div className="flex items-center gap-2.5">
+          <Link
+            href="/admin/blog/corbeille"
+            className="inline-flex items-center gap-1.5 text-sm px-3.5 py-2.5 rounded-lg border border-[var(--color-ink-line)] text-[var(--color-cream-dim)] hover:text-[var(--color-cream)] hover:border-[var(--color-gold-deep)] transition-colors"
+          >
+            <Trash2 className="w-4 h-4" /> Corbeille{trashed.length > 0 ? ` (${trashed.length})` : ''}
+          </Link>
+          <Link href="/admin/blog/new" className="btn-gold text-sm px-4 py-2.5">
+            <Plus className="w-4 h-4" /> Nouvel article
+          </Link>
+        </div>
       </div>
 
       <div className="admin-card !p-0 overflow-hidden">

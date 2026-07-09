@@ -217,6 +217,8 @@ export interface BlogPost {
   author: string
   published: boolean
   published_at: string
+  /** Corbeille : non nul = article supprimé (restaurable). */
+  deleted_at?: string | null
 }
 
 /** Catégories éditoriales, alignées sur les axes SEO de Cap Horn. */

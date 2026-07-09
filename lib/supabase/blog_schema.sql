@@ -25,11 +25,15 @@ alter table blog_posts add column if not exists published       boolean not null
 -- `published_at` = date/heure de mise en ligne. Si elle est dans le futur avec
 -- published = true, l'article est « programmé » : masqué jusqu'à cette date.
 alter table blog_posts add column if not exists published_at    timestamptz not null default now();
+-- `deleted_at` = corbeille (soft delete). Non nul → article dans la corbeille,
+-- masqué du site et de la liste admin, mais restaurable.
+alter table blog_posts add column if not exists deleted_at      timestamptz;
 
 -- Slug unique (clé d'URL /blog/<slug>)
 create unique index if not exists blog_posts_slug_uidx on blog_posts (slug);
 create index if not exists blog_posts_published_idx     on blog_posts (published, published_at desc);
 create index if not exists blog_posts_category_idx      on blog_posts (category);
+create index if not exists blog_posts_deleted_idx       on blog_posts (deleted_at);
 
 /* 2. updated_at automatique --------------------------------------------- */
 create or replace function update_blog_posts_updated_at() returns trigger as $$
@@ -61,7 +65,7 @@ drop policy if exists "anon_delete_posts_dev"          on blog_posts;
 -- dans le futur) reste donc invisible tant que l'heure n'est pas venue ; il
 -- apparaît automatiquement ensuite (les pages du blog sont `force-dynamic`).
 create policy "public_select_published_posts" on blog_posts
-  for select to anon using (published = true and published_at <= now());
+  for select to anon using (published = true and published_at <= now() and deleted_at is null);
 
 -- DEV-ONLY : l'admin (anon) peut tout lire / écrire / supprimer
 create policy "anon_select_posts_dev" on blog_posts for select to anon using (true);
