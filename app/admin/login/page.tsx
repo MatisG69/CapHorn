@@ -2,7 +2,7 @@
 
 import { useActionState, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Anchor, Eye, EyeOff } from 'lucide-react'
+import { Eye, EyeOff } from 'lucide-react'
 import { signInAction, type SignInResult } from './actions'
 
 export default function LoginPage() {
@@ -27,12 +27,13 @@ export default function LoginPage() {
           <div
             className="w-14 h-14 rounded-2xl flex items-center justify-center"
             style={{
-              background: 'linear-gradient(180deg, var(--color-gold-soft), var(--color-gold))',
-              boxShadow:
-                '0 18px 40px -8px rgba(201, 168, 76, 0.55), inset 0 1px 0 rgba(255,255,255,0.4)',
+              background: 'linear-gradient(160deg,#1c2432,#0b0d11)',
+              border: '1px solid rgba(201, 168, 76, 0.35)',
+              boxShadow: '0 18px 40px -8px rgba(12,14,18,0.6), inset 0 1px 0 rgba(255,255,255,0.06)',
             }}
           >
-            <Anchor className="w-6 h-6 text-[var(--color-ink)]" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo-mark.png" alt="Cap Horn Conseils" className="w-9 h-9 object-contain" />
           </div>
           <div className="text-center">
             <h1 className="display-serif text-2xl text-[var(--color-cream)] tracking-wide">

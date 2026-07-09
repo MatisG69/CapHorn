@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, Users, BarChart3, Anchor, FileText, Workflow, CalendarClock, Calculator } from 'lucide-react'
+import { LayoutDashboard, Users, BarChart3, FileText, Workflow, CalendarClock, Calculator } from 'lucide-react'
 import AdminProfile from './AdminProfile'
 
 const NAV_ITEMS = [
@@ -29,9 +29,10 @@ export default function Sidebar() {
         <Link href="/admin" className="flex items-center gap-3 group">
           <div
             className="w-11 h-11 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-105"
-            style={{ background: 'linear-gradient(160deg, #E8D29A, #B8922A)', boxShadow: '0 8px 20px -6px rgba(184,146,42,0.5)' }}
+            style={{ background: 'linear-gradient(160deg,#1c2432,#0b0d11)', border: '1px solid rgba(184,146,42,0.32)', boxShadow: '0 8px 20px -6px rgba(12,14,18,0.6)' }}
           >
-            <Anchor className="w-5 h-5 text-[#17130D]" strokeWidth={2.2} />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo-mark.png" alt="Cap Horn Conseils" className="w-7 h-7 object-contain" />
           </div>
           <div className="min-w-0">
             <div className="font-[var(--font-cormorant)] text-[19px] font-medium text-white leading-none tracking-wide" style={{ fontFamily: 'var(--font-cormorant), serif' }}>

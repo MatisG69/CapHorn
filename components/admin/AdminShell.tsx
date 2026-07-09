@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
-import { Menu, Anchor } from 'lucide-react'
+import { Menu } from 'lucide-react'
 import Sidebar from './Sidebar'
 
 export default function AdminShell({ children }: { children: React.ReactNode }) {
@@ -53,8 +53,9 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
             <Menu className="w-5 h-5" />
           </button>
           <div className="flex items-center gap-2">
-            <span className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'linear-gradient(160deg,#E8D29A,#B8922A)' }}>
-              <Anchor className="w-3.5 h-3.5 text-[#17130D]" strokeWidth={2.2} />
+            <span className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'linear-gradient(160deg,#1c2432,#0b0d11)', border: '1px solid rgba(184,146,42,0.32)' }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo-mark.png" alt="Cap Horn Conseils" className="w-4 h-4 object-contain" />
             </span>
             <span className="text-sm font-semibold text-[var(--color-cream)]" style={{ fontFamily: 'var(--font-cormorant), serif' }}>Cap Horn</span>
           </div>
