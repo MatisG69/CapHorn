@@ -3,6 +3,7 @@ import { getWebAnalytics, type WebAnalytics } from '@/lib/supabase/analytics'
 import { DEVICE_LABELS, countryName } from '@/lib/analytics/utils'
 import { TUNNEL_LABELS, SUBTUNNEL_LABELS, SCORE_BG } from '@/lib/admin/labels'
 import { Users, Eye, Calendar, MousePointerClick, Monitor, Smartphone, Tablet } from 'lucide-react'
+import ResetAnalyticsButton from '@/components/admin/ResetAnalyticsButton'
 
 export const dynamic = 'force-dynamic'
 
@@ -13,10 +14,13 @@ export default async function AnalyticsPage() {
 
   return (
     <div className="p-8 lg:p-10 space-y-8">
-      <div className="page-header">
-        <span className="page-header__index">02, Analyse</span>
-        <h1 className="page-header__title">Analytique</h1>
-        <p className="page-header__lead">Audience du site et santé du pipeline, 30 derniers jours.</p>
+      <div className="flex items-start justify-between gap-4 flex-wrap">
+        <div className="page-header">
+          <span className="page-header__index">02, Analyse</span>
+          <h1 className="page-header__title">Analytique</h1>
+          <p className="page-header__lead">Audience du site et santé du pipeline, 30 derniers jours.</p>
+        </div>
+        <ResetAnalyticsButton />
       </div>
 
       {/* ── Audience web ─────────────────────────────────────── */}

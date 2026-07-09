@@ -4,7 +4,6 @@ import { useActionState, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Anchor, Eye, EyeOff } from 'lucide-react'
 import { signInAction, type SignInResult } from './actions'
-import { ADMIN_EMAIL, ADMIN_PASSWORD } from '@/lib/admin/auth'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -50,25 +49,6 @@ export default function LoginPage() {
           <form action={formAction} className="space-y-5" noValidate>
             <div className="space-y-1.5">
               <label
-                htmlFor="email"
-                className="block text-[10px] font-mono uppercase tracking-[0.22em] text-[var(--color-cream-mute)]"
-              >
-                Email
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                className="tunnel-input"
-                defaultValue={ADMIN_EMAIL}
-                placeholder="admin@caphorn.fr"
-                autoComplete="email"
-                required
-              />
-            </div>
-
-            <div className="space-y-1.5">
-              <label
                 htmlFor="password"
                 className="block text-[10px] font-mono uppercase tracking-[0.22em] text-[var(--color-cream-mute)]"
               >
@@ -80,7 +60,6 @@ export default function LoginPage() {
                   name="password"
                   type={showPassword ? 'text' : 'password'}
                   className="tunnel-input"
-                  defaultValue={ADMIN_PASSWORD}
                   placeholder="••••••••"
                   autoComplete="current-password"
                   required
@@ -118,23 +97,6 @@ export default function LoginPage() {
               )}
             </button>
           </form>
-
-          {/* Aide dev, credentials affichés tant que l'auth est hardcodée */}
-          <div className="mt-5 pt-5 border-t border-[var(--color-ink-line)]">
-            <p className="text-[10px] font-mono uppercase tracking-[0.22em] text-[var(--color-cream-mute)] mb-2">
-              Identifiants de démo
-            </p>
-            <div className="text-[11px] font-mono text-[var(--color-cream-dim)] space-y-1">
-              <div>
-                <span className="text-[var(--color-cream-mute)]">email · </span>
-                {ADMIN_EMAIL}
-              </div>
-              <div>
-                <span className="text-[var(--color-cream-mute)]">mdp · </span>
-                {ADMIN_PASSWORD}
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>

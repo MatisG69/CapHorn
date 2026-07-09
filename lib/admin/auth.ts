@@ -5,12 +5,14 @@
  * À remplacer par Supabase Auth (ou autre IdP) avant mise en production.
  *
  * Mécanisme :
- *  1. La page login soumet email+password au server action `signInAction`.
+ *  1. La page login soumet le mot de passe au server action `signInAction`.
  *  2. Si match → on dépose un cookie HttpOnly signé HMAC-SHA256.
  *  3. Le middleware (proxy.ts) lit le cookie et autorise / redirige.
  *  4. Toute action serveur sensible appelle `assertAdminSession()`.
  *
- * Pour changer les credentials : édite ADMIN_EMAIL / ADMIN_PASSWORD ci-dessous.
+ * Accès par mot de passe seul, défini via la variable d'environnement BOARD
+ * (.env.local en dev, variables Vercel en prod). Repli sur ADMIN_PASSWORD si
+ * BOARD absente. ADMIN_EMAIL sert uniquement d'identité interne de session.
  *
  * Note : ce fichier est compatible Edge runtime (utilise Web Crypto, pas
  * `next/headers`). Les helpers cookie sont dans ./session.ts.
@@ -114,12 +116,11 @@ export async function parseSessionToken(token: string | undefined): Promise<Admi
   }
 }
 
-export function checkCredentials(email: string, password: string): boolean {
-  // Comparaison simple, credentials hardcodés non sensibles côté secret.
-  return (
-    email.trim().toLowerCase() === ADMIN_EMAIL.toLowerCase() &&
-    password === ADMIN_PASSWORD
-  )
+export function checkCredentials(password: string): boolean {
+  // Accès par mot de passe seul : variable d'environnement BOARD si définie,
+  // sinon repli sur ADMIN_PASSWORD (dev).
+  const expectedPassword = process.env.BOARD?.trim() || ADMIN_PASSWORD
+  return password === expectedPassword
 }
 
 export const ADMIN_COOKIE_OPTIONS = {

@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation'
 import {
   ADMIN_COOKIE_NAME,
   ADMIN_COOKIE_OPTIONS,
+  ADMIN_EMAIL,
   buildSessionToken,
   checkCredentials,
 } from '@/lib/admin/auth'
@@ -15,18 +16,17 @@ export interface SignInResult {
 }
 
 export async function signInAction(_prev: SignInResult | null, formData: FormData): Promise<SignInResult> {
-  const email = String(formData.get('email') ?? '')
   const password = String(formData.get('password') ?? '')
 
-  if (!email || !password) {
-    return { ok: false, error: 'Email et mot de passe requis.' }
+  if (!password) {
+    return { ok: false, error: 'Mot de passe requis.' }
   }
 
-  if (!checkCredentials(email, password)) {
-    return { ok: false, error: 'Identifiants incorrects.' }
+  if (!checkCredentials(password)) {
+    return { ok: false, error: 'Mot de passe incorrect.' }
   }
 
-  const token = await buildSessionToken(email.trim().toLowerCase())
+  const token = await buildSessionToken(ADMIN_EMAIL)
   const store = await cookies()
   store.set(ADMIN_COOKIE_NAME, token, ADMIN_COOKIE_OPTIONS)
 
