@@ -69,9 +69,9 @@ export function ChcFooter({ showCta = true }: { showCta?: boolean }) {
 
         <div className="chc-footer__bottom">
           <span>
-            © {new Date().getFullYear()} Cap Horn Conseils · Courtage &amp; Financement
+            {`© ${new Date().getFullYear()} Cap Horn Conseils · Courtage & Financement`}
             <span className="chc-footer__credit">
-              {' · '}Site réalisé par{' '}
+              {' · Site réalisé par '}
               <a href="https://mapa-developpement.fr" target="_blank" rel="noopener noreferrer">
                 Mapa Développement
               </a>

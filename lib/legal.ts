@@ -113,7 +113,7 @@ export const LEGAL_DOCS: LegalDoc[] = [
       {
         heading: 'Conception et développement',
         paragraphs: [
-          'Le présent site a été conçu et développé par Matis Gouyet pour le compte de GAH CONSULTING.',
+          'Le présent site a été conçu et développé par MAPA DEVELOPPEMENT pour le compte de GAH CONSULTING.',
           'L’ensemble des droits patrimoniaux relatifs au site, à son architecture, à son identité visuelle et à ses contenus appartient à GAH CONSULTING, sauf mention contraire.',
         ],
       },

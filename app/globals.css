@@ -2866,6 +2866,7 @@ body { background: var(--color-background); color: var(--color-foreground); }
   background: radial-gradient(circle, var(--chc-gold) 0 1.5px, transparent 1.6px);
 }
 
+.chc-footer__col { display: flex; flex-direction: column; align-items: flex-start; }
 .chc-footer__col h4 {
   font-family: var(--chc-sans); font-size: 10px; font-weight: 600;
   letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.44);
