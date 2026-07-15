@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, Users, BarChart3, FileText, Workflow, CalendarClock, Calculator } from 'lucide-react'
+import { LayoutDashboard, Users, BarChart3, FileText, Workflow, CalendarClock, Calculator, Settings } from 'lucide-react'
 import AdminProfile from './AdminProfile'
 
 const NAV_ITEMS = [
@@ -13,6 +13,7 @@ const NAV_ITEMS = [
   { href: '/admin/tunnel', label: 'Tunnel', icon: Workflow, exact: false },
   { href: '/admin/blog', label: 'Blog', icon: FileText, exact: false },
   { href: '/admin/analytics', label: 'Analytique', icon: BarChart3, exact: false },
+  { href: '/admin/parametres', label: 'Paramètres', icon: Settings, exact: false },
 ]
 
 export default function Sidebar() {

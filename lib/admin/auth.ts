@@ -116,6 +116,33 @@ export async function parseSessionToken(token: string | undefined): Promise<Admi
   }
 }
 
+/** Jeton court signé (HMAC) pour transporter un état WebAuthn (challenge, email)
+ *  entre deux requêtes via un cookie HttpOnly. `iat` ajouté automatiquement. */
+export async function signState(obj: Record<string, unknown>): Promise<string> {
+  const encoded = base64UrlEncode(JSON.stringify({ ...obj, iat: Date.now() }))
+  const sig = await sign(encoded)
+  return `${encoded}.${sig}`
+}
+
+export async function readState<T = Record<string, unknown>>(
+  token: string | undefined,
+  maxAgeMs = 5 * 60 * 1000,
+): Promise<T | null> {
+  if (!token) return null
+  const dot = token.indexOf('.')
+  if (dot === -1) return null
+  const encoded = token.slice(0, dot)
+  const signature = token.slice(dot + 1)
+  if (!(await verifySignature(encoded, signature))) return null
+  try {
+    const data = JSON.parse(base64UrlDecode(encoded)) as { iat?: number }
+    if (typeof data.iat !== 'number' || Date.now() - data.iat > maxAgeMs) return null
+    return data as T
+  } catch {
+    return null
+  }
+}
+
 export function checkCredentials(password: string): boolean {
   // Accès par mot de passe seul : variable d'environnement BOARD si définie,
   // sinon repli sur ADMIN_PASSWORD (dev).
