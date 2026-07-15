@@ -1,6 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { getPublishedPosts } from '@/lib/blog/queries'
 
 /** Assistant du site, propulsé par Groq (API compatible OpenAI). */
+
+/** Construit la base de connaissance « articles du blog » pour le prompt. */
+async function buildBlogKnowledge(): Promise<string> {
+  try {
+    const posts = await getPublishedPosts()
+    if (posts.length === 0) return ''
+    const lines = posts
+      .slice(0, 40)
+      .map((p) => {
+        const kw = p.keywords?.trim() ? ` — mots-clés : ${p.keywords.trim()}` : ''
+        const ex = p.excerpt?.trim() ? ` — ${p.excerpt.trim()}` : ''
+        return `- « ${p.title} » → /blog/${p.slug}${kw}${ex}`
+      })
+      .join('\n')
+    return `\n\nBASE DE CONNAISSANCE, ARTICLES DU BLOG (uniquement ceux-ci existent) :\n${lines}\n\nQuand la question de l'utilisateur correspond au sujet ou aux mots-clés d'un de ces articles, propose-le explicitement en donnant son lien exact (/blog/slug). Ne recommande jamais un article qui ne figure pas dans cette liste et n'invente jamais de lien.`
+  } catch {
+    return ''
+  }
+}
 
 interface ChatMsg {
   role: 'user' | 'assistant' | 'system'
@@ -53,6 +73,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Message vide' }, { status: 400 })
     }
 
+    const systemContent = SYSTEM_PROMPT + (await buildBlogKnowledge())
+
     const groqRes = await fetch(GROQ_URL, {
       method: 'POST',
       headers: {
@@ -63,7 +85,7 @@ export async function POST(request: NextRequest) {
         model: MODEL,
         temperature: 0.5,
         max_tokens: 600,
-        messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...history],
+        messages: [{ role: 'system', content: systemContent }, ...history],
       }),
     })
 

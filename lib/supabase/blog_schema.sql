@@ -28,6 +28,11 @@ alter table blog_posts add column if not exists published_at    timestamptz not 
 -- `deleted_at` = corbeille (soft delete). Non nul → article dans la corbeille,
 -- masqué du site et de la liste admin, mais restaurable.
 alter table blog_posts add column if not exists deleted_at      timestamptz;
+-- `badge` = petite étiquette affichée en haut à droite des cartes du blog public.
+alter table blog_posts add column if not exists badge           text;
+-- `keywords` = mots-clés (séparés par des virgules) pour que l'assistant (chatbot)
+-- connaisse l'article et puisse le recommander.
+alter table blog_posts add column if not exists keywords        text;
 
 -- Slug unique (clé d'URL /blog/<slug>)
 create unique index if not exists blog_posts_slug_uidx on blog_posts (slug);

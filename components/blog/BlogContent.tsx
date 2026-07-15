@@ -9,8 +9,8 @@ import React from 'react'
 
 function renderInline(text: string, keyPrefix: string): React.ReactNode[] {
   const nodes: React.ReactNode[] = []
-  // Découpe sur **gras** et [lien](url)
-  const regex = /(\*\*([^*]+)\*\*)|(\[([^\]]+)\]\((https?:\/\/[^\s)]+)\))/g
+  // Découpe sur **gras** et [lien](url) — url externe (https://) ou interne (/…)
+  const regex = /(\*\*([^*]+)\*\*)|(\[([^\]]+)\]\((https?:\/\/[^\s)]+|\/[^\s)]+)\))/g
   let last = 0
   let m: RegExpExecArray | null
   let i = 0
@@ -19,8 +19,14 @@ function renderInline(text: string, keyPrefix: string): React.ReactNode[] {
     if (m[2] !== undefined) {
       nodes.push(<strong key={`${keyPrefix}-b${i}`}>{m[2]}</strong>)
     } else if (m[4] !== undefined) {
+      const href = m[5]
+      const internal = href.startsWith('/')
       nodes.push(
-        <a key={`${keyPrefix}-l${i}`} href={m[5]} target="_blank" rel="noopener noreferrer">
+        <a
+          key={`${keyPrefix}-l${i}`}
+          href={href}
+          {...(internal ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
+        >
           {m[4]}
         </a>,
       )

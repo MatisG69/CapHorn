@@ -219,6 +219,10 @@ export interface BlogPost {
   published_at: string
   /** Corbeille : non nul = article supprimé (restaurable). */
   deleted_at?: string | null
+  /** Étiquette affichée sur les cartes du blog public. */
+  badge?: string | null
+  /** Mots-clés (virgules) pour la connaissance du chatbot. */
+  keywords?: string | null
 }
 
 /** Catégories éditoriales, alignées sur les axes SEO de Cap Horn. */

@@ -1,10 +1,13 @@
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import BlogEditor from '@/components/admin/BlogEditor'
+import { getPublishedPosts } from '@/lib/blog/queries'
 
 export const dynamic = 'force-dynamic'
 
-export default function NewBlogPostPage() {
+export default async function NewBlogPostPage() {
+  const published = await getPublishedPosts()
+  const linkablePosts = published.map((p) => ({ id: p.id, title: p.title, slug: p.slug }))
   return (
     <div className="p-8 space-y-6">
       <Link
@@ -14,7 +17,7 @@ export default function NewBlogPostPage() {
         <ArrowLeft className="w-3.5 h-3.5" /> Retour au blog
       </Link>
       <h1 className="display-serif text-3xl text-[var(--color-cream)] tracking-tight">Nouvel article</h1>
-      <BlogEditor post={null} />
+      <BlogEditor post={null} linkablePosts={linkablePosts} />
     </div>
   )
 }

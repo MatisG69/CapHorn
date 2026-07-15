@@ -16,6 +16,19 @@ export interface BlogPostInput {
   /** Date/heure de mise en ligne (ISO). Dans le futur = article programmé,
    *  il apparaîtra automatiquement sur le site public à cette date. */
   published_at?: string | null
+  /** Étiquette (badge) affichée sur les cartes du blog public. */
+  badge?: string | null
+  /** Mots-clés (virgules) pour la connaissance du chatbot. */
+  keywords?: string | null
+}
+
+/** Colonnes optionnelles (ajoutées via blog_schema.sql). Si elles n'existent
+ *  pas encore dans la base, on réessaie l'écriture sans elles pour ne rien casser. */
+const OPTIONAL_COLUMNS = ['badge', 'keywords'] as const
+
+function isMissingOptionalColumn(err: { code?: string; message?: string } | null): boolean {
+  if (!err) return false
+  return err.code === 'PGRST204' || err.code === '42703' || /\b(badge|keywords)\b/.test(err.message ?? '')
 }
 
 /** Garantit un slug unique (ajoute -2, -3… en cas de collision). */
@@ -43,22 +56,26 @@ export async function createPostAction(input: BlogPostInput): Promise<{ id: stri
   const supabase = await createClient()
   const slug = await uniqueSlug(supabase, input.slug?.trim() || input.title)
 
-  const { data, error } = await supabase
-    .from('blog_posts')
-    .insert({
-      title: input.title.trim(),
-      slug,
-      excerpt: input.excerpt?.trim() || null,
-      body: input.body ?? '',
-      cover_image_url: input.cover_image_url || null,
-      category: input.category || null,
-      published: input.published,
-      published_at: input.published_at || new Date().toISOString(),
-    })
-    .select('id, slug')
-    .single()
+  const row: Record<string, unknown> = {
+    title: input.title.trim(),
+    slug,
+    excerpt: input.excerpt?.trim() || null,
+    body: input.body ?? '',
+    cover_image_url: input.cover_image_url || null,
+    category: input.category || null,
+    badge: input.badge?.trim() || null,
+    keywords: input.keywords?.trim() || null,
+    published: input.published,
+    published_at: input.published_at || new Date().toISOString(),
+  }
 
-  if (error) throw new Error(error.message)
+  let { data, error } = await supabase.from('blog_posts').insert(row).select('id, slug').single()
+  if (error && isMissingOptionalColumn(error)) {
+    for (const k of OPTIONAL_COLUMNS) delete row[k]
+    ;({ data, error } = await supabase.from('blog_posts').insert(row).select('id, slug').single())
+  }
+  if (error || !data) throw new Error(error?.message ?? 'Erreur d’enregistrement')
+
   revalidatePath('/blog')
   revalidatePath('/admin/blog')
   revalidatePath(`/blog/${data.slug}`)
@@ -78,20 +95,21 @@ export async function updatePostAction(id: string, input: BlogPostInput): Promis
     body: input.body ?? '',
     cover_image_url: input.cover_image_url || null,
     category: input.category || null,
+    badge: input.badge?.trim() || null,
+    keywords: input.keywords?.trim() || null,
     published: input.published,
   }
   // Ne met à jour la date de mise en ligne que si l'éditeur en fournit une
   // (publication immédiate ou programmation), jamais écrasée par null.
   if (input.published_at) patch.published_at = input.published_at
 
-  const { data, error } = await supabase
-    .from('blog_posts')
-    .update(patch)
-    .eq('id', id)
-    .select('slug')
-    .single()
+  let { data, error } = await supabase.from('blog_posts').update(patch).eq('id', id).select('slug').single()
+  if (error && isMissingOptionalColumn(error)) {
+    for (const k of OPTIONAL_COLUMNS) delete patch[k]
+    ;({ data, error } = await supabase.from('blog_posts').update(patch).eq('id', id).select('slug').single())
+  }
+  if (error || !data) throw new Error(error?.message ?? 'Erreur d’enregistrement')
 
-  if (error) throw new Error(error.message)
   revalidatePath('/blog')
   revalidatePath('/admin/blog')
   revalidatePath(`/blog/${data.slug}`)

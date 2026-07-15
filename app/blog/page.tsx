@@ -56,7 +56,9 @@ export default async function BlogIndexPage() {
                   <div
                     className="chc-blog-feature__img"
                     style={featured.cover_image_url ? { backgroundImage: `url(${featured.cover_image_url})` } : undefined}
-                  />
+                  >
+                    {featured.badge && <span className="chc-blog-badge">{featured.badge}</span>}
+                  </div>
                   <div className="chc-blog-feature__body">
                     <div className="chc-blog__meta">
                       <span>{blogCategoryLabel(featured.category)}</span>
@@ -78,7 +80,9 @@ export default async function BlogIndexPage() {
                       <div
                         className="chc-blog-card__img"
                         style={post.cover_image_url ? { backgroundImage: `url(${post.cover_image_url})` } : undefined}
-                      />
+                      >
+                        {post.badge && <span className="chc-blog-badge">{post.badge}</span>}
+                      </div>
                       <div className="chc-blog-card__body">
                         <div className="chc-blog__meta">
                           <span>{blogCategoryLabel(post.category)}</span>

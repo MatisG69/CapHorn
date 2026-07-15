@@ -5,11 +5,19 @@ import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { createPostAction, updatePostAction, type BlogPostInput } from '@/app/admin/blog/actions'
 import { BLOG_CATEGORIES, type BlogPost } from '@/lib/types'
-import { ImagePlus, Save, Loader2, Eye, EyeOff, Clock } from 'lucide-react'
+import { ImagePlus, Save, Loader2, Eye, EyeOff, Clock, Link2, FileText } from 'lucide-react'
 import BlogPreview from './BlogPreview'
+
+export interface LinkablePost {
+  id: string
+  title: string
+  slug: string
+}
 
 interface Props {
   post: BlogPost | null
+  /** Articles déjà publiés, proposés pour créer des liens internes. */
+  linkablePosts?: LinkablePost[]
 }
 
 type PubMode = 'now' | 'schedule' | 'draft'
@@ -35,7 +43,7 @@ function initialMode(post: BlogPost | null): PubMode {
   return 'now'
 }
 
-export default function BlogEditor({ post }: Props) {
+export default function BlogEditor({ post, linkablePosts = [] }: Props) {
   const router = useRouter()
   const [pending, startTransition] = useTransition()
   const [error, setError] = useState<string | null>(null)
@@ -46,6 +54,13 @@ export default function BlogEditor({ post }: Props) {
   const [excerpt, setExcerpt] = useState(post?.excerpt ?? '')
   const [body, setBody] = useState(post?.body ?? '')
   const [coverUrl, setCoverUrl] = useState(post?.cover_image_url ?? '')
+  const [badge, setBadge] = useState(post?.badge ?? '')
+  const [keywords, setKeywords] = useState(post?.keywords ?? '')
+
+  // Insertion de lien externe (formulaire en ligne)
+  const [linkOpen, setLinkOpen] = useState(false)
+  const [linkText, setLinkText] = useState('')
+  const [linkUrl, setLinkUrl] = useState('')
   const [mode, setMode] = useState<PubMode>(() => initialMode(post))
   const [scheduleAt, setScheduleAt] = useState<string>(() =>
     post?.published && post.published_at && new Date(post.published_at).getTime() > Date.now()
@@ -102,6 +117,41 @@ export default function BlogEditor({ post }: Props) {
     }
   }
 
+  /** Insère un fragment de texte à la position du curseur dans le corps. */
+  const insertIntoBody = (snippet: string) => {
+    const ta = bodyRef.current
+    if (!ta) {
+      setBody((b) => b + snippet)
+      return
+    }
+    const start = ta.selectionStart ?? body.length
+    const end = ta.selectionEnd ?? body.length
+    const next = body.slice(0, start) + snippet + body.slice(end)
+    setBody(next)
+    requestAnimationFrame(() => {
+      ta.focus()
+      const pos = start + snippet.length
+      ta.setSelectionRange(pos, pos)
+    })
+  }
+
+  const insertLink = () => {
+    const url = linkUrl.trim()
+    if (!url) return
+    const text = linkText.trim() || url
+    insertIntoBody(`[${text}](${url})`)
+    setLinkText('')
+    setLinkUrl('')
+    setLinkOpen(false)
+  }
+
+  /** Insère un lien vers un autre article publié : [titre](/blog/slug). */
+  const insertArticleLink = (slug: string) => {
+    const p = linkablePosts.find((x) => x.slug === slug)
+    if (!p) return
+    insertIntoBody(`[${p.title}](/blog/${p.slug})`)
+  }
+
   const save = () => {
     setError(null)
 
@@ -139,6 +189,8 @@ export default function BlogEditor({ post }: Props) {
       body,
       cover_image_url: coverUrl || null,
       category: category || null,
+      badge: badge.trim() || null,
+      keywords: keywords.trim() || null,
       published: publishedFlag,
       published_at: publishedAtIso,
     }
@@ -242,17 +294,88 @@ export default function BlogEditor({ post }: Props) {
                 className="tunnel-input w-full resize-y text-sm leading-relaxed"
               />
             </Field>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Field label="Badge (étiquette sur la carte)">
+                <input
+                  type="text"
+                  value={badge}
+                  onChange={(e) => setBadge(e.target.value)}
+                  placeholder="ex. Nouveau · Guide · À la une"
+                  maxLength={24}
+                  className="tunnel-input w-full text-sm"
+                />
+              </Field>
+              <Field label="Mots-clés (pour l’assistant / chatbot)">
+                <input
+                  type="text"
+                  value={keywords}
+                  onChange={(e) => setKeywords(e.target.value)}
+                  placeholder="ex. financement cabinet médical, prêt professionnel santé"
+                  className="tunnel-input w-full text-sm"
+                />
+              </Field>
+            </div>
+            <p className="text-[11px] text-[var(--color-cream-mute)] -mt-1">
+              Le badge s’affiche en haut à droite de la carte sur le blog public. Les mots-clés
+              (séparés par des virgules) permettent à l’assistant du site de recommander cet article.
+            </p>
           </div>
 
           <div className="admin-card space-y-3">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-3 flex-wrap">
               <h2 className="eyebrow eyebrow--single">Contenu de l’article</h2>
-              <label className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-[0.16em] text-[var(--color-gold-soft)] hover:text-[var(--color-gold)] cursor-pointer transition-colors">
-                {uploadingInline ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <ImagePlus className="w-3.5 h-3.5" />}
-                Insérer une image
-                <input type="file" accept="image/*" className="hidden" onChange={handleInlineImage} disabled={uploadingInline} />
-              </label>
+              <div className="flex items-center gap-3 flex-wrap">
+                <label className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-[0.16em] text-[var(--color-gold-soft)] hover:text-[var(--color-gold)] cursor-pointer transition-colors">
+                  {uploadingInline ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <ImagePlus className="w-3.5 h-3.5" />}
+                  Image
+                  <input type="file" accept="image/*" className="hidden" onChange={handleInlineImage} disabled={uploadingInline} />
+                </label>
+                <button
+                  type="button"
+                  onClick={() => setLinkOpen((o) => !o)}
+                  className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-[0.16em] text-[var(--color-gold-soft)] hover:text-[var(--color-gold)] transition-colors"
+                >
+                  <Link2 className="w-3.5 h-3.5" /> Insérer un lien
+                </button>
+                {linkablePosts.length > 0 && (
+                  <label className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-[0.16em] text-[var(--color-gold-soft)] hover:text-[var(--color-gold)] cursor-pointer transition-colors">
+                    <FileText className="w-3.5 h-3.5" />
+                    <select
+                      value=""
+                      onChange={(e) => {
+                        if (e.target.value) insertArticleLink(e.target.value)
+                        e.target.value = ''
+                      }}
+                      className="bg-transparent border-none text-xs font-mono uppercase tracking-[0.16em] text-[var(--color-gold-soft)] focus:outline-none cursor-pointer"
+                      title="Lier un autre article publié"
+                    >
+                      <option value="">Lier un article</option>
+                      {linkablePosts.map((p) => (
+                        <option key={p.id} value={p.slug} className="normal-case tracking-normal text-[var(--color-foreground)]">
+                          {p.title}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                )}
+              </div>
             </div>
+
+            {linkOpen && (
+              <div className="rounded-lg border border-[var(--color-ink-line)] bg-[var(--color-ink-soft)] p-3 flex flex-wrap items-end gap-2.5">
+                <div className="flex-1 min-w-[140px]">
+                  <label className="block text-[9px] font-mono uppercase tracking-[0.2em] text-[var(--color-cream-mute)] mb-1">Texte du lien</label>
+                  <input type="text" value={linkText} onChange={(e) => setLinkText(e.target.value)} placeholder="ex. notre méthode" className="tunnel-input w-full text-sm !py-1.5" />
+                </div>
+                <div className="flex-1 min-w-[160px]">
+                  <label className="block text-[9px] font-mono uppercase tracking-[0.2em] text-[var(--color-cream-mute)] mb-1">URL (https:// ou /page)</label>
+                  <input type="text" value={linkUrl} onChange={(e) => setLinkUrl(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); insertLink() } }} placeholder="https://exemple.fr" className="tunnel-input w-full text-sm font-mono !py-1.5" />
+                </div>
+                <button type="button" onClick={insertLink} disabled={!linkUrl.trim()} className="btn-gold text-xs px-3 py-2 disabled:opacity-40">Insérer</button>
+                <button type="button" onClick={() => setLinkOpen(false)} className="text-xs px-2 py-2 text-[var(--color-cream-mute)] hover:text-[var(--color-cream)]">Annuler</button>
+              </div>
+            )}
+
             <textarea
               ref={bodyRef}
               value={body}
