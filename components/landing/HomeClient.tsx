@@ -117,7 +117,9 @@ export default function HomeClient() {
           {/* Colonne texte */}
           <div className="chc-h__text">
             <p className="chc-h__eyebrow chc-h-in" data-d="1">
-              <span className="chc-h__eyebrow-rule" aria-hidden /> Courtage indépendant · Lille & Hauts-de-France
+              <span className="chc-h__eyebrow-rule" aria-hidden /> Courtage indépendant ·{' '}
+              {/* insécable : sinon « Hauts-de-France » se coupait au trait d'union. */}
+              <span style={{ whiteSpace: 'nowrap' }}>Lille &amp; Hauts-de-France</span>
             </p>
             <h1 className="chc-h__title">
               <span className="chc-h__title-line chc-h-in" data-d="2">Nous tenons le</span>
