@@ -176,8 +176,9 @@ export default function ChatWidget() {
           {open ? (
             <X className="w-5 h-5" />
           ) : (
+            // Décoratif : le bouton porte déjà un aria-label explicite.
             // eslint-disable-next-line @next/next/no-img-element
-            <img src="/logo-mark.png" alt="Cap Horn Conseils" className="chc-chat__launcher-mark" />
+            <img src="/logo-mark.png" alt="" aria-hidden className="chc-chat__launcher-mark" />
           )}
         </button>
       </div>

@@ -62,8 +62,19 @@ export default function MethodCarousel({ steps }: { steps: MethodStep[] }) {
     <div className="chc-method">
       <div className="chc-method__stage">
         {steps.map((s, i) => (
+          // alt = étape N + intitulé : décrit le visuel, pas seulement le titre.
+          // Première image chargée en priorité (visible d'emblée), les autres
+          // en différé car masquées.
           // eslint-disable-next-line @next/next/no-img-element
-          <img key={s.src} src={s.src} alt={s.name} className="chc-method__img" style={imgStyle(i)} />
+          <img
+            key={s.src}
+            src={s.src}
+            alt={`Étape ${s.n} de la méthode Cap Horn : ${s.name}`}
+            className="chc-method__img"
+            style={imgStyle(i)}
+            loading={i === 0 ? undefined : 'lazy'}
+            decoding="async"
+          />
         ))}
       </div>
 

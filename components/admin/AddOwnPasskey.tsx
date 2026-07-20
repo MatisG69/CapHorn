@@ -26,7 +26,7 @@ export default function AddOwnPasskey() {
       const optRes = await fetch('/api/admin/webauthn/register/options', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, self: true }),
+        body: JSON.stringify({ email }),
       })
       const opt = (await optRes.json().catch(() => ({}))) as { error?: string }
       if (!optRes.ok) {

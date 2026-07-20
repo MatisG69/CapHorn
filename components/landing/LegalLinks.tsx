@@ -1,8 +1,9 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { X } from 'lucide-react'
-import { LEGAL_DOCS, type LegalDoc } from '@/lib/legal'
+import { LEGAL_DOCS, LEGAL_SLUGS, type LegalDoc } from '@/lib/legal'
 
 /** Liens légaux du pied de page : ouvrent une modale flottante avec le document. */
 export default function LegalLinks() {
@@ -22,9 +23,22 @@ export default function LegalLinks() {
     <>
       <span className="chc-footer__legal">
         {LEGAL_DOCS.map((d) => (
-          <button key={d.id} type="button" className="chc-legal-link" onClick={() => setOpenId(d.id)}>
+          // Vrai lien vers la page dédiée : exploré et indexé par Google, et
+          // ouvrable dans un nouvel onglet. La modale reste une amélioration
+          // progressive interceptée au clic simple.
+          <Link
+            key={d.id}
+            href={LEGAL_SLUGS[d.id]}
+            className="chc-legal-link"
+            onClick={(e) => {
+              // On laisse passer clic milieu, Cmd/Ctrl+clic, etc.
+              if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return
+              e.preventDefault()
+              setOpenId(d.id)
+            }}
+          >
             {d.label}
-          </button>
+          </Link>
         ))}
       </span>
 

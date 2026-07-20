@@ -1,6 +1,10 @@
 /**
  * Documents légaux (source : dossier JURIDIQUES/ fourni par Guillaume).
- * Affichés dans une modale depuis le pied de page.
+ *
+ * Chaque document dispose d'une page indexable dédiée (voir LEGAL_SLUGS) et
+ * reste consultable en modale depuis le pied de page. L'URL stable est une
+ * exigence pour un courtier immatriculé ORIAS et un signal de confiance fort
+ * pour Google sur un site financier.
  */
 
 export interface LegalBlock {
@@ -9,12 +13,35 @@ export interface LegalBlock {
   list?: string[]
 }
 
+export type LegalDocId = 'mentions' | 'confidentialite' | 'cookies'
+
 export interface LegalDoc {
-  id: 'mentions' | 'confidentialite' | 'cookies'
+  id: LegalDocId
   label: string
   title: string
   updated?: string
   blocks: LegalBlock[]
+}
+
+/** Chemin public canonique de chaque document légal. */
+export const LEGAL_SLUGS: Record<LegalDocId, string> = {
+  mentions: '/mentions-legales',
+  confidentialite: '/politique-de-confidentialite',
+  cookies: '/politique-de-cookies',
+}
+
+/** Résumé court par document, utilisé comme meta description. */
+export const LEGAL_DESCRIPTIONS: Record<LegalDocId, string> = {
+  mentions:
+    "Mentions légales de Cap Horn Conseils (GAH CONSULTING) : éditeur, SIRET, immatriculation ORIAS, hébergeur et directeur de la publication.",
+  confidentialite:
+    "Politique de confidentialité de Cap Horn Conseils : données collectées, finalités, durées de conservation et exercice de vos droits RGPD.",
+  cookies:
+    "Politique de cookies de Cap Horn Conseils : cookies utilisés, finalités, durée de conservation et paramétrage de votre navigateur.",
+}
+
+export function getLegalDoc(id: LegalDocId): LegalDoc | undefined {
+  return LEGAL_DOCS.find((d) => d.id === id)
 }
 
 export const LEGAL_DOCS: LegalDoc[] = [
@@ -40,7 +67,7 @@ export const LEGAL_DOCS: LegalDoc[] = [
           'Code APE : 66.19B, Autres activités auxiliaires de services financiers, hors assurance et caisses de retraite',
           'Téléphone : 06 28 71 83 95',
           'Courriel : contact@cap-horn-conseils.com',
-          'Site internet : https://cap-horn-conseils.com',
+          'Site internet : https://financezmonprojet.fr',
           'Directeur de la publication : Guillaume HORN',
         ],
       },

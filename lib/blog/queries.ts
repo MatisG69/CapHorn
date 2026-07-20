@@ -1,4 +1,5 @@
 import { createClient } from '../supabase/server'
+import { createPublicClient } from '../supabase/public'
 import type { BlogPost } from '../types'
 
 /** Articles publiés, du plus récent au plus ancien (site public).
@@ -6,15 +7,16 @@ import type { BlogPost } from '../types'
  *  Supabase n'est pas configuré, on renvoie une liste vide plutôt qu'une 500. */
 export async function getPublishedPosts(category?: string): Promise<BlogPost[]> {
   try {
-    const supabase = await createClient()
+    // Client public (sans cookies) : préserve le rendu statique / ISR.
+    const supabase = createPublicClient()
     let query = supabase
       .from('blog_posts')
       .select('*')
       .eq('published', true)
       .is('deleted_at', null)
       // Les articles programmés (published_at dans le futur) restent masqués
-      // jusqu'à leur date de mise en ligne. Les pages étant `force-dynamic`,
-      // `now()` est réévalué à chaque requête : l'article apparaît tout seul.
+      // jusqu'à leur date de mise en ligne. Les pages étant régénérées toutes
+      // les 10 minutes (ISR), l'article apparaît avec ce délai maximum.
       .lte('published_at', new Date().toISOString())
       .order('published_at', { ascending: false })
     if (category) query = query.eq('category', category)
@@ -28,7 +30,8 @@ export async function getPublishedPosts(category?: string): Promise<BlogPost[]> 
 
 /** Article publié par slug (site public). null si introuvable / non publié. */
 export async function getPublishedPostBySlug(slug: string): Promise<BlogPost | null> {
-  const supabase = await createClient()
+  // Client public (sans cookies) : préserve le rendu statique / ISR.
+  const supabase = createPublicClient()
   const { data, error } = await supabase
     .from('blog_posts')
     .select('*')

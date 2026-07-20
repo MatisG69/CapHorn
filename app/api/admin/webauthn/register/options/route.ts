@@ -1,25 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { generateRegistrationOptions } from '@simplewebauthn/server'
 import type { AuthenticatorTransportFuture } from '@simplewebauthn/server'
-import { checkCredentials, signState } from '@/lib/admin/auth'
+import { signState } from '@/lib/admin/auth'
 import { getAdminSession } from '@/lib/admin/session'
 import { getRpInfo, RP_NAME, WA_REG_COOKIE, WA_COOKIE_OPTIONS } from '@/lib/admin/webauthn'
 import { listApprovedPasskeys } from '@/lib/admin/passkeys'
 
 /** Étape 1 de l'enregistrement d'empreinte → options WebAuthn.
- *  Autorisé soit par le mot de passe (première connexion, résultat « pending »),
- *  soit par une session admin déjà ouverte (mode `self` → auto-validé). */
+ *  Réservé à un admin déjà connecté (par empreinte) : une nouvelle empreinte
+ *  ne peut être ajoutée que depuis Paramètres, et elle est validée d'office. */
 export async function POST(request: NextRequest) {
-  const { email, password, self } = (await request.json().catch(() => ({}))) as {
-    email?: string
-    password?: string
-    self?: boolean
-  }
+  const { email } = (await request.json().catch(() => ({}))) as { email?: string }
 
   const session = await getAdminSession()
-  const selfMode = self === true && !!session
-  if (!selfMode && (typeof password !== 'string' || !checkCredentials(password))) {
-    return NextResponse.json({ error: 'Mot de passe incorrect.' }, { status: 401 })
+  if (!session) {
+    return NextResponse.json({ error: 'Non authentifié.' }, { status: 401 })
   }
   if (typeof email !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ error: 'Adresse email invalide.' }, { status: 400 })
@@ -46,7 +41,7 @@ export async function POST(request: NextRequest) {
     })),
   })
 
-  const state = await signState({ challenge: options.challenge, email: email.toLowerCase(), approve: selfMode })
+  const state = await signState({ challenge: options.challenge, email: email.toLowerCase(), approve: true })
   const res = NextResponse.json(options)
   res.cookies.set(WA_REG_COOKIE, state, WA_COOKIE_OPTIONS)
   return res

@@ -29,7 +29,7 @@ const testimonials = [
   { testimonial: "Cap Horn a décroché un taux que ma banque refusait. Dossier bouclé en trois semaines.", by: 'Julie', role: 'Primo-accédante · Lille' },
   { testimonial: "Un seul interlocuteur du premier appel à la signature. Guillaume a tout négocié à ma place.", by: 'Marc', role: "Chef d'entreprise · Roubaix" },
   { testimonial: "On nous disait notre dossier impossible à financer. Ils ont trouvé la banque qui a dit oui.", by: 'Sophie & Karim', role: 'Investisseurs locatifs' },
-  { testimonial: "Près de 18 000 € économisés sur l'assurance de mon prêt grâce à la délégation.", by: 'Antoine', role: 'Cadre · Marcq-en-Barœul' },
+  { testimonial: "Près de 18 000 € économisés sur l'assurance de mon prêt grâce à la délégation.", by: 'Antoine', role: 'Cadre · Lille' },
   { testimonial: "Réactivité impressionnante : rappelé sous 24 h, accompagné jusque chez le notaire.", by: 'Élodie', role: 'Résidence principale' },
   { testimonial: "Le financement de mon cabinet a été monté sur mesure. Un service vraiment haut de gamme.", by: 'Dr. Laurent', role: 'Chirurgien-dentiste' },
   { testimonial: "Conseil honnête : orienté vers la solution la plus saine, pas la plus chère pour moi.", by: 'Nadia', role: 'Regroupement de crédits' },

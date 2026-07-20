@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { ArrowRight } from 'lucide-react'
 import ContactModal from './ContactModal'
 
@@ -16,6 +17,7 @@ const LINKS = [
 /** Nav editorial Cap Horn (transparent → crème au scroll) + menu mobile (burger animé). */
 export function ChcNav({ active }: { active?: string }) {
   const navRef = useRef<HTMLElement>(null)
+  const pathname = usePathname()
   const [contactOpen, setContactOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -25,15 +27,21 @@ export function ChcNav({ active }: { active?: string }) {
     }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
-
-    const obs = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('in') }),
-      { threshold: 0.14, rootMargin: '0px 0px -7% 0px' }
-    )
-    document.querySelectorAll('.chc .r').forEach((el) => obs.observe(el))
-
-    return () => { window.removeEventListener('scroll', onScroll); obs.disconnect() }
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  // Reveal au scroll. threshold 0 : un ratio plus élevé n'est jamais atteint par un
+  // bloc plus haut que le viewport (corps d'article), qui resterait alors invisible.
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      (entries) => entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target) }
+      }),
+      { threshold: 0, rootMargin: '0px 0px -8% 0px' }
+    )
+    document.querySelectorAll('.chc .r:not(.in)').forEach((el) => obs.observe(el))
+    return () => obs.disconnect()
+  }, [pathname])
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''

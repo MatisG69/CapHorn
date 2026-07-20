@@ -30,7 +30,7 @@ interface ChatMsg {
 const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions'
 const MODEL = 'llama-3.3-70b-versatile'
 
-const SYSTEM_PROMPT = `Tu es l'assistant virtuel de CAP HORN CONSEILS®, un cabinet de courtage en financement indépendant basé à Marcq-en-Barœul, fondé par Guillaume Horn.
+const SYSTEM_PROMPT = `Tu es l'assistant virtuel de CAP HORN CONSEILS®, un cabinet de courtage en financement indépendant au service de Lille et des Hauts-de-France, fondé par Guillaume Horn.
 
 Ton rôle : renseigner chaleureusement les visiteurs sur leurs projets de financement et les orienter vers une prise de contact.
 

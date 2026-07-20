@@ -7,12 +7,13 @@ import { AssuranceCalculator } from '@/components/simulateur/AssuranceCalculator
 import { getSimulatorSettings } from '@/lib/simulateur/settings'
 
 export const metadata = {
-  title: 'Simulateur d\'économies, Assurance emprunteur · Cap Horn Conseils',
+  title: 'Simulateur d\'économies, assurance emprunteur',
   description:
-    "Estimez en 30 secondes vos économies sur l'assurance emprunteur. Loi Lemoine, résiliation possible à tout moment, sans frais ni pénalité.",
+    "Estimez en 30 secondes vos économies sur l'assurance emprunteur. Loi Lemoine : résiliation possible à tout moment, sans frais ni pénalité. Simulation gratuite.",
+  alternates: { canonical: '/simulateur' },
 }
 
-const COORD = 'Marcq-en-Barœul'
+const COORD = 'Lille · Hauts-de-France'
 
 const SPECS: { k: string; v: string; sup?: string }[] = [
   { k: 'Cadre légal', v: 'Loi Lemoine' },

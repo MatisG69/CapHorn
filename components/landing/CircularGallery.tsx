@@ -159,12 +159,20 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
                     src={item.photo.url}
                     alt={item.photo.text}
                     draggable={false}
+                    /* width/height : cadre fixe 300×400 (voir marginLeft/Top) ;
+                       loading=lazy + decoding=async pour ne pas charger les six
+                       visuels au premier rendu et alléger le LCP de l'accueil. */
+                    width={300}
+                    height={400}
+                    loading="lazy"
+                    decoding="async"
                     className="absolute inset-0 w-full h-full object-cover pointer-events-none"
                     style={{ objectPosition: item.photo.pos || 'center' }}
                   />
-                  {/* Replaced text-primary-foreground with text-white for consistent color */}
+                  {/* Titre de vignette en <p> et non <h2> : évite d'empiler six
+                      h2 dans la section « expertises » qui a déjà son propre h2. */}
                   <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/80 to-transparent text-white">
-                    <h2 className="text-xl font-bold">{item.common}</h2>
+                    <p className="text-xl font-bold">{item.common}</p>
                     <em className="text-sm italic opacity-80">{item.binomial}</em>
                     {item.photo.by ? (
                       <p className="text-xs mt-2 opacity-70">Photo by: {item.photo.by}</p>

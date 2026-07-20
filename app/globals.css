@@ -2867,7 +2867,7 @@ body { background: var(--color-background); color: var(--color-foreground); }
 }
 
 .chc-footer__col { display: flex; flex-direction: column; align-items: flex-start; }
-.chc-footer__col h4 {
+.chc-footer__col h3 {
   font-family: var(--chc-sans); font-size: 10px; font-weight: 600;
   letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.44);
   margin-bottom: 18px;
@@ -3188,6 +3188,8 @@ body { background: var(--color-background); color: var(--color-foreground); }
 .chc-blog-grid { display: grid; grid-template-columns: 1fr; gap: 26px; }
 @media (min-width: 640px) { .chc-blog-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 980px) { .chc-blog-grid { grid-template-columns: repeat(3, 1fr); } }
+/* Deux articles suggérés : ils occupent la largeur plutôt que 2 colonnes sur 3. */
+@media (min-width: 640px) { .chc-blog-grid--pair { grid-template-columns: repeat(2, 1fr); } }
 .chc-blog-card { border: 1px solid var(--chc-bd); border-radius: 14px; overflow: hidden; background: var(--chc-white); text-decoration: none; display: flex; flex-direction: column; transition: box-shadow 0.3s, transform 0.3s; }
 .chc-blog-card:hover { box-shadow: 0 18px 44px -26px rgba(12,14,18,0.4); transform: translateY(-3px); }
 .chc-blog-card__img { aspect-ratio: 16 / 10; }
@@ -3203,10 +3205,18 @@ body { background: var(--color-background); color: var(--color-foreground); }
 .chc-article__head .chc-blog__meta { justify-content: center; }
 .chc-article__title { font-family: var(--chc-serif); font-weight: 300; font-size: clamp(34px, 5vw, 60px); line-height: 1.06; letter-spacing: -0.01em; color: var(--chc-text); margin-top: 16px; }
 .chc-article__lead { font-family: var(--chc-sans); font-size: clamp(16px, 1.6vw, 19px); font-weight: 300; line-height: 1.7; color: var(--chc-mid); margin-top: 18px; }
+.chc-article__byline { display: inline-flex; align-items: center; gap: 10px; margin-top: 26px; font-family: var(--chc-sans); font-size: 13.5px; font-weight: 300; color: var(--chc-mid); }
+.chc-article__byline strong { font-weight: 500; color: var(--chc-text); }
+.chc-article__avatar { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--chc-gold2); color: var(--chc-text); font-family: var(--chc-serif); font-size: 15px; font-weight: 500; }
+
 .chc-article__cover { max-width: 1000px; margin: 44px auto 0; padding: 0 clamp(24px, 5vw, 52px); }
-.chc-article__cover img { width: 100%; border-radius: 16px; display: block; }
+/* aspect-ratio fixe le cadre 16/9 quel que soit le ratio réel de l'image (cadrage
+   homogène d'un article à l'autre) et réserve la place avant chargement (pas de CLS). */
+.chc-article__cover img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 16px; display: block; background: #ece6db; }
 .chc-article__wrap { max-width: 720px; margin: 44px auto 0; padding: 0 clamp(24px, 5vw, 52px); }
 .chc-article__body p { font-family: var(--chc-sans); font-size: 17px; line-height: 1.9; color: var(--chc-text); margin: 0 0 22px; font-weight: 300; }
+/* Chapô : la première ligne du corps prolonge la voix du lead, en plus posé. */
+.chc-article__body > p:first-child { font-size: 19.5px; line-height: 1.75; color: var(--chc-mid); }
 .chc-article__body h2 { font-family: var(--chc-serif); font-weight: 400; font-size: clamp(26px, 3vw, 34px); color: var(--chc-text); margin: 42px 0 16px; }
 .chc-article__body h3 { font-family: var(--chc-serif); font-weight: 500; font-size: 22px; color: var(--chc-text); margin: 30px 0 12px; }
 .chc-article__body a { color: var(--chc-gold); text-decoration: underline; }
@@ -3219,6 +3229,10 @@ body { background: var(--color-background); color: var(--color-foreground); }
 .chc-article__figure img { width: 100%; border-radius: 12px; display: block; }
 .chc-article__figure figcaption { text-align: center; font-family: var(--chc-sans); font-size: 12.5px; color: var(--chc-lite); margin-top: 10px; }
 .chc-article__cta { max-width: 780px; margin: 56px auto 0; padding: clamp(36px, 5vw, 52px) clamp(24px, 5vw, 52px) 0; text-align: center; border-top: 1px solid var(--chc-bd); }
+
+/* Progression de lecture : filet doré en tête de page. */
+.chc-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 60; pointer-events: none; background: transparent; }
+.chc-progress__bar { height: 100%; transform: scaleX(0); transform-origin: 0 50%; background: linear-gradient(90deg, var(--chc-gold2), var(--chc-gold)); will-change: transform; }
 
 /* ── FAQ (pages SEO) ─────────────────────────────────────────────────── */
 .chc-faq { border-top: 1px solid var(--chc-bd); }
@@ -3436,11 +3450,22 @@ body { background: var(--color-background); color: var(--color-foreground); }
 .chc-cab-hero__title { font-family: var(--chc-serif); font-weight: 300; font-size: clamp(46px, 7.2vw, 94px); line-height: 0.98; letter-spacing: -0.02em; color: var(--chc-text); margin: 20px 0 0; }
 .chc-cab-hero__title em { font-style: italic; color: var(--chc-gold); }
 .chc-cab-hero__lead { font-family: var(--chc-sans); font-weight: 300; font-size: clamp(15px,1.35vw,17.5px); line-height: 1.85; color: var(--chc-mid); max-width: 52ch; margin-top: 26px; }
-.chc-cab-hero__aside { border-top: 1px solid var(--chc-bd); }
-.chc-cab-spec__row { display: flex; justify-content: space-between; align-items: baseline; gap: 18px; padding: 13px 2px; border-bottom: 1px solid var(--chc-bd); }
-.chc-cab-spec__k { font-family: var(--chc-sans); font-size: 10.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--chc-lite); }
-.chc-cab-spec__v { font-family: var(--chc-serif); font-style: italic; font-size: 19px; line-height: 1.2; color: var(--chc-text); text-align: right; }
+/* Cartouche du cabinet — plaque d'identité posée sur la rose des vents du hero.
+   Fond très translucide : la rose doit rester lisible au travers. */
+.chc-cab-hero__aside { position: relative; padding: 20px clamp(18px, 2vw, 24px) 8px; border: 1px solid var(--chc-bd); border-radius: 4px; background: rgba(255,255,255,0.42); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); box-shadow: 0 18px 44px -34px rgba(12,14,18,0.5); }
+/* Losange de report, repris de .chc-coord : le cartouche s'épingle à la carte. */
+.chc-cab-hero__aside::before { content: ''; position: absolute; top: -4px; left: clamp(18px, 2vw, 24px); width: 7px; height: 7px; border: 1px solid var(--chc-gold); background: var(--chc-cream); transform: rotate(45deg); }
+.chc-cab-spec__head { font-family: var(--chc-sans); font-size: 10.5px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--chc-text); padding-bottom: 14px; border-bottom: 1px solid var(--chc-bd); }
+.chc-cab-spec__head sup { font-size: 7px; letter-spacing: 0; color: var(--chc-gold); vertical-align: super; margin-left: 2px; }
+.chc-cab-spec__list { margin: 0; }
+.chc-cab-spec__row { display: flex; align-items: baseline; gap: 10px; padding: 12px 0; }
+/* Ligne de conduite pointillée portée par le <dt> : relie l'entrée à sa valeur,
+   comme la légende d'une carte. Le pseudo-élément prend l'espace flexible. */
+.chc-cab-spec__k { display: flex; align-items: baseline; gap: 10px; flex: 1; font-family: var(--chc-sans); font-size: 10.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--chc-lite); white-space: nowrap; }
+.chc-cab-spec__k::after { content: ''; flex: 1; min-width: 12px; height: 0; border-bottom: 1px dotted rgba(0,0,0,0.22); transform: translateY(-3px); }
+.chc-cab-spec__v { font-family: var(--chc-serif); font-style: italic; font-size: 19px; line-height: 1.2; color: var(--chc-text); text-align: right; margin: 0; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .chc-cab-spec__v span { font-family: var(--chc-sans); font-style: normal; font-size: 12.5px; font-weight: 500; color: var(--chc-gold); vertical-align: super; margin-left: 1px; }
+@media (max-width: 420px) { .chc-cab-spec__v { font-size: 17px; } }
 
 /* — LE FONDATEUR — */
 .chc-cab-founder { display: grid; grid-template-columns: 1fr; gap: clamp(40px,5vw,60px); align-items: center; }

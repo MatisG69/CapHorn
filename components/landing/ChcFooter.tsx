@@ -1,6 +1,7 @@
 import Link from 'next/link'
-import { ArrowRight, ArrowUpRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import LegalLinks from './LegalLinks'
+import { LEGAL_ENTITY } from '@/lib/seo/config'
 
 /**
  * Pied de page Cap Horn, « carte marine ».
@@ -35,35 +36,45 @@ export function ChcFooter({ showCta = true }: { showCta?: boolean }) {
             </Link>
             <p className="chc-footer__desc">
               Cabinet de courtage indépendant en financement et assurance.
-              Architecture financière sur mesure, à Marcq-en-Barœul.
+              Architecture financière sur mesure, au service de Lille et des Hauts-de-France.
             </p>
           </div>
 
+          {/* h3 et non h4 : les titres de colonnes suivent le h2 de la page,
+              un h4 sauterait un niveau de hiérarchie. */}
           <nav className="chc-footer__col" aria-label="Expertises">
-            <h4>Expertises</h4>
+            <h3>Expertises</h3>
             <Link href="/financement-professions-liberales">Professions libérales</Link>
+            {/* Sous-pages métier : sans lien depuis le pied de page elles
+                restaient orphelines alors qu'elles visent les requêtes les
+                plus qualifiées. */}
+            <Link href="/financement-professions-sante">Professions de santé</Link>
+            <Link href="/financement-professions-juridiques">Avocats &amp; notaires</Link>
+            <Link href="/financement-professions-chiffre">Experts-comptables</Link>
             <Link href="/financement-franchise">Franchise</Link>
             <Link href="/reprise-transmission">Reprise &amp; transmission</Link>
-            <Link href="/simulateur-credit-immobilier">Simulateur crédit immo</Link>
-            <Link href="/simulateur">Simulateur assurance</Link>
+            {/* Page locale : capte les requêtes « courtier crédit Lille ». */}
+            <Link href="/courtier-credit-immobilier-lille">Courtier immobilier à Lille</Link>
             <Link href="/expertises">Toutes les expertises</Link>
           </nav>
 
           <nav className="chc-footer__col" aria-label="Cabinet">
-            <h4>Cabinet</h4>
+            <h3>Cabinet</h3>
             <Link href="/methode">Méthode</Link>
+            <Link href="/simulateur-credit-immobilier">Simulateur crédit immo</Link>
+            <Link href="/simulateur">Simulateur assurance</Link>
             <Link href="/blog">Blog &amp; conseils</Link>
             <Link href="/le-cabinet">À propos</Link>
             <Link href="/tunnel">Démarrer une étude</Link>
           </nav>
 
           <div className="chc-footer__col chc-footer__col--contact">
-            <h4>Contact</h4>
-            <span>Marcq-en-Barœul</span>
-            <a href="https://cap-horn-conseils.com" target="_blank" rel="noopener noreferrer">
-              cap-horn-conseils.com
-              <ArrowUpRight className="w-3 h-3" style={{ display: 'inline', marginLeft: 4, verticalAlign: 'middle' }} aria-hidden />
-            </a>
+            <h3>Contact</h3>
+            <span>Lille · Hauts-de-France</span>
+            {/* Téléphone et e-mail cliquables : signal NAP pour le référencement
+                local et point de conversion direct. */}
+            <a href={`tel:${LEGAL_ENTITY.phone}`}>{LEGAL_ENTITY.phoneDisplay}</a>
+            <a href={`mailto:${LEGAL_ENTITY.email}`}>{LEGAL_ENTITY.email}</a>
           </div>
         </div>
 

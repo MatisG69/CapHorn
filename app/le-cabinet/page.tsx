@@ -6,18 +6,19 @@ import { Counter } from '@/components/landing/Counter'
 import { CompassRose } from '@/components/landing/CompassRose'
 
 export const metadata = {
-  title: 'Le cabinet, Courtier indépendant à Marcq-en-Barœul · Cap Horn Conseils',
+  title: 'Le cabinet, courtier à Lille',
   description:
-    "Cap Horn Conseils, cabinet de courtage indépendant fondé par Guillaume Horn à Marcq-en-Barœul. Indépendance, exigence et transparence au service de votre financement.",
+    "Cabinet de courtage indépendant fondé par Guillaume Horn, au service de Lille et des Hauts-de-France. Indépendance, exigence, transparence.",
+  alternates: { canonical: '/le-cabinet' },
 }
 
-/* Coordonnées de Marcq-en-Barœul, motif de repère nautique du cabinet. */
-const COORD = 'Marcq-en-Barœul'
+/* Zone desservie, affichée comme repère nautique du cabinet. */
+const COORD = 'Lille · Hauts-de-France'
 
 const SPECS: { k: string; v: string; sup?: string }[] = [
   { k: 'Statut', v: 'Indépendant' },
   { k: 'Fondateur', v: 'Guillaume Horn' },
-  { k: 'Établi à', v: 'Marcq-en-Barœul' },
+  { k: 'Au service de', v: 'Lille & Hauts-de-France' },
   { k: 'Réseau', v: '100', sup: '+ banques' },
   { k: 'Honoraires', v: 'Au résultat' },
 ]
@@ -67,20 +68,25 @@ export default function CabinetPage() {
             <div className="chc-eyebrow">Le cabinet</div>
             <h1 className="chc-cab-hero__title">Lire un projet<br /><em>avant de le financer.</em></h1>
             <p className="chc-cab-hero__lead">
-              Cap Horn Conseils est un cabinet de courtage indépendant établi à Marcq-en-Barœul.
+              Cap Horn Conseils est un cabinet de courtage indépendant au service de Lille et des Hauts-de-France.
               Nous accompagnons particuliers, expatriés et chefs d’entreprise dans la construction
               de financements sur mesure, en tenant la barre, du premier échange à la signature.
             </p>
             <div className="chc-coord" style={{ marginTop: 30 }}>{COORD}</div>
           </div>
 
+          {/* Cartouche : la plaque d'identité du cabinet, dans le vocabulaire
+              de la carte marine (rose des vents, losange de report). */}
           <aside className="chc-cab-hero__aside r" data-d="1">
-            {SPECS.map((s) => (
-              <div className="chc-cab-spec__row" key={s.k}>
-                <span className="chc-cab-spec__k">{s.k}</span>
-                <span className="chc-cab-spec__v">{s.v}{s.sup && <span>{s.sup}</span>}</span>
-              </div>
-            ))}
+            <div className="chc-cab-spec__head">Cap Horn Conseils<sup>®</sup></div>
+            <dl className="chc-cab-spec__list">
+              {SPECS.map((s) => (
+                <div className="chc-cab-spec__row" key={s.k}>
+                  <dt className="chc-cab-spec__k">{s.k}</dt>
+                  <dd className="chc-cab-spec__v">{s.v}{s.sup && <span>{s.sup}</span>}</dd>
+                </div>
+              ))}
+            </dl>
           </aside>
         </div>
       </header>

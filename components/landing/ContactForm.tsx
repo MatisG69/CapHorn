@@ -58,7 +58,7 @@ export default function ContactForm() {
     <div className="chc-contact-card r" data-d="1">
       <div className="chc-contact-card__manifest">
         <span>Fiche de contact</span>
-        <span>Marcq-en-Barœul</span>
+        <span>Lille · Hauts-de-France</span>
       </div>
 
       {done ? (

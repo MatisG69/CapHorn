@@ -1,25 +1,21 @@
 /**
- * ⚠️  DEV / PRE-PROD ONLY, Auth admin hardcodée.
+ * Auth admin — EMPREINTE DIGITALE UNIQUEMENT (WebAuthn / passkeys).
  *
- * Identifiants en dur le temps que Guillaume choisisse ses creds définitifs.
- * À remplacer par Supabase Auth (ou autre IdP) avant mise en production.
+ * Il n'existe plus aucune connexion par mot de passe : seules les empreintes
+ * validées (table `admin_passkeys`, statut `approved`) ouvrent l'espace admin.
  *
  * Mécanisme :
- *  1. La page login soumet le mot de passe au server action `signInAction`.
- *  2. Si match → on dépose un cookie HttpOnly signé HMAC-SHA256.
+ *  1. La page login lance une authentification WebAuthn (empreinte).
+ *  2. Si l'empreinte est reconnue ET validée → cookie HttpOnly signé HMAC-SHA256.
  *  3. Le middleware (proxy.ts) lit le cookie et autorise / redirige.
  *  4. Toute action serveur sensible appelle `assertAdminSession()`.
  *
- * Accès par mot de passe seul, défini via la variable d'environnement BOARD
- * (.env.local en dev, variables Vercel en prod). Repli sur ADMIN_PASSWORD si
- * BOARD absente. ADMIN_EMAIL sert uniquement d'identité interne de session.
+ * Ajouter une empreinte : uniquement depuis l'admin connecté
+ * (Paramètres → « Ajouter mon empreinte »).
  *
  * Note : ce fichier est compatible Edge runtime (utilise Web Crypto, pas
  * `next/headers`). Les helpers cookie sont dans ./session.ts.
  */
-
-export const ADMIN_EMAIL = 'test@test.com'
-export const ADMIN_PASSWORD = 'Test123'
 
 export const ADMIN_COOKIE_NAME = 'caphorn_admin_session'
 export const COOKIE_MAX_AGE = 60 * 60 * 24 * 7 // 7 jours
@@ -141,13 +137,6 @@ export async function readState<T = Record<string, unknown>>(
   } catch {
     return null
   }
-}
-
-export function checkCredentials(password: string): boolean {
-  // Accès par mot de passe seul : variable d'environnement BOARD si définie,
-  // sinon repli sur ADMIN_PASSWORD (dev).
-  const expectedPassword = process.env.BOARD?.trim() || ADMIN_PASSWORD
-  return password === expectedPassword
 }
 
 export const ADMIN_COOKIE_OPTIONS = {

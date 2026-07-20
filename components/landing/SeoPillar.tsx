@@ -3,6 +3,8 @@ import { ArrowRight } from 'lucide-react'
 import { ChcNav } from './ChcNav'
 import { ChcFooter } from './ChcFooter'
 import { LiquidButton } from '@/components/ui/LiquidButton'
+import { JsonLd } from '@/components/seo/JsonLd'
+import { breadcrumbSchema, faqSchema, servicePageSchema } from '@/lib/seo/jsonld'
 
 export interface PillarData {
   slug: string
@@ -29,8 +31,32 @@ export interface PillarData {
 }
 
 export function SeoPillar({ data }: { data: PillarData }) {
+  // Le fil d'Ariane suit la hiérarchie éditoriale : les sous-pages métier
+  // sont rattachées à leur page mère « professions libérales ».
+  const parent =
+    data.slug.startsWith('financement-professions-') &&
+    data.slug !== 'financement-professions-liberales'
+      ? [{ name: 'Professions libérales', path: '/financement-professions-liberales' }]
+      : []
+
   return (
     <div className="chc">
+      <JsonLd
+        schema={breadcrumbSchema([
+          { name: 'Accueil', path: '/' },
+          ...parent,
+          { name: data.eyebrow, path: `/${data.slug}` },
+        ])}
+      />
+      <JsonLd
+        schema={servicePageSchema({
+          name: data.metaTitle,
+          description: data.metaDescription,
+          path: `/${data.slug}`,
+        })}
+      />
+      {data.faq && data.faq.length > 0 && <JsonLd schema={faqSchema(data.faq)} />}
+
       <ChcNav active={data.navActive} />
 
       <header className="chc-pagehead">

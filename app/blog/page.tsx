@@ -5,12 +5,15 @@ import { LiquidButton } from '@/components/ui/LiquidButton'
 import { getPublishedPosts } from '@/lib/blog/queries'
 import { blogCategoryLabel } from '@/lib/types'
 
-export const dynamic = 'force-dynamic'
+// ISR : la liste est servie depuis le cache et rafraîchie toutes les 10 min,
+// ce qui couvre la mise en ligne des articles programmés.
+export const revalidate = 600
 
 export const metadata = {
-  title: 'Blog & conseils, Financement, immobilier, professions libérales · Cap Horn Conseils',
+  title: 'Blog & conseils en financement',
   description:
-    "Articles et conseils de Cap Horn Conseils : financement professionnel, immobilier, professions libérales, franchise, assurance emprunteur, reprise et transmission d'entreprise.",
+    "Nos articles sur le financement professionnel, l'immobilier, les professions libérales, la franchise, l'assurance emprunteur et la transmission d'entreprise.",
+  alternates: { canonical: '/blog' },
 }
 
 function formatDate(d: string) {

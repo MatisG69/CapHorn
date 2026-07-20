@@ -65,9 +65,9 @@ export const SEO_PAGES: Record<string, PillarData> = {
       { href: '/simulateur', label: 'Simulateur assurance emprunteur' },
       { href: '/tunnel', label: 'Démarrer mon étude' },
     ],
-    metaTitle: 'Financement des professions libérales, Installation, patientèle, murs · Cap Horn Conseils',
+    metaTitle: 'Financement des professions libérales',
     metaDescription:
-      "Courtier spécialisé dans le financement des professions libérales : installation, rachat de patientèle ou clientèle, achat des murs, matériel, trésorerie, rachat de parts. Étude gratuite.",
+      "Courtier spécialisé du financement des professions libérales : installation, rachat de patientèle, achat des murs, matériel, trésorerie. Étude gratuite.",
   },
 
   // ─── Sous-pages ───────────────────────────────────────────────────────
@@ -103,7 +103,7 @@ export const SEO_PAGES: Record<string, PillarData> = {
       { href: '/financement-professions-liberales', label: 'Toutes les professions libérales' },
       { href: '/tunnel', label: 'Démarrer mon étude' },
     ],
-    metaTitle: 'Financement professions de santé, Médecins, dentistes, kinés · Cap Horn Conseils',
+    metaTitle: 'Financement des professions de santé',
     metaDescription:
       "Financement des professionnels de santé : patientèle, installation, matériel médical, murs du cabinet. Apport réduit, conditions négociées. Courtier spécialisé.",
   },
@@ -139,9 +139,9 @@ export const SEO_PAGES: Record<string, PillarData> = {
       { href: '/financement-professions-liberales', label: 'Toutes les professions libérales' },
       { href: '/tunnel', label: 'Démarrer mon étude' },
     ],
-    metaTitle: 'Financement professions juridiques, Avocats, notaires · Cap Horn Conseils',
+    metaTitle: 'Financement avocats & notaires',
     metaDescription:
-      "Financement des professions juridiques : rachat de clientèle ou d’office, parts sociales (SCP, SEL), installation, murs. Montage et négociation par un courtier spécialisé.",
+      "Financement des avocats et notaires : rachat de clientèle ou d’office, parts sociales (SCP, SEL), installation, murs. Montage par un courtier spécialisé.",
   },
 
   'financement-professions-chiffre': {
@@ -178,9 +178,9 @@ export const SEO_PAGES: Record<string, PillarData> = {
       { href: '/reprise-transmission', label: 'Reprise & transmission' },
       { href: '/tunnel', label: 'Démarrer mon étude' },
     ],
-    metaTitle: 'Financement experts-comptables, Rachat de cabinet & portefeuille · Cap Horn Conseils',
+    metaTitle: 'Financement des experts-comptables',
     metaDescription:
-      "Financement des professions du chiffre : rachat de cabinet d’expertise comptable, portefeuille clients, parts, croissance externe. Montage en holding et négociation.",
+      "Financement des experts-comptables : rachat de cabinet, portefeuille clients, parts sociales, croissance externe. Montage en holding et négociation bancaire.",
   },
 
   // ─── Axe 3 : Franchise ────────────────────────────────────────────────
@@ -218,9 +218,9 @@ export const SEO_PAGES: Record<string, PillarData> = {
       { href: '/expertises', label: 'Toutes nos expertises' },
       { href: '/tunnel', label: 'Démarrer mon étude' },
     ],
-    metaTitle: 'Financement de franchise, Droit d’entrée, apport, prêt bancaire · Cap Horn Conseils',
+    metaTitle: 'Financement de franchise',
     metaDescription:
-      "Financer l’ouverture d’une franchise : droit d’entrée, agencement, stock, fonds de roulement. Optimisation de l’apport et négociation du prêt bancaire. Étude gratuite.",
+      "Financer l’ouverture d’une franchise : droit d’entrée, agencement, stock, fonds de roulement. Optimisation de l’apport et négociation du prêt bancaire.",
   },
 
   // ─── Axe 4 : Reprise & transmission ──────────────────────────────────
@@ -266,8 +266,61 @@ export const SEO_PAGES: Record<string, PillarData> = {
       { href: '/expertises', label: 'Toutes nos expertises' },
       { href: '/tunnel', label: 'Démarrer mon étude' },
     ],
-    metaTitle: 'Reprise & transmission d’entreprise, Vendre ou racheter · Cap Horn Conseils',
+    metaTitle: 'Reprise & transmission d’entreprise',
     metaDescription:
-      "Vendre son entreprise ou reprendre une société : valorisation, montage bancaire de reprise, effet de levier (holding), mise en relation cédants/repreneurs. Cap Horn Conseils.",
+      "Vendre son entreprise ou reprendre une société : valorisation, montage bancaire, effet de levier via holding, mise en relation cédants et repreneurs.",
+  },
+
+  // ─── Page locale : Lille & métropole ─────────────────────────────────
+  'courtier-credit-immobilier-lille': {
+    slug: 'courtier-credit-immobilier-lille',
+    eyebrow: 'Lille & métropole',
+    titleTop: 'Votre courtier en crédit immobilier',
+    titleEm: 'à Lille.',
+    introTitle: 'Un courtier indépendant au service des projets immobiliers lillois.',
+    professionsIntro:
+      'À Lille comme dans toute la métropole, chaque projet a ses spécificités. Nous adaptons la stratégie de financement à votre profil et au bien visé.',
+    lead:
+      "Résidence principale, premier achat, investissement locatif ou acquisition via SCI : Cap Horn Conseils accompagne les acquéreurs de Lille et de la Métropole Européenne de Lille (Roubaix, Tourcoing, Villeneuve-d’Ascq, Marcq-en-Barœul…). Le courtier se déplace chez vous et négocie votre crédit immobilier auprès de près de cent banques partenaires.",
+    intro: [
+      "Le marché immobilier lillois est dynamique et concurrentiel : entre le Vieux-Lille, les quartiers en développement et l’attractivité de la métropole, les dossiers doivent être présentés vite et bien pour convaincre les banques. Un financement bien structuré fait souvent la différence entre une offre acceptée et un projet qui échoue.",
+      "Notre rôle est de traduire votre projet dans le langage des banques, d’identifier les établissements les plus adaptés à votre profil et de négocier pour vous le taux, l’assurance emprunteur et les garanties. Indépendants, nous ne sommes liés à aucune banque : la solution recommandée est celle qui sert votre intérêt.",
+    ],
+    projets: [
+      { title: 'Résidence principale', desc: "Achat de votre logement à Lille ou dans la métropole, dans l’ancien comme dans le neuf, avec un plan de financement optimisé." },
+      { title: 'Premier achat (primo-accédant)', desc: "Constitution et défense de votre dossier de primo-accédant : prêt à taux zéro le cas échéant, apport limité, sécurisation des conditions." },
+      { title: 'Investissement locatif', desc: "Financement d’un investissement locatif dans la métropole lilloise, en direct ou via une SCI, avec une stratégie patrimoniale adaptée." },
+      { title: 'Achat via SCI', desc: "Structuration de l’acquisition via une SCI pour organiser votre patrimoine et optimiser votre financement." },
+      { title: 'Renégociation & rachat de prêt', desc: "Rachat ou renégociation de votre crédit immobilier existant pour réduire vos mensualités ou le coût total du crédit." },
+    ],
+    professions: [
+      'Primo-accédants et jeunes actifs de la métropole lilloise.',
+      'Investisseurs immobiliers, en direct ou via SCI.',
+      'Expatriés et non-résidents finançant un bien dans la région.',
+      'Professions libérales, chefs d’entreprise et dossiers atypiques.',
+    ],
+    solutions: [
+      { title: 'Crédit immobilier', desc: "Négociation du taux, des garanties et des conditions de votre prêt immobilier auprès de nos banques partenaires." },
+      { title: 'Assurance emprunteur', desc: "Délégation d’assurance (loi Lemoine) pour réduire significativement le coût de votre assurance de prêt, à garanties équivalentes." },
+      { title: 'Regroupement de crédits', desc: "Regroupement de vos crédits en cours pour retrouver de la capacité et alléger vos mensualités." },
+      { title: 'Financement professionnel', desc: "Pour les indépendants et dirigeants lillois : financement des murs, de l’activité ou de l’installation." },
+    ],
+    parcours: PARCOURS_STD,
+    faq: [
+      { q: 'Faut-il se déplacer à votre bureau ?', a: "Non. Cap Horn Conseils est une entreprise de courtage qui se déplace : nous échangeons par téléphone et visioconférence, et le courtier peut vous rencontrer à Lille ou dans la métropole. Vous n’avez aucun déplacement à prévoir pour constituer votre dossier." },
+      { q: 'Intervenez-vous dans toute la métropole de Lille ?', a: "Oui. Nous accompagnons les projets immobiliers à Lille et dans l’ensemble de la Métropole Européenne de Lille : Roubaix, Tourcoing, Villeneuve-d’Ascq, Marcq-en-Barœul, La Madeleine, Lambersart et les communes environnantes, ainsi que dans toute la région des Hauts-de-France." },
+      { q: 'Un courtier coûte-t-il plus cher qu’une banque ?', a: "Non : nos honoraires ne sont dus qu’en cas de succès, et l’économie négociée sur le taux et l’assurance emprunteur les couvre généralement largement. Sans résultat, aucun honoraire n’est facturé." },
+      { q: 'Quel apport pour acheter à Lille ?', a: "L’apport demandé varie selon votre profil, le type de bien et l’établissement. Un financement avec apport réduit reste possible pour les bons dossiers, notamment les primo-accédants. Nous identifions les banques les plus adaptées à votre situation." },
+      { q: 'Combien de temps pour obtenir un accord de prêt ?', a: "Après un premier échange sous 24 h, le montage et la négociation prennent généralement quelques semaines selon la complexité du dossier et les délais des banques. Un dossier bien préparé accélère nettement l’obtention de l’accord." },
+    ],
+    related: [
+      { href: '/simulateur-credit-immobilier', label: 'Simuler mon crédit immobilier' },
+      { href: '/simulateur', label: 'Simulateur assurance emprunteur' },
+      { href: '/expertises', label: 'Toutes nos expertises' },
+      { href: '/tunnel', label: 'Démarrer mon étude' },
+    ],
+    metaTitle: 'Courtier en crédit immobilier à Lille',
+    metaDescription:
+      "Courtier en crédit immobilier indépendant à Lille et dans la métropole : résidence principale, primo-accédant, investissement locatif. Étude gratuite.",
   },
 }

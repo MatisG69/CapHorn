@@ -5,9 +5,10 @@ import { ChcFooter } from '@/components/landing/ChcFooter'
 import { LiquidButton } from '@/components/ui/LiquidButton'
 
 export const metadata = {
-  title: 'Notre méthode, Étude, montage & négociation · Cap Horn Conseils',
+  title: 'Notre méthode, étude, montage & négociation',
   description:
-    "La méthode Cap Horn : qualification en 3 minutes, échange personnalisé sous 24 h, montage du dossier et négociation auprès de près de 100 banques partenaires. Transparent, sans frais avant résultat.",
+    "Qualification en 3 minutes, échange sous 24 h, montage du dossier et négociation auprès de près de 100 banques partenaires. Sans frais avant résultat.",
+  alternates: { canonical: '/methode' },
 }
 
 const STEPS = [
@@ -40,7 +41,7 @@ export default function MethodePage() {
       </header>
 
       <section className="chc-dark">
-        <img className="chc-dark__bg" src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1400&q=70&auto=format&fit=crop" alt="" />
+        <img className="chc-dark__bg" src="/methode/ciel-nuit-financement-cap-horn-conseils.webp" alt="" aria-hidden loading="lazy" decoding="async" />
         <div className="chc-dark__inner">
           <div className="chc-steps">
             {STEPS.map((s, i) => (
