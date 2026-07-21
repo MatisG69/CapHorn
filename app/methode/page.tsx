@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { ChcNav } from '@/components/landing/ChcNav'
+import { FeatureSteps, type FeatureStep } from '@/components/landing/FeatureSteps'
 import { ChcFooter } from '@/components/landing/ChcFooter'
 import { LiquidButton } from '@/components/ui/LiquidButton'
 
@@ -11,20 +12,20 @@ export const metadata = {
   alternates: { canonical: '/methode' },
 }
 
-const STEPS = [
-  { n: '01', name: 'Qualifiez votre projet', desc: 'Notre outil préqualifie votre projet en moins de trois minutes. Aucun document n’est nécessaire à cette étape.' },
-  { n: '02', name: 'Échange personnalisé', desc: 'Un expert vous rappelle sous 24 h afin d’affiner votre projet et de définir la stratégie de financement la plus adaptée.' },
-  { n: '03', name: 'Montage & négociation', desc: 'Nous constituons votre dossier et négocions chaque paramètre auprès des établissements les plus adaptés à votre projet.' },
-  { n: '04', name: 'Signature & suivi', desc: 'Nous coordonnons chaque étape jusqu’à la signature et sécurisons les conditions qui protégeront durablement vos intérêts.' },
+const STEPS: FeatureStep[] = [
+  { step: 'Étape 01', title: 'Qualifiez votre projet', content: 'Trois minutes, quelques questions, aucun document à fournir. Vous repartez avec un premier avis de faisabilité.', image: '/methode/qualification-projet-financement.webp' },
+  { step: 'Étape 02', title: 'Échange personnalisé', content: 'Un expert vous rappelle sous 24 h ouvrées. On creuse votre situation réelle, et la stratégie se décide ensemble.', image: '/methode/echange-conseiller-financement.webp' },
+  { step: 'Étape 03', title: 'Montage & négociation', content: 'Nous montons le dossier à votre place et le défendons auprès des banques dont les critères collent à votre profil. Taux, assurance, garanties : tout se négocie.', image: '/methode/montage-dossier-negociation-bancaire.webp' },
+  { step: 'Étape 04', title: 'Signature & suivi', content: 'Nous suivons chaque échéance jusqu’à la signature et au déblocage des fonds. Nos honoraires ne sont dus qu’à ce moment-là.', image: '/methode/signature-financement-accompagnement.webp' },
 ]
 
 const INCLUDED = [
-  'Comparaison de près de 100 banques et 20 assureurs partenaires',
-  'Négociation du taux, de la marge et de l’assurance emprunteur',
-  'Optimisation des conditions annexes (modulation, transférabilité, IRA)',
-  'Constitution et présentation du dossier à votre place',
-  'Accompagnement jusqu’à la signature, en lien avec votre notaire',
-  'Aucun honoraire avant l’obtention de votre financement',
+  'Près de 100 banques et 20 assureurs mis en concurrence sur votre dossier',
+  'Négociation du taux, de la marge bancaire et de l’assurance emprunteur',
+  'Conditions annexes travaillées : modulation, transférabilité, indemnités de remboursement anticipé',
+  'Dossier constitué, argumenté et présenté aux banques à votre place',
+  'Coordination avec votre notaire jusqu’au déblocage des fonds',
+  'Zéro honoraire tant que votre financement n’est pas obtenu',
 ]
 
 export default function MethodePage() {
@@ -36,22 +37,14 @@ export default function MethodePage() {
         <div className="chc-pagehead__inner r">
           <div className="chc-eyebrow">Méthodologie</div>
           <h1 className="chc-pagehead__title">Simple pour vous,<br /><em>exigeant en coulisses.</em></h1>
-          <p className="chc-pagehead__lead">Une démarche claire en quatre temps. Vous gardez la main et la visibilité ; nous prenons en charge la complexité, la constitution du dossier et la négociation.</p>
+          <p className="chc-pagehead__lead">Quatre temps, et une répartition claire : vous gardez la décision et la visibilité, nous absorbons la complexité, la paperasse et le rapport de force avec les banques.</p>
         </div>
       </header>
 
       <section className="chc-dark">
         <img className="chc-dark__bg" src="/methode/ciel-nuit-financement-cap-horn-conseils.webp" alt="" aria-hidden loading="lazy" decoding="async" />
         <div className="chc-dark__inner">
-          <div className="chc-steps">
-            {STEPS.map((s, i) => (
-              <div className="chc-step r" key={s.n} data-d={String((i % 4) + 1)}>
-                <div className="chc-step__n">{s.n}</div>
-                <div className="chc-step__name">{s.name}</div>
-                <p className="chc-step__desc">{s.desc}</p>
-              </div>
-            ))}
-          </div>
+          <FeatureSteps features={STEPS} />
         </div>
       </section>
 
@@ -60,8 +53,8 @@ export default function MethodePage() {
           <div className="r">
             <div className="chc-eyebrow">Ce que nous gérons</div>
             <h2 className="chc-h2">Tout,<br /><em>de bout en bout.</em></h2>
-            <p className="chc-lead" style={{ marginTop: 22 }}>Vous n’avez qu’un projet à exprimer. Le reste, comparaison, montage, négociation, paperasse, c’est notre métier.</p>
-            <LiquidButton href="/tunnel" tone="light" size="lg" style={{ marginTop: 28 }}>Démarrer mon étude <ArrowRight className="w-4 h-4" /></LiquidButton>
+            <p className="chc-lead" style={{ marginTop: 22 }}>Vous n’avez qu’une chose à faire : nous raconter votre projet. Comparaison, montage, négociation, relances, paperasse : c’est notre métier, et vous ne le payez que s’il aboutit.</p>
+            <LiquidButton href="/tunnel" tone="dark" size="lg" style={{ marginTop: 28 }}>Démarrer mon étude <ArrowRight className="w-4 h-4" /></LiquidButton>
           </div>
           <div className="r" data-d="1">
             <ul className="chc-checklist">

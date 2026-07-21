@@ -49,7 +49,7 @@ export default async function BlogIndexPage() {
                 Conseils de financement, méthodes et cas concrets, publiés régulièrement par Guillaume.
                 En attendant, lancez votre étude personnalisée.
               </p>
-              <LiquidButton href="/tunnel" tone="light" size="lg">Démarrer mon étude gratuite</LiquidButton>
+              <LiquidButton href="/tunnel" tone="dark" size="lg">Démarrer mon étude gratuite</LiquidButton>
             </div>
           ) : (
             <>

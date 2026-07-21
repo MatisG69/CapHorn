@@ -1,18 +1,24 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { X, ArrowRight, Check, ShieldCheck } from 'lucide-react'
+import { X, ArrowRight, Check, ShieldCheck, Phone } from 'lucide-react'
 import type { ContactFormData } from '@/lib/types'
+import { LEGAL_ENTITY } from '@/lib/seo/config'
 
-// Palette « Apple » (en dur → indépendant du CSS global / du cache)
-const TEXT = '#1d1d1f'
-const SUB = '#6e6e73'
-const FILL = 'rgba(118,118,128,0.10)'
-const SEP = 'rgba(0,0,0,0.08)'
-const BLUE = '#0071e3'
-const GREEN = '#34c759'
-
+/**
+ * Modale « Prendre contact ».
+ *
+ * L'habillage précédent était un pastiche Apple codé en dur (bleu #0071e3,
+ * vert #34c759, verre blanc), totalement étranger à la charte. Tout passe
+ * désormais par les jetons Cap Horn, donc la modale suivra les évolutions du
+ * design system au lieu d'en diverger.
+ *
+ * La logique d'origine est conservée (validation, portail, Échap, verrou du
+ * défilement). Trois manques d'accessibilité ont été corrigés : le focus est
+ * placé puis piégé dans la boîte, le dialogue porte un nom accessible, et la
+ * croix de fermeture atteint la cible tactile de 44 px.
+ */
 const SLOTS = ['Indifférent', 'Matin', 'Après-midi', 'Fin de journée']
 
 export default function ContactModal({ open, onClose }: { open: boolean; onClose: () => void }) {
@@ -23,14 +29,30 @@ export default function ContactModal({ open, onClose }: { open: boolean; onClose
   const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({})
   const [submitting, setSubmitting] = useState(false)
   const [done, setDone] = useState(false)
-  const [reduceMotion] = useState(
-    () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
-  )
+  const boxRef = useRef<HTMLDivElement>(null)
+  const firstFieldRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     if (!open) return
-    const id = requestAnimationFrame(() => setMounted(true))
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
+    const id = requestAnimationFrame(() => {
+      setMounted(true)
+      firstFieldRef.current?.focus()
+    })
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') { onClose(); return }
+      // Piège à focus : sans lui, la tabulation sort de la modale et parcourt
+      // la page située derrière.
+      if (e.key !== 'Tab' || !boxRef.current) return
+      const items = boxRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input:not([type="hidden"]), textarea, select, [tabindex]:not([tabindex="-1"])',
+      )
+      if (items.length === 0) return
+      const first = items[0], last = items[items.length - 1]
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus() }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus() }
+    }
+
     const prev = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', onKey)
@@ -42,7 +64,7 @@ export default function ContactModal({ open, onClose }: { open: boolean; onClose
     }
   }, [open, onClose])
 
-  if (!open) return null
+  if (!open || typeof document === 'undefined') return null
 
   const update = (k: keyof ContactFormData, v: string | boolean) => {
     setForm((p) => ({ ...p, [k]: v }))
@@ -77,121 +99,100 @@ export default function ContactModal({ open, onClose }: { open: boolean; onClose
     }
   }
 
-  const anim = reduceMotion ? {} : { transition: 'transform 0.45s cubic-bezier(0.2,0.8,0.2,1), opacity 0.3s ease' }
-
-  if (typeof document === 'undefined') return null
-
   return createPortal(
     <div
+      className={`chc-cm ${mounted ? 'is-in' : ''}`}
       onClick={onClose}
       role="dialog"
       aria-modal="true"
-      style={{
-        position: 'fixed', inset: 0, zIndex: 400,
-        display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 18,
-        background: 'rgba(0,0,0,0.42)',
-        WebkitBackdropFilter: 'blur(8px) saturate(120%)', backdropFilter: 'blur(8px) saturate(120%)',
-        opacity: mounted ? 1 : 0, transition: 'opacity 0.3s ease',
-      }}
+      aria-labelledby="chc-cm-title"
     >
-      <div
-        onClick={(e) => e.stopPropagation()}
-        style={{
-          position: 'relative', width: '100%', maxWidth: 470, maxHeight: 'calc(100dvh - 36px)', overflowY: 'auto',
-          borderRadius: 28, padding: 'clamp(26px, 4vw, 38px)',
-          background: 'rgba(255,255,255,0.72)',
-          WebkitBackdropFilter: 'blur(40px) saturate(180%)', backdropFilter: 'blur(40px) saturate(180%)',
-          border: '1px solid rgba(255,255,255,0.7)',
-          boxShadow: '0 30px 90px -20px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255,255,255,0.9)',
-          fontFamily: 'var(--font-ibm-plex), system-ui, sans-serif',
-          color: TEXT,
-          transform: mounted ? 'scale(1) translateY(0)' : 'scale(0.94) translateY(12px)',
-          opacity: mounted ? 1 : 0,
-          ...anim,
-        }}
-      >
-        <button onClick={onClose} aria-label="Fermer" style={closeBtn}><X className="w-4 h-4" /></button>
+      <div ref={boxRef} className="chc-cm__box" onClick={(e) => e.stopPropagation()}>
+        <button type="button" onClick={onClose} aria-label="Fermer" className="chc-cm__close">
+          <X className="w-4 h-4" aria-hidden />
+        </button>
 
         {done ? (
-          <div style={{ textAlign: 'center', padding: '12px 0', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14 }}>
-            <span style={{ width: 64, height: 64, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: GREEN, color: '#fff', boxShadow: `0 14px 30px -10px ${GREEN}` }}>
-              <Check className="w-7 h-7" strokeWidth={2.4} />
-            </span>
-            <h2 style={{ fontSize: 24, fontWeight: 600, letterSpacing: '-0.02em', margin: 0 }}>Demande envoyée</h2>
-            <p style={{ fontSize: 15, lineHeight: 1.5, color: SUB, margin: 0, maxWidth: 320 }}>
-              Merci {form.first_name}. Guillaume vous recontacte sous 24 h ouvrées au créneau indiqué.
+          <div className="chc-cm__done">
+            <span className="chc-cm__done-mark" aria-hidden><Check className="w-7 h-7" strokeWidth={2.4} /></span>
+            <h2 id="chc-cm-title" className="chc-cm__title">Demande envoyée</h2>
+            <p className="chc-cm__sub">
+              Merci {form.first_name}. Guillaume vous recontacte sous 24 h ouvrées, au créneau indiqué.
             </p>
-            <button onClick={onClose} style={{ ...primaryBtn, width: 'auto', padding: '12px 28px', marginTop: 4 }}>Fermer</button>
+            <a href={`tel:${LEGAL_ENTITY.phone}`} className="chc-cm__call">
+              <Phone className="w-4 h-4" aria-hidden /> {LEGAL_ENTITY.phoneDisplay}
+            </a>
+            <button type="button" onClick={onClose} className="chc-cm__submit chc-cm__submit--ghost">Fermer</button>
           </div>
         ) : (
           <>
-            <div style={{ marginBottom: 22 }}>
-              <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase', color: SUB }}>Prendre contact</div>
-              <h2 style={{ fontSize: 'clamp(24px, 3.4vw, 30px)', fontWeight: 600, letterSpacing: '-0.025em', lineHeight: 1.1, margin: '10px 0 8px' }}>
-                Être rappelé par Guillaume
-              </h2>
-              <p style={{ fontSize: 14.5, lineHeight: 1.5, color: SUB, margin: 0 }}>
-                Laissez vos coordonnées, réponse sous 24 h, sans engagement.
-              </p>
-            </div>
+            <header className="chc-cm__head">
+              <p className="chc-eyebrow">Prendre contact</p>
+              <h2 id="chc-cm-title" className="chc-cm__title">Être rappelé par Guillaume</h2>
+              <p className="chc-cm__sub">Laissez vos coordonnées : réponse sous 24 h ouvrées, sans engagement.</p>
+            </header>
 
-            <form onSubmit={submit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-                <Field label="Prénom" error={errors.first_name}>
-                  <Input value={form.first_name} onChange={(v) => update('first_name', v)} placeholder="Jean" autoComplete="given-name" />
+            <form onSubmit={submit} noValidate className="chc-cm__form">
+              <div className="chc-cm__row">
+                <Field label="Prénom" error={errors.first_name} id="cm-fn">
+                  <input ref={firstFieldRef} id="cm-fn" className="chc-cm__input" value={form.first_name}
+                    onChange={(e) => update('first_name', e.target.value)} placeholder="Jean" autoComplete="given-name" />
                 </Field>
-                <Field label="Nom" error={errors.last_name}>
-                  <Input value={form.last_name} onChange={(v) => update('last_name', v)} placeholder="Dupont" autoComplete="family-name" />
-                </Field>
-              </div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-                <Field label="Email" error={errors.email}>
-                  <Input value={form.email} onChange={(v) => update('email', v)} placeholder="jean@exemple.fr" type="email" autoComplete="email" />
-                </Field>
-                <Field label="Téléphone" error={errors.phone}>
-                  <Input value={form.phone} onChange={(v) => update('phone', v)} placeholder="06 12 34 56 78" type="tel" autoComplete="tel" />
+                <Field label="Nom" error={errors.last_name} id="cm-ln">
+                  <input id="cm-ln" className="chc-cm__input" value={form.last_name}
+                    onChange={(e) => update('last_name', e.target.value)} placeholder="Dupont" autoComplete="family-name" />
                 </Field>
               </div>
 
-              <Field label="Créneau préféré">
-                <div style={{ display: 'flex', gap: 4, padding: 4, background: FILL, borderRadius: 12 }}>
-                  {SLOTS.map((s) => {
-                    const on = form.preferred_slot === s
-                    return (
-                      <button type="button" key={s} onClick={() => update('preferred_slot', s)} style={{
-                        flex: 1, padding: '8px 6px', borderRadius: 9, border: 'none', cursor: 'pointer',
-                        fontSize: 12.5, fontWeight: on ? 600 : 500, color: on ? TEXT : SUB,
-                        background: on ? '#fff' : 'transparent',
-                        boxShadow: on ? '0 1px 3px rgba(0,0,0,0.12)' : 'none', transition: 'all 0.2s',
-                      }}>{s}</button>
-                    )
-                  })}
+              <div className="chc-cm__row">
+                <Field label="Email" error={errors.email} id="cm-em">
+                  <input id="cm-em" className="chc-cm__input" type="email" inputMode="email" value={form.email}
+                    onChange={(e) => update('email', e.target.value)} placeholder="jean@exemple.fr" autoComplete="email" />
+                </Field>
+                <Field label="Téléphone" error={errors.phone} id="cm-tel">
+                  <input id="cm-tel" className="chc-cm__input" type="tel" inputMode="tel" value={form.phone}
+                    onChange={(e) => update('phone', e.target.value)} placeholder="06 12 34 56 78" autoComplete="tel" />
+                </Field>
+              </div>
+
+              <fieldset className="chc-cm__field chc-cm__fieldset">
+                <legend className="chc-cm__label">Créneau préféré</legend>
+                <div className="chc-cm__slots">
+                  {SLOTS.map((s) => (
+                    <button type="button" key={s} onClick={() => update('preferred_slot', s)}
+                      className={`chc-cm__slot ${form.preferred_slot === s ? 'is-on' : ''}`}
+                      aria-pressed={form.preferred_slot === s}>{s}</button>
+                  ))}
                 </div>
+              </fieldset>
+
+              <Field label="Votre projet (optionnel)" id="cm-msg">
+                <textarea id="cm-msg" rows={2} className="chc-cm__input chc-cm__textarea" value={form.message ?? ''}
+                  onChange={(e) => update('message', e.target.value)} placeholder="Quelques mots sur votre projet…" />
               </Field>
 
-              <Field label="Votre projet (optionnel)">
-                <Textarea value={form.message ?? ''} onChange={(v) => update('message', v)} placeholder="Quelques mots sur votre projet…" />
-              </Field>
-
-              <label style={{ display: 'flex', alignItems: 'flex-start', gap: 11, cursor: 'pointer', marginTop: 2 }}>
-                <span onClick={() => update('consent_rgpd', !form.consent_rgpd)} style={{
-                  flexShrink: 0, marginTop: 1, width: 22, height: 22, borderRadius: 7,
-                  border: form.consent_rgpd ? `1px solid ${BLUE}` : `1px solid ${SEP}`,
-                  background: form.consent_rgpd ? BLUE : '#fff',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', transition: 'all 0.15s',
-                }}>{form.consent_rgpd && <Check className="w-3.5 h-3.5" strokeWidth={3} />}</span>
-                <input type="checkbox" checked={form.consent_rgpd} onChange={(e) => update('consent_rgpd', e.target.checked)} style={{ position: 'absolute', opacity: 0, width: 0, height: 0 }} />
-                <span style={{ fontSize: 12.5, lineHeight: 1.5, color: SUB }}>
-                  J’accepte d’être recontacté(e) et que mes données soient traitées conformément à la politique de confidentialité.
+              <label className="chc-cm__consent">
+                <input type="checkbox" checked={form.consent_rgpd}
+                  onChange={(e) => update('consent_rgpd', e.target.checked)} className="chc-cm__check" />
+                <span className="chc-cm__check-box" aria-hidden><Check className="w-3.5 h-3.5" strokeWidth={3} /></span>
+                <span className="chc-cm__consent-text">
+                  J’accepte d’être recontacté(e) et que mes données soient traitées conformément à la
+                  politique de confidentialité.
                 </span>
               </label>
-              {errors.consent_rgpd && <p style={{ fontSize: 12, color: '#c0392b', margin: 0 }}>{errors.consent_rgpd}</p>}
+              {errors.consent_rgpd && <p className="chc-cm__error" role="alert">{errors.consent_rgpd}</p>}
 
-              <button type="submit" disabled={submitting} style={{ ...primaryBtn, opacity: submitting ? 0.6 : 1, marginTop: 4 }}>
-                {submitting ? 'Envoi…' : <>Demander à être rappelé <ArrowRight className="w-4 h-4" /></>}
+              <button type="submit" disabled={submitting} className="chc-cm__submit">
+                {submitting ? 'Envoi…' : <>Demander à être rappelé <ArrowRight className="w-4 h-4" aria-hidden /></>}
               </button>
-              <p style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: 7, margin: '2px 0 0', fontSize: 11, fontWeight: 500, color: '#86868b' }}>
-                <ShieldCheck className="w-3.5 h-3.5" /> Données confidentielles · RGPD · Réponse sous 24 h
+
+              {/* Alternative directe : plus rapide qu'un formulaire pour qui hésite. */}
+              <a href={`tel:${LEGAL_ENTITY.phone}`} className="chc-cm__call">
+                <Phone className="w-4 h-4" aria-hidden /> Ou appeler le {LEGAL_ENTITY.phoneDisplay}
+              </a>
+
+              <p className="chc-cm__legal">
+                <ShieldCheck className="w-3.5 h-3.5" aria-hidden /> Données confidentielles · RGPD · Réponse sous 24 h
               </p>
             </form>
           </>
@@ -202,56 +203,14 @@ export default function ContactModal({ open, onClose }: { open: boolean; onClose
   )
 }
 
-const closeBtn: React.CSSProperties = {
-  position: 'absolute', top: 16, right: 16, width: 32, height: 32, borderRadius: '50%',
-  display: 'flex', alignItems: 'center', justifyContent: 'center',
-  background: 'rgba(118,118,128,0.14)', border: 'none', color: '#6e6e73', cursor: 'pointer',
-}
-
-const primaryBtn: React.CSSProperties = {
-  width: '100%', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 9,
-  padding: '15px 24px', borderRadius: 14, border: 'none', cursor: 'pointer',
-  background: '#1d1d1f', color: '#fff', fontSize: 15, fontWeight: 600, letterSpacing: '-0.01em',
-  fontFamily: 'var(--font-ibm-plex), system-ui, sans-serif',
-}
-
-function Field({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-      <label style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.04em', textTransform: 'uppercase', color: SUB }}>{label}</label>
-      {children}
-      {error && <span style={{ fontSize: 11.5, color: '#c0392b' }}>{error}</span>}
-    </div>
-  )
-}
-
-const fieldBase: React.CSSProperties = {
-  width: '100%', background: 'rgba(118,118,128,0.08)', borderRadius: 12,
-  padding: '12px 13px', fontSize: 16, color: TEXT, outline: 'none',
-  fontFamily: 'var(--font-ibm-plex), system-ui, sans-serif',
-}
-
-function Input({ value, onChange, placeholder, type = 'text', autoComplete }: {
-  value: string; onChange: (v: string) => void; placeholder?: string; type?: string; autoComplete?: string
+function Field({ label, error, id, children }: {
+  label: string; error?: string; id: string; children: React.ReactNode
 }) {
-  const [f, setF] = useState(false)
   return (
-    <input
-      type={type} value={value} placeholder={placeholder} autoComplete={autoComplete}
-      inputMode={type === 'email' ? 'email' : type === 'tel' ? 'tel' : undefined}
-      onChange={(e) => onChange(e.target.value)} onFocus={() => setF(true)} onBlur={() => setF(false)}
-      style={{ ...fieldBase, border: f ? `1px solid ${BLUE}` : '1px solid transparent', boxShadow: f ? `0 0 0 4px rgba(0,113,227,0.12)` : 'none' }}
-    />
-  )
-}
-
-function Textarea({ value, onChange, placeholder }: { value: string; onChange: (v: string) => void; placeholder?: string }) {
-  const [f, setF] = useState(false)
-  return (
-    <textarea
-      rows={2} value={value} placeholder={placeholder}
-      onChange={(e) => onChange(e.target.value)} onFocus={() => setF(true)} onBlur={() => setF(false)}
-      style={{ ...fieldBase, resize: 'vertical', minHeight: 60, lineHeight: 1.5, border: f ? `1px solid ${BLUE}` : '1px solid transparent', boxShadow: f ? `0 0 0 4px rgba(0,113,227,0.12)` : 'none' }}
-    />
+    <div className="chc-cm__field">
+      <label className="chc-cm__label" htmlFor={id}>{label}</label>
+      {children}
+      {error && <span className="chc-cm__error" role="alert">{error}</span>}
+    </div>
   )
 }

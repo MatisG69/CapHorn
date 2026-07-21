@@ -21,7 +21,7 @@ export default function ExpertisesPage() {
         <div className="chc-pagehead__inner r">
           <div className="chc-eyebrow">Nos expertises</div>
           <h1 className="chc-pagehead__title">Tous vos financements,<br /><em>un seul interlocuteur.</em></h1>
-          <p className="chc-pagehead__lead">Cap Horn intervient sur l’ensemble du spectre du financement des particuliers et des entreprises. Pour chaque dossier, la même méthode : analyser en profondeur, structurer, puis négocier auprès du bon réseau bancaire.</p>
+          <p className="chc-pagehead__lead">Immobilier, entreprise, assurance, situations bloquées : Cap Horn couvre tout le spectre du financement des particuliers et des entreprises. Et applique partout la même méthode : comprendre le projet, construire le dossier, puis mettre les banques en concurrence.</p>
         </div>
       </header>
 
@@ -37,7 +37,7 @@ export default function ExpertisesPage() {
             ))}
           </div>
           <div style={{ textAlign: 'center', marginTop: 52 }} className="r">
-            <LiquidButton href="/tunnel" tone="light" size="lg">Qualifier mon projet en 3 minutes <ArrowRight className="w-4 h-4" /></LiquidButton>
+            <LiquidButton href="/tunnel" tone="dark" size="lg">Qualifier mon projet en 3 minutes <ArrowRight className="w-4 h-4" /></LiquidButton>
           </div>
         </div>
       </section>

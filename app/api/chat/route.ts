@@ -11,8 +11,8 @@ async function buildBlogKnowledge(): Promise<string> {
     const lines = posts
       .slice(0, 40)
       .map((p) => {
-        const kw = p.keywords?.trim() ? ` — mots-clés : ${p.keywords.trim()}` : ''
-        const ex = p.excerpt?.trim() ? ` — ${p.excerpt.trim()}` : ''
+        const kw = p.keywords?.trim() ? ` · mots-clés : ${p.keywords.trim()}` : ''
+        const ex = p.excerpt?.trim() ? ` · ${p.excerpt.trim()}` : ''
         return `- « ${p.title} » → /blog/${p.slug}${kw}${ex}`
       })
       .join('\n')
@@ -46,6 +46,7 @@ Positionnement : indépendance totale (aucune banque de tutelle), réseau de pr�
 
 Règles :
 - Réponds en français, ton professionnel, premium et rassurant.
+- N'utilise JAMAIS de tiret cadratin (—) ni de tiret demi-cadratin (–) : emploie la ponctuation française, virgule, deux-points, point-virgule ou parenthèses.
 - Sois CONCIS : 2 à 4 phrases maximum, sauf si on te demande explicitement plus de détail.
 - Ne donne JAMAIS de taux précis, de montant garanti, de simulation chiffrée ni de conseil juridique ou fiscal définitif : cela dépend de l'étude du dossier.
 - Rappelle, quand c'est pertinent, que l'étude est gratuite et sans engagement, et qu'un expert recontacte sous 24 h.

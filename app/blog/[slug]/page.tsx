@@ -174,7 +174,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           <p className="chc-lead" style={{ marginTop: 14, marginBottom: 26 }}>
             Cap Horn qualifie votre projet en 3 minutes et vous rappelle sous 24 h.
           </p>
-          <LiquidButton href="/tunnel" tone="light" size="lg">
+          <LiquidButton href="/tunnel" tone="dark" size="lg">
             Démarrer mon étude gratuite <ArrowRight className="w-4 h-4" />
           </LiquidButton>
         </div>

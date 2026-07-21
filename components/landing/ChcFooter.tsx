@@ -35,8 +35,9 @@ export function ChcFooter({ showCta = true }: { showCta?: boolean }) {
               <span>Conseils, Courtage &amp; Financement</span>
             </Link>
             <p className="chc-footer__desc">
-              Cabinet de courtage indépendant en financement et assurance.
-              Architecture financière sur mesure, au service de Lille et des Hauts-de-France.
+              Cabinet de courtage indépendant en financement et assurance, au service de Lille et des
+              Hauts-de-France. Près de cent banques mises en concurrence, et aucun honoraire tant que
+              votre financement n’est pas obtenu.
             </p>
           </div>
 

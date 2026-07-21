@@ -4,6 +4,7 @@ import { ChcFooter } from '@/components/landing/ChcFooter'
 import { LiquidButton } from '@/components/ui/LiquidButton'
 import { Counter } from '@/components/landing/Counter'
 import { CompassRose } from '@/components/landing/CompassRose'
+import { SpecFlipCard, type Spec } from '@/components/landing/SpecFlipCard'
 
 export const metadata = {
   title: 'Le cabinet, courtier à Lille',
@@ -15,7 +16,7 @@ export const metadata = {
 /* Zone desservie, affichée comme repère nautique du cabinet. */
 const COORD = 'Lille · Hauts-de-France'
 
-const SPECS: { k: string; v: string; sup?: string }[] = [
+const SPECS: Spec[] = [
   { k: 'Statut', v: 'Indépendant' },
   { k: 'Fondateur', v: 'Guillaume Horn' },
   { k: 'Au service de', v: 'Lille & Hauts-de-France' },
@@ -26,27 +27,27 @@ const SPECS: { k: string; v: string; sup?: string }[] = [
 const VALUES = [
   {
     n: '01', name: 'Indépendance', feature: true, Icon: Compass,
-    desc: 'Nous ne sommes liés à aucune banque. La solution que nous recommandons est la meilleure pour vous, jamais la plus rémunératrice pour nous. C’est la condition d’un conseil qui n’a rien à cacher.',
+    desc: 'Aucune exclusivité, aucun accord de volume, aucune banque au capital. Nous recommandons l’établissement qui vous sert, pas celui qui nous paie le mieux. C’est la seule condition d’un conseil qui n’a rien à cacher.',
   },
   {
     n: '02', name: 'Exigence', Icon: Gem,
-    desc: 'Chaque dossier est travaillé comme un dossier premium : analyse fine, présentation soignée, négociation sur chaque paramètre.',
+    desc: 'Taux, marge, assurance, garanties, modulation, indemnités de remboursement : chaque ligne se négocie. Un dossier bien défendu vaut souvent plusieurs milliers d’euros de plus qu’un dossier simplement transmis.',
   },
   {
     n: '03', name: 'Transparence', Icon: Eye,
-    desc: 'Des conditions claires, un chiffrage annoncé d’avance, aucune zone d’ombre entre le premier appel et la signature.',
+    desc: 'Le montant de nos honoraires vous est annoncé dès le premier échange, par écrit. Aucune ligne ne s’ajoute entre cet appel et la signature.',
   },
   {
     n: '04', name: 'Honoraires au résultat', Icon: BadgeEuro,
-    desc: 'Aucun honoraire tant que le financement n’est pas obtenu. Notre rémunération est alignée sur votre réussite, pas sur le montant emprunté.',
+    desc: 'Vous ne payez rien tant que votre financement n’est pas obtenu. Si nous échouons, cela ne vous coûte rien : le risque est de notre côté, pas du vôtre.',
   },
   {
     n: '05', name: 'Interlocuteur unique', Icon: UserRound,
-    desc: 'Un seul contact, du premier échange à la signature chez le notaire. Guillaume suit personnellement chaque dossier.',
+    desc: 'Pas de plateau téléphonique, pas de dossier qui change de mains. Guillaume suit le vôtre personnellement, du premier appel à la signature chez le notaire.',
   },
 ]
 
-const CREDS = ['Ancien financeur bancaire', 'Courtier IOBSP indépendant', 'Sans exclusivité de réseau']
+const CREDS = ['Ancien financeur bancaire', 'Courtier IOBSP indépendant', 'Sans exclusivité de réseau', 'Honoraires uniquement au résultat']
 
 const STATS: { value: number; sup: string; label: string; duration?: number }[] = [
   { value: 100, sup: '+', label: 'Banques & assureurs' },
@@ -68,25 +69,19 @@ export default function CabinetPage() {
             <div className="chc-eyebrow">Le cabinet</div>
             <h1 className="chc-cab-hero__title">Lire un projet<br /><em>avant de le financer.</em></h1>
             <p className="chc-cab-hero__lead">
-              Cap Horn Conseils est un cabinet de courtage indépendant au service de Lille et des Hauts-de-France.
-              Nous accompagnons particuliers, expatriés et chefs d’entreprise dans la construction
-              de financements sur mesure, en tenant la barre, du premier échange à la signature.
+              Cap Horn Conseils est un cabinet de courtage indépendant au service de Lille et des
+              Hauts-de-France. Particuliers, expatriés, chefs d’entreprise : plus de 500 dossiers
+              financés, et une règle qui ne bouge pas. Nous tenons la barre du premier appel jusqu’à
+              la signature, et nous ne facturons rien avant l’accord de la banque.
             </p>
             <div className="chc-coord" style={{ marginTop: 30 }}>{COORD}</div>
           </div>
 
           {/* Cartouche : la plaque d'identité du cabinet, dans le vocabulaire
               de la carte marine (rose des vents, losange de report). */}
+          {/* Cartouche retournable : le logo apparaît au survol. */}
           <aside className="chc-cab-hero__aside r" data-d="1">
-            <div className="chc-cab-spec__head">Cap Horn Conseils<sup>®</sup></div>
-            <dl className="chc-cab-spec__list">
-              {SPECS.map((s) => (
-                <div className="chc-cab-spec__row" key={s.k}>
-                  <dt className="chc-cab-spec__k">{s.k}</dt>
-                  <dd className="chc-cab-spec__v">{s.v}{s.sup && <span>{s.sup}</span>}</dd>
-                </div>
-              ))}
-            </dl>
+            <SpecFlipCard head="Cap Horn Conseils" specs={SPECS} />
           </aside>
         </div>
       </header>
@@ -110,13 +105,15 @@ export default function CabinetPage() {
             </blockquote>
             <div className="chc-cab-founder__name">Guillaume Horn</div>
             <p className="chc-lead" style={{ marginTop: 14 }}>
-              Après plusieurs années dans le financement bancaire et le courtage en crédit, Guillaume Horn
-              a fondé CAP HORN CONSEILS® avec une conviction simple : un bon financement commence par une
-              compréhension approfondie du projet et de la personne qui le porte.
+              Guillaume Horn a passé plusieurs années de l’autre côté du bureau, à instruire et
+              financer des dossiers en banque. Il sait donc précisément ce qui fait dire oui, et ce
+              qui fait dire non, souvent pour des raisons qui n’ont rien à voir avec la qualité du
+              projet. Il a fondé CAP HORN CONSEILS® pour mettre cette lecture au service des
+              emprunteurs plutôt que des prêteurs.
             </p>
             <p className="chc-lead" style={{ marginTop: 16 }}>
-              Chaque recommandation repose sur une analyse indépendante, une stratégie adaptée et une
-              négociation menée dans le seul intérêt du client.
+              Aucune exclusivité, aucun accord de volume avec une banque. La recommandation qu’il
+              vous fait est celle qu’il ferait pour lui-même.
             </p>
             <div className="chc-cab-creds">
               {CREDS.map((c) => (
@@ -138,8 +135,9 @@ export default function CabinetPage() {
             Il devrait vous en rendre <em>libre.</em>
           </p>
           <p className="chc-cab-manifesto__sub">
-            C’est pourquoi nous refusons toute exclusivité et ne facturons rien tant que le financement
-            n’est pas obtenu. Notre seul intérêt, c’est le vôtre, négocié dossier par dossier, banque par banque.
+            C’est pourquoi nous refusons toute exclusivité et ne facturons rien tant que le
+            financement n’est pas obtenu. Si nous n’obtenons rien, vous ne payez rien. Notre seul
+            intérêt, c’est le vôtre : négocié dossier par dossier, banque par banque.
           </p>
         </div>
       </section>
@@ -194,8 +192,9 @@ export default function CabinetPage() {
               <div className="chc-eyebrow chc-eyebrow--center" style={{ color: 'var(--chc-gold)' }}>Mettez le cap</div>
               <h2 className="chc-cab-cta__title">Prêt à faire avancer<br /><em>votre projet ?</em></h2>
               <p className="chc-cab-cta__sub">
-                Qualifiez votre projet en moins de trois minutes. Un expert CAP HORN CONSEILS® vous recontacte
-                sous 24 h pour construire avec vous la stratégie de financement la plus adaptée, sans engagement.
+                Trois minutes pour décrire votre projet, aucun document à fournir. Un expert
+                CAP HORN CONSEILS® vous rappelle sous 24 h ouvrées avec un premier avis. Sans
+                engagement, et sans le moindre honoraire tant que votre financement n’est pas obtenu.
               </p>
               <LiquidButton href="/tunnel" tone="dark" size="lg">Travailler avec Cap Horn <ArrowRight className="w-4 h-4" /></LiquidButton>
             </div>

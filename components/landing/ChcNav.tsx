@@ -79,7 +79,10 @@ export function ChcNav({ active }: { active?: string }) {
       <nav ref={navRef} className="chc-nav">
         <Link href="/" className="chc-nav__logo" onClick={() => setMenuOpen(false)} aria-label="Cap Horn Conseils, accueil">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo-caphorn.png" alt="Cap Horn Conseils" className="chc-nav__logo-img" />
+          {/* Variante sombre : le lettrage est repeint en crème, le pictogramme
+              garde ses couleurs. Un simple filtre d'inversion aurait effacé
+              la sauge, le teal et l'aqua des barres. */}
+          <img src="/logo-caphorn-dark.png" alt="Cap Horn Conseils" className="chc-nav__logo-img" />
         </Link>
         <div className="chc-nav__links">
           {LINKS.map((l) => (
@@ -106,7 +109,7 @@ export function ChcNav({ active }: { active?: string }) {
         id="chc-mobile-menu"
         className={`chc-mobile-menu ${menuOpen ? 'is-open' : ''}`}
         aria-hidden={!menuOpen}
-        {...(!menuOpen ? { inert: '' as unknown as boolean } : {})}
+        inert={!menuOpen}
       >
         <div className="chc-mobile-menu__scroll">
           <nav className="chc-mobile-menu__links" aria-label="Navigation principale">

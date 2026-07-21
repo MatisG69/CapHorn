@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, Cormorant_Garamond } from 'next/font/google'
+import { Jost, IBM_Plex_Sans } from 'next/font/google'
 import './globals.css'
 import { LiquidGlassFilter } from '@/components/LiquidGlassFilter'
 import ChatWidget from '@/components/chat/ChatWidget'
@@ -8,23 +8,27 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { OG_IMAGE, SITE_NAME, SITE_TITLE_SUFFIX, SITE_URL } from '@/lib/seo/config'
 import { organizationSchema, websiteSchema } from '@/lib/seo/jsonld'
 
-// ── Direction « Cap Horn, editorial premium » ─────────────────────────
-// Deux familles, conformément au design system : Inter (corps + display
-// massif 900) et Cormorant Garamond (titres de section serif, italiques).
-// Variables CSS conservées (--font-ibm-plex = Inter, --font-cormorant =
-// Cormorant) pour ne casser aucune référence existante.
-const inter = Inter({
+// ── Direction typographique, dérivée du logo ──────────────────────────
+// Le logo Cap Horn est intégralement en sans-serif géométrique : lettrage
+// « CAP'HORN » gras et resserré, « conseils » léger et très tracké. On adopte
+// donc cette langue-là, au lieu du serif (Cormorant) qui n'a aucun lien
+// avec la marque.
+//
+// Jost — géométrique de lignée Futura : O circulaires, A à sommet pointu,
+// terminaisons horizontales. C'est le plus proche du lettrage du logo.
+const display = Jost({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '900'],
-  variable: '--font-ibm-plex',
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-jost',
   display: 'swap',
 })
 
-const cormorant = Cormorant_Garamond({
+// IBM Plex Sans — corps de texte : neutre, très lisible en petites tailles,
+// avec ce qu'il faut de caractère technique pour un métier de la finance.
+const body = IBM_Plex_Sans({
   subsets: ['latin'],
-  weight: ['300', '400', '600', '700'],
-  style: ['normal', 'italic'],
-  variable: '--font-cormorant',
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-plex',
   display: 'swap',
 })
 
@@ -80,7 +84,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={`${inter.variable} ${cormorant.variable} h-full`}>
+    <html lang="fr" className={`${body.variable} ${display.variable} h-full`}>
       <body className="min-h-full flex flex-col font-sans">
         {/* Identité de l'entité, rattachée à toutes les pages via @id. */}
         <JsonLd schema={organizationSchema()} />

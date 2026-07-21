@@ -27,7 +27,7 @@ export default function AdminProfile() {
         className="flex w-full items-center gap-3 rounded-xl p-2.5 hover:bg-white/5 transition-colors"
       >
         <span className="w-9 h-9 rounded-full flex items-center justify-center text-[#1A1306] font-semibold text-sm shrink-0"
-          style={{ background: 'linear-gradient(150deg, #E8D29A, #B8922A)' }}>
+          style={{ background: 'linear-gradient(150deg, #E8D29A, var(--chc-accent))' }}>
           A
         </span>
         <span className="min-w-0 flex-1 text-left">

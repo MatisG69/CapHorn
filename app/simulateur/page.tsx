@@ -2,6 +2,7 @@ import { ArrowRight, Scale, Clock, ShieldCheck, FileCheck } from 'lucide-react'
 import { ChcNav } from '@/components/landing/ChcNav'
 import { ChcFooter } from '@/components/landing/ChcFooter'
 import { CompassRose } from '@/components/landing/CompassRose'
+import { SpecFlipCard, type Spec } from '@/components/landing/SpecFlipCard'
 import { LiquidButton } from '@/components/ui/LiquidButton'
 import { AssuranceCalculator } from '@/components/simulateur/AssuranceCalculator'
 import { getSimulatorSettings } from '@/lib/simulateur/settings'
@@ -15,7 +16,7 @@ export const metadata = {
 
 const COORD = 'Lille · Hauts-de-France'
 
-const SPECS: { k: string; v: string; sup?: string }[] = [
+const SPECS: Spec[] = [
   { k: 'Cadre légal', v: 'Loi Lemoine' },
   { k: 'Résiliation', v: 'À tout moment' },
   { k: 'Frais', v: 'Zéro' },
@@ -26,19 +27,19 @@ const SPECS: { k: string; v: string; sup?: string }[] = [
 const REASONS = [
   {
     n: '01', name: 'La loi Lemoine', feature: true, Icon: Scale,
-    desc: 'Depuis septembre 2022, vous pouvez résilier votre assurance emprunteur à tout moment, sans frais ni pénalité. Un droit ouvert à tous les emprunteurs, et rarement exercé, faute d’être accompagné.',
+    desc: 'Depuis septembre 2022, vous pouvez résilier votre assurance emprunteur à tout moment, sans frais ni pénalité, et votre banque ne peut pas s’y opposer si les garanties sont équivalentes. Un droit ouvert à tous, encore rarement exercé faute d’être accompagné. Chaque mois d’attente est de l’argent perdu.',
   },
   {
     n: '02', name: 'Étude sous 24 h', Icon: Clock,
-    desc: 'Votre dossier est analysé par un expert. Vous recevez une proposition complète et chiffrée sous 24 heures ouvrées.',
+    desc: 'Un expert reprend votre contrat ligne à ligne. Sous 24 heures ouvrées, vous recevez une proposition chiffrée : prime actuelle, prime nouvelle, économie totale sur la durée restante.',
   },
   {
     n: '03', name: 'Garanties équivalentes', Icon: ShieldCheck,
-    desc: 'Nos contrats respectent à la lettre les garanties exigées par votre banque. Aucune dégradation de couverture, jamais.',
+    desc: 'Nos contrats respectent à la lettre les garanties exigées par votre banque. Vous payez moins, vous n’êtes pas moins protégé. Aucune dégradation de couverture, jamais.',
   },
   {
     n: '04', name: 'Démarches prises en charge', Icon: FileCheck,
-    desc: 'Nous gérons l’intégralité de la substitution auprès de votre banque : courriers, délais, formalisme. Vous n’avez rien à rédiger.',
+    desc: 'Courriers, délais légaux, formalisme, relances de votre banque : nous portons toute la substitution. Vous n’avez pas une seule lettre à rédiger.',
   },
 ]
 
@@ -50,43 +51,40 @@ export default async function SimulateurPage() {
 
       {/* ── HERO ─────────────────────────────────────────────── */}
       <header className="chc-cab-hero">
-        <CompassRose className="chc-cab-hero__rose" />
         <div className="chc-cab-hero__inner">
           <div className="r">
             <div className="chc-eyebrow">Module exclusif · Changement d’assurance emprunteur, Loi Lemoine</div>
             <h1 className="chc-cab-hero__title">Combien pourriez-vous<br /><em>économiser ?</em></h1>
             <p className="chc-cab-hero__lead">
-              Estimez en 30 secondes les économies réalisables sur votre assurance emprunteur.
-              Selon votre profil, vous pourriez réduire significativement le coût total de votre
-              assurance, sans modifier les garanties exigées par votre banque.
+              Trente secondes suffisent pour voir ce que votre assurance emprunteur vous coûte de
+              trop. À garanties strictement identiques à celles exigées par votre banque, et sans un
+              euro de frais de résiliation : la loi Lemoine vous en donne le droit.
             </p>
             <div className="chc-coord" style={{ marginTop: 30 }}>{COORD}</div>
           </div>
 
+          {/* Cartouche retournable : le logo apparaît au survol. */}
           <aside className="chc-cab-hero__aside r" data-d="1">
-            {SPECS.map((s) => (
-              <div className="chc-cab-spec__row" key={s.k}>
-                <span className="chc-cab-spec__k">{s.k}</span>
-                <span className="chc-cab-spec__v">{s.v}{s.sup && <span>{s.sup}</span>}</span>
-              </div>
-            ))}
+            <SpecFlipCard head="Cap Horn Conseils" specs={SPECS} />
           </aside>
         </div>
       </header>
 
       {/* ── CALCULATEUR, module sombre ──────────────────────── */}
-      <section className="chc-dark">
-        <CompassRose className="chc-cab-calc__rose" />
-        <div className="chc-dark__inner">
-          <div className="chc-cab-calc__head r">
-            <div className="chc-eyebrow chc-eyebrow--light">Votre estimation, en direct</div>
-            <h2 className="chc-cab-calc__title">Ajustez, comparez,<br /><em>chiffrez.</em></h2>
-            <p className="chc-cab-calc__lead">
-              Renseignez vos paramètres : l’estimation se recalcule instantanément.
-              Un ordre de grandeur fiable, avant l’étude personnalisée qui fixera votre prime réelle.
+      <section className="chc-calcsec">
+        <div className="chc-calcsec__inner">
+          <header className="chc-calcsec__head r">
+            <p className="chc-eyebrow">Votre estimation, en direct</p>
+            <h2 className="chc-calcsec__title">Ajustez, comparez,<br /><em>chiffrez.</em></h2>
+            <p className="chc-calcsec__lead">
+              Renseignez vos paramètres : le montant se recalcule à chaque geste. Un ordre de
+              grandeur fiable, avant l’étude personnalisée qui fixera votre prime réelle au centime.
             </p>
-          </div>
-          <div className="chc-cab-calc__body r" data-d="1">
+          </header>
+          {/* `chc-calc` remappe localement les variables de l'ancienne charte
+              or utilisées par le calculateur. L'admin partage ces classes :
+              les redéfinir globalement l'aurait cassé. */}
+          <div className="chc-calc r" data-d="1">
             <AssuranceCalculator settings={settings} />
           </div>
         </div>
@@ -139,8 +137,9 @@ export default async function SimulateurPage() {
               <div className="chc-eyebrow chc-eyebrow--center" style={{ color: 'var(--chc-gold)' }}>Passez à l’étude</div>
               <h2 className="chc-cab-cta__title">De l’estimation<br /><em>à l’économie réelle.</em></h2>
               <p className="chc-cab-cta__sub">
-                Lancez l’étude personnalisée : un expert Cap Horn calcule votre prime réelle
-                et pilote toute la renégociation. Sans engagement, sans honoraire avant résultat.
+                Une estimation ne fait économiser personne. Lancez l’étude : un expert Cap Horn
+                calcule votre prime réelle et pilote toute la substitution auprès de votre banque.
+                Sans engagement, et sans honoraire tant que l’économie n’est pas actée.
               </p>
               <LiquidButton href="/tunnel?path=particulier&need=assurance_emprunteur" tone="dark" size="lg">
                 Demander mon étude détaillée <ArrowRight className="w-4 h-4" />

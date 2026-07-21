@@ -12,17 +12,17 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
  * 100 % inline → insensible au cache CSS global. Charte Cap Horn.
  */
 
-const DARK = '#0C0E12'
+const DARK = '#1E2E3F'
 const WHITE = '#FFFFFF'
-const CREAM = '#F7F4EF'
-const GOLD = '#B8922A'
-const GOLD_LIGHT = '#E3C173'
-const GOLD_DEEP = '#8A6F2A'
-const ESPRESSO = '#2A2106'
-const BORDER = 'rgba(0,0,0,0.08)'
-const MID = '#6B7280'
-const SERIF = "var(--font-cormorant), 'Cormorant Garamond', Georgia, serif"
-const SANS = "var(--font-ibm-plex), 'Inter', system-ui, sans-serif"
+const CREAM = '#F4F5F0'
+const GOLD = 'var(--chc-accent)'
+const GOLD_LIGHT = '#9ED4D2'
+const GOLD_DEEP = '#2F6B63'
+const ESPRESSO = '#1E2E3F'
+const BORDER = 'rgba(48,69,94,0.12)'
+const MID = '#5E6E7E'
+const SERIF = "var(--font-jost), 'Jost', system-ui, sans-serif"
+const SANS = "var(--font-plex), 'IBM Plex Sans', system-ui, sans-serif"
 
 // ⚠️ Témoignages de démonstration, à remplacer par de vrais avis clients.
 const testimonials = [
@@ -108,7 +108,7 @@ const cardBase: React.CSSProperties = {
   borderRadius: 22,
   background: `linear-gradient(170deg, ${WHITE} 0%, ${CREAM} 100%)`,
   border: `1px solid ${BORDER}`,
-  boxShadow: `0 1px 0 rgba(255,255,255,0.7) inset, 0 30px 60px -32px rgba(12,14,18,0.55)`,
+  boxShadow: `0 1px 0 rgba(255,255,255,0.7) inset, 0 30px 60px -32px rgba(30,46,63,0.5)`,
   backfaceVisibility: 'hidden',
 }
 

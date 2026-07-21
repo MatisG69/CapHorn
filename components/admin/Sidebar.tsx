@@ -30,7 +30,7 @@ export default function Sidebar() {
         <Link href="/admin" className="flex items-center gap-3 group">
           <div
             className="w-11 h-11 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-105"
-            style={{ background: 'linear-gradient(160deg,#1c2432,#0b0d11)', border: '1px solid rgba(184,146,42,0.32)', boxShadow: '0 8px 20px -6px rgba(12,14,18,0.6)' }}
+            style={{ background: 'linear-gradient(160deg,#1c2432,#0b0d11)', border: '1px solid rgba(86,150,141,0.32)', boxShadow: '0 8px 20px -6px rgba(12,14,18,0.6)' }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/logo-mark.png" alt="Cap Horn Conseils" className="w-7 h-7 object-contain" />
@@ -57,7 +57,7 @@ export default function Sidebar() {
               aria-current={active ? 'page' : undefined}
               className={`relative flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm transition-all duration-200 ${
                 active
-                  ? 'text-[#E8D29A] bg-[rgba(184,146,42,0.13)]'
+                  ? 'text-[#E8D29A] bg-[rgba(86,150,141,0.13)]'
                   : 'text-white/55 hover:text-white hover:bg-white/[0.04]'
               }`}
             >

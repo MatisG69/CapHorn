@@ -53,7 +53,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
             <Menu className="w-5 h-5" />
           </button>
           <div className="flex items-center gap-2">
-            <span className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'linear-gradient(160deg,#1c2432,#0b0d11)', border: '1px solid rgba(184,146,42,0.32)' }}>
+            <span className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'linear-gradient(160deg,#1c2432,#0b0d11)', border: '1px solid rgba(86,150,141,0.32)' }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/logo-mark.png" alt="Cap Horn Conseils" className="w-4 h-4 object-contain" />
             </span>

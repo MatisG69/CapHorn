@@ -58,6 +58,20 @@ export const BUSINESS_ADDRESS = {
  * Lille et les Hauts-de-France sont la cible SEO principale ; les communes de
  * la métropole lilloise captent les requêtes locales à forte intention.
  */
+/**
+ * Réseaux sociaux.
+ *
+ * `linkedin` est le profil personnel de Guillaume Horn (et non une page
+ * entreprise) : il est donc déclaré sur la Person « fondateur » des données
+ * structurées, pas sur l'Organization, ce qui correspond à la réalité.
+ *
+ * Facebook est volontairement absent tant que l'URL n'est pas connue : un
+ * lien vers une page inexistante nuit plus qu'il ne sert.
+ */
+export const SOCIALS = {
+  linkedin: 'https://www.linkedin.com/in/guillaume-horn/',
+} as const
+
 export const AREA_SERVED = [
   'Lille',
   'Métropole Européenne de Lille',

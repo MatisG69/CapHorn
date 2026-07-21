@@ -1,10 +1,10 @@
 import type { PillarData } from '@/components/landing/SeoPillar'
 
 const PARCOURS_STD = [
-  { n: '01', name: 'Qualification', desc: 'Vous décrivez votre projet en 3 minutes via notre outil. Aucun document requis à ce stade.' },
-  { n: '02', name: 'Échange personnalisé', desc: 'Guillaume vous rappelle sous 24 h pour cadrer le besoin et la stratégie de financement.' },
-  { n: '03', name: 'Montage & négociation', desc: 'Nous construisons un dossier solide et négocions auprès des banques et partenaires adaptés.' },
-  { n: '04', name: 'Signature & suivi', desc: 'Nous orchestrons jusqu’au déblocage des fonds et sécurisons les conditions annexes.' },
+  { n: '01', name: 'Qualification', desc: 'Trois minutes pour décrire votre projet, aucun document à fournir. Vous repartez avec un premier avis de faisabilité.' },
+  { n: '02', name: 'Échange personnalisé', desc: 'Guillaume vous rappelle sous 24 h ouvrées. On creuse votre situation réelle, et la stratégie se décide ensemble.' },
+  { n: '03', name: 'Montage & négociation', desc: 'Nous montons le dossier à votre place et le défendons auprès des banques dont les critères collent à votre profil. Taux, assurance, garanties : tout se négocie.' },
+  { n: '04', name: 'Signature & suivi', desc: 'Nous suivons chaque échéance jusqu’au déblocage des fonds. Nos honoraires ne sont dus qu’à ce moment-là.' },
 ]
 
 export const SEO_PAGES: Record<string, PillarData> = {
@@ -14,14 +14,14 @@ export const SEO_PAGES: Record<string, PillarData> = {
     eyebrow: 'Professions libérales',
     titleTop: 'Le financement adapté à votre',
     titleEm: 'activité libérale.',
-    introTitle: 'Une stratégie de financement adaptée à chaque profession libérale.',
+    introTitle: 'Votre dossier ne se refuse pas, il se raconte mal.',
     professionsIntro:
-      'Chaque profession libérale répond à des critères bancaires spécifiques. Nous structurons votre dossier de financement selon les attentes des établissements prêteurs afin d’optimiser vos conditions d’emprunt.',
+      'Chaque profession libérale a ses propres codes bancaires. Nous montons votre dossier dans le langage des prêteurs, avec les indicateurs qu’ils regardent réellement, avant de le mettre en concurrence.',
     lead:
-      "Médecin, chirurgien-dentiste, infirmier, kinésithérapeute, pharmacien, avocat, notaire, expert-comptable ou toute autre profession libérale : CAP HORN CONSEILS structure et négocie votre prêt professionnel pour financer votre installation, le rachat de patientèle ou de clientèle, l’acquisition des murs de votre cabinet, vos équipements, votre trésorerie ou le rachat de parts auprès de banques et partenaires spécialisés.",
+      "Médecin, chirurgien-dentiste, infirmier, kinésithérapeute, pharmacien, avocat, notaire, expert-comptable : votre BNC est solide, votre patientèle vaut cher, et pourtant les banques hésitent. CAP HORN CONSEILS monte et défend votre prêt professionnel (installation, rachat de patientèle ou de clientèle, murs du cabinet, équipements, trésorerie, rachat de parts) auprès des établissements qui financent vraiment les libéraux.",
     intro: [
-      "Les professions libérales répondent à des critères bancaires spécifiques : revenus en BNC, parts de SCM ou de SELARL, valorisation d’une patientèle, acquisition des murs via une SCI… Même un excellent dossier peut être refusé s’il est mal présenté. Correctement structuré, il peut accéder à des conditions de financement plus compétitives.",
-      "Notre rôle est de traduire votre projet dans le langage des banques, d’identifier les établissements réellement adaptés à votre profession et de négocier pour vous les meilleures conditions de financement, d’assurance et de garanties.",
+      "Revenus en BNC, parts de SCM ou de SELARL, valorisation d’une patientèle, murs détenus via une SCI : un chargé d’affaires généraliste n’a ni les repères ni le temps de décoder tout cela. Résultat, un excellent dossier peut être refusé simplement parce qu’il a été mal présenté. Le même dossier, correctement structuré, obtient un accord et de meilleures conditions.",
+      "Notre travail est là : traduire votre projet dans le langage des banques, écarter celles qui ne financent pas votre profession, et négocier pour vous le taux, l’assurance et les garanties. Vous ne payez qu’une fois le financement obtenu.",
     ],
     projets: [
       { title: 'Installation', desc: "Installation, reprise ou association : financement du droit de présentation, des murs professionnels et des frais d’installation." },
@@ -44,17 +44,17 @@ export const SEO_PAGES: Record<string, PillarData> = {
       { title: 'Financement in fine & patrimonial', desc: "Pour les dirigeants et professions libérales disposant d’un patrimoine significatif, mise en place de financements in fine intégrés à une stratégie patrimoniale globale." },
     ],
     parcours: [
-      { n: '01', name: 'Analyse de votre projet', desc: "Présentez votre projet en quelques minutes. Pour les professionnels déjà installés, l’ajout des derniers bilans permet de réaliser une étude plus précise dès le premier échange." },
-      { n: '02', name: 'Analyse & stratégie', desc: "Un expert du cabinet étudie votre situation, vos bilans et votre projet afin de construire une stratégie de financement personnalisée avant toute présentation aux établissements bancaires." },
-      { n: '03', name: 'Structuration & négociation', desc: "Nous structurons votre dossier, sélectionnons les établissements les plus pertinents et négocions pour vous le taux, l’assurance et les garanties." },
-      { n: '04', name: 'Signature & suivi', desc: "Nous vous accompagnons jusqu’à la signature, au déblocage des fonds et au suivi des dernières formalités jusqu’à la concrétisation de votre projet." },
+      { n: '01', name: 'Présentation du projet', desc: "Quelques minutes suffisent. Si vous êtes déjà installé, joignez vos derniers bilans : l’étude est alors bien plus précise dès le premier échange." },
+      { n: '02', name: 'Analyse & stratégie', desc: "Un expert du cabinet décortique vos bilans et votre projet, puis arrête la stratégie avec vous. Rien n’est présenté à une banque avant que le dossier ne soit prêt à convaincre." },
+      { n: '03', name: 'Structuration & négociation', desc: "Nous écartons les établissements qui ne financent pas votre profession, défendons le dossier auprès des autres et négocions le taux, l’assurance et les garanties." },
+      { n: '04', name: 'Signature & suivi', desc: "Nous suivons chaque échéance jusqu’à la signature et au déblocage des fonds. Nos honoraires ne sont dus qu’à ce moment-là." },
     ],
     faq: [
       { q: 'Comment financer une patientèle ?', a: "Le rachat d’une patientèle ou d’une clientèle peut être financé par un prêt professionnel, parfois complété par une garantie adaptée. Les établissements bancaires analysent notamment la récurrence des honoraires, l’ancienneté du cabinet et votre capacité de reprise. Nous structurons et présentons votre dossier afin d’optimiser vos chances d’obtenir un financement pouvant couvrir jusqu’à 100 % du projet, lorsque votre situation le permet." },
       { q: 'Comment financer son installation ?', a: "L’installation d’une profession libérale peut inclure le droit de présentation, les équipements professionnels et les besoins de trésorerie de démarrage. Nous construisons un plan de financement global combinant prêt professionnel, crédit-bail et, si nécessaire, une ligne de trésorerie, présenté aux établissements bancaires avec un prévisionnel solide." },
-      { q: 'Comment financer un cabinet médical ?', a: "Le financement d’un cabinet médical peut combiner le rachat de patientèle, l’acquisition des équipements professionnels, l’achat des murs du cabinet et les besoins de trésorerie. Chaque composante répond à des critères bancaires spécifiques. Nous structurons un plan de financement global afin d’optimiser le coût du crédit, de préserver votre capacité d’emprunt et de sélectionner les établissements les plus adaptés à votre projet." },
+      { q: 'Comment financer un cabinet médical ?', a: "Le financement d’un cabinet médical peut combiner le rachat de patientèle, l’acquisition des équipements professionnels, l’achat des murs du cabinet et les besoins de trésorerie. Chaque composante répond à des critères bancaires spécifiques. Nous structurons un plan de financement global afin d’optimiser le coût du crédit, de préserver votre capacité d’emprunt et d’aller chercher les établissements qui financent réellement ce type d’opération." },
       { q: 'Comment financer les murs de son cabinet ?', a: "L’acquisition des murs d’un cabinet s’effectue le plus souvent en direct ou via une SCI, selon votre situation patrimoniale et fiscale. Cette structuration permet de dissocier l’immobilier de l’activité professionnelle et de construire un patrimoine à long terme. Nous négocions le financement immobilier et coordonnons le montage avec votre notaire et votre expert-comptable." },
-      { q: 'Quel apport pour acheter son cabinet ?', a: "Selon votre profession, votre expérience et la solidité de votre dossier, un financement avec un apport limité, voire sans apport dans certains cas, peut être envisagé. L’essentiel reste la qualité du projet, du prévisionnel et la stabilité des revenus. Nous identifions les établissements bancaires les plus adaptés à votre profil." },
+      { q: 'Quel apport pour acheter son cabinet ?', a: "Selon votre profession, votre expérience et la solidité de votre dossier, un financement avec un apport limité, voire sans apport dans certains cas, peut être envisagé. L’essentiel reste la qualité du projet, du prévisionnel et la stabilité des revenus. Nous savons quelles banques acceptent aujourd’hui de financer sans apport, et lesquelles ne le feront jamais." },
       { q: 'Comment financer du matériel médical ?', a: "Le matériel médical (imagerie, fauteuil dentaire, laser, informatique métier ou équipements spécialisés) peut être financé par un prêt professionnel ou un crédit-bail. Le crédit-bail permet généralement de préserver votre trésorerie, avec une option d’achat en fin de contrat. Nous comparons chaque solution afin de retenir le financement le plus adapté à votre activité, à votre fiscalité et à vos objectifs patrimoniaux." },
       { q: 'Comment financer un rachat de parts ?', a: "Le rachat de parts sociales d’une SELARL, d’une SCP ou de toute société d’exercice libéral peut être financé par un prêt professionnel dédié. Les établissements bancaires analysent notamment la rentabilité de la structure, votre capacité de remboursement et les perspectives de développement. Nous structurons le montage juridique, fiscal et bancaire avec votre expert-comptable et votre notaire afin de sécuriser l’opération." },
     ],
@@ -77,10 +77,10 @@ export const SEO_PAGES: Record<string, PillarData> = {
     titleTop: 'Financer votre projet',
     titleEm: 'de santé.',
     lead:
-      "Médecins, chirurgiens-dentistes, kinésithérapeutes, infirmiers, vétérinaires, pharmaciens : un financement calibré sur la régularité de vos honoraires et les spécificités de votre exercice.",
+      "Médecins, chirurgiens-dentistes, kinésithérapeutes, infirmiers, vétérinaires, pharmaciens : votre métier est l’un des mieux notés par les banques. Encore faut-il que votre dossier le montre. Nous le montons pour qu’il obtienne l’apport réduit et le taux que votre profil mérite.",
     intro: [
-      "Les professionnels de santé bénéficient d’un regard bancaire favorable, revenus réguliers, faible sinistralité, à condition que le dossier soit présenté avec les bons repères : valorisation de la patientèle, nomenclature des actes, conventionnement.",
-      "Nous travaillons avec les banques et les partenaires les plus actifs sur le secteur médical pour obtenir des financements à apport réduit et des conditions parmi les meilleures du marché.",
+      "Revenus réguliers, faible sinistralité, patientèle qui ne s’évapore pas : le secteur de la santé est un excellent risque bancaire. Mais ce n’est vrai que si le dossier parle la bonne langue : valorisation de la patientèle, nomenclature des actes, conventionnement, projection d’activité.",
+      "Nous travaillons avec les banques et partenaires réellement actifs sur le médical, ceux qui savent lire ces éléments. C’est ce qui ouvre les financements à apport réduit, parfois à 100 %, et des conditions que le guichet généraliste ne proposera pas.",
     ],
     projets: [
       { title: 'Rachat de patientèle', desc: "Financement de la valeur d’un cabinet médical, dentaire ou paramédical." },
@@ -114,10 +114,10 @@ export const SEO_PAGES: Record<string, PillarData> = {
     titleTop: 'Le financement sur mesure des',
     titleEm: 'professions juridiques.',
     lead:
-      "Avocats, notaires, commissaires de justice, administrateurs judiciaires et mandataires judiciaires : financement de l’installation, du rachat de clientèle ou d’office, des parts sociales, des murs professionnels et de la trésorerie.",
+      "Avocats, notaires, commissaires de justice, administrateurs et mandataires judiciaires : installation, rachat de clientèle ou d’office, parts sociales, murs professionnels, trésorerie. Des opérations que peu de banques savent réellement financer. Nous savons lesquelles.",
     intro: [
-      "Les professions juridiques cumulent des enjeux de valorisation (clientèle, office, parts) et de structuration (SCP, SEL, SCI). La présentation du dossier et la structuration juridique, fiscale et bancaire font toute la différence sur le coût final.",
-      "Nous identifions les banques qui financent réellement ces opérations et négocions un montage cohérent avec votre stratégie patrimoniale.",
+      "Vos opérations cumulent deux difficultés : une valorisation incorporelle (clientèle, office, parts) que le banquier ne sait pas toujours apprécier, et une structuration juridique et fiscale (SCP, SEL, SCI, holding) qui pèse lourd sur le coût final. Sur une reprise d’office, quelques points de montage se chiffrent en dizaines de milliers d’euros.",
+      "Nous identifions les établissements qui financent vraiment ces opérations, construisons le montage avec vos conseils et négocions un échéancier cohérent avec vos revenus réels. Sans honoraire tant que le financement n’est pas obtenu.",
     ],
     projets: [
       { title: 'Rachat de clientèle / office', desc: "Financement de la valeur incorporelle d’un cabinet d’avocats ou d’un office." },
@@ -150,10 +150,10 @@ export const SEO_PAGES: Record<string, PillarData> = {
     titleTop: 'Financer un cabinet d’expertise comptable,',
     titleEm: 'un portefeuille clients ou une croissance externe.',
     lead:
-      "Experts-comptables et commissaires aux comptes : financement du rachat de cabinet, de la clientèle, des parts et de la croissance externe.",
+      "Experts-comptables et commissaires aux comptes : rachat de cabinet, portefeuille clients, parts sociales, croissance externe. Vous savez monter un plan de financement ; nous savons à qui le présenter, et comment le faire passer.",
     intro: [
-      "Les cabinets d’expertise comptable se valorisent sur la récurrence des missions et le portefeuille clients. C’est un actif très finançable, à condition de présenter un dossier qui rassure sur la rétention de la clientèle après reprise.",
-      "Nous structurons l’opération, souvent via une holding de reprise, et négocions le financement le plus efficient avec les banques actives sur le secteur.",
+      "Un cabinet d’expertise comptable se valorise sur la récurrence des missions et la solidité du portefeuille. C’est l’un des actifs les plus finançables du marché, à une condition : que le dossier réponde d’avance à la seule question qui inquiète le banquier, la rétention de la clientèle après la reprise.",
+      "Nous structurons l’opération, le plus souvent via une holding de reprise, et négocions le financement avec les banques réellement actives sur le secteur. Vous ne payez qu’une fois l’accord obtenu.",
     ],
     projets: [
       { title: 'Rachat de cabinet', desc: "Acquisition d’un portefeuille clients d’expertise comptable, en direct ou par holding." },
@@ -169,7 +169,7 @@ export const SEO_PAGES: Record<string, PillarData> = {
     parcours: PARCOURS_STD,
     faq: [
       { q: 'Comment financer le rachat d’un cabinet comptable ?', a: "Le rachat d’un cabinet d’expertise comptable peut être financé par un prêt professionnel, souvent via une holding de reprise. Les banques analysent la rentabilité du cabinet, la récurrence du portefeuille clients et votre capacité de remboursement. Nous structurons le montage et négocions les meilleures conditions de financement." },
-      { q: 'Quel apport pour racheter un portefeuille clients ?', a: "L’apport dépend de votre profil, du cabinet repris et de la banque. Un apport limité, voire nul dans certains dossiers, peut être accepté lorsque la rentabilité et le portefeuille clients offrent des garanties suffisantes. Nous identifions les établissements les plus adaptés à votre projet." },
+      { q: 'Quel apport pour racheter un portefeuille clients ?', a: "L’apport dépend de votre profil, du cabinet repris et de la banque. Un apport limité, voire nul dans certains dossiers, peut être accepté lorsque la rentabilité et le portefeuille clients offrent des garanties suffisantes. Nous savons lesquelles se positionnent réellement sur ce type de reprise." },
       { q: 'Comment financer une holding de reprise ?', a: "Une holding de reprise permet d’acquérir un cabinet en utilisant l’effet de levier du financement bancaire. Les remboursements sont généralement assurés par les dividendes remontés par la société reprise. Nous structurons l’opération avec votre expert-comptable et vos conseils." },
       { q: 'Comment financer une croissance externe ?', a: "La croissance externe peut être financée par un prêt professionnel, une holding de reprise ou un financement mixte. Nous analysons la rentabilité de l’opération et construisons une stratégie adaptée afin d’optimiser le coût du financement et votre capacité d’investissement." },
     ],
@@ -189,12 +189,12 @@ export const SEO_PAGES: Record<string, PillarData> = {
     eyebrow: 'Franchise',
     titleTop: 'Le financement sur mesure',
     titleEm: 'de votre franchise.',
-    introTitle: 'Un financement sur mesure, pour chaque projet de franchise.',
+    introTitle: 'Le concept est validé. Reste à convaincre la banque.',
     lead:
-      "Vous ouvrez un point de vente en franchise ? Cap Horn monte votre dossier bancaire, optimise l’apport et négocie le financement du droit d’entrée, de l’aménagement et du besoin en fonds de roulement.",
+      "Vous ouvrez un point de vente en franchise ? Cap Horn monte votre dossier bancaire, réduit l’apport que vous devrez sortir et négocie le financement du droit d’entrée, des travaux, du matériel et du fonds de roulement.",
     intro: [
-      "Un projet de franchise bénéficie souvent d’un concept éprouvé, d’un accompagnement du franchiseur et d’un prévisionnel structuré. Les établissements bancaires analysent toutefois la solidité du business plan, l’apport personnel, les garanties et l’adéquation entre le porteur de projet et le réseau choisi.",
-      "Nous construisons un dossier de financement complet, identifions les banques les plus adaptées à votre franchise et négocions une solution qui préserve votre trésorerie dès le lancement de votre activité.",
+      "Une franchise part avec un avantage réel : concept éprouvé, accompagnement du franchiseur, prévisionnel cadré. Mais la banque, elle, ne finance pas un réseau : elle finance un porteur de projet. Elle regarde votre apport, vos garanties, et votre crédibilité personnelle sur ce métier-là.",
+      "Nous construisons le dossier qui répond à ces trois questions, sélectionnons les banques actives sur votre enseigne et mobilisons les leviers qui allègent votre apport : prêt d’honneur, garantie Bpifrance, crédit-bail. L’objectif n’est pas seulement d’obtenir l’accord, c’est d’ouvrir avec de la trésorerie devant vous.",
     ],
     projets: [
       { title: 'Droit d’entrée & redevances', desc: "Financement du droit d’entrée dans le réseau et des frais initiaux." },
@@ -230,14 +230,14 @@ export const SEO_PAGES: Record<string, PillarData> = {
     titleTop: 'Vendre ou reprendre',
     titleEm: 'une entreprise.',
     cta: {
-      title: 'Vous préparez une reprise ou une transmission d’entreprise ?',
-      text: 'Présentez votre projet en quelques minutes. Un expert CAP HORN CONSEILS analysera votre situation, définira la stratégie la plus adaptée et vous accompagnera jusqu’à la réussite de votre opération.',
+      title: 'Une reprise se gagne avant la signature.',
+      text: 'Présentez votre projet en quelques minutes. Un expert CAP HORN CONSEILS étudie votre situation, arrête la stratégie avec vous et défend le financement jusqu’à la conclusion de l’opération. Sans honoraire tant qu’elle n’aboutit pas.',
     },
     lead:
-      "Que vous cédiez votre société ou que vous repreniez une entreprise, Cap Horn intervient sur la valorisation, le montage du financement et la mise en relation entre vendeurs et repreneurs.",
+      "Vendre la société d’une vie ou en reprendre une : dans les deux cas, tout se joue sur la valorisation et le montage. Cap Horn intervient sur l’estimation, la structuration du financement et la mise en relation entre cédants et repreneurs.",
     intro: [
-      "Chaque opération de reprise ou de transmission est unique. Valorisation de l’entreprise, audit d’acquisition, structuration juridique, apport personnel, dette d’acquisition ou holding de reprise : chaque étape influence directement les conditions de financement et la réussite de l’opération.",
-      "Nous accompagnons vendeurs et repreneurs dans la structuration de la transaction, la recherche des financements et la négociation avec les établissements bancaires afin de sécuriser l’ensemble du projet.",
+      "Une reprise se gagne ou se perd bien avant la signature. Valorisation, audit d’acquisition, structuration juridique, niveau d’apport, dette senior, holding de reprise : chacun de ces arbitrages se répercute directement sur le coût du financement, et sur ce qu’il vous restera après remboursement.",
+      "Nous accompagnons cédants et repreneurs sur toute la chaîne : structurer la transaction, aller chercher les financements, négocier avec les banques et sécuriser le calendrier. Une opération mal montée ne se rattrape pas ; une opération bien montée se finance.",
     ],
     projets: [
       { title: 'Vendre son entreprise', desc: "Préparation de la cession, valorisation d’entreprise et recherche de repreneur." },
@@ -277,14 +277,14 @@ export const SEO_PAGES: Record<string, PillarData> = {
     eyebrow: 'Lille & métropole',
     titleTop: 'Votre courtier en crédit immobilier',
     titleEm: 'à Lille.',
-    introTitle: 'Un courtier indépendant au service des projets immobiliers lillois.',
+    introTitle: 'À Lille, un dossier prêt vaut mieux qu’un dossier rapide.',
     professionsIntro:
-      'À Lille comme dans toute la métropole, chaque projet a ses spécificités. Nous adaptons la stratégie de financement à votre profil et au bien visé.',
+      'À Lille comme dans toute la métropole, chaque profil a ses banques. Nous savons lesquelles diront oui au vôtre, et à quelles conditions.',
     lead:
-      "Résidence principale, premier achat, investissement locatif ou acquisition via SCI : Cap Horn Conseils accompagne les acquéreurs de Lille et de la Métropole Européenne de Lille (Roubaix, Tourcoing, Villeneuve-d’Ascq, Marcq-en-Barœul…). Le courtier se déplace chez vous et négocie votre crédit immobilier auprès de près de cent banques partenaires.",
+      "Résidence principale, premier achat, investissement locatif ou acquisition via SCI : Cap Horn Conseils accompagne les acquéreurs de Lille et de la Métropole Européenne de Lille (Roubaix, Tourcoing, Villeneuve-d’Ascq, Marcq-en-Barœul…). Nous nous déplaçons chez vous, et nous mettons près de cent banques en concurrence sur votre crédit.",
     intro: [
-      "Le marché immobilier lillois est dynamique et concurrentiel : entre le Vieux-Lille, les quartiers en développement et l’attractivité de la métropole, les dossiers doivent être présentés vite et bien pour convaincre les banques. Un financement bien structuré fait souvent la différence entre une offre acceptée et un projet qui échoue.",
-      "Notre rôle est de traduire votre projet dans le langage des banques, d’identifier les établissements les plus adaptés à votre profil et de négocier pour vous le taux, l’assurance emprunteur et les garanties. Indépendants, nous ne sommes liés à aucune banque : la solution recommandée est celle qui sert votre intérêt.",
+      "Sur le marché lillois, un bien qui vous plaît plaît aussi à trois autres acquéreurs. Entre le Vieux-Lille, les quartiers en pleine mutation et la pression de la métropole, l’offre retenue est rarement la plus élevée : c’est celle dont le financement rassure le vendeur. Un dossier solide, présenté vite et bien, vaut souvent mieux que quelques milliers d’euros de plus.",
+      "Notre rôle est de traduire votre projet dans le langage des banques, d’aller directement vers celles dont les critères correspondent à votre profil, et de négocier le taux, l’assurance emprunteur et les garanties. Nous ne sommes liés à aucun établissement : la solution que nous recommandons est celle qui vous sert, et nos honoraires ne sont dus qu’en cas de succès.",
     ],
     projets: [
       { title: 'Résidence principale', desc: "Achat de votre logement à Lille ou dans la métropole, dans l’ancien comme dans le neuf, avec un plan de financement optimisé." },

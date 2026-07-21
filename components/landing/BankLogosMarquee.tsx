@@ -21,7 +21,7 @@ export default function BankLogosMarquee() {
   return (
     <section className="bank-logos" aria-label="Banques partenaires de Cap Horn Conseils">
       <p className="bank-logos__eyebrow">
-        <span className="bank-logos__rule" aria-hidden /> Nos banques partenaires
+        Nos banques partenaires
       </p>
 
       <div className="bank-logos__viewport">

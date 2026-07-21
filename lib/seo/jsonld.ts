@@ -6,6 +6,7 @@
  */
 import {
   AREA_SERVED,
+  SOCIALS,
   BUSINESS_ADDRESS,
   LEGAL_ENTITY,
   SITE_NAME,
@@ -41,6 +42,9 @@ export function organizationSchema() {
       '@type': 'Person',
       name: LEGAL_ENTITY.founder,
       jobTitle: 'Fondateur, courtier en financement',
+      // Profil personnel : il qualifie la personne, pas l'entreprise. C'est
+      // ce qui permet à Google de relier le site au profil officiel.
+      sameAs: [SOCIALS.linkedin],
     },
     email: LEGAL_ENTITY.email,
     telephone: LEGAL_ENTITY.phone,

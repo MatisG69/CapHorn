@@ -82,7 +82,7 @@ export function SeoPillar({ data }: { data: PillarData }) {
           </div>
           <div className="chc-intro__right r" data-d="1">
             {data.intro.map((p, i) => (<p key={i}>{p}</p>))}
-            <LiquidButton href="/tunnel" tone="light" size="lg" style={{ marginTop: 8 }}>
+            <LiquidButton href="/tunnel" tone="dark" size="lg" style={{ marginTop: 8 }}>
               Étudier mon projet <ArrowRight className="w-4 h-4" />
             </LiquidButton>
           </div>
@@ -216,7 +216,7 @@ export function SeoPillar({ data }: { data: PillarData }) {
             <div className="chc-eyebrow" style={{ justifyContent: 'center' }}>À votre disposition</div>
             <h2 className="chc-h2">{data.cta.title}</h2>
             <p className="chc-lead" style={{ marginTop: 20 }}>{data.cta.text}</p>
-            <LiquidButton href="/tunnel" tone="light" size="lg" style={{ marginTop: 28 }}>
+            <LiquidButton href="/tunnel" tone="dark" size="lg" style={{ marginTop: 28 }}>
               Démarrer mon étude <ArrowRight className="w-4 h-4" />
             </LiquidButton>
           </div>

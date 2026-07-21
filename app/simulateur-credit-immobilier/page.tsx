@@ -19,8 +19,9 @@ export default function SimulateurCreditPage() {
           <div className="chc-eyebrow">Simulateur · crédit immobilier</div>
           <h1 className="chc-pagehead__title">Votre mensualité,<br /><em>en quelques secondes.</em></h1>
           <p className="chc-pagehead__lead">
-            Estimez votre mensualité et le coût total de votre crédit selon les taux 2026. Cap Horn négocie
-            ensuite, sur les profils premium, des conditions souvent inférieures aux grilles affichées.
+            Estimez votre mensualité et le coût total de votre crédit selon les taux 2026. Ce que
+            vous voyez ici, ce sont les grilles publiques. Sur les profils solides, nous négocions
+            couramment 0,20 à 0,40 % en dessous.
           </p>
         </div>
       </header>

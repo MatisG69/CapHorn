@@ -80,7 +80,7 @@ export default function DossierLens() {
 
   return (
     <div className="w-full max-w-[460px] mx-auto">
-      <div className="group relative w-full overflow-hidden rounded-[2rem] border border-[var(--chc-bd)] bg-[var(--chc-white)] p-2 shadow-[0_40px_90px_-30px_rgba(12,14,18,0.42),0_8px_24px_-12px_rgba(12,14,18,0.28)]">
+      <div className="group relative w-full overflow-hidden rounded-[2rem] border border-[var(--chc-bd)] bg-[var(--chc-white)] p-2 shadow-[0_40px_90px_-30px_rgba(30,46,63,0.42),0_8px_24px_-12px_rgba(30,46,63,0.28)]">
         <div
           ref={containerRef}
           className="relative w-full overflow-hidden rounded-[1.6rem] bg-[var(--chc-cream)] h-[248px] sm:h-[292px]"
@@ -170,7 +170,7 @@ function Pill({ item, revealed = false }: { item: Tag; revealed?: boolean }) {
       className={cn(
         'flex gap-2 items-center whitespace-nowrap w-fit rounded-full border px-3 py-2 text-xs',
         revealed
-          ? 'bg-[var(--chc-white)] border-[rgba(184,146,42,0.30)] text-[var(--chc-text)] shadow-sm scale-[1.12] ml-5 font-medium'
+          ? 'bg-[var(--chc-white)] border-[rgba(86,150,141,0.30)] text-[var(--chc-text)] shadow-sm scale-[1.12] ml-5 font-medium'
           : 'bg-[rgba(255,255,255,0.55)] border-[var(--chc-bd)] text-[var(--chc-lite)]',
       )}
     >

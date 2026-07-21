@@ -32,7 +32,7 @@ export default async function AdminDashboard() {
   ]
 
   const kpis = [
-    { label: 'Dossiers complets', value: counts.completed, icon: Folder, tint: 'rgba(184,146,42,0.12)', color: '#B8922A', spark: '#C9A45C', data: trends.completed, pill: stats.new_leads_week > 0 ? { t: `+${stats.new_leads_week} cette sem.`, c: 'green' } : null, sub: 'Finalisés à 100 %' },
+    { label: 'Dossiers complets', value: counts.completed, icon: Folder, tint: 'rgba(86,150,141,0.12)', color: 'var(--chc-accent)', spark: '#C9A45C', data: trends.completed, pill: stats.new_leads_week > 0 ? { t: `+${stats.new_leads_week} cette sem.`, c: 'green' } : null, sub: 'Finalisés à 100 %' },
     { label: 'Dossiers en cours', value: counts.inProgress, icon: Clock, tint: 'rgba(217,119,6,0.12)', color: '#d97706', spark: '#e0a45c', data: trends.inProgress, pill: counts.inProgress > 0 ? { t: 'à relancer', c: 'amber' } : null, sub: 'Non finalisés' },
     { label: 'Leads chauds', value: stats.hot_leads, icon: Flame, tint: 'rgba(220,38,38,0.10)', color: '#dc2626', spark: '#e07a7a', data: trends.hot, pill: stats.hot_leads > 0 ? { t: 'priorité', c: 'red' } : null, sub: 'Priorité haute' },
     { label: 'Taux de conversion', value: `${stats.conversion_rate}%`, icon: TrendingUp, tint: 'rgba(22,163,74,0.12)', color: '#16a34a', spark: '#5fb87f', data: trends.conversion, pill: (st['won'] ?? 0) > 0 ? { t: `${st['won']} gagnés`, c: 'green' } : null, sub: 'Leads gagnés / total' },
@@ -136,7 +136,7 @@ export default async function AdminDashboard() {
           </div>
           <div className="mt-6 flex items-center justify-between gap-3 px-4 py-3 rounded-xl bg-[var(--color-ink-raised)]">
             <span className="text-sm text-[var(--color-cream-dim)]">Taux de conversion global</span>
-            <span className="text-sm font-semibold px-2.5 py-1 rounded-lg" style={{ background: 'rgba(184,146,42,0.16)', color: '#8A6B12' }}>{stats.conversion_rate}%</span>
+            <span className="text-sm font-semibold px-2.5 py-1 rounded-lg" style={{ background: 'rgba(86,150,141,0.16)', color: '#8A6B12' }}>{stats.conversion_rate}%</span>
           </div>
         </div>
       </div>
