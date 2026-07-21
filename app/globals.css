@@ -2544,41 +2544,67 @@ body.menu-open .chc-chat { opacity: 0; pointer-events: none; visibility: hidden;
 .chc-mobile-menu {
   position: fixed; inset: 0; z-index: 190;
   display: flex; flex-direction: column;
-  background: var(--chc-dark);
+  /* Même sol que le reste du site. L'ancienne valeur --chc-dark venait de
+     l'époque où le menu était une surface INVERSÉE sur un site clair. */
+  background: var(--chc-cream);
   opacity: 0; pointer-events: none;
   transition: opacity 0.3s ease;
 }
 .chc-mobile-menu.is-open { opacity: 1; pointer-events: auto; }
 @media (min-width: 900px) { .chc-mobile-menu { display: none; } }
-/* Voile haut : au défilement, les liens passaient en transparence derrière la
-   pilule de navigation. Ce dégradé les fait disparaître proprement. */
+
+/* Halo teal en haut à droite : la surface plate manquait de profondeur, et le
+   halo place le regard du côté du pouce qui vient d'ouvrir le menu. */
+.chc-mobile-menu::after {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(90% 55% at 88% 6%, rgba(86, 150, 141, 0.22), transparent 62%),
+    radial-gradient(70% 40% at 0% 100%, rgba(202, 209, 120, 0.07), transparent 60%);
+}
+/* Voile haut : au défilement, les liens passaient derrière la pilule de
+   navigation. Ce dégradé les fait disparaître proprement. */
 .chc-mobile-menu::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; z-index: 2;
+  content: ''; position: absolute; top: 0; left: 0; right: 0; z-index: 3;
   height: calc(env(safe-area-inset-top, 0px) + 84px);
-  background: linear-gradient(to bottom, var(--chc-dark) 58%, rgba(30, 46, 63, 0));
+  background: linear-gradient(to bottom, var(--chc-cream) 56%, rgba(14, 24, 33, 0));
   pointer-events: none;
 }
 
 /* Défilant : sur petit écran (ou en paysage) le contenu dépasse. */
 .chc-mobile-menu__scroll {
+  position: relative; z-index: 1;
   flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch;
-  padding: calc(env(safe-area-inset-top, 0px) + 88px) 24px 28px;
+  padding: calc(env(safe-area-inset-top, 0px) + 92px) 24px 28px;
 }
 
 .chc-mobile-menu__links { display: flex; flex-direction: column; }
 .chc-mobile-menu__links a {
-  display: flex; align-items: center; justify-content: space-between;
-  font-family: var(--chc-serif); font-weight: 600;
-  font-size: clamp(26px, 7.2vw, 34px); line-height: 1.16;
-  color: var(--chc-cream); text-decoration: none;
-  padding: 11px 0; border-bottom: 1px solid rgba(247, 244, 239, 0.10);
+  position: relative;
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  font-family: var(--chc-display); font-weight: 500;
+  font-size: clamp(27px, 7.6vw, 36px); line-height: 1.1; letter-spacing: -0.015em;
+  color: var(--chc-text); text-decoration: none;
+  padding: 13px 0 13px 20px;
+  border-bottom: 1px solid var(--chc-bd);
   opacity: 0; transform: translateY(10px);
-  transition: opacity 0.45s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1), color 0.2s;
+  transition: opacity 0.45s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1), color 0.2s, padding-left 0.25s;
 }
-.chc-mobile-menu__links a[aria-current="page"] { color: var(--chc-gold); }
+/* Barre de bôme, reprise des barres du logo : elle rythme la liste et fait
+   écho aux trois chiffres de l'accueil, mêmes couleurs dans le même ordre. */
+.chc-mobile-menu__links a::before {
+  content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+  width: 3px; height: 17px; border-radius: 2px;
+  background: var(--chc-teal); opacity: 0.45;
+  transition: opacity 0.25s, height 0.25s;
+}
+.chc-mobile-menu__links a:nth-child(3n+1)::before { background: var(--chc-sage); }
+.chc-mobile-menu__links a:nth-child(3n+2)::before { background: var(--chc-aqua); }
+.chc-mobile-menu__links a:active { color: var(--chc-accent-bright); }
+.chc-mobile-menu__links a[aria-current="page"] { color: var(--chc-accent-bright); }
+.chc-mobile-menu__links a[aria-current="page"]::before { opacity: 1; height: 26px; }
 /* Repère « vous êtes ici » : information, pas décoration. */
 .chc-mobile-menu__links a[aria-current="page"]::after {
-  content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--chc-gold); flex: none;
+  content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--chc-accent-bright); flex: none;
 }
 .chc-mobile-menu.is-open .chc-mobile-menu__links a { opacity: 1; transform: none; }
 .chc-mobile-menu.is-open .chc-mobile-menu__links a:nth-child(1) { transition-delay: 0.05s; }
@@ -2590,34 +2616,37 @@ body.menu-open .chc-chat { opacity: 0; pointer-events: none; visibility: hidden;
 
 /* Groupe « Financements » : hiérarchie réelle (sections vs pages de service). */
 .chc-mobile-menu__group {
-  margin-top: 32px;
+  margin-top: 30px;
   opacity: 0; transform: translateY(10px);
   transition: opacity 0.45s ease 0.28s, transform 0.5s cubic-bezier(0.16,1,0.3,1) 0.28s;
 }
 .chc-mobile-menu.is-open .chc-mobile-menu__group { opacity: 1; transform: none; }
 .chc-mobile-menu__label {
-  display: flex; align-items: center; gap: 12px; margin: 0 0 6px;
-  font-family: var(--chc-sans); font-size: 10px; font-weight: 600;
+  display: flex; align-items: center; gap: 12px; margin: 0 0 4px;
+  font-family: var(--chc-display); font-size: 10px; font-weight: 600;
   letter-spacing: 0.2em; text-transform: uppercase;
-  color: rgba(247, 244, 239, 0.42);
+  color: var(--chc-lite);
 }
-.chc-mobile-menu__label::after { content: ''; flex: 1; height: 1px; background: rgba(247, 244, 239, 0.12); }
-.chc-mobile-menu__grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 18px; }
+.chc-mobile-menu__grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; }
 .chc-mobile-menu__grid a {
-  display: flex; align-items: center; min-height: 44px; padding: 11px 0;
-  font-family: var(--chc-sans); font-size: 13px; line-height: 1.3;
-  color: rgba(247, 244, 239, 0.72); text-decoration: none;
-  border-bottom: 1px solid rgba(247, 244, 239, 0.07);
+  display: flex; align-items: center; min-height: 46px; padding: 11px 0;
+  font-family: var(--chc-sans); font-size: 13.5px; line-height: 1.3;
+  color: var(--chc-mid); text-decoration: none;
+  border-bottom: 1px solid rgba(232, 238, 242, 0.07);
+  transition: color 0.2s;
 }
-.chc-mobile-menu__grid a[aria-current="page"] { color: var(--chc-gold); }
+.chc-mobile-menu__grid a:active { color: var(--chc-accent-bright); }
+.chc-mobile-menu__grid a[aria-current="page"] { color: var(--chc-accent-bright); }
 
 /* Dock : appeler est la première action utile sur mobile pour un courtier. */
 .chc-mobile-menu__dock {
-  position: relative;
-  flex: none; display: grid; gap: 9px;
-  padding: 14px 24px calc(env(safe-area-inset-bottom, 0px) + 16px);
-  border-top: 1px solid rgba(247, 244, 239, 0.12);
-  background: rgba(15, 24, 33, 0.55);
+  position: relative; z-index: 2;
+  flex: none; display: grid; gap: 10px;
+  padding: 16px 24px calc(env(safe-area-inset-bottom, 0px) + 16px);
+  border-top: 1px solid var(--chc-bd);
+  background: rgba(8, 17, 26, 0.72);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
   opacity: 0; transform: translateY(14px);
   transition: opacity 0.4s ease 0.2s, transform 0.45s cubic-bezier(0.16,1,0.3,1) 0.2s;
 }
@@ -2625,30 +2654,31 @@ body.menu-open .chc-chat { opacity: 0; pointer-events: none; visibility: hidden;
 /* Dégradé au-dessus du dock : un lien coupé se lit alors comme « ça défile »
    et non comme un défaut d'affichage. */
 .chc-mobile-menu__dock::before {
-  content: ''; position: absolute; left: 0; right: 0; bottom: 100%; height: 40px;
-  background: linear-gradient(to top, var(--chc-dark), rgba(30, 46, 63, 0));
+  content: ''; position: absolute; left: 0; right: 0; bottom: 100%; height: 44px;
+  background: linear-gradient(to top, var(--chc-cream), rgba(14, 24, 33, 0));
   pointer-events: none;
 }
 .chc-mobile-menu__call {
-  display: flex; align-items: center; gap: 13px; min-height: 54px; padding: 8px 16px;
+  display: flex; align-items: center; gap: 13px; min-height: 56px; padding: 8px 16px;
   border-radius: 14px; text-decoration: none;
-  border: 1px solid rgba(86, 150, 141, 0.34); background: rgba(86, 150, 141, 0.08);
+  border: 1px solid rgba(111, 179, 168, 0.34); background: rgba(86, 150, 141, 0.10);
 }
-.chc-mobile-menu__call svg { color: var(--chc-gold); flex: none; }
-.chc-mobile-menu__call-label { display: block; font-family: var(--chc-sans); font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(247, 244, 239, 0.5); }
-.chc-mobile-menu__call-num { display: block; font-family: var(--chc-sans); font-size: 17px; font-weight: 600; letter-spacing: 0.02em; color: var(--chc-cream); margin-top: 2px; }
+.chc-mobile-menu__call svg { color: var(--chc-accent-bright); flex: none; }
+.chc-mobile-menu__call-label { display: block; font-family: var(--chc-display); font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--chc-lite); }
+.chc-mobile-menu__call-num { display: block; font-family: var(--chc-sans); font-size: 18px; font-weight: 600; letter-spacing: 0.02em; color: var(--chc-text); margin-top: 2px; }
 .chc-mobile-menu__cta {
   display: flex; align-items: center; justify-content: center; gap: 10px;
-  min-height: 54px; border-radius: 14px; text-decoration: none;
-  background: var(--chc-accent); color: #fff;
+  min-height: 56px; border-radius: 14px; text-decoration: none;
+  /* Encre sur teal : 8,9:1. Le blanc d'origine ne donnait que 2,3:1. */
+  background: var(--chc-accent); color: var(--chc-deep);
   font-family: var(--chc-display); font-size: 12.5px; font-weight: 600;
   letter-spacing: 0.1em; text-transform: uppercase;
 }
 .chc-mobile-menu__alt {
-  min-height: 40px; background: none; border: none; cursor: pointer;
-  font-family: var(--chc-sans); font-size: 11.5px; font-weight: 500;
+  min-height: 44px; background: none; border: none; cursor: pointer;
+  font-family: var(--chc-sans); font-size: 12px; font-weight: 500;
   letter-spacing: 0.08em; text-transform: uppercase;
-  color: rgba(247, 244, 239, 0.55);
+  color: var(--chc-mid);
   text-decoration: underline; text-underline-offset: 4px;
 }
 @media (prefers-reduced-motion: reduce) {
