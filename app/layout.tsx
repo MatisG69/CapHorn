@@ -5,7 +5,7 @@ import { LiquidGlassFilter } from '@/components/LiquidGlassFilter'
 import ChatWidget from '@/components/chat/ChatWidget'
 import Analytics from '@/components/Analytics'
 import { JsonLd } from '@/components/seo/JsonLd'
-import { OG_IMAGE, SITE_NAME, SITE_TITLE_SUFFIX, SITE_URL } from '@/lib/seo/config'
+import { SITE_NAME, SITE_TITLE_SUFFIX, SITE_URL } from '@/lib/seo/config'
 import { organizationSchema, websiteSchema } from '@/lib/seo/jsonld'
 
 // ── Direction typographique, dérivée du logo ──────────────────────────
@@ -57,14 +57,16 @@ export const metadata: Metadata = {
     title: 'Courtier en crédit à Lille et Hauts-de-France · Cap Horn Conseils',
     description:
       "Crédit immobilier, financement professionnel et assurance emprunteur. Étude gratuite, réponse sous 24 h.",
-    images: [OG_IMAGE],
+    // Les images OG sont fournies par les fichiers `opengraph-image.tsx`
+    // (générés, de marque, propres à chaque page). La carte racine
+    // app/opengraph-image.tsx se transmet à toute page sans la sienne.
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Courtier en crédit à Lille · Cap Horn Conseils',
     description:
       "Crédit immobilier, financement professionnel et assurance emprunteur. Étude gratuite, réponse sous 24 h.",
-    images: [OG_IMAGE.url],
+    // twitter:image reprend l'og:image généré à défaut de twitter-image dédié.
   },
   robots: {
     index: true,

@@ -65,6 +65,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     ? clamp(post.excerpt)
     : clamp(post.body.replace(/[#*_>`[\]()]/g, ' '))
   const path = `/blog/${post.slug}`
+  // Image de partage : la couverture de l'article si elle existe, sinon la
+  // carte de marque « Blog » générée — jamais une image piochée au hasard.
+  const ogImages = [post.cover_image_url ?? '/blog/opengraph-image']
 
   return {
     // Le suffixe de marque vient de title.template (app/layout.tsx).
@@ -81,13 +84,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       publishedTime: post.published_at,
       modifiedTime: post.updated_at ?? post.published_at,
       authors: [post.author],
-      images: post.cover_image_url ? [post.cover_image_url] : undefined,
+      images: ogImages,
     },
     twitter: {
-      card: post.cover_image_url ? 'summary_large_image' : 'summary',
+      card: 'summary_large_image',
       title: post.title,
       description,
-      images: post.cover_image_url ? [post.cover_image_url] : undefined,
+      images: ogImages,
     },
   }
 }
