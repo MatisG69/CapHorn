@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { after } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
 import { computeEstimation, parseFrNumber } from '@/lib/simulateur/estimate'
 import { getSimulatorSettings } from '@/lib/simulateur/settings'
+import { notifySimulation } from '@/lib/email/notifications'
 import type { SimulatorEstimationPayload } from '@/lib/types'
 
 /**
@@ -65,6 +67,26 @@ export async function POST(request: NextRequest) {
       console.error('[simulateur] Supabase error:', error)
       return NextResponse.json({ error: 'Erreur enregistrement' }, { status: 500 })
     }
+
+    // Notification à Guillaume après la réponse (n'affecte pas le client).
+    after(async () => {
+      try {
+        await notifySimulation({
+          payload: { first_name: first_name.trim(), email: email.trim(), phone: phone?.trim() || undefined },
+          capital,
+          durationYears,
+          age,
+          currentPremium,
+          caphornPremium: Math.round(result.caphornPremium),
+          monthlySaving: Math.round(result.monthlySaving),
+          yearlySaving: Math.round(result.yearlySaving),
+          totalSaving: Math.round(result.totalSaving),
+          savingsPercent: Math.round(result.savingsPercent),
+        })
+      } catch (err) {
+        console.error('[simulateur] Notification e-mail échouée:', err)
+      }
+    })
 
     return NextResponse.json({ success: true })
   } catch (err) {

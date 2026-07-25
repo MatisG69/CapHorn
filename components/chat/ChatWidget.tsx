@@ -45,7 +45,7 @@ export default function ChatWidget() {
   }, [messages, loading])
 
   // Le widget n'apparaît pas dans l'admin ni dans le tunnel
-  if (pathname.startsWith('/admin') || pathname.startsWith('/tunnel')) return null
+  if (pathname.startsWith('/admin') || pathname.startsWith('/mon-etude')) return null
 
   const send = (preset?: string) => {
     const text = (preset ?? value).trim()

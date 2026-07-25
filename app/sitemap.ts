@@ -7,7 +7,7 @@ import { getPublishedPosts } from '@/lib/blog/queries'
 export const revalidate = 600
 
 /**
- * `/tunnel` (entonnoir de conversion) et `/admin` sont volontairement absents :
+ * `/mon-etude` (entonnoir de conversion) et `/admin` sont volontairement absents :
  * ils portent un noindex et n'ont pas vocation à être explorés.
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

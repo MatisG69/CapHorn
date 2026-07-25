@@ -54,7 +54,7 @@ export default function MethodePage() {
             <div className="chc-eyebrow">Ce que nous gérons</div>
             <h2 className="chc-h2">Tout,<br /><em>de bout en bout.</em></h2>
             <p className="chc-lead" style={{ marginTop: 22 }}>Vous n’avez qu’une chose à faire : nous raconter votre projet. Comparaison, montage, négociation, relances, paperasse : c’est notre métier, et vous ne le payez que s’il aboutit.</p>
-            <LiquidButton href="/tunnel" tone="dark" size="lg" style={{ marginTop: 28 }}>Démarrer mon étude <ArrowRight className="w-4 h-4" /></LiquidButton>
+            <LiquidButton href="/mon-etude" tone="dark" size="lg" style={{ marginTop: 28 }}>Démarrer mon étude <ArrowRight className="w-4 h-4" /></LiquidButton>
           </div>
           <div className="r" data-d="1">
             <ul className="chc-checklist">

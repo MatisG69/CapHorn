@@ -199,7 +199,7 @@ export function AssuranceCalculator({
                 />
 
                 <Link
-                  href="/tunnel?path=particulier&need=assurance_emprunteur"
+                  href="/mon-etude?path=particulier&need=assurance_emprunteur"
                   className="btn-gold w-full justify-center mt-3"
                 >
                   Demander une étude détaillée

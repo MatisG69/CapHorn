@@ -141,7 +141,7 @@ export default async function SimulateurPage() {
                 calcule votre prime réelle et pilote toute la substitution auprès de votre banque.
                 Sans engagement, et sans honoraire tant que l’économie n’est pas actée.
               </p>
-              <LiquidButton href="/tunnel?path=particulier&need=assurance_emprunteur" tone="dark" size="lg">
+              <LiquidButton href="/mon-etude?path=particulier&need=assurance_emprunteur" tone="dark" size="lg">
                 Demander mon étude détaillée <ArrowRight className="w-4 h-4" />
               </LiquidButton>
             </div>

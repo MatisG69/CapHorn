@@ -322,7 +322,7 @@ export default function CreditSimulator() {
           </>
         )}
 
-        <Link href="/tunnel" className="chc-btn chc-btn-gold chc-credit__cta">
+        <Link href="/mon-etude" className="chc-btn chc-btn-gold chc-credit__cta">
           Affiner avec un expert <ArrowRight className="w-4 h-4" />
         </Link>
 

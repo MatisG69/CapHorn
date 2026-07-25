@@ -7,7 +7,7 @@ import { toDefaultConfig } from '@/lib/tunnel/engine'
 import type { TunnelStepDef } from '@/lib/types'
 
 function revalidate() {
-  revalidatePath('/tunnel')
+  revalidatePath('/mon-etude')
   revalidatePath('/admin/tunnel')
   revalidatePath('/admin/tunnel/editor')
 }

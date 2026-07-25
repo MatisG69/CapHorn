@@ -47,7 +47,7 @@ export default function FinalCta() {
           </ul>
 
           <div className="chc-final__actions">
-            <Link href="/tunnel" className="chc-btn chc-btn-gold">
+            <Link href="/mon-etude" className="chc-btn chc-btn-gold">
               Démarrer mon étude gratuite <ArrowRight className="w-4 h-4" aria-hidden />
             </Link>
             {/* Dernier bloc avant le pied de page : c'est ici qu'un appel

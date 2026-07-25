@@ -196,7 +196,7 @@ export default function CabinetPage() {
                 CAP HORN CONSEILS® vous rappelle sous 24 h ouvrées avec un premier avis. Sans
                 engagement, et sans le moindre honoraire tant que votre financement n’est pas obtenu.
               </p>
-              <LiquidButton href="/tunnel" tone="dark" size="lg">Travailler avec Cap Horn <ArrowRight className="w-4 h-4" /></LiquidButton>
+              <LiquidButton href="/mon-etude" tone="dark" size="lg">Travailler avec Cap Horn <ArrowRight className="w-4 h-4" /></LiquidButton>
             </div>
           </div>
         </div>

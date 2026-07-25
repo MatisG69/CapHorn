@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
       // L'admin et les routes API n'ont rien à faire dans l'index.
-      // /tunnel porte en plus un noindex au niveau de la page.
+      // /mon-etude porte en plus un noindex au niveau de la page.
       disallow: ['/admin', '/admin/', '/api/'],
     },
     sitemap: `${SITE_URL}/sitemap.xml`,

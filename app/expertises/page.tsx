@@ -37,7 +37,7 @@ export default function ExpertisesPage() {
             ))}
           </div>
           <div style={{ textAlign: 'center', marginTop: 52 }} className="r">
-            <LiquidButton href="/tunnel" tone="dark" size="lg">Qualifier mon projet en 3 minutes <ArrowRight className="w-4 h-4" /></LiquidButton>
+            <LiquidButton href="/mon-etude" tone="dark" size="lg">Qualifier mon projet en 3 minutes <ArrowRight className="w-4 h-4" /></LiquidButton>
           </div>
         </div>
       </section>

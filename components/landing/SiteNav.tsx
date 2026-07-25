@@ -71,7 +71,7 @@ export function SiteNav({ active }: { active?: string }) {
           ))}
         </div>
         <div className="ch-nav__right">
-          <Link href="/tunnel" className="ch-btn ch-btn--primary" style={{ padding: '10px 18px', fontSize: '0.85rem' }}>
+          <Link href="/mon-etude" className="ch-btn ch-btn--primary" style={{ padding: '10px 18px', fontSize: '0.85rem' }}>
             Démarrer <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

@@ -63,7 +63,7 @@ export const SEO_PAGES: Record<string, PillarData> = {
       { href: '/financement-professions-juridiques', label: 'Professions juridiques' },
       { href: '/financement-professions-chiffre', label: 'Professions du chiffre' },
       { href: '/simulateur', label: 'Simulateur assurance emprunteur' },
-      { href: '/tunnel', label: 'Démarrer mon étude' },
+      { href: '/mon-etude', label: 'Démarrer mon étude' },
     ],
     metaTitle: 'Financement des professions libérales',
     metaDescription:
@@ -101,7 +101,7 @@ export const SEO_PAGES: Record<string, PillarData> = {
     ],
     related: [
       { href: '/financement-professions-liberales', label: 'Toutes les professions libérales' },
-      { href: '/tunnel', label: 'Démarrer mon étude' },
+      { href: '/mon-etude', label: 'Démarrer mon étude' },
     ],
     metaTitle: 'Financement des professions de santé',
     metaDescription:
@@ -137,7 +137,7 @@ export const SEO_PAGES: Record<string, PillarData> = {
     ],
     related: [
       { href: '/financement-professions-liberales', label: 'Toutes les professions libérales' },
-      { href: '/tunnel', label: 'Démarrer mon étude' },
+      { href: '/mon-etude', label: 'Démarrer mon étude' },
     ],
     metaTitle: 'Financement avocats & notaires',
     metaDescription:
@@ -176,7 +176,7 @@ export const SEO_PAGES: Record<string, PillarData> = {
     related: [
       { href: '/financement-professions-liberales', label: 'Toutes les professions libérales' },
       { href: '/reprise-transmission', label: 'Reprise & transmission' },
-      { href: '/tunnel', label: 'Démarrer mon étude' },
+      { href: '/mon-etude', label: 'Démarrer mon étude' },
     ],
     metaTitle: 'Financement des experts-comptables',
     metaDescription:
@@ -216,7 +216,7 @@ export const SEO_PAGES: Record<string, PillarData> = {
     ],
     related: [
       { href: '/expertises', label: 'Toutes nos expertises' },
-      { href: '/tunnel', label: 'Démarrer mon étude' },
+      { href: '/mon-etude', label: 'Démarrer mon étude' },
     ],
     metaTitle: 'Financement de franchise',
     metaDescription:
@@ -264,7 +264,7 @@ export const SEO_PAGES: Record<string, PillarData> = {
     related: [
       { href: '/financement-professions-chiffre', label: 'Rachat de cabinet comptable' },
       { href: '/expertises', label: 'Toutes nos expertises' },
-      { href: '/tunnel', label: 'Démarrer mon étude' },
+      { href: '/mon-etude', label: 'Démarrer mon étude' },
     ],
     metaTitle: 'Reprise & transmission d’entreprise',
     metaDescription:
@@ -317,7 +317,7 @@ export const SEO_PAGES: Record<string, PillarData> = {
       { href: '/simulateur-credit-immobilier', label: 'Simuler mon crédit immobilier' },
       { href: '/simulateur', label: 'Simulateur assurance emprunteur' },
       { href: '/expertises', label: 'Toutes nos expertises' },
-      { href: '/tunnel', label: 'Démarrer mon étude' },
+      { href: '/mon-etude', label: 'Démarrer mon étude' },
     ],
     metaTitle: 'Courtier en crédit immobilier à Lille',
     metaDescription:

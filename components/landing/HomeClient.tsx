@@ -140,7 +140,7 @@ export default function HomeClient() {
             </p>
             <div className="chc-h__actions chc-h-in" data-d="6">
               {/* Action principale : bouton « liquid metal » (shader WebGL). */}
-              <LiquidMetalButton label="Qualifier mon projet" href="/tunnel" />
+              <LiquidMetalButton label="Qualifier mon projet" href="/mon-etude" />
               <Link href="/methode" className="chc-h__textlink">
                 Découvrir la méthode <ArrowRight className="w-4 h-4" aria-hidden />
               </Link>
@@ -344,7 +344,7 @@ export default function HomeClient() {
               <p className="chc-modal__lead">{open.lead}</p>
               <div className="chc-modal__rule" />
               <p className="chc-modal__body">{open.details}</p>
-              <LiquidButton href="/tunnel" tone="dark" size="lg" className="chc-modal__cta">Étudier mon projet <ArrowRight className="w-4 h-4" /></LiquidButton>
+              <LiquidButton href="/mon-etude" tone="dark" size="lg" className="chc-modal__cta">Étudier mon projet <ArrowRight className="w-4 h-4" /></LiquidButton>
             </div>
           </div>
         </div>

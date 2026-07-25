@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { after } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
 import { scoreLead } from '@/lib/scoring'
+import { notifyDossierStarted, notifyDossierSubmitted } from '@/lib/email/notifications'
 import type { LeadUpsertPayload } from '@/lib/types'
 
 const UUID_RE =
@@ -60,6 +62,18 @@ export async function POST(request: NextRequest) {
         },
       },
     )
+
+    // État AVANT écriture : sert à n'envoyer chaque notification qu'une fois.
+    // Le tunnel appelle cette route à chaque étape ; sans ce garde-fou,
+    // Guillaume recevrait un e-mail à chaque sauvegarde. On récupère juste de
+    // quoi détecter les deux transitions qui l'intéressent.
+    const { data: prior } = await supabase
+      .from('leads')
+      .select('completed, email')
+      .eq('session_id', session_id)
+      .maybeSingle()
+    const hadContact = !!prior?.email
+    const wasCompleted = prior?.completed === true
 
     // Colonnes communes à chaque sauvegarde.
     // On fournit TOUJOURS toutes les colonnes métier NOT NULL (avec des
@@ -146,6 +160,38 @@ export async function POST(request: NextRequest) {
       console.error('[leads] Supabase error:', JSON.stringify(error ? { message: error.message, code: error.code, details: error.details, hint: error.hint } : 'no data'))
       return NextResponse.json({ error: 'Erreur enregistrement' }, { status: 500 })
     }
+
+    // Notifications e-mail à Guillaume, APRÈS la réponse (after) : elles ne
+    // ralentissent jamais le tunnel et un échec d'envoi ne casse pas l'enregistrement.
+    const nowHasContact = !!contact?.email
+    const nowCompleted = !!completed
+    const notifyContact = contact // capturé pour la closure
+    after(async () => {
+      try {
+        // Dossier FINALISÉ : la personne a soumis. Une seule fois (transition).
+        if (nowCompleted && !wasCompleted && notifyContact && sub_type) {
+          await notifyDossierSubmitted({
+            contact: notifyContact,
+            tunnelType: tunnel_type,
+            subType: sub_type,
+            scoreLabel: scoring?.score_label,
+            projectDetails: typeof project_details === 'string' ? project_details : undefined,
+            documentCount: Array.isArray(documents) ? documents.length : 0,
+          })
+        // Dossier COMMENCÉ : coordonnées laissées mais pas encore finalisé.
+        // Une seule fois : la première sauvegarde où l'e-mail apparaît.
+        } else if (!nowCompleted && !hadContact && nowHasContact && notifyContact) {
+          await notifyDossierStarted({
+            contact: notifyContact,
+            tunnelType: tunnel_type,
+            subType: sub_type ?? null,
+            progress: Math.max(0, Math.min(100, Math.round(progress ?? 0))),
+          })
+        }
+      } catch (err) {
+        console.error('[leads] Notification e-mail échouée:', err)
+      }
+    })
 
     return NextResponse.json({
       success: true,

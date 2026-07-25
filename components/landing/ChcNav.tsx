@@ -142,7 +142,7 @@ export function ChcNav({ active }: { active?: string }) {
               <span className="chc-mobile-menu__call-num">{LEGAL_ENTITY.phoneDisplay}</span>
             </span>
           </a>
-          <Link href="/tunnel" className="chc-mobile-menu__cta" onClick={() => setMenuOpen(false)}>
+          <Link href="/mon-etude" className="chc-mobile-menu__cta" onClick={() => setMenuOpen(false)}>
             Démarrer mon étude <ArrowRight className="w-4 h-4" aria-hidden />
           </Link>
           <button type="button" className="chc-mobile-menu__alt" onClick={() => { setMenuOpen(false); setContactOpen(true) }}>

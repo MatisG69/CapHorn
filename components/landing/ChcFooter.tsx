@@ -19,7 +19,7 @@ export function ChcFooter({ showCta = true }: { showCta?: boolean }) {
               Prêt à faire avancer<br />
               <em>votre projet ?</em>
             </p>
-            <Link href="/tunnel" className="chc-footer__cta-link">
+            <Link href="/mon-etude" className="chc-footer__cta-link">
               Démarrer mon étude gratuite
               <ArrowRight className="w-4 h-4" aria-hidden />
             </Link>
@@ -66,7 +66,7 @@ export function ChcFooter({ showCta = true }: { showCta?: boolean }) {
             <Link href="/simulateur">Simulateur assurance</Link>
             <Link href="/blog">Blog &amp; conseils</Link>
             <Link href="/le-cabinet">À propos</Link>
-            <Link href="/tunnel">Démarrer une étude</Link>
+            <Link href="/mon-etude">Démarrer une étude</Link>
           </nav>
 
           <div className="chc-footer__col chc-footer__col--contact">

@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { after } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
+import { notifyContactRequest } from '@/lib/email/notifications'
 import type { ContactFormData } from '@/lib/types'
 
 /** Demande de rendez-vous depuis le formulaire « Prendre contact ». */
@@ -39,6 +41,26 @@ export async function POST(request: NextRequest) {
       console.error('[contact] Supabase error:', error)
       return NextResponse.json({ error: 'Erreur enregistrement' }, { status: 500 })
     }
+
+    // Notification à Guillaume après la réponse.
+    after(async () => {
+      try {
+        await notifyContactRequest({
+          data: {
+            first_name: first_name.trim(),
+            last_name: last_name.trim(),
+            email: email.trim(),
+            phone: phone.trim(),
+            message: message?.trim() || undefined,
+            preferred_slot: preferred_slot?.trim() || undefined,
+            consent_rgpd: true,
+          },
+        })
+      } catch (err) {
+        console.error('[contact] Notification e-mail échouée:', err)
+      }
+    })
+
     return NextResponse.json({ success: true })
   } catch (err) {
     console.error('[contact] Unexpected error:', err)
