@@ -13,6 +13,7 @@ const LINKS = [
   { href: '/blog', label: 'Blog' },
   { href: '/simulateur', label: 'Simulateur' },
   { href: '/le-cabinet', label: 'Le cabinet' },
+  { href: '/parrainage-apporteur-affaires', label: 'Parrainage' },
 ]
 
 /** Pages de financement : sur mobile elles n'étaient atteignables que par le
@@ -20,6 +21,7 @@ const LINKS = [
 const FINANCEMENTS = [
   { href: '/financement-professions-liberales', label: 'Professions libérales' },
   { href: '/financement-professions-sante', label: 'Professions de santé' },
+  { href: '/financement-medecins-chirurgiens-lille', label: 'Médecins & chirurgiens' },
   { href: '/financement-professions-juridiques', label: 'Avocats & notaires' },
   { href: '/financement-professions-chiffre', label: 'Experts-comptables' },
   { href: '/financement-franchise', label: 'Franchise' },
@@ -30,6 +32,15 @@ const FINANCEMENTS = [
 export function ChcNav({ active }: { active?: string }) {
   const navRef = useRef<HTMLElement>(null)
   const pathname = usePathname()
+
+  /**
+   * Page courante déduite de l'URL, avec la prop `active` en priorité.
+   *
+   * Auparavant seule la prop comptait : une page qui oubliait de la passer
+   * (c'était le cas de /parrainage-apporteur-affaires) n'apparaissait jamais
+   * comme courante, ni visuellement ni pour les lecteurs d'écran.
+   */
+  const isCurrent = (href: string) => active === href || pathname === href
   const [contactOpen, setContactOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -86,7 +97,7 @@ export function ChcNav({ active }: { active?: string }) {
         </Link>
         <div className="chc-nav__links">
           {LINKS.map((l) => (
-            <Link key={l.href} href={l.href} aria-current={active === l.href ? 'page' : undefined}>{l.label}</Link>
+            <Link key={l.href} href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</Link>
           ))}
         </div>
         <button type="button" className="chc-nav__cta" onClick={() => setContactOpen(true)}>Prendre contact</button>
@@ -115,7 +126,7 @@ export function ChcNav({ active }: { active?: string }) {
           <nav className="chc-mobile-menu__links" aria-label="Navigation principale">
             <Link href="/" onClick={() => setMenuOpen(false)}>Accueil</Link>
             {LINKS.map((l) => (
-              <Link key={l.href} href={l.href} aria-current={active === l.href ? 'page' : undefined} onClick={() => setMenuOpen(false)}>
+              <Link key={l.href} href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined} onClick={() => setMenuOpen(false)}>
                 {l.label}
               </Link>
             ))}
@@ -125,7 +136,7 @@ export function ChcNav({ active }: { active?: string }) {
             <p className="chc-mobile-menu__label">Financements</p>
             <nav className="chc-mobile-menu__grid" aria-label="Pages de financement">
               {FINANCEMENTS.map((l) => (
-                <Link key={l.href} href={l.href} aria-current={active === l.href ? 'page' : undefined} onClick={() => setMenuOpen(false)}>
+                <Link key={l.href} href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined} onClick={() => setMenuOpen(false)}>
                   {l.label}
                 </Link>
               ))}

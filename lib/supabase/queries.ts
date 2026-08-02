@@ -1,5 +1,35 @@
 import { createClient } from './server'
-import type { Lead, DashboardStats, LeadStatus, AppointmentRequest, SimulatorEstimation } from '../types'
+import type { Lead, DashboardStats, LeadStatus, AppointmentRequest, GuideRequest, Referral, SimulatorEstimation } from '../types'
+
+/** Parrainages déposés depuis /parrainage-apporteur-affaires. Résilient. */
+export async function getReferrals(): Promise<Referral[]> {
+  try {
+    const supabase = await createClient()
+    const { data, error } = await supabase
+      .from('referrals')
+      .select('*')
+      .order('created_at', { ascending: false })
+    if (error) return []
+    return (data ?? []) as Referral[]
+  } catch {
+    return []
+  }
+}
+
+/** Coordonnées laissées pour recevoir un guide (pages métier). Résilient. */
+export async function getGuideRequests(): Promise<GuideRequest[]> {
+  try {
+    const supabase = await createClient()
+    const { data, error } = await supabase
+      .from('guide_requests')
+      .select('*')
+      .order('created_at', { ascending: false })
+    if (error) return []
+    return (data ?? []) as GuideRequest[]
+  } catch {
+    return []
+  }
+}
 
 /** Demandes de rendez-vous (formulaire « Prendre contact »). Résilient. */
 export async function getAppointments(): Promise<AppointmentRequest[]> {

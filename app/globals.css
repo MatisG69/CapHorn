@@ -4544,3 +4544,486 @@ body.menu-open .chc-chat { opacity: 0; pointer-events: none; visibility: hidden;
 .chc-sdock--vertical .chc-sdock__num { left: calc(100% + 10px); bottom: 6px; }
 @keyframes chc-sdock-in { from { opacity: 0; transform: translateY(6px) scale(0.94); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .chc-sdock__num { animation: none; } }
+
+/* ════════════════════════════════════════════════════════════════════════
+   PAGE MÉDECINS & CHIRURGIENS (/financement-medecins-chirurgiens-lille)
+
+   Tout est préfixé .med- et vit sous .chc : la page réutilise les jetons du
+   thème (teal, aqua, encre) mais possède ses propres compositions — héros en
+   deux colonnes, frise de carrière, grille de spécialités, carte régionale,
+   formulaire de guide — qu'aucune autre page n'emploie.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ── Boutons ─────────────────────────────────────────────────────────── */
+.chc .med-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 15px 28px; border-radius: 999px; border: 1px solid transparent;
+  font-family: var(--chc-display); font-size: 12.5px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+  cursor: pointer; text-align: center; line-height: 1.2;
+  transition: background 0.25s, border-color 0.25s, color 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+.chc .med-btn--accent { background: var(--chc-accent); color: #08111A; }
+.chc .med-btn--accent:hover:not(:disabled) {
+  background: var(--chc-accent-bright); transform: translateY(-2px);
+  box-shadow: 0 12px 30px -12px rgba(111,179,168,0.55);
+}
+.chc .med-btn--accent:disabled { opacity: 0.55; cursor: default; }
+.chc .med-btn--ghost { background: transparent; color: var(--chc-text); border-color: var(--chc-bd); }
+.chc .med-btn--ghost:hover { border-color: var(--chc-accent); color: var(--chc-accent-bright); }
+.chc .med-btn--block { width: 100%; }
+.chc .med-btn svg { flex: none; }
+
+/* ── Héros ───────────────────────────────────────────────────────────── */
+.med-hero { position: relative; padding: clamp(116px, 17vh, 168px) clamp(24px, 5vw, 52px) clamp(56px, 8vh, 88px); overflow: hidden; }
+.med-hero__glow {
+  position: absolute; top: -18%; right: -10%; width: 62vw; max-width: 780px; height: 780px;
+  pointer-events: none; z-index: 0;
+  background: radial-gradient(closest-side, rgba(86,150,141,0.16), transparent 72%);
+}
+.med-hero__inner {
+  position: relative; z-index: 1; max-width: 1180px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr; gap: 44px; align-items: start;
+}
+@media (min-width: 1000px) {
+  .med-hero__inner { grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); gap: clamp(48px, 5vw, 72px); }
+}
+.med-hero__title {
+  font-family: var(--chc-serif); font-weight: 600;
+  font-size: clamp(31px, 4.3vw, 54px); line-height: 1.07; letter-spacing: -0.018em;
+  color: var(--chc-text); margin: 0 0 22px; text-wrap: balance;
+}
+.med-hero__claim {
+  font-family: var(--chc-serif); font-weight: 500; font-size: clamp(17px, 1.7vw, 21px);
+  line-height: 1.55; color: var(--chc-accent-bright); margin: 0 0 26px; max-width: 46ch;
+}
+.med-hero__p { font-size: 15.5px; font-weight: 300; line-height: 1.85; color: var(--chc-mid); margin: 0 0 16px; max-width: 62ch; }
+.med-hero__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.med-hero__reassure { margin: 16px 0 0; font-size: 13px; color: var(--chc-lite); }
+
+.med-engagements { list-style: none; margin: 38px 0 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media (min-width: 640px) { .med-engagements { grid-template-columns: 1fr 1fr; gap: 20px 28px; } }
+.med-engagements li { display: flex; align-items: flex-start; gap: 13px; font-size: 13.8px; font-weight: 300; line-height: 1.6; color: var(--chc-text); }
+.med-engagements__icon {
+  flex: none; width: 36px; height: 36px; border-radius: 11px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--chc-accent3); border: 1px solid var(--chc-bd); color: var(--chc-accent-bright);
+}
+
+.med-hero__aside { position: relative; }
+.med-hero__img {
+  width: 100%; height: auto; display: block; border-radius: 20px;
+  aspect-ratio: 5 / 4; object-fit: cover; object-position: center 28%;
+  box-shadow: 0 34px 70px -30px rgba(4,9,14,0.9);
+}
+.med-premium {
+  position: relative; margin: -34px 0 0 0; margin-inline: clamp(0px, 3vw, 26px);
+  background: var(--chc-white); border: 1px solid var(--chc-bd); border-radius: 18px;
+  padding: 26px 26px 24px; box-shadow: 0 26px 54px -26px rgba(4,9,14,0.85);
+}
+.med-premium__title { font-family: var(--chc-serif); font-weight: 600; font-size: 19px; line-height: 1.35; color: var(--chc-text); margin: 0 0 18px; }
+.med-premium__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.med-premium__list li { display: flex; align-items: flex-start; gap: 11px; font-size: 14px; font-weight: 300; line-height: 1.55; color: var(--chc-mid); }
+.med-premium__list svg { flex: none; margin-top: 2px; color: var(--chc-accent-bright); }
+
+/* ── Frise de carrière ───────────────────────────────────────────────── */
+.med-timeline {
+  list-style: none; margin: 48px 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+  background: var(--chc-bd); border: 1px solid var(--chc-bd); border-radius: 14px; overflow: hidden;
+}
+@media (min-width: 720px) { .med-timeline { grid-template-columns: repeat(6, 1fr); } }
+.med-timeline__step {
+  position: relative; background: var(--chc-white); padding: 26px 16px 22px;
+  display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center;
+  transition: background 0.3s;
+}
+.med-timeline__step:hover { background: var(--chc-raised); }
+.med-timeline__icon {
+  width: 46px; height: 46px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--chc-accent3); border: 1px solid var(--chc-bd); color: var(--chc-accent-bright);
+}
+.med-timeline__label { font-family: var(--chc-display); font-size: 12.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--chc-text); }
+.med-timeline__n { font-family: var(--chc-display); font-size: 10px; font-weight: 600; letter-spacing: 0.16em; color: var(--chc-lite); }
+
+/* ── Cartes « où en êtes-vous » ──────────────────────────────────────── */
+.med-cards { display: grid; grid-template-columns: 1fr; gap: 18px; }
+@media (min-width: 700px) { .med-cards { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1040px) { .med-cards { grid-template-columns: repeat(3, 1fr); } }
+.med-card {
+  display: flex; flex-direction: column; gap: 12px;
+  background: var(--chc-cream); border: 1px solid var(--chc-bd); border-radius: 18px;
+  padding: 28px 26px 26px; transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), border-color 0.3s, box-shadow 0.3s;
+}
+.med-card:hover { transform: translateY(-3px); border-color: rgba(111,179,168,0.42); box-shadow: 0 24px 46px -28px rgba(4,9,14,0.9); }
+.med-card__icon {
+  width: 44px; height: 44px; border-radius: 13px; margin-bottom: 4px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--chc-accent3); border: 1px solid var(--chc-bd); color: var(--chc-accent-bright);
+}
+.med-card__title { font-family: var(--chc-serif); font-weight: 600; font-size: 20px; line-height: 1.3; color: var(--chc-text); margin: 0; }
+.med-card__text { font-size: 14px; font-weight: 300; line-height: 1.78; color: var(--chc-mid); margin: 0; }
+.med-card__cta {
+  margin-top: auto; padding-top: 12px; display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--chc-display); font-size: 11.5px; font-weight: 600; letter-spacing: 0.09em;
+  text-transform: uppercase; color: var(--chc-accent-bright); text-decoration: none;
+  transition: gap 0.25s, color 0.25s;
+}
+.med-card__cta:hover { gap: 13px; color: var(--chc-text); }
+
+/* ── Encadré « bon à savoir » ────────────────────────────────────────── */
+.med-note {
+  background: linear-gradient(135deg, rgba(48,69,94,0.55), rgba(86,150,141,0.16));
+  border: 1px solid rgba(158,212,210,0.24); border-radius: 18px;
+  padding: clamp(26px, 3.4vw, 38px);
+}
+.med-note__label {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--chc-display); font-size: 10.5px; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--chc-accent-bright); margin-bottom: 16px;
+}
+.med-note__lead { font-family: var(--chc-serif); font-weight: 600; font-size: clamp(18px, 2vw, 23px); line-height: 1.45; color: var(--chc-text); margin: 0 0 14px; }
+.med-note__text { font-size: 14.5px; font-weight: 300; line-height: 1.8; color: var(--chc-mid); margin: 0; max-width: 76ch; }
+
+/* ── Bandeau de preuves ──────────────────────────────────────────────── */
+.med-proof {
+  list-style: none; margin: 48px 0 0; padding: 0;
+  display: grid; grid-template-columns: 1fr; gap: 1px;
+  background: var(--chc-bd); border: 1px solid var(--chc-bd); border-radius: 14px; overflow: hidden;
+}
+@media (min-width: 620px) { .med-proof { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 980px) { .med-proof { grid-template-columns: repeat(4, 1fr); } }
+.med-proof li {
+  background: var(--chc-white); padding: 26px 22px;
+  display: flex; align-items: flex-start; gap: 11px;
+  font-size: 13.8px; font-weight: 400; line-height: 1.55; color: var(--chc-text);
+}
+.med-proof svg { flex: none; margin-top: 2px; color: var(--chc-accent-bright); }
+
+/* ── Structures juridiques ───────────────────────────────────────────── */
+.med-structs { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--chc-bd); border: 1px solid var(--chc-bd); border-radius: 14px; overflow: hidden; }
+@media (min-width: 700px) { .med-structs { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1040px) { .med-structs { grid-template-columns: repeat(3, 1fr); } }
+.med-struct { background: var(--chc-cream); padding: 32px 28px; transition: background 0.3s, box-shadow 0.3s; }
+.med-struct:hover { background: var(--chc-raised); box-shadow: inset 3px 0 0 var(--chc-accent); }
+.med-struct__sigle { font-family: var(--chc-display); font-size: 26px; font-weight: 600; letter-spacing: 0.02em; color: var(--chc-accent-bright); line-height: 1; }
+.med-struct__nom { font-family: var(--chc-display); font-size: 10.5px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--chc-lite); margin: 9px 0 16px; }
+.med-struct__text { font-size: 14px; font-weight: 300; line-height: 1.78; color: var(--chc-mid); margin: 0; }
+.med-struct__points { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.med-struct__points li { position: relative; padding-left: 16px; font-size: 13.5px; font-weight: 300; line-height: 1.6; color: var(--chc-text); }
+.med-struct__points li::before { content: ''; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; border-radius: 50%; background: var(--chc-accent); }
+
+/* ── Spécialités ─────────────────────────────────────────────────────── */
+.med-specs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+@media (min-width: 700px) { .med-specs { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1040px) { .med-specs { grid-template-columns: repeat(4, 1fr); } }
+.med-spec {
+  display: flex; align-items: center; gap: 12px; min-height: 68px;
+  background: var(--chc-white); border: 1px solid var(--chc-bd); border-radius: 14px;
+  padding: 14px 16px; transition: border-color 0.25s, transform 0.25s, background 0.25s;
+}
+.med-spec:hover { border-color: rgba(111,179,168,0.45); background: var(--chc-raised); transform: translateY(-2px); }
+.med-spec__icon {
+  flex: none; width: 36px; height: 36px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--chc-accent3); color: var(--chc-accent-bright);
+}
+.med-spec__label { font-size: 13.2px; font-weight: 400; line-height: 1.35; color: var(--chc-text); }
+
+/* ── Implantation & carte ────────────────────────────────────────────── */
+.med-geo { display: grid; grid-template-columns: 1fr; gap: 46px; align-items: center; }
+@media (min-width: 900px) { .med-geo { grid-template-columns: 0.92fr 1.08fr; gap: clamp(48px, 6vw, 84px); } }
+.med-map {
+  background: linear-gradient(150deg, rgba(48,69,94,0.42), rgba(14,24,33,0.9));
+  border: 1px solid var(--chc-bd); border-radius: 20px; padding: 18px;
+}
+.med-map__svg { width: 100%; height: auto; display: block; max-height: 460px; }
+.med-map__label {
+  font-family: var(--chc-display); font-size: 15px; font-weight: 600;
+  fill: #E8EEF2; paint-order: stroke; stroke: #0E1821; stroke-width: 4px; stroke-linejoin: round;
+}
+.med-geo__pins { list-style: none; margin: 22px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 18px; }
+.med-geo__pins li { display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 300; color: var(--chc-mid); }
+.med-geo__pins svg { flex: none; color: var(--chc-accent-bright); }
+
+/* ── CTA intermédiaire ───────────────────────────────────────────────── */
+.med-cta { background: var(--chc-dark); padding: clamp(60px, 9vh, 92px) clamp(24px, 5vw, 52px); }
+.med-cta__inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; }
+@media (min-width: 860px) { .med-cta__inner { grid-template-columns: 1.35fr 0.65fr; gap: 64px; } }
+.med-cta__title { font-family: var(--chc-serif); font-weight: 600; font-size: clamp(26px, 3.2vw, 40px); line-height: 1.15; color: #fff; margin: 0; }
+.med-cta__title em { font-style: normal; color: var(--chc-accent-bright); }
+.med-cta__lead { font-size: 15px; font-weight: 300; line-height: 1.8; color: rgba(255,255,255,0.6); margin: 20px 0 0; max-width: 62ch; }
+.med-cta__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.chc .med-cta .med-btn--ghost { color: #fff; border-color: rgba(255,255,255,0.2); }
+.chc .med-cta .med-btn--ghost:hover { border-color: var(--chc-accent); color: var(--chc-accent-bright); }
+
+.med-qr {
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 18px; padding: 20px; text-decoration: none;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.med-qr:hover { border-color: var(--chc-accent); transform: translateY(-2px); }
+/* Le code est recadré au plus juste (zone de silence comprise) : on l'affiche
+   assez grand pour rester scannable depuis un écran, et on le pose sur un
+   fond blanc puisque la section est sombre. */
+.med-qr img { width: 100%; max-width: 210px; height: auto; border-radius: 10px; background: #fff; padding: 10px; }
+.med-qr__label {
+  display: inline-flex; align-items: flex-start; gap: 8px; text-align: center;
+  font-size: 12px; font-weight: 300; line-height: 1.5; color: rgba(255,255,255,0.62);
+}
+.med-qr__label svg { flex: none; margin-top: 2px; color: var(--chc-accent-bright); }
+
+/* ── Erreurs fréquentes ──────────────────────────────────────────────── */
+.med-errors { display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media (min-width: 860px) { .med-errors { grid-template-columns: repeat(2, 1fr); } }
+.med-error {
+  display: flex; gap: 16px; align-items: flex-start;
+  background: var(--chc-white); border: 1px solid var(--chc-bd); border-radius: 16px;
+  padding: 26px 24px; transition: border-color 0.25s;
+}
+.med-error:hover { border-color: rgba(202,209,120,0.4); }
+.med-error__icon {
+  flex: none; width: 38px; height: 38px; border-radius: 11px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(202,209,120,0.12); color: var(--chc-sage);
+}
+.med-error__title { font-family: var(--chc-serif); font-weight: 600; font-size: 17.5px; line-height: 1.35; color: var(--chc-text); margin: 0 0 10px; }
+.med-error__text { font-size: 14px; font-weight: 300; line-height: 1.78; color: var(--chc-mid); margin: 0 0 10px; }
+.med-error__text:last-child { margin-bottom: 0; }
+
+/* ── Méthode (section sombre) ────────────────────────────────────────── */
+.med-method { list-style: none; margin: 50px 0 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 1px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; overflow: hidden; }
+@media (min-width: 620px) { .med-method { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .med-method { grid-template-columns: repeat(4, 1fr); } }
+.med-method__step { background: rgba(255,255,255,0.03); padding: 32px 26px; transition: background 0.3s; }
+.med-method__step:hover { background: rgba(255,255,255,0.07); }
+.med-method__n { font-family: var(--chc-serif); font-size: 42px; font-weight: 600; color: rgba(158,212,210,0.45); line-height: 1; margin-bottom: 18px; }
+.med-method__title { font-family: var(--chc-sans); font-size: 14.5px; font-weight: 600; line-height: 1.45; color: #fff; margin: 0 0 10px; }
+.med-method__text { font-size: 12.8px; font-weight: 300; line-height: 1.75; color: rgba(255,255,255,0.5); margin: 0; }
+.med-method__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+.med-method__list li { position: relative; padding-left: 15px; font-size: 12.8px; font-weight: 300; color: rgba(255,255,255,0.62); }
+.med-method__list li::before { content: ''; position: absolute; left: 0; top: 7px; width: 5px; height: 5px; border-radius: 50%; background: var(--chc-accent); }
+
+/* ── Guide téléchargeable ────────────────────────────────────────────── */
+.med-guide { display: grid; grid-template-columns: 1fr; gap: 44px; align-items: center; }
+@media (min-width: 900px) { .med-guide { grid-template-columns: 0.85fr 1.15fr; gap: clamp(48px, 6vw, 80px); } }
+.med-book { position: relative; margin: 0 auto; width: min(300px, 82%); aspect-ratio: 3 / 4; perspective: 1400px; }
+.med-book__pages {
+  position: absolute; inset: 4% -3% 2% 6%; border-radius: 6px 12px 12px 6px;
+  background: linear-gradient(90deg, #cfd6d4, #f3f6f4 22%, #e4e9e7);
+  transform: rotateY(-11deg); box-shadow: 0 30px 60px -26px rgba(4,9,14,0.9);
+}
+.med-book__cover {
+  position: absolute; inset: 0; border-radius: 5px 12px 12px 5px;
+  display: flex; flex-direction: column; justify-content: flex-end; gap: 14px;
+  padding: 30px 26px 32px;
+  background: linear-gradient(145deg, #17242F 0%, #0E1821 55%, #08111A 100%);
+  border: 1px solid rgba(158,212,210,0.18);
+  transform: rotateY(-11deg); transform-origin: left center;
+  box-shadow: 0 40px 80px -32px rgba(4,9,14,0.95), inset -18px 0 26px -22px rgba(0,0,0,0.9);
+}
+.med-book__spine { position: absolute; left: 0; top: 0; bottom: 0; width: 12px; border-radius: 5px 0 0 5px; background: linear-gradient(90deg, rgba(0,0,0,0.55), rgba(255,255,255,0.06)); }
+.med-book__eyebrow { font-family: var(--chc-display); font-size: 9.5px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--chc-accent-bright); }
+.med-book__title { font-family: var(--chc-serif); font-weight: 600; font-size: clamp(19px, 2.2vw, 24px); line-height: 1.22; color: #F3F6F4; }
+.med-book__rule { width: 46px; height: 3px; border-radius: 2px; background: var(--chc-accent); }
+.med-book__foot { font-family: var(--chc-sans); font-size: 10.5px; font-weight: 300; letter-spacing: 0.05em; color: rgba(232,238,242,0.5); }
+@media (prefers-reduced-motion: reduce) { .med-book__cover, .med-book__pages { transform: none; } }
+
+.med-guide__intro { margin: 24px 0 14px; font-size: 14.5px; font-weight: 500; color: var(--chc-text); }
+.med-guide__points { list-style: none; margin: 0 0 30px; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+.med-guide__points li { display: flex; align-items: flex-start; gap: 11px; font-size: 14.5px; font-weight: 300; line-height: 1.6; color: var(--chc-mid); }
+.med-guide__points svg { flex: none; margin-top: 2px; color: var(--chc-accent-bright); }
+
+.med-guide__form { display: flex; flex-direction: column; gap: 14px; background: var(--chc-cream); border: 1px solid var(--chc-bd); border-radius: 18px; padding: clamp(20px, 2.6vw, 28px); }
+.med-guide__row { display: grid; grid-template-columns: 1fr; gap: 14px; }
+@media (min-width: 560px) { .med-guide__row { grid-template-columns: 1fr 1fr; } }
+.med-field { display: flex; flex-direction: column; gap: 7px; }
+.med-field__label { font-family: var(--chc-display); font-size: 10.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--chc-lite); }
+.med-input {
+  width: 100%; min-height: 48px; padding: 12px 14px; border-radius: 10px;
+  background: var(--chc-white); border: 1px solid var(--chc-bd); color: var(--chc-text);
+  font-family: var(--chc-sans); font-size: 15px; font-weight: 300;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.med-input:focus { outline: none; border-color: var(--chc-accent); box-shadow: 0 0 0 3px var(--chc-accent3); }
+.med-input.is-error { border-color: #C97A6B; }
+.med-input option { background: var(--chc-white); color: var(--chc-text); }
+.med-consent { display: flex; align-items: flex-start; gap: 11px; font-size: 12.5px; font-weight: 300; line-height: 1.6; color: var(--chc-mid); cursor: pointer; }
+.med-consent input { flex: none; margin-top: 3px; width: 17px; height: 17px; accent-color: var(--chc-accent); }
+.med-consent.is-error { color: #D79A8E; }
+.med-guide__error { margin: 0; font-size: 13px; color: #D79A8E; }
+.med-guide__note { display: flex; align-items: center; justify-content: center; gap: 7px; margin: 2px 0 0; font-size: 11.5px; color: var(--chc-lite); }
+.med-guide__note svg { flex: none; color: var(--chc-accent); }
+
+.med-guide__done { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; background: var(--chc-cream); border: 1px solid rgba(111,179,168,0.4); border-radius: 18px; padding: clamp(24px, 3vw, 32px); }
+.med-guide__done-icon { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--chc-accent); color: #08111A; }
+.med-guide__done-title { font-family: var(--chc-serif); font-weight: 600; font-size: 21px; color: var(--chc-text); margin: 0; }
+.med-guide__done-text { font-size: 14.5px; font-weight: 300; line-height: 1.7; color: var(--chc-mid); margin: 0 0 6px; }
+
+/* ── FAQ deux colonnes ───────────────────────────────────────────────── */
+.med-faq { display: grid; grid-template-columns: 1fr; gap: 0 clamp(32px, 4vw, 56px); align-items: start; }
+@media (min-width: 900px) { .med-faq { grid-template-columns: 1fr 1fr; } }
+
+/* ── Contact & coordonnées ───────────────────────────────────────────── */
+.med-contact { display: grid; grid-template-columns: 1fr; gap: 44px; align-items: start; }
+@media (min-width: 900px) { .med-contact { grid-template-columns: 1.15fr 0.85fr; gap: clamp(48px, 6vw, 80px); } }
+.med-coords { font-style: normal; display: flex; flex-direction: column; gap: 4px; background: var(--chc-cream); border: 1px solid var(--chc-bd); border-radius: 18px; padding: clamp(22px, 2.6vw, 30px); }
+.med-coords a, .med-coords p { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; margin: 0; font-size: 14.5px; font-weight: 300; line-height: 1.5; color: var(--chc-text); text-decoration: none; border-bottom: 1px solid var(--chc-bd); transition: color 0.2s; }
+.med-coords a:hover { color: var(--chc-accent-bright); }
+.med-coords svg { flex: none; margin-top: 2px; color: var(--chc-accent-bright); }
+.med-coords > :last-child { border-bottom: none; padding-bottom: 0; }
+.med-coords__legal { font-size: 11.5px !important; color: var(--chc-lite) !important; line-height: 1.65 !important; }
+
+/* ── Critères bancaires ──────────────────────────────────────────────── */
+.med-criteres { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--chc-bd); border: 1px solid var(--chc-bd); border-radius: 14px; overflow: hidden; }
+@media (min-width: 700px) { .med-criteres { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1040px) { .med-criteres { grid-template-columns: repeat(3, 1fr); } }
+.med-critere { background: var(--chc-white); padding: 30px 26px; }
+.med-critere__n { font-family: var(--chc-display); font-size: 11px; font-weight: 600; letter-spacing: 0.16em; color: var(--chc-accent); }
+.med-critere__title { font-family: var(--chc-serif); font-weight: 600; font-size: 19px; line-height: 1.3; color: var(--chc-text); margin: 10px 0 16px; }
+.med-critere ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+.med-critere li { position: relative; padding-left: 16px; font-size: 13.8px; font-weight: 300; line-height: 1.6; color: var(--chc-mid); }
+.med-critere li::before { content: ''; position: absolute; left: 0; top: 9px; width: 5px; height: 5px; border-radius: 50%; background: var(--chc-accent); }
+.med-critere__note { margin: 14px 0 0; font-size: 12.5px; font-weight: 300; line-height: 1.6; color: var(--chc-lite); }
+
+/* ── Cas pratique ────────────────────────────────────────────────────── */
+.med-case { display: grid; grid-template-columns: 1fr; gap: 18px; }
+@media (min-width: 900px) { .med-case { grid-template-columns: repeat(3, 1fr); } }
+.med-case__col { background: var(--chc-cream); border: 1px solid var(--chc-bd); border-radius: 18px; padding: 28px 26px; }
+.med-case__step { font-family: var(--chc-display); font-size: 10.5px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--chc-accent); }
+.med-case__title { font-family: var(--chc-serif); font-weight: 600; font-size: 21px; color: var(--chc-text); margin: 10px 0 14px; }
+.med-case__text { font-size: 14px; font-weight: 300; line-height: 1.78; color: var(--chc-mid); margin: 0; }
+.med-case__list { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.med-case__list li { position: relative; padding-left: 16px; font-size: 13.5px; font-weight: 300; line-height: 1.6; color: var(--chc-text); }
+.med-case__list li::before { content: ''; position: absolute; left: 0; top: 9px; width: 5px; height: 5px; border-radius: 50%; background: var(--chc-accent); }
+
+/* ── Divers ──────────────────────────────────────────────────────────── */
+.med-outro { font-family: var(--chc-serif); font-weight: 500; font-size: clamp(17px, 1.9vw, 21px); line-height: 1.6; color: var(--chc-text); max-width: 74ch; margin: 0; }
+.med-disclaimer { display: flex; align-items: flex-start; gap: 11px; font-size: 12.8px; font-weight: 300; line-height: 1.75; color: var(--chc-lite); max-width: 86ch; margin: 0; }
+.med-disclaimer svg { flex: none; margin-top: 3px; color: var(--chc-accent); }
+.med-sub { font-family: var(--chc-display); font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--chc-lite); margin: 0 0 16px; }
+.med-sources { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; margin-top: 30px; padding-top: 22px; border-top: 1px solid var(--chc-bd); font-size: 12.5px; color: var(--chc-lite); }
+.med-sources a { color: var(--chc-mid); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--chc-bd); transition: color 0.2s; }
+.med-sources a:hover { color: var(--chc-accent-bright); }
+
+@media (prefers-reduced-motion: reduce) {
+  .chc .med-btn, .med-card, .med-spec, .med-qr { transition: none; }
+}
+
+/* ── Parrainage / apport d'affaires (/parrainage-apporteur-affaires) ─── */
+
+/* Encart d'offre — mis en avant sans crier : une carte accentuée par un filet
+   sauge à gauche, dans la langue du reste du site. Retrait programmé côté
+   rendu (lib/parrainage.ts), pas côté CSS. */
+.chc-offer {
+  position: relative; overflow: hidden;
+  background: var(--chc-white);
+  border: 1px solid var(--chc-bd);
+  border-left: 3px solid var(--chc-sage);
+  border-radius: 14px;
+  padding: clamp(28px, 4vw, 42px);
+}
+.chc-offer::after {
+  content: ''; position: absolute; top: -80px; right: -60px; width: 260px; height: 260px;
+  border-radius: 50%; pointer-events: none;
+  background: radial-gradient(closest-side, rgba(202,209,120,0.12), rgba(202,209,120,0));
+}
+.chc-offer__tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--chc-display); font-size: 10.5px; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--chc-sage);
+}
+.chc-offer__text {
+  font-family: var(--chc-serif); font-weight: 400;
+  font-size: clamp(21px, 2.4vw, 30px); line-height: 1.34;
+  color: var(--chc-text); margin-top: 16px; max-width: 46ch;
+}
+.chc-offer__note {
+  font-family: var(--chc-sans); font-weight: 300; font-size: 14.5px; line-height: 1.8;
+  color: var(--chc-mid); margin-top: 16px; max-width: 62ch;
+}
+.chc-offer__link { color: var(--chc-accent-bright); text-decoration: underline; text-underline-offset: 3px; }
+.chc-offer__link:hover { color: var(--chc-sage); }
+
+/* Formulaire — deux personnes sur un écran : chaque bloc est encadré et titré,
+   sinon on ne sait plus de qui l'on saisit les coordonnées. */
+.chc-parr-block {
+  display: flex; flex-direction: column; gap: 18px;
+  border: 1px solid var(--chc-bd); border-radius: 14px;
+  padding: clamp(20px, 3vw, 28px);
+  background: rgba(232, 238, 242, 0.02);
+}
+.chc-parr-legend {
+  padding: 0 10px; margin-left: -4px;
+  font-family: var(--chc-display); font-size: 10.5px; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--chc-accent);
+}
+
+/* Choix rapides (lien avec le filleul, nature du projet). */
+.chc-pick { display: flex; flex-wrap: wrap; gap: 8px; }
+.chc-pick__opt {
+  padding: 10px 16px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--chc-bd); background: transparent;
+  font-family: var(--chc-sans); font-size: 13px; font-weight: 400; color: var(--chc-mid);
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.chc-pick__opt:hover { border-color: var(--chc-accent); color: var(--chc-text); }
+.chc-pick__opt.is-on {
+  background: var(--chc-gold2); border-color: var(--chc-accent);
+  color: var(--chc-text); font-weight: 500;
+}
+
+/* Confirmation après envoi. */
+.chc-parr-done {
+  text-align: center; padding: clamp(36px, 6vw, 56px) clamp(22px, 4vw, 38px);
+  border: 1px solid var(--chc-bd); border-radius: 16px; background: var(--chc-raised);
+}
+.chc-parr-done__mark {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 54px; height: 54px; border-radius: 50%;
+  background: var(--chc-gold2); color: var(--chc-accent-bright);
+  border: 1px solid var(--chc-accent);
+}
+.chc-parr-done__title {
+  font-family: var(--chc-serif); font-weight: 600; font-size: clamp(24px, 2.6vw, 32px);
+  color: var(--chc-text); margin-top: 20px;
+}
+.chc-parr-done__text {
+  font-family: var(--chc-sans); font-weight: 300; font-size: 15px; line-height: 1.8;
+  color: var(--chc-mid); margin: 14px auto 0; max-width: 46ch;
+}
+
+/* Promesse d'envoi affichée tant que le guide n'est pas en ligne : elle doit
+   se lire avant le formulaire, pas se fondre dans le texte courant. */
+.med-guide__promise {
+  margin: 18px 0 0; padding: 13px 16px; border-radius: 12px;
+  background: var(--chc-accent3); border: 1px solid rgba(111,179,168,0.28);
+  font-size: 14px; font-weight: 400; line-height: 1.6; color: var(--chc-text);
+}
+
+/* Chapô au-dessus du H1 : il qualifie le visiteur avant même le titre, donc il
+   se lit vite — corps réduit, couleur atténuée, largeur courte. */
+.med-hero__chapo { margin: 0 0 18px; max-width: 54ch; font-size: 14.5px; font-weight: 300; line-height: 1.7; color: var(--chc-mid); }
+/* Titre du bloc d'appel du héros. */
+.med-hero__cta-title { margin: 30px 0 6px; font-family: var(--chc-serif); font-weight: 600; font-size: clamp(17px, 1.6vw, 20px); line-height: 1.4; color: var(--chc-text); }
+.med-hero__cta-title + .med-hero__reassure { margin-top: 0; }
+.med-hero__cta-title + .med-hero__reassure + .med-hero__actions { margin-top: 20px; }
+/* Nom du document, sous le H2 d'action du bloc guide. */
+.med-guide__name { margin: 16px 0 14px; font-family: var(--chc-serif); font-weight: 500; font-size: clamp(18px, 1.9vw, 22px); line-height: 1.4; color: var(--chc-accent-bright); }
+
+/* ── Barre de navigation : six entrées ───────────────────────────────────
+   L'ajout de « Parrainage » fait passer la barre de cinq à six liens. Entre
+   900 px (seuil d'affichage du menu horizontal) et la largeur maximale de la
+   pilule, « Le cabinet » et le bouton d'appel passaient à la ligne, ce qui
+   déformait la barre. Deux correctifs : plus aucun retour à la ligne dans les
+   libellés, et une gouttière resserrée tant que la place manque. */
+.chc-nav__links a,
+.chc-nav__cta { white-space: nowrap; }
+@media (min-width: 900px) and (max-width: 1119.98px) {
+  .chc-nav__links { gap: 17px; }
+  .chc-nav__links a { font-size: 11.5px; letter-spacing: 0.06em; }
+  .chc-nav { padding-left: 16px; }
+  .chc-nav.scrolled { padding-left: 14px; }
+}

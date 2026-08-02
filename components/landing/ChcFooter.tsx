@@ -50,6 +50,7 @@ export function ChcFooter({ showCta = true }: { showCta?: boolean }) {
                 restaient orphelines alors qu'elles visent les requêtes les
                 plus qualifiées. */}
             <Link href="/financement-professions-sante">Professions de santé</Link>
+            <Link href="/financement-medecins-chirurgiens-lille">Médecins &amp; chirurgiens</Link>
             <Link href="/financement-professions-juridiques">Avocats &amp; notaires</Link>
             <Link href="/financement-professions-chiffre">Experts-comptables</Link>
             <Link href="/financement-franchise">Franchise</Link>
@@ -66,6 +67,7 @@ export function ChcFooter({ showCta = true }: { showCta?: boolean }) {
             <Link href="/simulateur">Simulateur assurance</Link>
             <Link href="/blog">Blog &amp; conseils</Link>
             <Link href="/le-cabinet">À propos</Link>
+            <Link href="/parrainage-apporteur-affaires">Parrainage</Link>
             <Link href="/mon-etude">Démarrer une étude</Link>
           </nav>
 

@@ -13,10 +13,13 @@ export function sectionFromPath(path: string): string {
     'le-cabinet': 'Le cabinet',
     'financement-professions-liberales': 'Professions libérales',
     'financement-professions-sante': 'Professions santé',
+    'financement-medecins-chirurgiens-lille': 'Médecins & chirurgiens',
     'financement-professions-juridiques': 'Professions juridiques',
     'financement-professions-chiffre': 'Professions chiffre',
     'financement-franchise': 'Franchise',
     'reprise-transmission': 'Reprise & transmission',
+    'courtier-credit-immobilier-lille': 'Courtier Lille',
+    'parrainage-apporteur-affaires': 'Parrainage',
   }
   return map[seg] ?? seg
 }

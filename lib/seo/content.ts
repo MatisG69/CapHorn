@@ -60,6 +60,7 @@ export const SEO_PAGES: Record<string, PillarData> = {
     ],
     related: [
       { href: '/financement-professions-sante', label: 'Professions de santé' },
+      { href: '/financement-medecins-chirurgiens-lille', label: 'Médecins & chirurgiens' },
       { href: '/financement-professions-juridiques', label: 'Professions juridiques' },
       { href: '/financement-professions-chiffre', label: 'Professions du chiffre' },
       { href: '/simulateur', label: 'Simulateur assurance emprunteur' },
@@ -100,6 +101,7 @@ export const SEO_PAGES: Record<string, PillarData> = {
       { q: 'Comment financer du matériel dentaire ou d’imagerie ?', a: "Le crédit-bail est généralement le plus pertinent : loyers déductibles, pas d’apport, option d’achat. Nous comparons avec le prêt classique selon votre fiscalité." },
     ],
     related: [
+      { href: '/financement-medecins-chirurgiens-lille', label: 'Médecins & chirurgiens à Lille' },
       { href: '/financement-professions-liberales', label: 'Toutes les professions libérales' },
       { href: '/mon-etude', label: 'Démarrer mon étude' },
     ],

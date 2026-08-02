@@ -291,12 +291,125 @@ export interface ContactFormData {
   consent_rgpd: boolean
 }
 
+/* ── Téléchargements de guide (aimant à prospects des pages métier) ──── */
+
+export type GuideRequestStatus = 'new' | 'sent' | 'contacted' | 'converted' | 'archived'
+
+export const GUIDE_REQUEST_STATUS_LABELS: Record<GuideRequestStatus, string> = {
+  new: 'À envoyer',
+  sent: 'Guide envoyé',
+  contacted: 'Contacté',
+  converted: 'Dossier ouvert',
+  archived: 'Archivé',
+}
+
+export interface GuideRequestData {
+  first_name: string
+  last_name: string
+  email: string
+  phone: string
+  /** Étape de carrière déclarée (facultative), pour qualifier le contact. */
+  situation?: string
+  consent_rgpd: boolean
+}
+
+export interface GuideRequest extends GuideRequestData {
+  id: string
+  created_at: string
+  /** Identifiant du guide demandé (une page métier = un guide). */
+  guide_slug: string
+  /** Page d'origine, pour distinguer les sources de contact. */
+  source_page: string | null
+  status: GuideRequestStatus
+}
+
 export const APPOINTMENT_STATUS_LABELS: Record<AppointmentStatus, string> = {
   new: 'Nouvelle',
   contacted: 'Contacté',
   scheduled: 'RDV planifié',
   done: 'Traité',
   archived: 'Archivé',
+}
+
+/* ── Parrainage / apport d'affaires ───────────────────────────────────── */
+
+/**
+ * Cycle de vie d'un parrainage. Il ne s'arrête pas à la signature : la prime
+ * du parrain n'est due qu'ensuite, d'où l'étape « paid » qui clôt réellement
+ * le dossier.
+ */
+export type ReferralStatus =
+  | 'new'
+  | 'contacted'
+  | 'study'
+  | 'signed'
+  | 'paid'
+  | 'lost'
+  | 'archived'
+
+export const REFERRAL_STATUS_LABELS: Record<ReferralStatus, string> = {
+  new: 'Nouveau',
+  contacted: 'Filleul contacté',
+  study: 'Étude en cours',
+  signed: 'Financement signé',
+  paid: 'Prime versée',
+  lost: 'Sans suite',
+  archived: 'Archivé',
+}
+
+export type ReferralProjectType = 'immobilier' | 'professionnel' | 'assurance' | 'autre'
+
+export const REFERRAL_PROJECT_LABELS: Record<ReferralProjectType, string> = {
+  immobilier: 'Projet immobilier',
+  professionnel: 'Projet professionnel',
+  assurance: 'Assurance emprunteur',
+  autre: 'Autre / je ne sais pas',
+}
+
+/** Lien déclaré entre le parrain et son filleul (qualifie la recommandation). */
+export const REFERRAL_RELATIONS = ['Un proche', 'Un client', 'Un confrère', 'Un partenaire'] as const
+
+/** Corps du POST /api/parrainage. */
+export interface ReferralFormData {
+  parrain_first_name: string
+  parrain_last_name: string
+  parrain_email: string
+  parrain_phone: string
+  parrain_relation?: string
+  filleul_first_name: string
+  filleul_last_name: string
+  filleul_email: string
+  filleul_phone: string
+  project_type: ReferralProjectType
+  project_details?: string
+  consent_rgpd: boolean
+  /** Le parrain certifie avoir obtenu l'accord préalable de son filleul. */
+  consent_filleul: boolean
+  /** Page d'origine, renseignée par le formulaire. */
+  source_page?: string
+}
+
+export interface Referral {
+  id: string
+  created_at: string
+  updated_at: string
+  parrain_first_name: string
+  parrain_last_name: string
+  parrain_email: string
+  parrain_phone: string
+  parrain_relation: string | null
+  filleul_first_name: string
+  filleul_last_name: string
+  filleul_email: string
+  filleul_phone: string
+  project_type: ReferralProjectType
+  project_details: string | null
+  consent_rgpd: boolean
+  consent_filleul: boolean
+  source_page: string | null
+  status: ReferralStatus
+  reward_amount: number | null
+  notes: string | null
 }
 
 /* ── Simulateur, estimations envoyées par les clients ─────────────────── */

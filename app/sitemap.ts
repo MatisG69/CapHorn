@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { SEO_PAGES } from '@/lib/seo/content'
+import { MEDECINS_SLUG } from '@/lib/seo/medecins'
 import { absoluteUrl } from '@/lib/seo/config'
 import { getPublishedPosts } from '@/lib/blog/queries'
 
@@ -26,6 +27,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: 'monthly',
         priority: 0.8,
       },
+      {
+        url: absoluteUrl('/parrainage-apporteur-affaires'),
+        changeFrequency: 'monthly',
+        priority: 0.7,
+      },
     ] satisfies MetadataRoute.Sitemap
   ).map((entry) => ({ ...entry, lastModified: now }))
 
@@ -36,6 +42,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: 'monthly',
     priority: slug === 'financement-professions-liberales' ? 0.9 : 0.8,
   }))
+
+  // Page métier de troisième niveau (santé → médecins & chirurgiens). Elle ne
+  // passe pas par SEO_PAGES : sa composition lui est propre.
+  pillarEntries.push({
+    url: absoluteUrl(`/${MEDECINS_SLUG}`),
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.85,
+  })
 
   const legalEntries: MetadataRoute.Sitemap = [
     '/mentions-legales',
